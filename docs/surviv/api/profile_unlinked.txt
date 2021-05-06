@@ -1,0 +1,81 @@
+POST request to api/user/profile_unlinked, json contains 1 field:
+  "userId": str
+reply contains:
+  success: bool
+  profile: dict
+    errorFlash: list, purpose unknown
+    slug: none, purpose unknown
+    kpg: int, purpose unknown
+    wins: int
+    games: int
+    username: str
+    usernameSet: bool
+    usernameChangeTime: int
+    userCreated: str, time
+    linkedFacebook: bool
+    linkedGoogle: bool
+    linkedTwitch: bool
+    linkedDiscord: bool
+    linkedApple: bool
+    linkedStem: bool
+    gpTotal: int, golden potatoes (currency)
+    offerwallGpWon: none
+    forteUserId: None
+    prestige: str
+    prestigeChangeTime: str, time
+    endorsePoints: int
+    reportPoints: int
+    unlinked: bool
+    gift: dict
+      hasPendingGift: bool
+      gp: int
+      description: none
+    prestigeResetTime: str, time
+  loadout: dict
+    outfit: str
+    melee: str
+    heal: str
+    boost: str
+    player_icon: str
+    crosshair: dict
+      type: str
+      colour: int
+      size: str
+      stroke: str
+    emotes: list
+      0: str
+      1: str
+      2: str
+      3: str
+      4: str
+      5: str
+    deathEffect: str
+  loadoutIds: dict
+    heal: str
+    boost: str
+    melee: str
+    emotes: list
+      0: str
+      1: str
+      2: str
+      3: str
+      4: str
+      5: str
+    outfit: str
+    deathEffect: str
+  loadoutPriv: str
+  loadoutStats: str
+  items: list
+   x: dict
+     type: str
+     soure: str
+     timeAcquired: int
+     status: int
+     id: str
+     sourceRef: str
+     stats: dict
+       makr: str
+       kills: int
+       levels: int
+       wins: int
+  error: none

@@ -1,0 +1,4 @@
+ws4py==0.5.1
+requests==2.25.1
+jsbeautifier==1.13.13
+pypng==0.0.20

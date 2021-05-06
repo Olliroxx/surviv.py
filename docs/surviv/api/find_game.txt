@@ -1,0 +1,17 @@
+Post request to "https://surviv.io/api/find_game"
+Request contains fields:
+    autofill enabled?(autoFill): bool
+    game mode(gameModeIdx): int
+    team size(playerCount): int
+    on mobile(isMobile)?: bool
+    version(version): int
+    region(region): str
+    zones(zones): list of strings, purpose unknown
+
+Reply contains:
+    zone: str
+    gameId: str
+    hosts: list[url:port1, url]
+    addrs: list[ip:port2, ip]
+    data: str, used in type 1 packets
+    useHttps: bool

@@ -1,0 +1,48 @@
+POST request with:
+  json:
+    userId: str
+    tryRefreshQuests:bool
+    (optional)
+    forceUpdate: bool
+    resetTeams: bool
+  cookie
+    app-sid: str | from previous requests
+reply:
+  success: bool
+  pass: dict
+    type: str
+    level: int
+    xp: int
+    unlocks: dict
+      #TODO what is in this dict? (no data)
+    newItems: bool
+    newGP: bool
+    items: list
+      #TODO what is in this list? (no data)
+    lvlUpItems: list
+      #TODO what is in this list? (no data)
+    newPass: bool
+    gpChange: int
+    premium: False
+    xp_rewards: bool
+    xp_reward_timestamp: none #TODO
+    newDiscount: bool
+    discount_level: none #TODO
+    discount_time: none #TODO
+    team_members: int
+    newItemsData: none #TODO
+  quests: list (len up to 2)
+    x:dict
+      idx: int
+      type: str
+      args: dict
+        xp: int
+        random: float
+      progress: int
+      target: int
+      complete: bool
+      rerolled: bool
+      timeToRefresh
+      xpReward: int
+      timeAcquired: int
+  questPriv: str
