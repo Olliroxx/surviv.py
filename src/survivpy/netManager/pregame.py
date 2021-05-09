@@ -1,4 +1,4 @@
-class Profile(object):
+class Profile:
     def __init__(self, id_=None):
         self.id = id_
         import requests
@@ -42,7 +42,7 @@ class Profile(object):
         self.update_pass()
         self.update_currency()
 
-        self.version = 102
+        self.version = 104
 
     def update_currency(self):
         resp = self.session.post("https://surviv.io/api/user/get_user_currency_total").json()

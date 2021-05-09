@@ -1,6 +1,44 @@
 class BitString:
     """
-    Most of this is js translated to python, with some missing variable names
+    Bitstring is a class that helps with the manipulation of binary data.
+
+    It is based off the bitstring class in app.js, as that has slightly different behaviour to the python module ``bitstring``.
+
+    Input buffer must be bytes, bytearray, list or tuple. (If using list/tuple, then all values must be positive integers below 256)
+
+    Has multiple read/write functions for different data types with different sizes. Vector sizes are the sizes of the floats, not the total size.
+
+    Full list:
+
+       * read_ascii_str
+       * read_bool
+       * read_int8
+       * read_uint8
+       * read_int16
+       * read_uint16
+       * read_int32
+       * read_uint32
+       * read_float8
+       * read_float16
+       * read_float32
+       * read_float64
+       * read_bits (also needs bit amount)
+       * read_vec8
+       * read_vec16
+       * read_vec32
+       * read_vec64
+        
+       * write_ascii_str
+       * write_bool
+       * write_int8
+       * write_uint8
+       * write_int16
+       * write_uint16
+       * write_int32
+       * write_uint32
+       * write_float32
+       * write_float64
+
     """
 
     def __init__(self, buffer=None):
@@ -159,10 +197,21 @@ class BitString:
             i += 1
 
     def read_ascii_str(self, length=None):
+        """
+        Read an ASCII string.
+
+        At time of writing, surviv uses no unicode
+
+        .. warning::
+            There is currently no unicode support
+
+        :param length: If left unfilled, will read until a null byte, else will read a string this long
+        :return: result string
+        """
         return self._read_str(self, length, False)
 
-    def read_utf8_str(self, length=None):
-        return self._read_str(self, length, True)
+    #def read_utf8_str(self, length=None):
+        #return self._read_str(self, length, True)
 
     @staticmethod
     def _read_str(bitstring, length, z: bool):
@@ -203,11 +252,11 @@ class BitString:
             bitstring.write_uint8(ord(char))
         bitstring.write_uint8(0)
 
-    def _write_utf8_string(self, bitstring, string):
-        array = self._string_to_list(string)
+    #def _write_utf8_string(self, bitstring, string):
+    #    array = self._string_to_list(string)
 
-        for element in array:
-            bitstring.write_uint8(element)
+    #    for element in array:
+    #        bitstring.write_uint8(element)
 
     @staticmethod
     def _string_to_list(string):
@@ -356,26 +405,20 @@ class BitString:
     def write_ascii_str(self, text: str):
         self._write_ascii_string(self, text)
 
-    def write_utf8_str(self, text: str):
-        self._write_utf8_string(self, text)
+    #def write_utf8_str(self, text: str):
+    #    self._write_utf8_string(self, text)
 
     def bits_free(self):
         return len(self) - self.index
-
-    def extend(self, amount: int):
-        if type(amount) != int:
-            raise ValueError("Amount must be int")
-
-        if amount > 0:
-            raise ValueError("Amount must be greater than 0 ")
-
-        self._view[-1:] = [0] * amount
 
     def align_to_next_byte(self):
         self._view = self._view.rstrip(b"\x00") + b"\x00"
 
 
 class Packet:
+    """
+    Packet is a template class for the decoders/encoders used in a game session
+    """
     def __init__(self, encode_data=None, bytearray_data=None):
 
         self.constants = {
@@ -546,7 +589,10 @@ class Type0aPacket(Packet):
         return result
 
 
-class Game(object):
+class Game:
+    """
+    Game is a python representation of all the network stuff that happens when game is played
+    """
     def __init__(self, uri, join_packet_data, version):
         """
         :param uri: uri of the game (or test) server
@@ -570,42 +616,57 @@ class Game(object):
     class EXIT:
         pass
 
-    def _autodecode_packet(self, packet):
-        if packet == self.EXIT:
-            return packet
-
+    @staticmethod
+    def _packetise_down_message(message):
         decode_handlers = {
             0x2: Type02Packet,
             0xa: Type0aPacket
         }
 
-        if packet[0] not in decode_handlers:
-            return packet
+        if message[0] not in decode_handlers:
+            return message
 
-        handler = decode_handlers[packet[0]]
-        packet = handler(bytearray_data=packet)
+        handler = decode_handlers[message[0]]
+        packet = handler(bytearray_data=message)
+        return packet
 
-        return packet.decoded
+    def send_message(self, message):
+        """
+        :param message: Any one of bytes, bytearray, packet or bitstring
+        """
+        if isinstance(message, Packet):
+            message = bytes(message.data)
+        elif isinstance(message, (bytes, bytearray, BitString)):
+            message = bytes(message)
+        else:
+            raise TypeError
+        self.ws.send(message, True)
 
-    def send_message(self, message, is_binary):
-        self.ws.send(message, is_binary)
-
-    def get_decoded_messages(self):
+    def get_messages(self):
         messages = []
         while not self._queue_soci.empty():
-            message = self._queue_soci.get()
-            decoded = self._autodecode_packet(message)
-            messages.append(decoded)
+            messages.append(self._queue_soci.get())
+        return messages
+
+    def get_decoded_messages(self):
+        """
+        :return: A list of the decoded values of the packet
+        """
+        messages = []
+        for message in self.get_messages():
+            if isinstance(message, Packet):
+                message = message.decoded
+            messages.append(message)
+
         return messages
 
     def _join(self):
         from ws4py.client.threadedclient import WebSocketClient
 
         exit_val = self.EXIT
-
         settings = self._settings
-
         queue = self._queue_soci
+        packetise = self._packetise_down_message
 
         class game_websocket(WebSocketClient):
             """
@@ -617,7 +678,8 @@ class Game(object):
             """
 
             def received_message(self, message):
-                queue.put(message.data)
+                packet = packetise(message.data)
+                queue.put(packet)
 
             def opened(self):
                 join_packet = Type01Packet(encode_data=settings)
@@ -633,7 +695,3 @@ class Game(object):
 
         self.ws.connect()
         self.ws.run_forever()
-
-
-if __name__ == '__main__':
-    pass

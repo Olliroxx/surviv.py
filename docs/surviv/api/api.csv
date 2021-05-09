@@ -1,7 +1,0 @@
-Name,status,game join critical,category,desc
-find_game,Needs doc,True,Game,Finds server for game of requested type
-games_mode,Needs research,False,Game,Gives game modes and team sizes
-get_pass_unlinked,Needs doc,True,Account,"Gets quests, questPriv and XP"
-get_user_currency_total,Unresearched,Unkown,Account,
-profile_unlinked,Needs doc,True,Account,Gets profile of unlinked user
-reset_prestige_points,Unresearched,Unkown,Account,

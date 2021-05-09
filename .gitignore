@@ -77,6 +77,6 @@ venv.bak/
 
 .idea/
 
-/utils/deobfuscation/out/
-/utils/deobfuscation/jsons/
-/utils/deobfuscation/deobfuscated/
+/utils/asset_processing/out/
+/utils/asset_processing/jsons/
+/utils/asset_processing/deobfuscated/

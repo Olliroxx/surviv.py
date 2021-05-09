@@ -1,5 +1,0 @@
-GET request to "https://surviv.io/api/games_modes" gives reply with format:
-    list (usually 4 long) of dicts
-        dict has field:
-          mapName: gamemode name
-          teamMode: team size
