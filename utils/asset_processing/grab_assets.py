@@ -208,6 +208,7 @@ def grab_svgs(big_string: str):
     import requests
     import os
 
+    print("\n\nWARNING: This script DOES NOT get all SVGs, look in json_processing for that\n")
     print("Finding SVGs")
     svg_links = []
     for svg in re.findall("img/[a-z0-9/-_]*\\.svg", big_string):
@@ -302,7 +303,7 @@ def grab_assets(grab_all, mp3s=False, svgs=False, pngs=False):
     """
 
     import ast
-    from get_app import get_app
+    from misc_utils import get_app
 
     if grab_all:
         mp3s = True
@@ -331,8 +332,7 @@ def grab_assets(grab_all, mp3s=False, svgs=False, pngs=False):
     if pngs:
         big_string = None
         for x in big_list:
-            if x.count("sourceSize") and x.count(
-                    "-100-"):
+            if x.count("sourceSize"):  # and x.count("-100-"):
                 # The mapping strings are the only strings in the big list to have "sourceSize" in them
                 # There seems to be a set of half size/resolution assets, but they have -50- instead of -100-
                 big_string = x

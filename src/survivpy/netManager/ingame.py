@@ -589,7 +589,7 @@ class Type0aPacket(Packet):
         return result
 
 
-class Game:
+class GameConnection:
     """
     Game is a python representation of all the network stuff that happens when game is played
     """

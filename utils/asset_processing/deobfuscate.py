@@ -65,15 +65,41 @@ def grab_code():
     print("Done downloading\n")
 
 
-def eval_exp(exp):
+def eval_exp(exp: str):
     """
     Evaluates simple expressions (eg. 1+2)
 
     :param exp: the expression to evaluate, as a string
     :return: The result
     """
+    from io import StringIO
+    from tokenize import generate_tokens, untokenize, NAME, NUMBER, OP, STRING
     import ast
-    return eval_(ast.parse(exp, mode='eval').body)
+
+    def is_float(s: str):
+        if "." in s:
+            return True
+        else:
+            return False
+
+    def deci_statement(s: str):
+        result = []
+        g = generate_tokens(StringIO(s).readline)   # tokenize the string
+        for toknum, tokval, _, _, _ in g:
+            if toknum == NUMBER and is_float(tokval):
+                result.extend([
+                    (NAME, 'Decimal'),
+                    (OP, '('),
+                    (STRING, repr(tokval)),
+                    (OP, ')')
+                ])
+            else:
+                result.append((toknum, tokval))
+        return untokenize(result)
+
+    tree = ast.parse(deci_statement(exp))
+
+    return eval_(tree)
 
 
 def eval_(node):
@@ -82,6 +108,7 @@ def eval_(node):
     operators = {ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul,
                  ast.Div: op.truediv, ast.Pow: op.pow, ast.BitXor: op.xor,
                  ast.USub: op.neg}
+
     if isinstance(node, ast.Num):
         return node.n
     elif isinstance(node, ast.BinOp):
@@ -90,6 +117,15 @@ def eval_(node):
     elif isinstance(node, ast.UnaryOp):
         # noinspection PyTypeChecker
         return operators[type(node.op)](eval_(node.operand))
+    elif isinstance(node, ast.Module):
+        return eval_(node.body[0])
+    elif isinstance(node, ast.Expr):
+        return eval_(node.value)
+    elif isinstance(node, ast.Call):
+        if node.func.id != "Decimal":
+            raise RuntimeError("Function that isn't decimal")
+        from decimal import Decimal
+        return Decimal(node.args[0].s)
     else:
         raise TypeError(node)
 
@@ -99,10 +135,9 @@ def solve_hex():
     In app.js there are simple expression written in hex, instead of ints and some floats.
     This function swaps them out for the results (currently only ints)
     """
-    # TODO make this work with decimals
 
     import re
-    from get_app import get_app
+    from misc_utils import get_app
 
     print("Simplifying hex")
 
@@ -118,9 +153,23 @@ def solve_hex():
     to_solve = []
     for match in re.findall("[^_](-?0x[0-9a-f]+(?: ?[*+/-] ?-?0x[0-9a-f]*)+)", script):
         to_solve.append(match.strip(" "))
-    print(str(len(to_solve)) + " changes to make")
+    print(str(len(to_solve)) + " ints to simplify")
     for element in to_solve:
         script = script.replace(element, str(eval_exp(element)))
+
+    regex = "-?[0-9.]+ [+/*\\-] -?[0-9.]+"
+    matches = re.findall(regex, script)
+    print(str(len(matches)) + " decimals to simplify")
+
+    for match in matches:
+        script = script.replace(match, str(eval_exp(match)))
+
+    regex = "-\\([0-9\\.]+\\)"
+    matches = re.findall(regex, script)
+    print(str(len(matches)))
+
+    for match in matches:
+        script = script.replace(match, str(eval_exp(match)))
 
     script = script.replace("// Indented\n", "//Hex simplified\n", 1)
 
@@ -169,7 +218,7 @@ def fill_strings():
     """
     import ast
     import re
-    from get_app import get_app
+    from misc_utils import get_app
 
     file = get_app()
     line = file.readline()
@@ -270,7 +319,7 @@ def remove_char_code_lists():
     This replaces those lists with the actual strings.
     """
     import re
-    from get_app import get_app
+    from misc_utils import get_app
 
     with get_app() as file:
         line = file.readline()
@@ -328,7 +377,7 @@ def add_bools():
     """
     Replaces !![] with true and ![] with false
     """
-    from get_app import get_app
+    from misc_utils import get_app
 
     with get_app() as file:
         line = file.readline()
@@ -359,7 +408,7 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
 
     :param dl_assets: If true will download and slice .pngs, mp3s and svgs, using :doc:`grab_assets`
     :param redownload: If false will use already downloaded copies
-    :param deobfuscate: If you don't want to deobfuscate, set to false (mostly just for assets)
+    :param deobfuscate: If you don't want to deobfuscate, set to false (just for assets)
     """
     from grab_assets import grab_assets
 
@@ -372,10 +421,6 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
         except FileExistsError:
             pass
         del os
-        import shutil
-        shutil.rmtree("../overrides/surviv.io")
-        shutil.copytree("../out/code", "overrides\\surviv.io")
-        del shutil
     del redownload
 
     autoindent()

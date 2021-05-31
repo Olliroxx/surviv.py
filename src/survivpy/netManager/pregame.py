@@ -213,4 +213,4 @@ class Profile:
         # The vanilla js client does this before each game
 
         from survivpy.netManager import ingame
-        return ingame.Game(uri, settings, self.version)
+        return ingame.GameConnection(uri, settings, self.version)

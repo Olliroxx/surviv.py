@@ -1,8 +1,53 @@
-class DataNeededError(RuntimeError):
+def split_bracket_level(data: str, trim_start=True, ignore_unbalanced=False):
     """
-    This is the error used when there isn't enough information to turn a function into a value
+    Splits the input string at every point where there are no surrounding brackets
+
+    :param data: input string
+    :param trim_start: Remove whitespace and newlines at the start of each split
+    :param ignore_unbalanced: Ignore unbalanced brackets, otherwise throw RuntimeError
+    :return: List of strings
     """
-    pass
+
+    if not data:
+        raise ValueError("Data is empty")
+
+    bracket_level = 0
+    split_points = [0]
+
+    for pos in range(0, len(data)):
+        if data[pos] in ["(", "{"]:
+            bracket_level += 1
+        elif data[pos] in [")", "}"]:
+            bracket_level -= 1
+        # Adjust the bracket level if the character is an open/close bracket
+
+        if bracket_level == 0 and data[pos] == "\n":
+            split_points.append(pos+1)
+
+        if bracket_level < 0 and not ignore_unbalanced:
+            raise RuntimeError("Unbalanced close bracket at pos " + str(pos))
+    if bracket_level > 0 and not ignore_unbalanced:
+        raise RuntimeError("Unbalanced open bracket")
+
+    split_points.append(len(data))
+    # Create a list of ints representing the indexes bordering each function/dictionary in the string
+
+    split = []
+    for i in range(len(split_points) - 1):
+        start = split_points[i]
+        stop = split_points[i + 1]
+        split.append(data[start:stop])
+    # Create split, a list of strings by splitting the string at the indexes in split_points
+
+    if trim_start:
+        for i in range(len(split)):
+            while split[i].startswith((" ", "\n", ",")) or split[i].endswith((" ", "\n", ",")):
+                split[i] = split[i].strip("\n")
+                split[i] = split[i].strip(" ")
+                split[i] = split[i].strip(",")
+        # Clean up the strings
+
+    return split
 
 
 def basic_simplify(data):
@@ -17,27 +62,38 @@ def basic_simplify(data):
     import textwrap
     data = textwrap.dedent(data)
     del textwrap
+    #    A
+    # Becomes
+    # A
 
     regex = "[^_]0x[0-9a-f]+"
     hex_matches = re.findall(regex, data)
     for hex_data in hex_matches:
         data = data.replace(hex_data, str(int(hex_data, 16)), 1)
     del hex_matches
+    # 0x123
+    # becomes
+    # 291
 
     data = re.sub("Math\\[[\"']PI[\"']]", "3.141592653589793", data)
     data = solve_expressions(data)
+    # Math["Pi"] * 5
+    # Becomes
+    # 15.7079632679
 
     replacements = {
-        "\\\\x20": " ",
+        r"\\x20": " ",
         " 1:": " \"1\":",
         " 2:": " \"2\":",
-        "[^\\\\]\\\\x": "\\\\\\\\x",
+        r"[^\\]\\x": r"\\\\x",
         "'": "\"",
     }
     for pattern, new in replacements.items():
         data = re.sub(pattern, new, data)
+    # Small changes
 
     data = data.rstrip(", \n")
+    # Remove trialing whitespace and commas
 
     return data
 
@@ -60,7 +116,7 @@ def solve_expressions(data: str):
             solved = solve_expression(match)
             data = data.replace(match, str(solved), 1)
             changed = True
-        # Solve expressions (eg. 2+1)
+        # Solve expressions (like 2+1)
 
         regex = "-?\\(-?[0-9\\.]+\\)"
         bracket_matches = re.findall(regex, data)
@@ -68,7 +124,7 @@ def solve_expressions(data: str):
             solved = str(solve_expression(match))
             data = data.replace(match, solved, 1)
             changed = True
-        # Remove redundant brackets around ints
+        # Remove redundant brackets around numbers
     return data
 
 
@@ -80,6 +136,7 @@ def solve_expression(to_solve: str):
     :return: solved input string, as an int
     """
     import ast
+    # noinspection PyUnresolvedReferences
     return _eval(ast.parse(to_solve, mode="eval").body)
 
 
@@ -99,59 +156,7 @@ def _eval(node):
         return operators[type(node.op)](_eval(node.operand))
     else:
         raise TypeError(node)
-
-
-def split_bracket_level(data: str, trim_start=True, ignore_unbalanced=False):
-    """
-    Splits the input string at every point where there are no surrounding brackets
-
-    :param data: input string
-    :param trim_start: Remove whitespace and newlines at the start of each split
-    :param ignore_unbalanced: Ignore unbalanced brackets, otherwise throw RuntimeError
-    :return: List of strings
-    """
-
-    if not data:
-        raise ValueError("Data is empty")
-
-    bracket_level = 0
-    split_points = [0]
-    new_text = True
-    pos = 0
-
-    for pos in range(len(data)):
-
-        if data[pos] == "{":
-            bracket_level += 1
-        elif data[pos] == "}":
-            bracket_level -= 1
-        elif data[pos] == "\n" and bracket_level == 0 and new_text:
-            split_points.append(pos)
-            new_text = False
-
-        if data[pos] != " ":
-            new_text = True
-
-        if bracket_level < 0 and not ignore_unbalanced:
-            raise RuntimeError("Unbalanced close bracket at pos " + str(pos))
-    if bracket_level > 0 and not ignore_unbalanced:
-        raise RuntimeError("Unbalanced open bracket as pos" + str(pos))
-
-    split_points.append(len(data))
-
-    split = []
-    for i in range(len(split_points) - 1):
-        start = split_points[i]
-        stop = split_points[i + 1]
-        split.append(data[start:stop])
-
-    if trim_start:
-        for i in range(len(split)):
-            if split[i].startswith("\n"):
-                split[i] = split[i].lstrip("\n")
-                split[i] = split[i].lstrip(" ")
-
-    return split
+    # Ast magic from stackoverflow, slightly modified to handle floats
 
 
 def solve_vars(data: list, functions=None):
@@ -164,6 +169,7 @@ def solve_vars(data: list, functions=None):
     """
 
     import re
+    from utils.asset_processing.misc_utils import DataNeededError
 
     if functions is None:
         functions = {}
@@ -173,9 +179,12 @@ def solve_vars(data: list, functions=None):
     solved = {}
     unsolved = {}
     for var in data:
-        name, content = var.split(" = ", 1)
+        name, content = re.split("(?<=[0-9a-f]) = ", var, 1)
+        name = name.strip(" ")
+        content = content.strip(" ")
         unsolved[name] = content
     del var
+    # Split each string into the variable name and the variable content, and add that to unsolved
 
     while unsolved:
         keys_to_delete = []
@@ -183,6 +192,7 @@ def solve_vars(data: list, functions=None):
             value = unsolved[key]
 
             matches = re.findall(needs_solving_regex, value)
+            # Example match: _0x123 = {5},
 
             if matches:
                 match = matches[0]
@@ -195,18 +205,19 @@ def solve_vars(data: list, functions=None):
                     try:
                         function = functions[fname]
                         result = str(function(args, solved=solved))
-                        if len(value.split(fname)) > 2:
-                            result = result + ","
                         value = value.replace(args, result)
                         unsolved[key] = value
                     except DataNeededError:
                         pass
+                    # Try to use the handler function, if there isn't enough data do nothing
+                    # This could lead to an infinite loop, but I don't know enough to implement graphs
 
                 elif fname not in unsolved:
                     raise RuntimeError("No way to handle function " + fname)
             else:
                 keys_to_delete.append(key)
-                solved[key] = value
+                solved[key] = handler_generic(return_processed=True)(value)
+                # If there are no matches, then it must be solved
 
         for key in keys_to_delete:
             del unsolved[key]
@@ -216,7 +227,13 @@ def solve_vars(data: list, functions=None):
 
 def handler_generic(filename="", return_processed=False):
     """
-    Handles any function which has only a single variable to solve
+    Handles any function which has only a single variable to solve. Example:
+
+    _0x123456 = function (_0x123456) {
+        var _0x123456 = {};
+    }
+    returns
+    {}
 
     :param filename: The output file name
     :param return_processed: Return the solved value instead of writing to disk
@@ -233,13 +250,13 @@ def handler_generic(filename="", return_processed=False):
                 data = i
                 break
         del i
-        # Split and find the interesting variable
+        if type(data) == list:
+            data = data[0]
 
         data = re.sub("_0x[0-9a-f]{6} = ", "", data, count=1)
         data = re.sub(";.*", "", data, flags=re.DOTALL)
         data = basic_simplify(data)
         # General cleaning
-
         data = json.loads(data)
 
         if return_processed:
@@ -258,18 +275,19 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
 
         Has 2 modes:
 
-        Normal:
+        Use keys:
 
          * Write a dict with the each value in categories used as the key
          * Any keys that are 0s are discarded
 
-        Expand:
+        Normal:
 
          * All keys must either be 0s or 1s
          * There can only be one 1
          * The result of value of 1 must be a dict
          * The keys of the result dict are used instead of the values from categories
     """
+    from utils.asset_processing.misc_utils import DataNeededError
 
     def dict_ref_setup(source_dict_name: str):
         def dict_ref(args: str, solved: dict):
@@ -358,7 +376,8 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
                 value = dict_ref_setup(source_dict)
                 functions[key] = value
                 has_handler = True
-                del source_dict
+            # Set up dict usages. Example:
+            # _0x123["property"]
 
             if re.findall(merge_dicts_regex, function):
                 key = re.findall(merge_dicts_regex, function)[0]
@@ -366,12 +385,13 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
                 if key not in functions:
                     functions[key] = value
                     has_handler = True
+            # Set up dict merging functions
 
             if not has_handler:
                 raise RuntimeError("Function without handler")
         del merge_dicts_regex, dict_ref_regex, function, has_handler, key, functions_string
 
-        data = split_bracket_level(data)
+        data = split_bracket_level(data, trim_start=True)
 
         simple_value_regex = "_0x[0-9a-f]{6} = -?[0-9.]+"
         simple_values = {}
@@ -397,7 +417,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
             variable = basic_simplify(variable)
             data_solved.append(variable)
         data = data_solved
-        del data_solved, key, value, variable, i
+        del data_solved, variable, i
         # Replace the simple variables with their values
 
         result = solve_vars(data, functions)
@@ -419,7 +439,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
         if has_1:
             for category in categories:
                 if category not in (0, 1):
-                    raise ValueError("Cannot have categories other than 0 or 1 in expand mode")
+                    raise ValueError("Cannot have categories other than 0 or 1 in normal mode")
         # Input validation
 
         with open(filename, "w") as file:
@@ -446,9 +466,24 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
     return handler
 
 
-def create_jsons(root_dir: str):
-    from get_app import get_app
+def create_jsons(root_dir: str, skip_simple=False, skip_objects=False):
+    """
+    This is the main function of create_jsons.py
+
+    :param skip_objects: skips making objects.json
+    :param skip_simple: skips straight to objects
+    :param root_dir: The output directory
+    """
+    from utils.asset_processing.misc_utils import get_app
+    from utils.asset_processing.json_processing.create_objects_json import write_objects_json
     import re
+    import os
+
+    try:
+        os.mkdir("./jsons")
+    except FileExistsError:
+        pass
+    del os
 
     with get_app() as file:
         line = file.readline()
@@ -471,7 +506,7 @@ def create_jsons(root_dir: str):
 
     filters = [
         ("quest", 20, handler_generic(root_dir + "quests.json")),  # Quests
-        ("falloff", 5, handler_multidict(root_dir + "bullets.json", categories=("a", "b", "c"))),  # Bullets
+        ("falloff", 5, handler_multidict(root_dir + "bullets.json")),  # Bullets
         ("explosionEffectType", 10, handler_generic(root_dir + "explosions.json")),  # Explosions
         ("playerRad", 1, handler_multidict(root_dir + "nonweapons.json")),  # Nonweapons
         ("'name': 'VSS'", 1, handler_generic(root_dir + "guns.json")),  # Guns
@@ -485,34 +520,40 @@ def create_jsons(root_dir: str):
         ("'unlock_default'", 1, handler_generic(root_dir + "default_unlocks.json")),  # Default unlocks
     ]
     # Format : string, threshold, handler function
-    # If [string] is found more times than (or equal to) [threshold], then [handler function] is called
+    # If [string] is found more times than (or equal to) [threshold], then [handler function] is used
 
-    for match in matches:
-        regex = "'" + match + "': function\\(_0x[0-9a-f]{6}(?:, _0x[0-9a-f]{6})*\\) {\n {12}'use strict';.*?'use strict';"
-        matches_function = re.findall(regex, script, flags=re.DOTALL)
-        if len(matches_function) != 1:
-            raise RuntimeError
-        function = str(matches_function[0])
-        del matches_function
-        function = "\n".join(function.split("\n")[:-2])
-        # Gets function text
+    if not skip_simple:
+        print(str(len(matches)) + " matches, " + str(len(filters)) + " filters")
 
-        for filter_string, threshold, handler in filters:
-            if function.count(filter_string) >= threshold:
-                handler(function)
-                continue
+        for match in matches:
+            print("Starting match " + str(matches.index(match)) + " of " + str(len(matches)))
+            regex = "'" + match + "': function\\(_0x[0-9a-f]{6}(?:, _0x[0-9a-f]{6})*\\) {\n {12}'use strict';.*?'use strict';"
+            matches_function = re.findall(regex, script, flags=re.DOTALL)
+            if len(matches_function) != 1:
+                raise RuntimeError
+            function = str(matches_function[0])
+            del matches_function
+            function = "\n".join(function.split("\n")[:-2])
+            # Gets function text
 
-    del match, function, script, matches
-    pass
+            for filter_string, threshold, handler in filters:
+                if function.count(filter_string) >= threshold:
+                    handler(function)
+                    continue
+
+        del match, function, matches, filters
+        # Write every json except for objects
+        print("Simple jsons written, starting objects.json")
+    else:
+        print("Skipping simple")
+
+    if skip_objects:
+        print("Skipping objects")
+    else:
+        write_objects_json(script, root_dir)
+
+    print("Finished")
 
 
 if __name__ == '__main__':
-    import os
-
-    try:
-        os.mkdir("./jsons")
-    except FileExistsError:
-        pass
-    del os
-
     create_jsons("./jsons/")
