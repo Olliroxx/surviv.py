@@ -229,11 +229,17 @@ def handler_generic(filename="", return_processed=False):
     """
     Handles any function which has only a single variable to solve. Example:
 
-    _0x123456 = function (_0x123456) {
-        var _0x123456 = {};
-    }
+    .. code-block::
+
+        _0x123456 = function (_0x123456) {
+            var _0x123456 = {};
+        }
+
     returns
-    {}
+
+    .. code-block::
+
+        {}
 
     :param filename: The output file name
     :param return_processed: Return the solved value instead of writing to disk
