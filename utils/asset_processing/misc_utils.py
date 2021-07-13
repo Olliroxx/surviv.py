@@ -23,3 +23,11 @@ def get_app(mode="r"):
     if file is None:
         raise RuntimeError("There must be exactly one app.js script in out/code/js")
     return file
+
+
+def check_servers_down():
+    import requests
+    resp = requests.get("https://surviv.io")
+    if resp.status_code == 503:
+        return True
+    return False

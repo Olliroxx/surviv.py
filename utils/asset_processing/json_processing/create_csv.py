@@ -41,8 +41,9 @@ def make_table(infile: str, defaults: dict):
     :return:
     """
     from json import load
+    import os
 
-    with open(infile) as file:
+    with open(os.path.join(os.path.dirname(__file__),infile)) as file:
         data = load(file)
 
     list_of_dicts = []
@@ -67,7 +68,9 @@ def write_table(table: list, fname: str):
     :return:
     """
     from csv import DictWriter
-    file = open(fname, "w", newline="")
+    import os
+
+    file = open(os.path.join(os.path.dirname(__file__), fname), "w", newline="")
     fields = table[0].keys()
     writer = DictWriter(file, fields)
     writer.writeheader()

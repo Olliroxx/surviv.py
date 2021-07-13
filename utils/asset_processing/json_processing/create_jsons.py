@@ -50,6 +50,30 @@ def split_bracket_level(data: str, trim_start=True, ignore_unbalanced=False):
     return split
 
 
+def single_to_double_quote(s: str):
+    s = s.replace(r"\'", r"\x27")
+    lines = s.split("\n")
+    solved_lines = []
+    for line in lines:
+        if "'" in line and ":" in line and "function" not in line:
+            key, value = line.split(":", 1)
+            key = key.replace("'", '"')
+            if "'" in value:
+                if "[" in value:
+                    value = value.replace("'", '"')
+                    # List handling code
+                else:
+                    first_pos = value.index("'")
+                    last_pos = len(value)-value[::-1].index("'")
+                    value = value[:first_pos] + '"' + value[first_pos+1:last_pos-1].replace('"', "'") + '"' + value[last_pos:]
+            line = key + ":" + value
+        solved_lines.append(line)
+    return "\n".join(solved_lines)
+    # 'a': 'ab"c"de'
+    # becomes
+    # "a": "ab'c'de"
+
+
 def basic_simplify(data):
     """
     This function replaces ' with " and solves expressions, among other things
@@ -69,7 +93,7 @@ def basic_simplify(data):
     regex = "[^_]0x[0-9a-f]+"
     hex_matches = re.findall(regex, data)
     for hex_data in hex_matches:
-        data = data.replace(hex_data, str(int(hex_data, 16)), 1)
+        data = data.replace(hex_data, hex_data[0] + str(int(hex_data[1:], 16)), 1)
     del hex_matches
     # 0x123
     # becomes
@@ -86,10 +110,10 @@ def basic_simplify(data):
         " 1:": " \"1\":",
         " 2:": " \"2\":",
         r"[^\\]\\x": r"\\\\x",
-        "'": "\"",
     }
     for pattern, new in replacements.items():
         data = re.sub(pattern, new, data)
+    data = single_to_double_quote(data)
     # Small changes
 
     data = data.rstrip(", \n")
@@ -159,24 +183,26 @@ def _eval(node):
     # Ast magic from stackoverflow, slightly modified to handle floats
 
 
-def solve_vars(data: list, functions=None):
+def solve_vars(data: list, functions=None, solved=None):
     """
     Tries to solve as many variables as possible
 
+    :param solved:
     :param data: A list of strings containing a variable declaration, example: "_0x1234 = 1,
     :param functions: A dictionary of conversion functions. Format:  "name in code": function
     :return: A dictionary in the format "function name": solved value
     """
 
+    if solved is None:
+        solved = {}
     import re
     from utils.asset_processing.misc_utils import DataNeededError
 
     if functions is None:
         functions = {}
 
-    needs_solving_regex = "_0x[0-9a-f]{4,}[\\[\\(]"
+    needs_solving_regex = r"_0x[0-9a-f]{4,}[\[\(]"
 
-    solved = {}
     unsolved = {}
     for var in data:
         name, content = re.split("(?<=[0-9a-f]) = ", var, 1)
@@ -200,7 +226,6 @@ def solve_vars(data: list, functions=None):
                 args = match + value.split(match, 1)[1]
                 args = split_bracket_level(args, ignore_unbalanced=True)[0]
                 # Get function args
-
                 if fname in functions:
                     try:
                         function = functions[fname]
@@ -248,18 +273,18 @@ def handler_generic(filename="", return_processed=False):
 
     def handler(data: str):
         import re
+        import os
         import json
 
         data = data.split("var ")
         for i in data:
-            if re.findall("_0x[0-9a-f]{6} = {", i):
+            if re.findall("_0x[0-9a-f]{4,6} = {", i):
                 data = i
                 break
-        del i
         if type(data) == list:
-            data = data[0]
+            data = data[-1]
 
-        data = re.sub("_0x[0-9a-f]{6} = ", "", data, count=1)
+        data = re.sub("_0x[0-9a-f]{4,6} = ", "", data, count=1)
         data = re.sub(";.*", "", data, flags=re.DOTALL)
         data = basic_simplify(data)
         # General cleaning
@@ -268,7 +293,7 @@ def handler_generic(filename="", return_processed=False):
         if return_processed:
             return data
         else:
-            with open(filename, "w") as file:
+            with open(os.path.join(os.path.dirname(__file__), filename), "w") as file:
                 json.dump(data, file, indent=4)
 
     return handler
@@ -295,8 +320,14 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
     """
     from utils.asset_processing.misc_utils import DataNeededError
 
-    def dict_ref_setup(source_dict_name: str):
-        def dict_ref(args: str, solved: dict):
+    def op_bullet_setup(source_dict_name: str):
+        """
+        Not just used for overpressure bullets, but that is the best example
+
+        :param source_dict_name:
+        :return:
+        """
+        def op_bullet(args: str, solved: dict):
             import json
 
             if not type(source_dict_name) == dict:
@@ -317,7 +348,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
             args[1] = basic_simplify(args[1])
 
             parsed = json.loads(args[1])
-            result_dict = {}
+            result_dict = {"baseType": args[0]}
 
             # noinspection PyTypeChecker
             for key in source_dict[args[0]]:
@@ -328,7 +359,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
 
             return json.dumps(result_dict, indent=4)
 
-        return dict_ref
+        return op_bullet
 
     def merge_dicts(args: str, solved: dict):
         import json
@@ -346,40 +377,51 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
 
         return json.dumps(result_dict)
 
+    def dict_ref_setup(source: dict):
+        def dict_ref(args: str, solved: dict):
+            args = args.split("][")
+            args[-1] = args[-1][:-2]
+            args[0] = args[0].split("[")[1][1:]
+            result = source
+            for target in args:
+                result = result[target]
+            return result
+        return dict_ref
+
     def handler(data: str):
         import re
         import json
+        import os
 
         data = basic_simplify(data)
 
         data = data.split("var ")
         functions_string = []
         longest = ""
-        function_regex = "[\"'][0-9a-f]{8}[\"']: function\\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}, _0x[0-9a-f]{6}\\) \\{\n {12}[\"']use strict[\"'];"
+        function_regex = "[\"'][0-9a-f]{8}[\"']: function\\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\\) \\{\n {12}[\"']use strict[\"'];"
         for i in data:
             if len(i) > len(longest):
                 longest = i
             if "function" in i and not re.findall(function_regex, i):
                 functions_string.append(i)
         data = longest
-        del longest, i, function_regex
         data = data.split(";")[0]
         # Split the function, with "var " at the split points
         # Find the longest one and discard everything else, except functions which might need a handler
 
-        dict_ref_regex = """function _0x[0-9a-f]{6}\\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}\\) \\{
- {16}return _0x[0-9a-f]{6}\\["mergeDeep"\\]\\(\\{\\}. _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}\\], \\{
- {20}"baseType": _0x[0-9a-f]{6}
- {16}\\}, _0x[0-9a-f]{6}\\);
- {12}\\}"""
-        merge_dicts_regex = "(_0x[0-9a-f]{6})\\[[\"']mergeDeep[\"']\\]"
+        op_bullet_regex = r"""function _0x[0-9a-f]{4,6}\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\) \{
+ {16}return _0x[0-9a-f]{4,6}\[[\"']mergeDeep[\"']\]\(\{\}. _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}\], \{
+ {20}[\"']baseType[\"']: _0x[0-9a-f]{4,6}
+ {16}\}, _0x[0-9a-f]{4,6}\);
+ {12}\}"""
+        merge_dicts_regex = "(_0x[0-9a-f]{4,6})\\[[\"']mergeDeep[\"']\\]"
         functions = {}
         for function in functions_string:
             has_handler = False
-            if re.findall(dict_ref_regex, function):
-                key = re.findall("function (_0x[0-9a-f]{6})", function)[0]
-                source_dict = re.findall("_0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]", function)[0][:9]
-                value = dict_ref_setup(source_dict)
+            if re.findall(op_bullet_regex, function):
+                key = re.findall("function (_0x[0-9a-f]{4,6})", function)[0]
+                source_dict = re.findall("_0x[0-9a-f]{4,6}\\[_0x[0-9a-f]{4,6}]", function)[0][:9]
+                value = op_bullet_setup(source_dict)
                 functions[key] = value
                 has_handler = True
             # Set up dict usages. Example:
@@ -395,19 +437,32 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
 
             if not has_handler:
                 raise RuntimeError("Function without handler")
-        del merge_dicts_regex, dict_ref_regex, function, has_handler, key, functions_string
+        del merge_dicts_regex, op_bullet_regex, functions_string
 
         data = split_bracket_level(data, trim_start=True)
 
-        simple_value_regex = "_0x[0-9a-f]{6} = -?[0-9.]+"
+        simple_value_regex = "_0x[0-9a-f]{4,6} = (?:-?[0-9.]+|{(?:(?!_0x).)*})"
         simple_values = {}
         to_remove = []
+        solved = {}
+        from json import loads
         for variable in data:
-            if re.findall(simple_value_regex, variable):
+            if re.findall(simple_value_regex, variable, re.DOTALL):
                 split = variable.split(" = ")
                 key = split[0]
                 value = split[1][:-1]
-                simple_values[key] = value
+                if "{" not in value:
+                    value = basic_simplify(value)
+                    simple_values[key] = value
+                else:
+                    key = re.findall("_0x[0-9a-f]{4,6}", variable)[0]
+                    start = variable.index("{")
+                    value = variable[start-1:]
+                    value = basic_simplify(value)
+                    value = loads(value)
+                    solved[key] = value
+                    if key not in functions:
+                        functions[key] = dict_ref_setup(value)
                 to_remove.append(variable)
         # Find "simple variables" (eg _0x123 = 0.5) and add them to a list
 
@@ -419,14 +474,15 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
         for i in range(len(data)):
             variable = data[i]
             for key, value in simple_values.items():
-                variable = variable.replace(key, value)
+                variable = variable.replace(key, str(value))
+
             variable = basic_simplify(variable)
             data_solved.append(variable)
         data = data_solved
         del data_solved, variable, i
         # Replace the simple variables with their values
 
-        result = solve_vars(data, functions)
+        result = solve_vars(data, functions, solved)
         del data, functions
 
         if len(result) < len(categories):
@@ -448,7 +504,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
                     raise ValueError("Cannot have categories other than 0 or 1 in normal mode")
         # Input validation
 
-        with open(filename, "w") as file:
+        with open(os.path.join(os.path.dirname(__file__), filename), "w") as file:
             if has_1:
                 for i in range(len(result)):
                     if categories[i]:
@@ -472,16 +528,18 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
     return handler
 
 
-def create_jsons(root_dir: str, skip_simple=False, skip_objects=False):
+def create_jsons(root_dir: str, skip_simple=False, skip_objects=False, skip_constants=False, skip_game_modes=False):
     """
     This is the main function of create_jsons.py
 
+    :param skip_game_modes: skips making map_data.json
+    :param skip_constants: skips making constants.json
     :param skip_objects: skips making objects.json
     :param skip_simple: skips straight to objects
     :param root_dir: The output directory
     """
     from utils.asset_processing.misc_utils import get_app
-    from utils.asset_processing.json_processing.create_objects_json import write_objects_json
+    from utils.asset_processing.json_processing import create_gamemodes_json, create_constants_json, create_objects_json
     import re
     import os
 
@@ -499,9 +557,9 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False):
     del line, file
     # Check at what stage this is being run
 
-    regex = """'[0-9a-f]{8}': function\\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}, _0x[0-9a-f]{6}\\) {
+    regex = """'[0-9a-f]{8}': function\\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\\) {
  {12}'use strict';
- {12}var _0x[a-f0-9]{6} = \\[(_0x[0-9a-f]{6}\\('[0-9a-f]{8}'\\)(?:, _0x[0-9a-f]{6}\\('[0-9a-f]{8}'\\))*)]"""
+ {12}var _0x[a-f0-9]{4,6} = \\[(_0x[0-9a-f]{4,6}\\('[0-9a-f]{8}'\\)(?:, _0x[0-9a-f]{4,6}\\('[0-9a-f]{8}'\\))*)]"""
     matches = re.findall(regex, script)
     if len(matches) != 1:
         raise RuntimeError
@@ -522,8 +580,18 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False):
         ("pass_survivr", 5, handler_generic(root_dir + "passes.json")),  # Passes
         ("ping", 6, handler_generic(root_dir + "pings.json")),  # Pings
         ("role", 15, handler_generic(root_dir + "roles.json")),  # Roles
-        ("'type': 'throwable',", 1, handler_generic(root_dir + "explosives.json")),  # Throwables
-        ("'unlock_default'", 1, handler_generic(root_dir + "default_unlocks.json")),  # Default unlocks
+        ("'type': 'throwable',", 1, handler_generic(root_dir + "throwables.json")),  # Throwables
+        ("crosshair", 90, handler_generic(root_dir + "crosshairs.json")),  # Crosshairs
+        ("heal", 60, handler_generic(root_dir + "heal_effects.json")),  # Heal + boost particles
+        ("emote", 700, handler_multidict(root_dir + "emotes.json", categories=(0, 1))),  # Emotes
+        ("new-account", 1, handler_generic(root_dir + "default_unlocks.json")),  # Default account unlocks (skins, particles etc.)
+        ("Cake Donut", 1, handler_multidict(root_dir + "xp_sources.json")),  # XP sources
+        ("deathEffect", 15, handler_generic(root_dir + "death_effects.json")),  # Death effects
+        ("loot_box", 7, handler_generic(root_dir + "lootbox_tables.json")),  # Probabilities of item pools from lootboxes
+        ("itemPool", 6, handler_generic(root_dir + "item_pools.json")),  # Item pools
+        ("rescheduled", 3, handler_generic(root_dir + "xp_boost_events.json")),  # XP boost times and amounts
+        ("price", 16, handler_generic(root_dir + "market_min_values.json")),  # Black market minimum prices (and taxes?)
+        ("motherShip", 3, handler_generic(root_dir + "npcs.json")),  # NPCs (so far only mothership+skitters from contact
     ]
     # Format : string, threshold, handler function
     # If [string] is found more times than (or equal to) [threshold], then [handler function] is used
@@ -532,8 +600,8 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False):
         print(str(len(matches)) + " matches, " + str(len(filters)) + " filters")
 
         for match in matches:
-            print("Starting match " + str(matches.index(match)) + " of " + str(len(matches)))
-            regex = "'" + match + "': function\\(_0x[0-9a-f]{6}(?:, _0x[0-9a-f]{6})*\\) {\n {12}'use strict';.*?'use strict';"
+            print("Starting match " + str(matches.index(match)+1) + " of " + str(len(matches)))
+            regex = "'" + match + "': function\\(_0x[0-9a-f]{4,6}(?:, _0x[0-9a-f]{4,6})*\\) {\n {12}'use strict';.*?\n(?= {8}'[0-9a-f]{8}')"
             matches_function = re.findall(regex, script, flags=re.DOTALL)
             if len(matches_function) != 1:
                 raise RuntimeError
@@ -545,7 +613,9 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False):
             for filter_string, threshold, handler in filters:
                 if function.count(filter_string) >= threshold:
                     handler(function)
-                    continue
+                    filters.remove((filter_string, threshold, handler))
+                    print("Match found")
+                    break
 
         del match, function, matches, filters
         # Write every json except for objects
@@ -556,7 +626,17 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False):
     if skip_objects:
         print("Skipping objects")
     else:
-        write_objects_json(script, root_dir)
+        create_objects_json.write_objects_json(script, root_dir)
+
+    if skip_constants:
+        print("Skipping constants")
+    else:
+        create_constants_json.write_constants_json(script, root_dir)
+
+    if skip_game_modes:
+        print("Skipping gamemodes")
+    else:
+        create_gamemodes_json.create_game_modes(script, root_dir)
 
     print("Finished")
 

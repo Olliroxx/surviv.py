@@ -32,7 +32,7 @@ def grab_code():
     print("HTML retrieved\n")
     # Get HTML, and ensure nothing went horribly wrong
 
-    file = open(".\\out\\code\\index.html", "w", encoding="utf-8")
+    file = open(os.path.join(os.path.dirname(__file__),".\\out\\code\\index.html"), "w", encoding="utf-8")
     file.write(resp)
     file.close()
     # Write HTML file
@@ -41,7 +41,7 @@ def grab_code():
 
     for script in files:
         print("Downloading " + script)
-        file = open(".\\out\\code\\" + script, "bw")
+        file = open(os.path.join(os.path.dirname(__file__), ".\\out\\code\\" + script), "bw")
 
         resp = requests.get("https://surviv.io/" + script, stream=True)
         length = resp.headers.get("content-length")
@@ -189,7 +189,7 @@ def autoindent():
 
     for script in os.listdir(".\\deobfuscated\\js"):
 
-        file = open(".\\deobfuscated\\js\\" + script, "r", encoding="utf-8")
+        file = open(os.path.join(os.path.dirname(__file__),".\\deobfuscated\\js\\" + script), "r", encoding="utf-8")
         text = file.readline()
         file.close()
         if text.startswith("//"):
@@ -201,7 +201,7 @@ def autoindent():
         result = jsbeautifier.beautify_file(".\\deobfuscated\\js\\" + script, opts)
         result = "// Indented\n" + result
 
-        with open(".\\deobfuscated\\js\\" + script, "w", encoding="utf-8") as writer:
+        with open(os.path.join(os.path.dirname(__file__),".\\deobfuscated\\js\\" + script), "w", encoding="utf-8") as writer:
             print("Writing " + script)
             writer.write(result)
             writer.close()
@@ -435,6 +435,4 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
 
 
 if __name__ == "__main__":
-    main()
-    # main(dl_assets=True)
-    # main(redownload=False)
+    main(deobfuscate=False, dl_assets=True)

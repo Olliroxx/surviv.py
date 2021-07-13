@@ -4,5 +4,5 @@ Direction: up
 
 Contains:
 
- * "role" "writeGameType" : ???
+ * role: gameType
  * 6 filler bits

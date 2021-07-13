@@ -1,5 +1,6 @@
-from survivpy.netManager import ingame
 import unittest
+
+from survivpy_net import ingame
 
 
 class test_packets(unittest.TestCase):
@@ -7,6 +8,7 @@ class test_packets(unittest.TestCase):
         import os
         import json
         file = open(os.path.join(os.path.dirname(__file__), "type_01_packet_test_data.json"), "r")
+        # A thing that gets the correct file irrelevant of the working directory
         test_data = json.load(file)
         file.close()
         del json, os

@@ -8,14 +8,14 @@ import os
 
 master_dict = {}
 sources = [
-    "explosives",
+    "throwables",
     "nonweapons",
     "outfits",
 ]
 # The names of the json files to read from
 
 for file in sources:
-    file = open("./jsons/"+file+".json", "r")
+    file = open(os.path.join(os.path.dirname(__file__), "jsons/"+file+".json"), "r")
     data = load(file)
     file.close()
     master_dict = master_dict | data
@@ -41,7 +41,7 @@ sprite_number = 0
 for name in svg_names:
     sprite_number += 1
     print("Downloading " + name + ".svg, " + str(sprite_number)+"/"+str(len(svg_names)))
-    file = open("../out/svgs/loot/"+name+".svg", "bw")
+    file = open(os.path.join(os.path.dirname(__file__), "../out/svgs/loot/"+name+".svg"), "bw")
     resp = requests.get("https://surviv.io/img/loot/"+name+".svg")
     file.close()
 # Get and write all the sprites

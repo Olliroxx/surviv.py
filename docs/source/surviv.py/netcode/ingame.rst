@@ -1,4 +1,4 @@
 In game client-server communication
 ===================================
-.. automodule:: survivpy.netManager.ingame
+.. automodule:: survivpy_net.ingame
     :members:

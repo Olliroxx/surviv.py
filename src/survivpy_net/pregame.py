@@ -1,5 +1,14 @@
 class Profile:
-    def __init__(self, id_=None):
+    """
+    Some attributes of note:
+    * pass_data: dict containing levels, xp and unlocks
+    * kpg, total_wins, total_games: some stats
+    * loadout: skins, starting melee, emotes, particles and crosshair
+
+    :param id_: Optional, the user id to use. If not set will make a new account
+    """
+    def __init__(self, id_=None,):
+
         self.id = id_
         import requests
         self.session = requests.session()
@@ -19,9 +28,7 @@ class Profile:
         self.kpg = "0.0"
         self.progress_notification_active = True
         self.ign = "Player"
-        """
-        Defaults for joining a game
-        """
+        # Defaults for joining a game
 
         self.total_games = 0
         self.total_wins = 0
@@ -34,7 +41,7 @@ class Profile:
         self.user_pass_max_level = []
         self.user_transaction_data = []
 
-        self.pass_ = None
+        self.pass_data = None
         self.quests = []
 
         self.update_profile()
@@ -42,9 +49,12 @@ class Profile:
         self.update_pass()
         self.update_currency()
 
-        self.version = 104
+        self.version = 107
 
     def update_currency(self):
+        """
+        Update local copy of currency and transaction data
+        """
         resp = self.session.post("https://surviv.io/api/user/get_user_currency_total").json()
 
         if not resp:
@@ -54,16 +64,6 @@ class Profile:
         self.user_pass_max_level = resp["userPassMaxLevel"]
         self.user_transaction_data = resp["userTransactionData"]
 
-    def get_modes(self):
-        """
-        Gets currently suggested game modes/maps
-        :return: parsed response from server
-        """
-
-        resp = self.session.get("https://surviv.io/api/games_modes").json()
-
-        return resp
-
     def reset_prestige(self):
         self.session.post("https://surviv.io/api/user/reset_prestige_points")
 
@@ -71,8 +71,8 @@ class Profile:
     def _gen_user_id():
         import random
         """
-        Generates a random ID, following a pattern
-        :return:
+        Generates a random ID, following a pattern  
+        You probably don't need this
         """
 
         bytelist = []
@@ -129,13 +129,13 @@ class Profile:
 
     def update_pass(self):
         """
-        Update local copy of a pass
+        Update local copy of pass
         :return:
         """
         resp = self._get_pass_unlinked()
         if not resp["success"]:
             raise (IOError("Pass retrieval unsuccessful"))
-        self.pass_ = resp["pass"]
+        self.pass_data = resp["pass"]
         self.quests = resp["quests"]
         self.quest_priv = resp["questPriv"]
 
@@ -183,7 +183,7 @@ class Profile:
 
         if settings is None:
             settings = {
-                "autoFill": True,
+                "autoFill": False,
                 "gameModeIdx": 0,
                 "isMobile": False,
                 "playerCount": 1,
@@ -212,5 +212,5 @@ class Profile:
         self.update_pass()
         # The vanilla js client does this before each game
 
-        from survivpy.netManager import ingame
+        from survivpy_net import ingame
         return ingame.GameConnection(uri, settings, self.version)

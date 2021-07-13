@@ -1,7 +1,8 @@
 Surviv.py
 =========
-This is the documentation for the client
+This is the documentation for the client and netcode
 
 .. toctree::
 
-    netManager/index
+    netcode/index
+    client/index

@@ -57,10 +57,11 @@ def split_bracket_level(data: str, trim_start=True, ignore_unbalanced=False, bra
 def write_objects_json(script, root_dir):
     import re
     import json
+    import os
 
-    regex = """(?:_0x[0-9a-f]{6} = _0x[0-9a-f]{6}\\('[0-9a-f]{8}'\\),
- +)+_0x[0-9a-f]{6} = 'production' === 'dev'[,;](?:
- +_0x[0-9a-f]{6} = _0x[0-9a-f]{6}\\('[0-9a-f]{8}'\\)[,;])*"""
+    regex = r"""(?:_0x[0-9a-f]{4,6} = _0x[0-9a-f]{4,6}\('[0-9a-f]{8}'\),
+ +)+_0x[0-9a-f]{4,6} = 'production' === 'dev'[,;](?:
+ +_0x[0-9a-f]{4,6} = _0x[0-9a-f]{4,6}\('[0-9a-f]{8}'\)[,;])*"""
     matches = re.findall(regex, script, re.DOTALL)
     if len(matches) != 1:
         raise RuntimeError
@@ -86,36 +87,38 @@ def write_objects_json(script, root_dir):
     main_function = highest_text
     # Get the function containing the object info
 
-    function_regex_base = "\n {12}function _0x[0-9a-f]{6}\\(_0x[0-9a-f]{6}(?:, _0x[0-9a-f]{6})+\\) {\n.*?\n {12}}"
-    weighted_random_regex = """\n {12}function _0x[0-9a-f]{6}\\(_0x[0-9a-f]{6}\\) {
- {16}var _0x[0-9a-f]{6} = \\[];
- {16}for \\(var _0x[0-9a-f]{6} in _0x[0-9a-f]{6}\\) {
- {20}_0x[0-9a-f]{6}\\['hasOwnProperty']\\(_0x[0-9a-f]{6}\\) && _0x[0-9a-f]{6}\\['push']\\({
- {24}'type': _0x[0-9a-f]{6},
- {24}'weight': _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]
- {20}}\\);
+    function_regex_base = "\n {12}function _0x[0-9a-f]{4,6}\\(_0x[0-9a-f]{4,6}(?:, _0x[0-9a-f]{4,6})+\\) {\n.*?\n {12}}"
+    weighted_random_regex = r"""
+ {12}function _0x[0-9a-f]{4,6}\(_0x[0-9a-f]{4,6}\) {
+ {16}var _0x[0-9a-f]{4,6} = \[];
+ {16}for \(var _0x[0-9a-f]{4,6} in _0x[0-9a-f]{4,6}\) {
+ {20}_0x[0-9a-f]{4,6}\['hasOwnProperty']\(_0x[0-9a-f]{4,6}\) && _0x[0-9a-f]{4,6}\['push']\({
+ {24}'type': _0x[0-9a-f]{4,6},
+ {24}'weight': _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]
+ {20}}\);
  {16}}
- {16}if \\(_0x[0-9a-f]{6}\\['length'] == 0\\) throw new Error\\('Invalid obstacle types'\\);
- {16}var _0x[0-9a-f]{6} = 0;
- {16}for \\(var _0x[0-9a-f]{6} = 0; _0x[0-9a-f]{6} < _0x[0-9a-f]{6}\\['length']; _0x[0-9a-f]{6}\\+\\+\\) {
- {20}_0x[0-9a-f]{6} \\+= _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]\\['weight'];
+ {16}if \(_0x[0-9a-f]{4,6}\['length'] == 0\) throw new Error\('Invalid(?:\\x20| )obstacle(?:\\x20| )types'\);
+ {16}var _0x[0-9a-f]{4,6} = 0;
+ {16}for \(var _0x[0-9a-f]{4,6} = 0; _0x[0-9a-f]{4,6} < _0x[0-9a-f]{4,6}\['length']; _0x[0-9a-f]{4,6}\+\+\) {
+ {20}_0x[0-9a-f]{4,6} \+= _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]\['weight'];
  {16}}
- {16}return function\\(\\) {
- {20}var _0x[0-9a-f]{6} = _0x[0-9a-f]{6}\\['random']\\(0, _0x[0-9a-f]{6}\\),
- {24}_0x[0-9a-f]{6} = 0;
- {20}while \\(_0x[0-9a-f]{6} > _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]\\['weight']\\) {
- {24}_0x[0-9a-f]{6} -= _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]\\['weight'], _0x[0-9a-f]{6}\\+\\+;
+ {16}return function\(\) {
+ {20}var _0x[0-9a-f]{4,6} = _0x[0-9a-f]{4,6}\['random']\(0, _0x[0-9a-f]{4,6}\),
+ {24}_0x[0-9a-f]{4,6} = 0;
+ {20}while \(_0x[0-9a-f]{4,6} > _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]\['weight']\) {
+ {24}_0x[0-9a-f]{4,6} -= _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]\['weight'], _0x[0-9a-f]{4,6}\+\+;
  {20}}
- {20}return _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]\\['type'];
- {16}};\n"""
-    shipping_container_function_regex = """ {12}function _0x[0-9a-f]{4,7}\\(_0x[0-9a-f]{4,7}\\) {
- {16}var _0x[0-9a-f]{4,7} = \\[{.*?container.*?
+ {20}return _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]\['type'];
+ {16}};"""
+    shipping_container_function_regex = r"""
+ {12}function _0x[0-9a-f]{4,7}\(_0x[0-9a-f]{4,7}\) {
+ {16}var _0x[0-9a-f]{4,7} = \[{.*?container.*?
  {20}}],
- {20}_0x[0-9a-f]{4,7} = \\[\\{.*?container.*? {20}}];
- {16}return \\{.*?container.*?
+ {20}_0x[0-9a-f]{4,7} = \[\{.*?container.*? {20}}];
+ {16}return \{.*?container.*?
  {12}}"""
     function_regex = function_regex_base + "|" + weighted_random_regex + "|" + shipping_container_function_regex
-    var_regex = "\n {12}var _0x[0-9a-f]{6} = {\n.*?\n {12}}"
+    var_regex = "\n {12}var _0x[0-9a-f]{4,6} = {\n.*?\n {12}}"
     template_regex = " {12}function _0x[0-9a-f]{4,6}\\(_0x[0-9a-f]{4,6}\\) {\n {16}var _0x[0-9a-f]{4,6} = (?:_0x[0-9a-f]{4,6}\\()?{.*?\n {12}}"
     function_matches = re.findall(function_regex, main_function, re.DOTALL)
     template_matches = re.findall(template_regex, main_function, re.DOTALL)
@@ -145,7 +148,7 @@ def write_objects_json(script, root_dir):
 
     result["objects"] = solve_main(main_list, functions, solve_at_runtime)
 
-    file = open(root_dir + "objects.json", "w")
+    file = open(os.path.join(os.path.dirname(__file__), root_dir + "objects.json"), "w")
     json.dump(result, file, indent=4)
     print("Done writing objects")
     # Write file
@@ -210,10 +213,10 @@ def add_extended_functions(data: str, solved_functions: dict):
         return dumps(target | source)
 
     replacements = {
-        "_0x[0-9a-f]{6}\\['createAabbExtents'\\]": create_rect,
-        "_0x[0-9a-f]{6}\\['create'\\]": create_point,
-        "_0x[0-9a-f]{6}\\['createCircle'\\]": create_circle,
-        "_0x[0-9a-f]{6}\\['copy'\\]": copy_point,
+        "_0x[0-9a-f]{4,6}\\['createAabbExtents'\\]": create_rect,
+        "_0x[0-9a-f]{4,6}\\['create'\\]": create_point,
+        "_0x[0-9a-f]{4,6}\\['createCircle'\\]": create_circle,
+        "_0x[0-9a-f]{4,6}\\['copy'\\]": copy_point,
         "Object\\['assign']": object_assign
     }
 
@@ -281,7 +284,8 @@ def function_list_to_dict(data: list):
     :param data: List of strings, each string is a non-template function
     :return: dictionary in the format "function name": function
     """
-    def tinted_image(args, functions):
+
+    def tinted_image(args, functions_):
         args = args.split(", ")
         sprite = args[0].strip("'").strip('"')
         try:
@@ -305,24 +309,24 @@ def function_list_to_dict(data: list):
             "zIdx": z_idx
         }
 
-    tinted_regex = """\n {12}function _0x[0-9a-f]{6}\\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}, _0x[0-9a-f]{6}, _0x[0-9a-f]{6}\\) {
+    tinted_regex = """\n {12}function _0x[0-9a-f]{4,6}\\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\\) {
  {16}return {
- {20}'sprite': _0x[0-9a-f]{6},
+ {20}'sprite': _0x[0-9a-f]{4,6},
  {20}'scale': 0\\.5,
- {20}'alpha': _0x[0-9a-f]{6} \\|\\| 1,
- {20}'tint': _0x[0-9a-f]{6} \\|\\| 16777215,
- {20}'zIdx': _0x[0-9a-f]{6} \\|\\| 10
+ {20}'alpha': _0x[0-9a-f]{4,6} \\|\\| 1,
+ {20}'tint': _0x[0-9a-f]{4,6} \\|\\| 16777215,
+ {20}'zIdx': _0x[0-9a-f]{4,6} \\|\\| 10
  {16}};
  {12}}"""
     functions = add_functions_with_regex(tinted_regex, tinted_image, data)
 
-    def loot_table(args, functions):
+    def loot_table(args, functions_):
         args = args.split(", ")
         tier = args[0].replace("'", "")
         lowest = int(args[1])
         highest = int(args[2])
         if len(args) == 4:
-            props = recursive_simplify(args[3], functions)
+            props = recursive_simplify(args[3], functions_)
         else:
             props = {}
         return {
@@ -333,17 +337,17 @@ def function_list_to_dict(data: list):
             "props": props
         }
 
-    loot_table_regex = """\n {12}function _0x[0-9a-f]{6}\\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}, _0x[0-9a-f]{6}, _0x[0-9a-f]{6}\\) {
- {16}return _0x[0-9a-f]{6} = _0x[0-9a-f]{6} \\|\\| {}, {
- {20}'tier': _0x[0-9a-f]{6},
- {20}'min': _0x[0-9a-f]{6},
- {20}'max': _0x[0-9a-f]{6},
- {20}'props': _0x[0-9a-f]{6}
+    loot_table_regex = """\n {12}function _0x[0-9a-f]{4,6}\\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\\) {
+ {16}return _0x[0-9a-f]{4,6} = _0x[0-9a-f]{4,6} \\|\\| {}, {
+ {20}'tier': _0x[0-9a-f]{4,6},
+ {20}'min': _0x[0-9a-f]{4,6},
+ {20}'max': _0x[0-9a-f]{4,6},
+ {20}'props': _0x[0-9a-f]{4,6}
  {16}};
  {12}}"""
     functions = add_functions_with_regex(loot_table_regex, loot_table, data, functions)
 
-    def item_dict(args, functions):
+    def item_dict(args, functions_):
         args = args.split(", ")
         item = args[0].strip("'")
         amount = int(args[1], 0)
@@ -358,49 +362,50 @@ def function_list_to_dict(data: list):
             "props": props
         }
 
-    item_dict_regex = """\n {12}function _0x[0-9a-f]{6}\\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}, _0x[0-9a-f]{6}\\) {
- {16}return _0x[0-9a-f]{6} = _0x[0-9a-f]{6} \\|\\| {}, {
- {20}'type': _0x[0-9a-f]{6},
- {20}'count': _0x[0-9a-f]{6},
- {20}'props': _0x[0-9a-f]{6}
+    item_dict_regex = """\n {12}function _0x[0-9a-f]{4,6}\\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\\) {
+ {16}return _0x[0-9a-f]{4,6} = _0x[0-9a-f]{4,6} \\|\\| {}, {
+ {20}'type': _0x[0-9a-f]{4,6},
+ {20}'count': _0x[0-9a-f]{4,6},
+ {20}'props': _0x[0-9a-f]{4,6}
  {16}};
  {12}}"""
     functions = add_functions_with_regex(item_dict_regex, item_dict, data, functions)
 
-    def weighted_random(args, functions):
+    def weighted_random(args, functions_):
         from json import dumps
-        args = recursive_simplify(args, functions)
+        args = recursive_simplify(args, functions_)
         return dumps({
             "type": "weighted_random_obstacle",
             "value": args
         })
 
-    weighted_random_regex = """\n {12}function _0x[0-9a-f]{6}\\(_0x[0-9a-f]{6}\\) {
- {16}var _0x[0-9a-f]{6} = \\[];
- {16}for \\(var _0x[0-9a-f]{6} in _0x[0-9a-f]{6}\\) {
- {20}_0x[0-9a-f]{6}\\['hasOwnProperty']\\(_0x[0-9a-f]{6}\\) && _0x[0-9a-f]{6}\\['push']\\({
- {24}'type': _0x[0-9a-f]{6},
- {24}'weight': _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]
- {20}}\\);
+    weighted_random_regex = r"""
+ {12}function _0x[0-9a-f]{4,6}\(_0x[0-9a-f]{4,6}\) {
+ {16}var _0x[0-9a-f]{4,6} = \[];
+ {16}for \(var _0x[0-9a-f]{4,6} in _0x[0-9a-f]{4,6}\) {
+ {20}_0x[0-9a-f]{4,6}\['hasOwnProperty']\(_0x[0-9a-f]{4,6}\) && _0x[0-9a-f]{4,6}\['push']\({
+ {24}'type': _0x[0-9a-f]{4,6},
+ {24}'weight': _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]
+ {20}}\);
  {16}}
- {16}if \\(_0x[0-9a-f]{6}\\['length'] == 0\\) throw new Error\\('Invalid obstacle types'\\);
- {16}var _0x[0-9a-f]{6} = 0;
- {16}for \\(var _0x[0-9a-f]{6} = 0; _0x[0-9a-f]{6} < _0x[0-9a-f]{6}\\['length']; _0x[0-9a-f]{6}\\+\\+\\) {
- {20}_0x[0-9a-f]{6} \\+= _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]\\['weight'];
+ {16}if \(_0x[0-9a-f]{4,6}\['length'] == 0\) throw new Error\('Invalid(?:\\x20| )obstacle(?:\\x20| )types'\);
+ {16}var _0x[0-9a-f]{4,6} = 0;
+ {16}for \(var _0x[0-9a-f]{4,6} = 0; _0x[0-9a-f]{4,6} < _0x[0-9a-f]{4,6}\['length']; _0x[0-9a-f]{4,6}\+\+\) {
+ {20}_0x[0-9a-f]{4,6} \+= _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]\['weight'];
  {16}}
- {16}return function\\(\\) {
- {20}var _0x[0-9a-f]{6} = _0x[0-9a-f]{6}\\['random']\\(0, _0x[0-9a-f]{6}\\),
- {24}_0x[0-9a-f]{6} = 0;
- {20}while \\(_0x[0-9a-f]{6} > _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]\\['weight']\\) {
- {24}_0x[0-9a-f]{6} -= _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]\\['weight'], _0x[0-9a-f]{6}\\+\\+;
+ {16}return function\(\) {
+ {20}var _0x[0-9a-f]{4,6} = _0x[0-9a-f]{4,6}\['random']\(0, _0x[0-9a-f]{4,6}\),
+ {24}_0x[0-9a-f]{4,6} = 0;
+ {20}while \(_0x[0-9a-f]{4,6} > _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]\['weight']\) {
+ {24}_0x[0-9a-f]{4,6} -= _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]\['weight'], _0x[0-9a-f]{4,6}\+\+;
  {20}}
- {20}return _0x[0-9a-f]{6}\\[_0x[0-9a-f]{6}]\\['type'];
- {16}};\n"""
+ {20}return _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}]\['type'];
+ {16}};"""
     functions = add_functions_with_regex(weighted_random_regex, weighted_random, data, functions)
 
-    def shipping_container_template(args, functions):
+    def shipping_container_template(args, functions_):
         from json import dumps
-        args = recursive_simplify(args, functions)
+        args = recursive_simplify(args, functions_)
 
         def if_exists(potential, fallback):
             try:
@@ -575,11 +580,12 @@ def function_list_to_dict(data: list):
             "mapObjects": open_container if args["open"] else closed_container
         })
 
-    shipping_container_function_regex = """ {12}function _0x[0-9a-f]{4,7}\\(_0x[0-9a-f]{4,7}\\) {
- {16}var _0x[0-9a-f]{4,7} = \\[{.*?container.*?
+    shipping_container_function_regex = r"""
+ {12}function _0x[0-9a-f]{4,7}\(_0x[0-9a-f]{4,7}\) {
+ {16}var _0x[0-9a-f]{4,7} = \[{.*?container.*?
  {20}}],
- {20}_0x[0-9a-f]{4,7} = \\[\\{.*?container.*? {20}}];
- {16}return \\{.*?container.*?
+ {20}_0x[0-9a-f]{4,7} = \[\{.*?container.*? {20}}];
+ {16}return \{.*?container.*?
  {12}}"""
     functions = add_functions_with_regex(shipping_container_function_regex, shipping_container_template, data,
                                          functions, True)
@@ -742,7 +748,7 @@ def solve_runtime(arg, solved, unsolved):
 
     arg = recursive_simplify(arg, solved)
 
-    main_dict = re.findall("var _0x[0-9a-f]{6} = ({.*?});", function_text, re.DOTALL)[0]
+    main_dict = re.findall("var _0x[0-9a-f]{4,6} = ({.*?});", function_text, re.DOTALL)[0]
 
     while "||" in main_dict:
         first, second = handle_or(main_dict)
@@ -753,7 +759,7 @@ def solve_runtime(arg, solved, unsolved):
             if str(e) != "Expecting value: line 1 column 1 (char 0)":
                 raise RuntimeError
         if arg_name not in first:
-            raise RuntimeError
+            raise RuntimeError(arg_name + " not in " + first)
         first = first.strip("']")
         first = first.strip(arg_name + "['")
         if first in arg:
@@ -777,8 +783,8 @@ def solve_runtime(arg, solved, unsolved):
             replacements[match] = arg
             continue
         orig = match
-        match = match.rstrip("']")
-        match = match.lstrip(arg_name + "['")
+        match = match[:-2]
+        match = match[len(arg_name) + 2:]
         match = match.split("']['")
         result = arg
         for key in match:
@@ -800,15 +806,21 @@ def solve_main(main_dict, solved, solve_at_runtime):
 
     unsolved = {}
     for function in solve_at_runtime:
-        name = re.findall("_0x[0-9a-f]{6}", function)[0]
-        unsolved[name] = (re.findall("_0x[0-9a-f]{4,6}", function[31:])[0], function[43:])
+        name = re.findall("_0x[0-9a-f]{4,6}", function)[0]
+        arg_name = re.findall("_0x[0-9a-f]{4,6}", function[22+len(name):])[0]
+        unsolved[name] = (arg_name, function[25+len(arg_name)+len(name):])
     # Split function content into arg name and content
 
     matches = True
+    old_matches = 0
     while matches:
+
         matches = re.findall("_0x[0-9a-f]{4,6}", main_dict)
         if matches:
+            if len(matches) == old_matches:
+                raise RuntimeError("Unsolvable")
             print(str(len(matches)) + " to simplify")
+            old_matches = len(matches)
         match_num = 0
         prev_amount = 0
         for match in matches:
@@ -817,11 +829,7 @@ def solve_main(main_dict, solved, solve_at_runtime):
                 prev_amount = match_num
                 # Progress updates
 
-            if match not in main_dict:
-                matches.remove(match)
-            # Sometimes functions are used with same args, which is why a set can't be used, and "spares" have to be removed
-
-            elif match in unsolved:
+            elif match in unsolved and match in main_dict:
                 old = split_bracket_level(main_dict[main_dict.index(match):], True, True, ("(", ")"))[0]
                 new = solve_runtime(old, solved, unsolved)
                 main_dict = main_dict.replace(old, dumps(new))

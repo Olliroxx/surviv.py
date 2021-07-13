@@ -1,5 +1,5 @@
 import unittest
-from survivpy.netManager import pregame
+from survivpy_net import pregame
 
 
 class test_profile(unittest.TestCase):

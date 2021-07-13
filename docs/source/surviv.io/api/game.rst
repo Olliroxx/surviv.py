@@ -1,30 +1,5 @@
 Game related API calls
 ======================
-.. py:function:: api/game_modes
-    Method: GET
-
-    Response structure:
-
-    .. code-block:: py
-
-        resp = [
-            {
-                "mapName": "classic",
-                "teamMode": 1
-            },
-            {
-                "mapName": "classic",
-                "teamMode": 2
-            },
-            {
-                "mapName": "classic",
-                "teamMode": 4
-            },
-            {
-                "mapName": "woods",
-                "teamMode": 2
-            }
-        ]
 
 .. py:function:: api/find_game
 
@@ -68,3 +43,9 @@ Game related API calls
                 }
             ]
         }
+
+.. py:function:: api/site_info?language=en
+
+    Method: GET
+
+    Returns current modes and active youtube/twitch streamers

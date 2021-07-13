@@ -1,6 +1,9 @@
 # These are needed for tests/doc generation/executable generation
-sphinx >= 3.5.4
-tox >= 3.23.1
-sphinx_rtd_theme >= 0.5.2
-virtualenv >= 20.4.6
-pyinstaller >= 4.3
+sphinx ~= 4.10
+tox ~= 3.23.1
+sphinx_rtd_theme ~= 0.5.2
+virtualenv ~= 20.4.6
+
+# Will be needed later
+# pyside6
+# pyinstaller

@@ -1,5 +1,5 @@
 Menus and Profile stuff
 =======================
 
-.. autoclass:: survivpy.netManager.pregame.Profile
+.. autoclass:: survivpy_net.pregame.Profile
     :members:

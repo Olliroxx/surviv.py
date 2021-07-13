@@ -103,7 +103,7 @@ def grab_pngs(to_parse):
 
             if redownload_pngs:
                 print("Downloading PNG: " + bigimage_name)
-                with open("./out/pngs/raw/" + bigimage_name, "bw") as file:
+                with open(os.path.join(os.path.dirname(__file__), "./out/pngs/raw/" + bigimage_name), "bw") as file:
                     resp = requests.get("https://surviv.io/assets/" + bigimage_name, stream=True)
                     length = resp.headers.get("content-length")
 
@@ -134,7 +134,7 @@ def grab_pngs(to_parse):
             bigimage_name = bigimage["meta"]["image"]
             frames = bigimage["frames"]
 
-            file = open("./out/pngs/raw/" + bigimage_name, "br")
+            file = open(os.path.join(os.path.dirname(__file__), "./out/pngs/raw/" + bigimage_name), "br")
             reader = png.Reader(file=file)
             bigimage_data = reader.asRGBA()
 
@@ -241,7 +241,7 @@ def grab_svgs(big_string: str):
     for link in svg_links:
         link_trimmed = link[4:]
         resp = requests.get("https://surviv.io/" + link)
-        file = open("./out/svgs/" + link_trimmed, "bw")
+        file = open(os.path.join(os.path.dirname(__file__), "./out/svgs/" + link_trimmed), "bw")
         file.write(resp.content)
         file.close()
     print("Done grabbing SVGs\n")
@@ -286,7 +286,7 @@ def grab_mp3s(big_list: list):
     for link in mp3_links:
         link_trimmed = link[6:]
         resp = requests.get("https://surviv.io/" + link)
-        file = open("./out/mp3s/" + link_trimmed, "bw")
+        file = open(os.path.join(os.path.dirname(__file__), "./out/mp3s/" + link_trimmed), "bw")
         file.write(resp.content)
         file.close()
     print("Done grabbing MP3s\n")
