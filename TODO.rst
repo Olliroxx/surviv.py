@@ -1,4 +1,3 @@
- * Optimise deobfuscators+asset downloaders/processors
  * Add logging
  * Add surviv version control script
     * Writes current app, vendor and manifest hashes to a file, along with first and last seen

@@ -1,20 +1,7 @@
-def split(to_split, n):
-    from itertools import zip_longest
-    if not len(to_split) % n == 0:
-        raise ValueError("Array must be multiple of " + n)
-
-    end_list = []
-
-    args = [iter(to_split)] * n
-    for i in zip_longest(*args):
-        end_list.append(i)
-
-    return end_list
-
-
 def array_cutout(array, x, y, w, h):
     """
     Creates a cutout of a big array
+
     :param array: input array
     :param x: x of top left corner of cutout
     :param y: y of top left corner of cutout
@@ -22,14 +9,7 @@ def array_cutout(array, x, y, w, h):
     :param h: height of cutout
     :return: cutout
     """
-    cutout = []
-    for iy in range(y, y + h):
-        cutout_row = []
-        for ix in range(x, x + w):
-            cutout_row.append(array[iy][ix])
-        cutout.append(cutout_row)
-
-    return cutout
+    return [array[i][x:x+w] for i in range(y, y+h)]
 
 
 def grab_pngs(to_parse):
@@ -38,20 +18,7 @@ def grab_pngs(to_parse):
     """
     import json
     import os
-    import png
-    import requests
-    from array import array
-
-    clean_run = True
-    print_completed_file = False
-    print_dl_progress = False
-
-    if clean_run:
-        autoclean_out = True
-        redownload_pngs = True
-    else:
-        autoclean_out = False
-        redownload_pngs = False
+    import multiprocessing
 
     try:
         os.mkdir("./out")
@@ -62,12 +29,11 @@ def grab_pngs(to_parse):
     except FileExistsError:
         pass
 
-    if autoclean_out:
-        from shutil import rmtree
-        rmtree("./out/pngs")
-        del rmtree
-        os.mkdir("./out/pngs")
-        os.mkdir("./out/pngs/raw")
+    from shutil import rmtree
+    rmtree("./out/pngs")
+    del rmtree
+    os.mkdir("./out/pngs")
+    os.mkdir("./out/pngs/raw")
 
     if type(to_parse) == str:
         parsed = json.loads(to_parse)
@@ -76,131 +42,94 @@ def grab_pngs(to_parse):
     else:
         raise TypeError("Input must be either string or dict")
 
-    for key in parsed:
+    with multiprocessing.Pool() as pool:
+        pool.starmap(write_bigimage, tuple(parsed.items()))
 
-        if key == "raw":
-            raise RuntimeError("Very unlikely name collision")
+
+def write_bigimage(key, parse_data):
+    import os
+    from requests import get
+    import png
+
+    if key == "raw":
+        raise RuntimeError("Very unlikely name collision")
+
+    try:
+        os.mkdir("./out/pngs/" + key)
+    except FileExistsError:
+        pass
+
+    for bigimage_number in range(len(parse_data)):
+        bigimage = parse_data[bigimage_number]
+        bigimage_name = bigimage["meta"]["image"]
+
+        cwd = "./out/pngs/" + key + "/" + str(bigimage_number)
 
         try:
-            os.mkdir("./out/pngs/" + key)
+            os.mkdir(cwd)
         except FileExistsError:
             pass
 
-        for bigimage_number in range(len(parsed[key])):
-            bigimage = parsed[key][bigimage_number]
-            bigimage_name = bigimage["meta"]["image"]
+        if os.listdir(path=cwd):
+            continue
+        print(bigimage_name + ": Downloading")
+        with open(os.path.join(os.path.dirname(__file__), "./out/pngs/raw/" + bigimage_name), "bw") as file:
+            resp = get("https://surviv.io/assets/" + bigimage_name, stream=True)
+            length = resp.headers.get("content-length")
 
-            cwd = "./out/pngs/" + key + "/" + str(bigimage_number)
+            if length is None:
+                file.write(resp.content)
+            else:
+                for data in resp.iter_content(chunk_size=(2 ^ 25)):
+                    file.write(data)
 
-            try:
-                os.mkdir(cwd)
-            except FileExistsError:
-                pass
+        # Get big image
 
-            if os.listdir(path=cwd):
-                continue
-            # If dir is not empty, skip this bigimage
+    for bigimage_number in range(len(parse_data)):
+        bigimage = parse_data[bigimage_number]
+        bigimage_name = bigimage["meta"]["image"]
+        frames = bigimage["frames"]
 
-            if redownload_pngs:
-                print("Downloading PNG: " + bigimage_name)
-                with open(os.path.join(os.path.dirname(__file__), "./out/pngs/raw/" + bigimage_name), "bw") as file:
-                    resp = requests.get("https://surviv.io/assets/" + bigimage_name, stream=True)
-                    length = resp.headers.get("content-length")
+        file = open(os.path.join(os.path.dirname(__file__), "./out/pngs/raw/" + bigimage_name), "br")
+        reader = png.Reader(file=file)
+        bigimage_data = reader.asRGBA()
 
-                    if length is None:
-                        file.write(resp.content)
-                    else:
-                        dl = 0
-                        length = int(length)
-                        last_percent = 0
+        bigimage_bitdepth = bigimage_data[3]["bitdepth"]
+        bigimage_alpha = bigimage_data[3]["alpha"]
 
-                        for data in resp.iter_content(chunk_size=(2 ^ 25)):
-                            dl += len(data)
-                            file.write(data)
-                            done = int(100 * dl / length)
-                            if print_dl_progress and done > last_percent:
-                                last_percent = done
-                                print(
-                                    str(done) + "% complete (" + str(dl // (2 ^ 15)) + "/" + str(
-                                        length // (2 ^ 15)) + "k)")
-                        if print_dl_progress:
-                            print()
-                    # Progress updates
-            # Get big image
+        if bigimage_data[0] != bigimage["meta"]["size"]["w"]:
+            raise RuntimeError("Expected and actual image width differ.\nExpected: " + str(
+                bigimage["meta"]["size"]["w"]) + "\n Actual: " + str(bigimage_data[0]))
+        if bigimage_data[1] != bigimage["meta"]["size"]["h"]:
+            raise RuntimeError("Expected and actual image height differ.\nExpected: " + str(
+                bigimage["meta"]["size"]["w"]) + "\n Actual: " + str(bigimage_data[0]))
 
-    for key in parsed:
-        for bigimage_number in range(len(parsed[key])):
-            bigimage = parsed[key][bigimage_number]
-            bigimage_name = bigimage["meta"]["image"]
-            frames = bigimage["frames"]
+        if bigimage["meta"]["scale"] != 1:
+            print(bigimage_name + ": scale expected to be 1, is actually " + str(bigimage["meta"]["scale"]))
 
-            file = open(os.path.join(os.path.dirname(__file__), "./out/pngs/raw/" + bigimage_name), "br")
-            reader = png.Reader(file=file)
-            bigimage_data = reader.asRGBA()
+        # Generator to list
+        img_data = []
+        for line in bigimage_data[2]:
+            img_data.append(line)
+        file.close()
+        print(bigimage_name + ": Processing")
 
-            bigimage_bitdepth = bigimage_data[3]["bitdepth"]
-            bigimage_alpha = bigimage_data[3]["alpha"]
+        channels = 3 + bigimage_alpha
+        for i in frames:
+            x = frames[i]["frame"]["x"]
+            y = frames[i]["frame"]["y"]
+            w = frames[i]["frame"]["w"]
+            h = frames[i]["frame"]["h"]
+            name = i.replace(".img", ".png")
+            smallimage_organised = array_cutout(img_data, x*channels, y, w*channels, h)
 
-            if bigimage_data[0] != bigimage["meta"]["size"]["w"]:
-                raise RuntimeError("Expected and actual image width differ.\nExpected: " + str(
-                    bigimage["meta"]["size"]["w"]) + "\n Actual: " + str(bigimage_data[0]))
-            if bigimage_data[1] != bigimage["meta"]["size"]["h"]:
-                raise RuntimeError("Expected and actual image height differ.\nExpected: " + str(
-                    bigimage["meta"]["size"]["w"]) + "\n Actual: " + str(bigimage_data[0]))
-
-            if bigimage["meta"]["scale"] != 1:
-                print("Scale expected to be 1, is actually " + str(bigimage["meta"]["scale"]))
-                print(bigimage_name)
-                print()
-
-            print("Processing " + bigimage_name)
-
-            bigimage_organised = []
-            for i in bigimage_data[2]:
-                if str(type(i)) != "<class 'array.array'>":
-                    i = array("B", i)
-                split_array = split(i, 3 + bigimage_alpha)
-                bigimage_organised.append(split_array)
-            file.close()
-
-            for i in frames:
-                if frames[i]["rotated"]:
-                    print(i + " is rotated")
-                if not i.endswith(".img"):
-                    print(i + " does not end with img")
-                # if frames[i]["trimmed"]:
-                #    print(i + " is trimmed")
-                # They have these values, but all of them are false, I want to be notified if they introduce one which is different
-
-                x = frames[i]["frame"]["x"]
-                y = frames[i]["frame"]["y"]
-                w = frames[i]["frame"]["w"]
-                h = frames[i]["frame"]["h"]
-                name = i.replace(".img", ".png")
-
-                smallimage_organised = array_cutout(bigimage_organised, x, y, w, h)
-
-                smallimage = []
-                for row in smallimage_organised:
-                    smallimage_row = []
-                    for pixel in row:
-                        for channel in pixel:
-                            smallimage_row.append(channel)
-                    smallimage.append(smallimage_row)
-                del smallimage_row, row, pixel, channel
-
-                if bigimage_alpha:
-                    image = png.from_array(smallimage, "RGBA;" + str(bigimage_bitdepth))
-                else:
-                    image = png.from_array(smallimage, "RGB;" + str(bigimage_bitdepth))
-                # convert image back into format png lib can understand
-
-                image.save("./out/pngs/" + key + "/" + str(bigimage_number) + "/" + name)
-
-                if print_completed_file:
-                    print(name + " written to disk")
-
-            print(bigimage_name + " mapped\n")
+            if bigimage_alpha:
+                image = png.from_array(smallimage_organised, "RGBA;" + str(bigimage_bitdepth))
+            else:
+                image = png.from_array(smallimage_organised, "RGB;" + str(bigimage_bitdepth))
+            # convert image back into format png lib can understand
+            image.save("./out/pngs/" + key + "/" + str(bigimage_number) + "/" + name)
+        print(bigimage_name + ": Finished")
 
 
 def grab_svgs(big_string: str):

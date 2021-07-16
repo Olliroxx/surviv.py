@@ -32,7 +32,7 @@ def grab_code():
     print("HTML retrieved\n")
     # Get HTML, and ensure nothing went horribly wrong
 
-    file = open(os.path.join(os.path.dirname(__file__),".\\out\\code\\index.html"), "w", encoding="utf-8")
+    file = open(os.path.join(os.path.dirname(__file__), ".\\out\\code\\index.html"), "w", encoding="utf-8")
     file.write(resp)
     file.close()
     # Write HTML file
@@ -150,23 +150,24 @@ def solve_hex():
     del file
     # Check that auto indent was run just before this, and read the file
 
-    to_solve = []
-    for match in re.findall("[^_](-?0x[0-9a-f]+(?: ?[*+/-] ?-?0x[0-9a-f]*)+)", script):
-        to_solve.append(match.strip(" "))
+    to_solve = set(re.findall("[^_](-?0x[0-9a-f]+(?: ?[*+/-] ?-?0x[0-9a-f]*)+)", script))
     print(str(len(to_solve)) + " ints to simplify")
     for element in to_solve:
+        if element == "0x1e4c+0x1b56+-14753.95":
+            print()
         script = script.replace(element, str(eval_exp(element)))
 
-    regex = "-?[0-9.]+ [+/*\\-] -?[0-9.]+"
-    matches = re.findall(regex, script)
-    print(str(len(matches)) + " decimals to simplify")
+    regex = r"-?[0-9.]+ [+/*\-] -?[0-9.]+"
+    matches = set(re.findall(regex, script))
+    print(str(len(matches)) + " decimals")
 
     for match in matches:
-        script = script.replace(match, str(eval_exp(match)))
+        script = re.sub(r"(?<!\d)"+match+r"(?!\d)", str(eval_exp(match)), script)
+        # script = script.replace(match, str(eval_exp(match)))
 
-    regex = "-\\([0-9\\.]+\\)"
-    matches = re.findall(regex, script)
-    print(str(len(matches)))
+    regex = r"-\([0-9\.]+\)"
+    matches = set(re.findall(regex, script))
+    print(str(len(matches)) + " expressions to simplify")
 
     for match in matches:
         script = script.replace(match, str(eval_exp(match)))
@@ -189,7 +190,7 @@ def autoindent():
 
     for script in os.listdir(".\\deobfuscated\\js"):
 
-        file = open(os.path.join(os.path.dirname(__file__),".\\deobfuscated\\js\\" + script), "r", encoding="utf-8")
+        file = open(os.path.join(os.path.dirname(__file__), ".\\deobfuscated\\js\\" + script), "r", encoding="utf-8")
         text = file.readline()
         file.close()
         if text.startswith("//"):
@@ -201,7 +202,7 @@ def autoindent():
         result = jsbeautifier.beautify_file(".\\deobfuscated\\js\\" + script, opts)
         result = "// Indented\n" + result
 
-        with open(os.path.join(os.path.dirname(__file__),".\\deobfuscated\\js\\" + script), "w", encoding="utf-8") as writer:
+        with open(os.path.join(os.path.dirname(__file__), ".\\deobfuscated\\js\\" + script), "w", encoding="utf-8") as writer:
             print("Writing " + script)
             writer.write(result)
             writer.close()
@@ -237,7 +238,7 @@ def fill_strings():
     regex = "a0_0x[0-9a-f]+"
     list_name = re.findall(regex, line)[0]
     big_list = ast.literal_eval(line[line.find("["):])
-    del line
+    # Get the list and parse it
 
     regex = "\\(" + list_name + ", ([0-9]+?)\\)"
     shift_amount = int(re.findall(regex, script)[0]) * -1
@@ -255,9 +256,9 @@ def fill_strings():
     del script_as_list
     # Remove the list
 
-    regex = """var (a0_0x[0-9a-f]{3,7}) = function\\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}\\) \\{
-    _0x[0-9a-f]{6} = _0x[0-9a-f]{6} - \\(0\\);
-    var _0x[0-9a-f]{6} = """ + list_name + """\\[_0x[0-9a-f]{6}];
+    regex = r"""var (a0_0x[0-9a-f]{3,7}) = function\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}\) \{
+    _0x[0-9a-f]{6} = _0x[0-9a-f]{6} - \(0\);
+    var _0x[0-9a-f]{6} = """ + list_name + r"""\[_0x[0-9a-f]{6}];
     return _0x[0-9a-f]{6};
 };"""
     alt_name = re.findall(regex, script)[0]
@@ -265,9 +266,9 @@ def fill_strings():
     # There is a a function that (as far as I can tell) does nothing except rename it
     # This finds the new name
 
-    regex = """var a0_[0-9a-f]{3,7} = function\\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}\\) \\{
-        _0x[0-9a-f]{6} = _0x[0-9a-f]{6} - \\(0\\);
-        var _0x[0-9a-f]{6} = """ + list_name + """\\[_0x[0-9a-f]{6}];
+    regex = r"""var a0_[0-9a-f]{3,7} = function\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}\) \{
+        _0x[0-9a-f]{6} = _0x[0-9a-f]{6} - \(0\);
+        var _0x[0-9a-f]{6} = """ + list_name + r"""\[_0x[0-9a-f]{6}];
         return _0x[0-9a-f]{6};
     };"""
     script = re.sub(regex, "", script)
@@ -282,18 +283,18 @@ def fill_strings():
     print(str(len(matches)) + " strings to fill")
 
     for match in matches:
-        number = ast.literal_eval(match)
-        to_replace = alt_name + "('" + match + "')"
-        string = big_list[number]
-        string = string.replace("\n", "\\x0a")
-        string = string.replace("'", "\\'")
-        string = "'" + string + "'"
-        script = script.replace(to_replace, string, 1)
-    del match, number, string, to_replace
+        script = script.replace(alt_name + "('" + match + "')", "'" + big_list[int(match, 16)].replace("\n", r"\x0a").replace("'", r"\'") + "'")
+        # More readable, slower version:
+        # number = int(match, 16)
+        # to_replace = alt_name + "('" + match + "')"
+        # string = big_list[number]
+        # string = string.replace("\n", r"\x0a")
+        # string = string.replace("'", r"\'")
+        # string = "'" + string + "'"
+        # script = script.replace(to_replace, string, 1)
+
     # Replace usages
-
     script = script.replace("//Hex simplified\n", "//Strings filled\n", 1)
-
     file = get_app("w")
     file.write(script)
     file.close()
@@ -401,10 +402,10 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
     Downloads and deobfuscates primarily app.js, but also other scripts and assets to a lesser degree
 
     .. warning::
-        dl_assets takes a long time, optimising it is a goal
+        This takes a long time (~15m on my quad core 3.6Ghz with 60Mbps down)
 
     .. warning::
-        dl_assets does not yet download all svgs
+        dl_assets does not download all svgs, you need to use grab_svgs.py in json_processing it
 
     :param dl_assets: If true will download and slice .pngs, mp3s and svgs, using :doc:`grab_assets`
     :param redownload: If false will use already downloaded copies
@@ -435,4 +436,4 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
 
 
 if __name__ == "__main__":
-    main(deobfuscate=False, dl_assets=True)
+    main()
