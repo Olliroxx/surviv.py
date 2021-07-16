@@ -15,4 +15,20 @@ The smallest possible script:
 
     do_something(conn.state)
 
-Currently, linked accounts and lobbies are not supported, but if you want to reuse an unlinked id you can just pass it to Profile
+Currently, linked accounts and lobbies are not supported, but if you want to reuse an unlinked id you can just pass it to Profile  
+To change inputs:
+
+.. code-block:: py
+    
+    msg = {
+        "moveLeft": False,
+        "moveRight": False,
+        "moveUp": False,
+        "moveDown": False,
+        "shootStart": False,
+        "shootHold": False,
+        "toMouseDir": Vector(1, 0),
+        "toMouseLen": 0,
+        "useItem": ""
+    }
+    conn.send_input_msg(msg)

@@ -163,7 +163,6 @@ def solve_hex():
 
     for match in matches:
         script = re.sub(r"(?<!\d)"+match+r"(?!\d)", str(eval_exp(match)), script)
-        # script = script.replace(match, str(eval_exp(match)))
 
     regex = r"-\([0-9\.]+\)"
     matches = set(re.findall(regex, script))
