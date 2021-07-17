@@ -1,5 +1,8 @@
 from json import load
 from src.survivpy_net.custom_types import *
+from logging import getLogger
+
+logger = getLogger("survivpy_net")
 
 JS_MAX_VALUE = 2 ** 1024 - 1
 
@@ -33,6 +36,7 @@ class River:
     :param other_rivers: Other rivers on the map that could be sources for this
     :param min_max: Top right map corner to center
     """
+
     def __init__(self, points, width, looped, other_rivers, min_max: Rect):
 
         if not constants:
@@ -183,6 +187,11 @@ class River:
                 shore_corner1 = point.add_point(shore_corner1)
                 shore_corner2 = point.add_point(shore_corner2)
 
+                logger.warning("Rare river, maybe investigate. Points: " + str(points))
+                logger.debug("Rare river info, width: " + str(width))
+                logger.debug("Rare river info, looped: " + str(looped))
+                logger.debug("Rare river info, other rivers: " + str(other_rivers))
+
             water_corner1 = min_max.clamp_point(water_corner1)
             water_corner2 = min_max.clamp_point(water_corner2)
             shore_corner1 = min_max.clamp_point(shore_corner1)
@@ -204,6 +213,9 @@ class River:
         self.shore_widths = shore_widths
         self.water_poly = water_poly
         self.shore_poly = shore_poly
+
+    def __str__(self):
+        return str((self.water_width, self.looped, self.points))
 
     def get_closest(self, target):
         closest = self.points[0]
@@ -238,7 +250,10 @@ class Map:
     """
     Contains bullets, objects and everything else seen in the main viewport
     """
+
     def __init__(self, map_dict):
+        logger.debug("Map dict: " + str(map_dict))
+
         self.map_name = map_dict["mapName"]
         self.map_def = map_definitions[self.map_name]
 
@@ -275,7 +290,13 @@ class Map:
         self.airstrike_zones = []
         self.map_indicators = []
 
-    def __dict__(self):
+    def __str__(self):
+        return str(dict(self))
+
+    def __repr__(self):
+        return repr(dict(self))
+
+    def __getitem__(self, item):
         return {
             "name": self.map_name,
             "def": self.map_def,
@@ -295,7 +316,7 @@ class Map:
             "planes": self.planes,
             "airstrike_zones": self.airstrike_zones,
             "pings": self.map_indicators
-        }
+        }[item]
 
     @staticmethod
     def _gen_terrain(width, height, shore_inset, grass_inset, rivers, seed):
@@ -368,6 +389,7 @@ class GameInstance:
     This is mostly just things to do with the current player/team.
     You probably only want GameInstance.map
     """
+
     def __init__(self):
         self.map = None
 
@@ -378,7 +400,7 @@ class GameInstance:
         self.active_player = {}
         self.active_player_id = 0
 
-    def __dict__(self):
+    def __getitem__(self, item):
         return {
             "status": self.status,
             "team_size": self.team_size,
@@ -387,7 +409,13 @@ class GameInstance:
             "active_player": self.active_player,
             "active_player_id": self.active_player_id,
             "map": self.map
-        }
+        }[item]
+
+    def __str__(self):
+        return str(dict(self))
+
+    def __repr__(self):
+        return repr(dict(self))
 
     def init_map(self, map_dict):
         self.map = Map(map_dict)

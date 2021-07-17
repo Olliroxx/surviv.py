@@ -1,4 +1,5 @@
 from survivpy_net.custom_types import Vector
+from logging import getLogger
 
 constants = {
     "mapNameMaxLen": 0x18,
@@ -16,6 +17,10 @@ constants = {
     "maxMapIndicators": 0x10,
 }
 solved = []
+log_xcodes = False
+# Set to true to log de/encodings, except for
+# type 6 as that might have a performance impact
+logger = getLogger("survivpy_net")
 
 
 def update_constants():
@@ -108,6 +113,9 @@ class BitString:
 
     def __bytes__(self):
         return bytes(self._view)
+
+    def __str__(self):
+        return self._view.hex()
 
     def _set_bit(self, offset, bit):
         if bit:
@@ -570,6 +578,10 @@ class Type01Packet(Packet):
         self.data.write_bool(fields["aimAssist"])
         self.data.write_ascii_str(fields["kpg"])
         self.data.write_align_to_next_byte()
+        if log_xcodes:
+            logger.debug("Encoded type 1")
+            logger.debug("In: " + str(fields))
+            logger.debug("Out: " + str(self.data))
 
     def decode(self, game_state):
         raise NotImplementedError("Type 1 packets should not be decoded client side")
@@ -586,6 +598,10 @@ class Type02Packet(Packet):
             "reason": self.data.read_ascii_str()
         }
         game_state.status = "closed"
+        if log_xcodes:
+            logger.debug("Decoded type 2")
+            logger.debug("In: " + str(self.data))
+            logger.debug("Out: " + str(result))
         return result
 
 
@@ -607,9 +623,13 @@ class Type03Packet(Packet):
             self.data.write_uint8(item)
         self.data.write_game_type(data["useItem"])
         self.data.write_bits(0, 6)
+        if log_xcodes:
+            logger.debug("Encoded type 3")
+            logger.debug("In: " + str(data))
+            logger.debug("Out: " + str(self.data))
 
     def decode(self, game_state):
-        raise NotImplementedError("Type 1 packets should not be decoded client side")
+        raise NotImplementedError("Type 3 packets should not be decoded client side")
 
 
 class Type05Packet(Packet):
@@ -634,6 +654,10 @@ class Type05Packet(Packet):
         game_state.team_size = result["teamMode"]
         game_state.player_id = result["playerId"]
         self.data.read_align_to_next_byte()
+        if log_xcodes:
+            logger.debug("Decoded type 5")
+            logger.debug("In: " + str(self.data))
+            logger.debug("Out: " + str(result))
         return result
 
 
@@ -1418,6 +1442,11 @@ class Type0aPacket(Packet):
             result["groundPatches"].append(patch)
 
         game_state.init_map(result)
+
+        if log_xcodes:
+            logger.debug("Decoded type A")
+            logger.debug("In: " + str(self.data))
+            logger.debug("Out: " + str(result))
 
     @staticmethod
     def decode_river(bs: TypedBitString):

@@ -26,6 +26,9 @@ class GenericXYObject:
             return items[item]
         raise KeyError(item)
 
+    def __str__(self):
+        return str((self.x, self.y))
+
 
 class Point(GenericXYObject):
     def copy(self):
