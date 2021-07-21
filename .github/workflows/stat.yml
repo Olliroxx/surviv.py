@@ -18,4 +18,5 @@ jobs:
         uses: jgehrcke/github-repo-stats@v1.1.0
         with:
           repository: Olliroxx/surviv.py
+          ghtoken: ${{secrets.ghrs_github_api_token}}
           databranch: repo-stats
