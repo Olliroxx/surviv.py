@@ -22,7 +22,8 @@ def get_surviv_changelog():
         "last_modified": resp.headers.get("last-modified")
     }
     content = resp.content.decode("utf-8")
-    content = findall("(?<=<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">).*(?=\n {4}</pre>)", content, DOTALL)[0]
+    pre_content_regex = "(?<=<pre style=\"word-wrap: break-word; white-space: pre-wrap;\">).*(?=\n {4}</pre>)"
+    content = findall(pre_content_regex, content, DOTALL)[0]
     result["content"] = content
     return result
 

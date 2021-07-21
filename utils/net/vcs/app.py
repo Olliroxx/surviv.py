@@ -48,7 +48,6 @@ def diff(a_path, b_path):
         # Diff, then adding line numbers, then removing lines with no changes
     elif system() == "Windows":
         from os.path import dirname
-        from re import sub
 
         result = run(["fc", a_path, b_path], stdout=PIPE).stdout.decode("utf-8")
 

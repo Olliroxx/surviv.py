@@ -283,7 +283,7 @@ def fill_strings():
     print(str(len(matches)) + " strings to fill")
 
     for match in matches:
-        script = script.replace(alt_name + "('" + match + "')", "'" + big_list[int(match, 16)].replace("\n", r"\x0a").replace("'", r"\'") + "'")
+        script = script.replace(alt_name + "('" + match + "')", "'" + big_list[int(match, 16)].replace("\n", r"\x0a").replace("'", r"\'") + "'")  # noqa: E501
         # More readable, slower version:
         # number = int(match, 16)
         # to_replace = alt_name + "('" + match + "')"
