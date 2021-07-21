@@ -144,6 +144,7 @@ def solve_hex():
     file = get_app()
     line = file.readline()
     if line != "// Indented\n":
+        file.close()
         raise RuntimeError("This should be run right after auto indentation")
     script = line + file.read()
     file.close()
@@ -153,8 +154,6 @@ def solve_hex():
     to_solve = set(re.findall("[^_](-?0x[0-9a-f]+(?: ?[*+/-] ?-?0x[0-9a-f]*)+)", script))
     print(str(len(to_solve)) + " ints to simplify")
     for element in to_solve:
-        if element == "0x1e4c+0x1b56+-14753.95":
-            print()
         script = script.replace(element, str(eval_exp(element)))
 
     regex = r"-?[0-9.]+ [+/*\-] -?[0-9.]+"
@@ -162,7 +161,8 @@ def solve_hex():
     print(str(len(matches)) + " decimals")
 
     for match in matches:
-        script = re.sub(r"(?<!\d)"+match+r"(?!\d)", str(eval_exp(match)), script)
+        while bool(old := re.findall(r"[^\d]"+re.escape(match)+r"[^\d]", script)):
+            script = script.replace(old[0], old[0][0] + str(eval_exp(match)) + old[0][-1])
 
     regex = r"-\([0-9\.]+\)"
     matches = set(re.findall(regex, script))
@@ -201,7 +201,7 @@ def autoindent():
         result = jsbeautifier.beautify_file(".\\deobfuscated\\js\\" + script, opts)
         result = "// Indented\n" + result
 
-        with open(os.path.join(os.path.dirname(__file__), ".\\deobfuscated\\js\\" + script), "w", encoding="utf-8") as writer:
+        with open(os.path.join(os.path.dirname(__file__), ".\\deobfuscated\\js\\" + script), "w", encoding="utf-8", newline="\n") as writer:
             print("Writing " + script)
             writer.write(result)
             writer.close()
@@ -294,6 +294,11 @@ def fill_strings():
 
     # Replace usages
     script = script.replace("//Hex simplified\n", "//Strings filled\n", 1)
+
+    from re import sub
+    script = sub(r"https://web\.archive\.org/web/\d{14}/", "", script)
+    # Make scripts from archive.org diffable
+
     file = get_app("w")
     file.write(script)
     file.close()
@@ -415,24 +420,23 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
     if redownload:
         grab_code()
     else:
-        import os
+        from os import mkdir
         try:
-            os.mkdir("deobfuscated")
+            mkdir("deobfuscated")
         except FileExistsError:
             pass
-        del os
-    del redownload
+        del mkdir
 
     autoindent()
     if dl_assets:
         grab_assets(True)
-    del dl_assets
     if deobfuscate:
         solve_hex()
         fill_strings()
         remove_char_code_lists()
         add_bools()
+        print()
 
 
 if __name__ == "__main__":
-    main()
+    main(redownload=False)
