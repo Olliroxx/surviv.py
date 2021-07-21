@@ -1,0 +1,21 @@
+# I want to see stats older than 14 days, so I added this
+
+name: Stats
+
+on:
+  schedule:
+    - cron: "0 23 * * *"
+      # Daily
+  workflow_dispatch:
+
+
+jobs:
+  main:
+    name: repo-stats
+    runs-on: ubuntu-latest
+    steps:
+      - name: github-repo-stats
+        uses: jgehrcke/github-repo-stats@v1.1.0
+        with:
+          repository: Olliroxx/surviv.py
+          databranch: repo-stats
