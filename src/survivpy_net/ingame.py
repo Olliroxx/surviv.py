@@ -95,7 +95,7 @@ class BitString:
 
     def __init__(self, buffer=None):
         """
-        :param buffer: Input buffer, must be bytes, bytearray, list or tuple. (If using list/tuple, then all values must be positive integers below 256)
+        :param buffer: Input buffer, must be iterable yielding integers less than 256 (anything ``bytearray`` can use)
         """
 
         if buffer is None:

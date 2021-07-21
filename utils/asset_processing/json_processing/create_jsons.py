@@ -378,6 +378,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
         return json.dumps(result_dict)
 
     def dict_ref_setup(source: dict):
+        # noinspection PyUnusedLocal
         def dict_ref(args: str, solved: dict):
             args = args.split("][")
             args[-1] = args[-1][:-2]
@@ -602,7 +603,9 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False, skip_cons
 
         for match in matches:
             print("Starting match " + str(matches.index(match)+1) + " of " + str(len(matches)))
-            regex = "'" + match + "': function\\(_0x[0-9a-f]{4,6}(?:, _0x[0-9a-f]{4,6})*\\) {\n {12}'use strict';.*?\n(?= {8}'[0-9a-f]{8}')"
+            regex = "'" + match + r"""': function\(_0x[0-9a-f]{4,6}(?:, _0x[0-9a-f]{4,6})*\) {
+ {12}'use strict';.*?
+(?= {8}'[0-9a-f]{8}')"""
             matches_function = re.findall(regex, script, flags=re.DOTALL)
             if len(matches_function) != 1:
                 raise RuntimeError

@@ -77,7 +77,8 @@ venv.bak/
 
 .idea/
 
-/utils/asset_processing/out/
-/utils/asset_processing/deobfuscated/
-/utils/asset_processing/json_processing/csvs/
-/utils/asset_processing/json_processing/jsons/
+/utils/asset_processing/out/*
+/utils/asset_processing/deobfuscated/*
+/utils/asset_processing/json_processing/csvs/*
+/utils/asset_processing/json_processing/jsons/*
+/utils/net/vcs/changelogs/*

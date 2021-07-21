@@ -130,7 +130,6 @@ def write_objects_json(script, root_dir):
     function_matches = re.findall(function_regex, main_function, re.DOTALL)
     template_matches = re.findall(template_regex, main_function, re.DOTALL)
     var_matches = re.findall(var_regex, main_function, re.DOTALL)
-    del var_regex, function_regex, function_regex_base, weighted_random_regex, template_regex, main_function, shipping_container_function_regex
     # Find a bunch of things using regexes
 
     if len(var_matches) != 2:
