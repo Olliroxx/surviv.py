@@ -71,7 +71,9 @@ def write_objects_json(script, root_dir):
 
     functions = []
     for name in function_names:
-        regex = name + ": function\\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\\) {\n {12}'use strict';\n.*?(?= {8}'[0-9a-f]{8}': function\\((?:_0x[0-9a-f]{4,6}, ){1,2}_0x[0-9a-f]{4,6}\\) {\n {12}'use strict';\n)"
+        regex = name + r""": function\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\) { {12}'use strict';
+.*?(?= {8}'[0-9a-f]{8}': function\((?:_0x[0-9a-f]{4,6}, ){1,2}_0x[0-9a-f]{4,6}\) {
+ {12}'use strict';\n)"""
         matches = re.findall(regex, script, re.DOTALL)
         if len(matches) == 1:
             functions.append(matches[0])
@@ -118,8 +120,13 @@ def write_objects_json(script, root_dir):
  {16}return \{.*?container.*?
  {12}}"""
     function_regex = function_regex_base + "|" + weighted_random_regex + "|" + shipping_container_function_regex
-    var_regex = "\n {12}var _0x[0-9a-f]{4,6} = {\n.*?\n {12}}"
-    template_regex = " {12}function _0x[0-9a-f]{4,6}\\(_0x[0-9a-f]{4,6}\\) {\n {16}var _0x[0-9a-f]{4,6} = (?:_0x[0-9a-f]{4,6}\\()?{.*?\n {12}}"
+    var_regex = """
+ {12}var _0x[0-9a-f]{4,6} = {
+.*?
+ {12}}"""
+    template_regex = r""" {12}function _0x[0-9a-f]{4,6}\(_0x[0-9a-f]{4,6}\) {
+ {16}var _0x[0-9a-f]{4,6} = (?:_0x[0-9a-f]{4,6}\()?{.*?
+ {12}}"""
     function_matches = re.findall(function_regex, main_function, re.DOTALL)
     template_matches = re.findall(template_regex, main_function, re.DOTALL)
     var_matches = re.findall(var_regex, main_function, re.DOTALL)
@@ -671,7 +678,9 @@ def simplify_template_functions(templates, functions):
         for number, template in enumerate(templates):
             template_orig = template
             name = re.findall("_0x[0-9a-f]+", template)[0]
-            regex = " {12}function _0x[0-9a-f]{4,6}?\\(_0x[0-9a-f]{4,6}?\\) {\n {16}var _0x[0-9a-f]{4,6}? = (?:_0x[0-9a-f]{4,6}?\\()?\\[?({.*?})\\]?\\)?;.*?mergeDeep.*?\\);\n {12}}"
+            regex = r""" {12}function _0x[0-9a-f]{4,6}?\(_0x[0-9a-f]{4,6}?\) {
+ {16}var _0x[0-9a-f]{4,6}? = (?:_0x[0-9a-f]{4,6}?\()?\[?({.*?})\]?\)?;.*?mergeDeep.*?\);
+ {12}}"""
             template = re.findall(regex, template, re.DOTALL)[0]
             template = dedent(template)
             # Get the main dictionary in a template function

@@ -55,9 +55,11 @@ class BitString:
 
     It is based off the bitstring class in app.js, as that has slightly different behaviour to the python module ``bitstring``.
 
-    Input buffer must be bytes, bytearray, list or tuple. (If using list/tuple, then all values must be positive integers below 256)
+    Input buffer must be iterable yielding integers less than 256 (anything ``bytearray`` can use)
 
-    Has multiple read/write functions for different data types with different sizes. Vector sizes are the sizes of the floats, not the total size.
+    Has multiple read/write functions for different data types with different sizes.
+
+    Vector sizes are the sizes of the floats, not the total size.
 
     Full list:
 

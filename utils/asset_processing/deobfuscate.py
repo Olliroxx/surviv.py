@@ -201,7 +201,8 @@ def autoindent():
         result = jsbeautifier.beautify_file(".\\deobfuscated\\js\\" + script, opts)
         result = "// Indented\n" + result
 
-        with open(os.path.join(os.path.dirname(__file__), ".\\deobfuscated\\js\\" + script), "w", encoding="utf-8", newline="\n") as writer:
+        with open(os.path.join(os.path.dirname(__file__),
+                               ".\\deobfuscated\\js\\" + script), "w", encoding="utf-8", newline="\n") as writer:
             print("Writing " + script)
             writer.write(result)
             writer.close()

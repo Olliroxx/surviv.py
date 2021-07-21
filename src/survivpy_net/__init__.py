@@ -1,4 +1,4 @@
-from . import custom_types
+from custom_types import *
 from . import pregame
 
 surviv_protocol_version = 107

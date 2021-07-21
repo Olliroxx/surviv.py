@@ -398,7 +398,8 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
         data = data.split("var ")
         functions_string = []
         longest = ""
-        function_regex = "[\"'][0-9a-f]{8}[\"']: function\\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\\) \\{\n {12}[\"']use strict[\"'];"
+        function_regex = r"""[\"'][0-9a-f]{8}[\"']: function\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\) \{
+ {12}[\"']use strict[\"'];"""
         for i in data:
             if len(i) > len(longest):
                 longest = i
@@ -584,10 +585,10 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False, skip_cons
         ("crosshair", 90, handler_generic(root_dir + "crosshairs.json")),  # Crosshairs
         ("heal", 60, handler_generic(root_dir + "heal_effects.json")),  # Heal + boost particles
         ("emote", 700, handler_multidict(root_dir + "emotes.json", categories=(0, 1))),  # Emotes
-        ("new-account", 1, handler_generic(root_dir + "default_unlocks.json")),  # Default account unlocks (skins, particles etc.)
+        ("new-account", 1, handler_generic(root_dir + "default_unlocks.json")),  # Default account unlocks
         ("Cake Donut", 1, handler_multidict(root_dir + "xp_sources.json")),  # XP sources
         ("deathEffect", 15, handler_generic(root_dir + "death_effects.json")),  # Death effects
-        ("loot_box", 7, handler_generic(root_dir + "lootbox_tables.json")),  # Probabilities of item pools from lootboxes
+        ("loot_box", 7, handler_generic(root_dir + "lootbox_tables.json")),  # Item pools for lootboxes
         ("itemPool", 6, handler_generic(root_dir + "item_pools.json")),  # Item pools
         ("rescheduled", 3, handler_generic(root_dir + "xp_boost_events.json")),  # XP boost times and amounts
         ("price", 16, handler_generic(root_dir + "market_min_values.json")),  # Black market minimum prices (and taxes?)
