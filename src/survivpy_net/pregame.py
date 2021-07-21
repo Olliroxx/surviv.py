@@ -70,10 +70,6 @@ class Profile:
     @staticmethod
     def _gen_user_id():
         import random
-        """
-        Generates a random ID, following a pattern  
-        You probably don't need this
-        """
 
         bytelist = []
         for i in range(16):

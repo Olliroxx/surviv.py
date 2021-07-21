@@ -25,7 +25,7 @@ def write_constants_json(script: str, root_dir):
     for hex_function in hex_matches:
         function = function.replace(hex_function, str(int(hex_function, 16)), 1)
     del hex_matches, regex, hex_function
-    
+
     function = loads(function)
     file = open(os.path.join(os.path.dirname(__file__), root_dir + "constants.json"), "w")
     dump(function, file, indent=4)

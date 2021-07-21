@@ -76,7 +76,7 @@ class BitString:
        * read_vec
        * read_vec32
        * read_vec64
-        
+
        * write_ascii_str
        * write_bool
        * write_int8

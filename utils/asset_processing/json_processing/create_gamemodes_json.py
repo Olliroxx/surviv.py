@@ -18,13 +18,13 @@ def create_game_modes(script, root_dir):
     function_names = re.findall("'([0-9a-f]{8})'", match)
     names = dict(zip(friendly_names, function_names))
     # There is a function that contains a list of map names and function that list properties, this block gets that
-    
+
     derived_function_names = {}
     for friendly_name, name in names.items():
         if friendly_name.endswith(("_spring", "_summer", "_snow")):
             derived_function_names[friendly_name] = name
     # Some modes (derived) are other modes but with different particles/tree colours/etc
-    
+
     output = {}
     function_to_friendly = {}
     simple_replacements = {

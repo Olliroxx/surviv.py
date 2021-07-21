@@ -242,9 +242,6 @@ class Poly:
             self.mid = Point(sum(x) / len(x), sum(y) / len(y))
             self.edges = EndpointLine.lines_from_poly(self.points)
 
-    def __len__(self):
-        return len(self.points)
-
     def __getitem__(self, item):
         return self.points[item]
 

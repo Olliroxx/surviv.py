@@ -43,7 +43,7 @@ def make_table(infile: str, defaults: dict):
     from json import load
     import os
 
-    with open(os.path.join(os.path.dirname(__file__),infile)) as file:
+    with open(os.path.join(os.path.dirname(__file__), infile)) as file:
         data = load(file)
 
     list_of_dicts = []
@@ -206,7 +206,7 @@ if __name__ == '__main__':
     try:
         from os import mkdir
 
-        mkdir("./csvs")
+        mkdir("./ csvs")
         del mkdir
     except FileExistsError:
         pass
