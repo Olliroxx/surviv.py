@@ -3,25 +3,50 @@ from survivpy_net import ingame
 from pytest import approx
 
 ASCII_CHARS = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefhijklmnopqrstuvwxyz{|}~"
-TARGET_HEX = ("202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f50515253"
-              "5455565758595a5b5c5d5e5f6061626364656668696a6b6c6d6e6f707172737475767778797a7b7c7d7e0001fc0102fc0300fcff"
-              "01000200fcff03000000fcffffff0100000002000000fcffffff03000000000000fe0000200b5ddc46e5009e999d999d999d9999"
-              "9898686b9b686b03")
+TARGET_HEX_BS_RW = \
+    ("202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f50515253545556575"
+     "8595a5b5c5d5e5f6061626364656668696a6b6c6d6e6f707172737475767778797a7b7c7d7e0001fc0102fc0300fcff01000200fcff030000"
+     "00fcffffff0100000002000000fcffffff03000000000000fe0000200b5ddc46e5009e999d999d999d99999898686b9b686b03")
+
+
+class DummyGameState:
+    def __init__(self):
+        self.status = "Testing"
 
 
 class test_packets(unittest.TestCase):
-    def test_type1(self):
+    @staticmethod
+    def packet_with_json(path, packet, assertEqual):
         from os.path import join, dirname
         import json
-        file = open(join(dirname(__file__), "type_01_packet_test_data.json"), "r")
+        file = open(join(dirname(__file__), path), "r")
+
+        ingame.update_constants()
+
         # A thing that gets the correct file irrelevant of the working directory
         test_data = json.load(file)
         file.close()
         for pair in test_data:
-            actual = bytes(ingame.Type01Packet(pair["input"]).data).hex()
+            actual_packet = packet(pair["input"])
+            actual_bytes = bytes(actual_packet.data)
+            actual_hex = actual_bytes.hex()
             expected = pair["output"]
-            self.assertEqual(expected, actual)
+            assertEqual(expected, actual_hex)
 
+    def test_type1(self):
+        self.packet_with_json("type_01_packet_test_data.json", ingame.Type01Packet, self.assertEqual)
+
+    def test_type2(self):
+        in_bytes = b"\x02Generic error reason\x00"
+        packet = ingame.Type02Packet(bytearray_data=in_bytes)
+        self.assertEqual({"reason": "Generic error reason"}, packet.decode(DummyGameState()))
+
+    def test_type3(self):
+        ingame.update_constants()
+        self.packet_with_json("type_03_packet_test_data.json", ingame.Type03Packet, self.assertEqual)
+
+
+class test_bs(unittest.TestCase):
     def test_bitstring_read_write(self):
         bs = ingame.BitString(bytearray(164))
         bs.write_ascii_str(ASCII_CHARS)
@@ -54,7 +79,7 @@ class test_packets(unittest.TestCase):
         bs.write_unit_vec((-0.707, 0.707), 8)
         bs.write_unit_vec((0.707, -0.707), 8)
         bs.write_unit_vec((0.707, 0.707), 8)
-        self.assertEqual(TARGET_HEX, bs.get_view().hex())
+        self.assertEqual(TARGET_HEX_BS_RW, bs.get_view().hex())
         bs.index = 0
         self.assertEqual(bs.read_ascii_str(), ASCII_CHARS)
         self.assertEqual(True, bs.read_bool())
