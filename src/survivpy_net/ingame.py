@@ -90,6 +90,8 @@ class BitString:
        * write_float32
        * write_float64
        * write_bits
+       * write_vec
+       * write_unit_vec
 
     """
 
@@ -125,7 +127,7 @@ class BitString:
         else:
             self._view[offset >> 3] &= ~(1 << (offset & 7))
 
-    def _get_bits(self, offset, length, return_is_positive=False):
+    def _get_bits(self, offset, length, signed=False):
         remaining = len(self._view) * 8 - offset
         if length > remaining:
             raise ValueError("Cannot get " + str(length) + " bit(s) from offset " + str(offset) + ", " + str(
@@ -145,12 +147,11 @@ class BitString:
             offset = offset + size
             i = i + size
 
-        # print(str(result) + ", " + str(length))
-        # if result == 0 and length == 8:
-        #     print()
-
-        if return_is_positive:
-            return length != 32 & result & 1 << length - 1 & result - 1, result
+        if signed:
+            highest_positive = 2 ** (length - 1)
+            lowest_negative = -highest_positive
+            if result >= highest_positive:
+                return result - highest_positive + lowest_negative
         return result
 
     def _set_bits(self, offset, bits, length):
@@ -158,6 +159,8 @@ class BitString:
         if length > free:
             raise ValueError(
                 "Cannot set " + str(length) + " bit(s) from offset " + str(offset) + ", " + str(free) + " available")
+        if bits > (2 ** length) - 1:
+            raise ValueError("Value too large for amount of bits")
 
         buffer = 0
         while buffer < length:
@@ -210,18 +213,21 @@ class BitString:
         self._set_bits(offset, int8, 8)
 
     def _set_uint8(self, offset, uint8):
+        self.check_positive(uint8)
         self._set_bits(offset, uint8, 8)
 
     def _set_int16(self, offset, int16):
         self._set_bits(offset, int16, 16)
 
     def _set_uint16(self, offset, uint16):
+        self.check_positive(uint16)
         self._set_bits(offset, uint16, 16)
 
     def _set_int32(self, offset, int32):
         self._set_bits(offset, int32, 32)
 
     def _set_uint32(self, offset, uint32):
+        self.check_positive(uint32)
         self._set_bits(offset, uint32, 32)
 
     def _set_float32(self, offset, float32):
@@ -252,8 +258,8 @@ class BitString:
         result = self._read_str(self, length, False)
         return result
 
-    # def read_utf8_str(self, length=None):
-    #    return self._read_str(self, length, True)
+    def read_utf8_str(self, length=None):
+        return self._read_str(self, length, True)
 
     @staticmethod
     def _read_str(bitstring, length, z: bool):
@@ -267,7 +273,7 @@ class BitString:
         if not length:
             length = (len(bitstring) - bitstring.index) // 8
         else:
-            length += 1  # Minor difference in implementation, means this is necessary
+            length += 1  # Minor difference in implementation mean this is necessary
 
         while byte_no < length:
             byte = bitstring.read_uint8()
@@ -303,11 +309,11 @@ class BitString:
         if length is None:
             bitstring.write_uint8(0)
 
-    # def _write_utf8_string(self, bitstring, string):
-    #    array = self._string_to_list(string)
+    def _write_utf8_string(self, bitstring, string):
+        array = self._string_to_list(string)
 
-    #    for element in array:
-    #        bitstring.write_uint8(element)
+        for element in array:
+            bitstring.write_uint8(element)
 
     @staticmethod
     def _string_to_list(string):
@@ -474,8 +480,8 @@ class BitString:
     def write_unit_vec(self, val, size):
         self.write_vec(-1.0001, -1.0001, 1.0001, 1.0001, val[0], val[1], size)
 
-    # def write_utf8_str(self, text: str):
-    #    self._write_utf8_string(self, text)
+    def write_utf8_str(self, text: str):
+        self._write_utf8_string(self, text)
 
     def bits_free(self):
         return len(self) - self.index
@@ -487,6 +493,14 @@ class BitString:
         bits_to_read = 8 - (self.index % 8)
         if bits_to_read != 8:
             self.read_bits(bits_to_read)
+
+    def get_view(self):
+        return self._view
+
+    @staticmethod
+    def check_positive(num):
+        if num < 0:
+            raise ValueError("Number is not positive")
 
 
 class TypedBitString(BitString):
