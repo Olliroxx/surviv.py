@@ -4,7 +4,7 @@ tox ~= 3.23.1
 sphinx_rtd_theme ~= 0.5.2
 virtualenv ~= 20.4.6
 flake8 ~= 3.9
+pytest ~= 6.2
 
 # Will be needed later
-# pyside6
 # pyinstaller

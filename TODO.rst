@@ -1,4 +1,6 @@
  * More tests
+ * Add the ability to use proxies and allow arbitrary config locations
+ * Migrate deobfuscation scripts to /src and add 1-click deobfuscation with VCS, assets and configs
  * Client
     * Frame trees
         * Define a tree with all nodes having a get_frame() method
