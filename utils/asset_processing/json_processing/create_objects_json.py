@@ -71,7 +71,8 @@ def write_objects_json(script, root_dir):
 
     functions = []
     for name in function_names:
-        regex = name + r""": function\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\) { {12}'use strict';
+        regex = name + r""": function\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\) {
+ {12}'use strict';
 .*?(?= {8}'[0-9a-f]{8}': function\((?:_0x[0-9a-f]{4,6}, ){1,2}_0x[0-9a-f]{4,6}\) {
  {12}'use strict';\n)"""
         matches = re.findall(regex, script, re.DOTALL)

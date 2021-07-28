@@ -78,15 +78,15 @@ def update_changelog(changelog_dict, content):
 
     if str_hash in changelog_dict["updates"]:
         changelog_dict["updates"][str_hash]["last_seen"] = content["time"]
-        if content["last_modified"] != changelog_dict["updates"][str_hash]["last_modified"]:
-            raise RuntimeError("Conflicting last_modified times")
+        if content["last_modified"] not in changelog_dict["updates"][str_hash]["last_modified"]:
+            changelog_dict["updates"][str_hash]["last_modified"].append(content["last_modified"])
 
     else:
         changelog_dict["updates"][str_hash] = {
             "new_chunks": [],
             "first_seen": content["time"],
             "last_seen": content["time"],
-            "last_modified": content["last_modified"]
+            "last_modified": [content["last_modified"]]
         }
         for chunk in content["content"]:
             if chunk not in changelog_dict["chunks"]:

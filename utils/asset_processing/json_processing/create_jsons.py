@@ -422,7 +422,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
             has_handler = False
             if re.findall(op_bullet_regex, function):
                 key = re.findall("function (_0x[0-9a-f]{4,6})", function)[0]
-                source_dict = re.findall("_0x[0-9a-f]{4,6}\\[_0x[0-9a-f]{4,6}]", function)[0][:9]
+                source_dict = re.findall("(_0x[0-9a-f]{4,6})\\[_0x[0-9a-f]{4,6}]", function)[0]
                 value = op_bullet_setup(source_dict)
                 functions[key] = value
                 has_handler = True

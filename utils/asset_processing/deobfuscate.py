@@ -440,4 +440,4 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
 
 
 if __name__ == "__main__":
-    main(redownload=False)
+    main()
