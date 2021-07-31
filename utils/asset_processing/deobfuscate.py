@@ -84,7 +84,7 @@ def eval_exp(exp: str):
 
     def deci_statement(s: str):
         result = []
-        g = generate_tokens(StringIO(s).readline)   # tokenize the string
+        g = generate_tokens(StringIO(s).readline)  # tokenize the string
         for toknum, tokval, _, _, _ in g:
             if toknum == NUMBER and is_float(tokval):
                 result.extend([
@@ -130,6 +130,31 @@ def eval_(node):
         raise TypeError(node)
 
 
+def find_usages(solved_items, script):
+    """
+    Used for adding multithreading to float processing, adds context characters to each match.
+
+    Without this, `1 + 2` would replace `1 + 20` with `30`. Adding context characters avoids that.
+
+    :param solved_items: List of values to add context to
+    :param script: string that to take context from
+    """
+
+    from re import findall, escape
+    result = {}
+
+    for old, new in solved_items:
+        for each in findall(r"([^\d])" + escape(old) + r"([^\d])", script):
+            result[each[0]+old+each[1]] = each[0]+new+each[1]
+
+    return result
+
+
+def split_list(to_split, size):
+    for i in range(0, len(to_split), size):
+        yield tuple(to_split)[i:i+size]
+
+
 def solve_hex():
     """
     In app.js there are simple expression written in hex, instead of ints and some floats.
@@ -138,6 +163,9 @@ def solve_hex():
 
     import re
     from misc_utils import get_app
+    from multiprocessing import Pool
+    from os import cpu_count
+    from math import ceil
 
     print("Simplifying hex")
 
@@ -160,9 +188,22 @@ def solve_hex():
     matches = set(re.findall(regex, script))
     print(str(len(matches)) + " decimals")
 
+    solved = {}
     for match in matches:
-        while bool(old := re.findall(r"[^\d]"+re.escape(match)+r"[^\d]", script)):
-            script = script.replace(old[0], old[0][0] + str(eval_exp(match)) + old[0][-1])
+        solved[match] = str(eval_exp(match))
+
+    split_size = ceil(len(solved)/cpu_count())
+    split = split_list(solved.items(), split_size)
+
+    with Pool() as p:
+        result = p.starmap(find_usages, zip(split, [script]*cpu_count()))
+
+    context_added = {}
+    for item in result:
+        context_added = context_added | item
+
+    for old, new in context_added.items():
+        script = script.replace(old, new)
 
     regex = r"-\([0-9\.]+\)"
     matches = set(re.findall(regex, script))
