@@ -21,14 +21,12 @@ class test_packets(unittest.TestCase):
         import json
         file = open(join(dirname(__file__), path), "r")
 
-        ingame.update_constants()
-
         # A thing that gets the correct file irrelevant of the working directory
         test_data = json.load(file)
         file.close()
         for pair in test_data:
             actual_packet = packet(pair["input"])
-            actual_bytes = bytes(actual_packet.data)
+            actual_bytes = actual_packet.get_trimmed()
             actual_hex = actual_bytes.hex()
             expected = pair["output"]
             assertEqual(expected, actual_hex)
@@ -47,7 +45,7 @@ class test_packets(unittest.TestCase):
 
 
 class test_bs(unittest.TestCase):
-    def test_bitstring_read_write(self):
+    def test_bitstring_write(self):
         bs = ingame.BitString(bytearray(164))
         bs.write_ascii_str(ASCII_CHARS)
         bs.write_bool(True)
@@ -80,7 +78,9 @@ class test_bs(unittest.TestCase):
         bs.write_unit_vec((0.707, -0.707), 8)
         bs.write_unit_vec((0.707, 0.707), 8)
         self.assertEqual(TARGET_HEX_BS_RW, bs.get_view().hex())
-        bs.index = 0
+
+    def test_bitstring_read(self):
+        bs = ingame.BitString(bytearray.fromhex(TARGET_HEX_BS_RW))
         self.assertEqual(bs.read_ascii_str(), ASCII_CHARS)
         self.assertEqual(True, bs.read_bool())
         self.assertEqual(False, bs.read_bool())

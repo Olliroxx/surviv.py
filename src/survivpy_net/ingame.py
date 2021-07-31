@@ -29,6 +29,7 @@ def update_constants():
     import pathlib
     constants_file = open(pathlib.Path(__file__).parent / "./configs/constants.json")
     constants = constants | load(constants_file)
+    constants_file.close()
 
     mtypes_file = open(pathlib.Path(__file__).parent / "./configs/objects.json")
     mtypes_dict = load(mtypes_file)["objects"]
@@ -105,7 +106,7 @@ class BitString:
 
         if type(buffer) not in (bytearray, tuple, list, bytes):
             raise TypeError("Input buffer must be byteArray")
-        if type(buffer) in (tuple, list, bytes):
+        else:
             buffer = bytearray(buffer)
 
         self._view = buffer
@@ -213,21 +214,21 @@ class BitString:
         self._set_bits(offset, int8, 8)
 
     def _set_uint8(self, offset, uint8):
-        self.check_positive(uint8)
+        self._check_positive(uint8)
         self._set_bits(offset, uint8, 8)
 
     def _set_int16(self, offset, int16):
         self._set_bits(offset, int16, 16)
 
     def _set_uint16(self, offset, uint16):
-        self.check_positive(uint16)
+        self._check_positive(uint16)
         self._set_bits(offset, uint16, 16)
 
     def _set_int32(self, offset, int32):
         self._set_bits(offset, int32, 32)
 
     def _set_uint32(self, offset, uint32):
-        self.check_positive(uint32)
+        self._check_positive(uint32)
         self._set_bits(offset, uint32, 32)
 
     def _set_float32(self, offset, float32):
@@ -498,9 +499,14 @@ class BitString:
         return self._view
 
     @staticmethod
-    def check_positive(num):
+    def _check_positive(num):
         if num < 0:
             raise ValueError("Number is not positive")
+
+    def get_trimmed(self):
+        from math import ceil
+        end = ceil(self.index/8)
+        return bytes(self)[:end]
 
 
 class TypedBitString(BitString):
@@ -571,6 +577,9 @@ class Packet:
     def decode(self, game_state):
         raise NotImplementedError("This should be overridden")
 
+    def get_trimmed(self):
+        return self.data.get_trimmed()
+
 
 class Type01Packet(Packet):
 
@@ -630,9 +639,9 @@ class Type03Packet(Packet):
                 "touchMoveActive"):
             self.data.write_bool(data[item])
         if data["touchMoveActive"]:
-            self.data.write_unit_vec(data["touchMoveDir"], 8)
+            self.data.write_unit_vec(Vector(data["touchMoveDir"]), 8)
             self.data.write_uint8(data["touchMoveLen"])
-        self.data.write_unit_vec(data["toMouseDir"], 10)
+        self.data.write_unit_vec(Vector(data["toMouseDir"]), 10)
         self.data.write_float(data["toMouseLen"], 0, constants["mouseMaxDist"], 8)
         self.data.write_bits(len(data["inputs"]), 4)
         for item in data["inputs"]:

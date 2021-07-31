@@ -109,11 +109,47 @@ class Point(GenericXYObject):
         return Point(-self.x, -self.y)
 
 
-class Vector(GenericXYObject):
+class Vector:
     # You just got vectored
     """
     A vector class, nothing special
     """
+    def __init__(self, *args, **kwargs):
+        if args:
+            if len(args) == 2:
+                self.x = args[0]
+                self.y = args[1]
+                return
+
+            elif type(args[0]) in (tuple, list):
+                self.x = args[0][0]
+                self.y = args[0][1]
+
+            elif type(args[0]) == dict:
+                self.x = args[0]["x"] if "x" in args[0] else args[0]["X"]
+                self.y = args[0]["y"] if "y" in args[0] else args[0]["Y"]
+
+            else:
+                raise ValueError
+
+        elif kwargs:
+            self.x = kwargs["x"] if "x" in kwargs else kwargs["X"]
+            self.y = kwargs["y"] if "y" in kwargs else kwargs["Y"]
+
+        else:
+            raise ValueError
+
+    def __getitem__(self, item):
+        items = {
+            "x": self.x,
+            "y": self.y,
+            0: self.x,
+            1: self.y
+        }
+        if item in items:
+            return items[item]
+        raise KeyError(item)
+
     @staticmethod
     def get_degrees(x, y):
         """

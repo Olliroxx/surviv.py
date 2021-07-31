@@ -1,22 +1,28 @@
 [
   {
     "input": {
-            "seq": 0,
-            "moveLeft": false,
-            "moveRight": false,
-            "moveUp": false,
-            "moveDown": false,
-            "shootStart": false,
-            "portrait": false,
-            "touchMoveActive": false,
-            "shootHold": false,
-            "touchMoveDir": [1, 0],
-            "touchMoveLen": 255,
-            "toMouseDir": [1, 0],
-            "toMouseLen": 0,
-            "inputs": [],
-            "useItem": ""
-        },
-    "output": "0000ff0318000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      "seq": 0,
+      "moveLeft": false,
+      "moveRight": false,
+      "moveUp": false,
+      "moveDown": false,
+      "shootStart": false,
+      "portrait": false,
+      "touchMoveActive": false,
+      "shootHold": false,
+      "touchMoveDir": [
+        1,
+        0
+      ],
+      "touchMoveLen": 255,
+      "toMouseDir": [
+        1,
+        0
+      ],
+      "toMouseLen": 0,
+      "inputs": [],
+      "useItem": ""
+    },
+    "output": "0000ff0318000000"
   }
 ]
