@@ -47,15 +47,16 @@ def grab_pngs(to_parse):
 
 
 def write_bigimage(key, parse_data):
-    import os
     from requests import get
     import png
+    from os.path import join, dirname
+    from os import mkdir, listdir
 
     if key == "raw":
         raise RuntimeError("Very unlikely name collision")
 
     try:
-        os.mkdir("./out/pngs/" + key)
+        mkdir("./out/pngs/" + key)
     except FileExistsError:
         pass
 
@@ -66,14 +67,14 @@ def write_bigimage(key, parse_data):
         cwd = "./out/pngs/" + key + "/" + str(bigimage_number)
 
         try:
-            os.mkdir(cwd)
+            mkdir(cwd)
         except FileExistsError:
             pass
 
-        if os.listdir(path=cwd):
+        if listdir(path=cwd):
             continue
         print(bigimage_name + ": Downloading")
-        with open(os.path.join(os.path.dirname(__file__), "./out/pngs/raw/" + bigimage_name), "bw") as file:
+        with open(join(dirname(__file__), "./out/pngs/raw/" + bigimage_name), "bw") as file:
             resp = get("https://surviv.io/assets/" + bigimage_name, stream=True)
             length = resp.headers.get("content-length")
 
@@ -90,7 +91,7 @@ def write_bigimage(key, parse_data):
         bigimage_name = bigimage["meta"]["image"]
         frames = bigimage["frames"]
 
-        file = open(os.path.join(os.path.dirname(__file__), "./out/pngs/raw/" + bigimage_name), "br")
+        file = open(join(dirname(__file__), "./out/pngs/raw/" + bigimage_name), "br")
         reader = png.Reader(file=file)
         bigimage_data = reader.asRGBA()
 
@@ -135,12 +136,13 @@ def write_bigimage(key, parse_data):
 def grab_svgs(big_string: str):
     import re
     import requests
-    import os
+    from os.path import join, dirname
+    from os import mkdir
 
     print("\n\nWARNING: This script DOES NOT get all SVGs, look in json_processing for that\n")
     print("Finding SVGs")
     svg_links = []
-    for svg in re.findall("img/[a-z0-9/-_]*\\.svg", big_string):
+    for svg in re.findall(r"img/[a-z\d/-_]*\.svg", big_string):
         if svg not in svg_links:
             svg_links.append(svg)
     del svg
@@ -149,7 +151,7 @@ def grab_svgs(big_string: str):
     svg_folders = ["./out/svgs", "./out/svgs/gui", "./out/svgs/loot", "./out/svgs/emotes", "./out/svgs/modals"]
 
     try:
-        os.mkdir("./out")
+        mkdir("./out")
     except FileExistsError:
         pass
 
@@ -162,7 +164,7 @@ def grab_svgs(big_string: str):
 
     for folder in svg_folders:
         try:
-            os.mkdir(folder)
+            mkdir(folder)
         except FileExistsError:
             pass
 
@@ -170,7 +172,7 @@ def grab_svgs(big_string: str):
     for link in svg_links:
         link_trimmed = link[4:]
         resp = requests.get("https://surviv.io/" + link)
-        file = open(os.path.join(os.path.dirname(__file__), "./out/svgs/" + link_trimmed), "bw")
+        file = open(join(dirname(__file__), "./out/svgs/" + link_trimmed), "bw")
         file.write(resp.content)
         file.close()
     print("Done grabbing SVGs\n")
@@ -179,12 +181,13 @@ def grab_svgs(big_string: str):
 def grab_mp3s(big_list: list):
     import re
     import requests
-    import os
+    from os.path import join, dirname
+    from os import mkdir
 
     print("Finding MP3s")
     mp3_links = []
     for string in big_list:
-        for mp3 in re.findall("audio/[a-z0-9/_-]*\\.mp3", string):
+        for mp3 in re.findall(r"audio/[a-z\d/_-]*\.mp3", string):
             if mp3 not in mp3_links:
                 mp3_links.append(mp3)
     del string, mp3
@@ -194,7 +197,7 @@ def grab_mp3s(big_list: list):
                    "./out/mp3s/ambient", "./out/mp3s/reverb"]
 
     try:
-        os.mkdir("./out")
+        mkdir("./out")
     except FileExistsError:
         pass
 
@@ -207,7 +210,7 @@ def grab_mp3s(big_list: list):
 
     for folder in mp3_folders:
         try:
-            os.mkdir(folder)
+            mkdir(folder)
         except FileExistsError:
             pass
 
@@ -215,7 +218,7 @@ def grab_mp3s(big_list: list):
     for link in mp3_links:
         link_trimmed = link[6:]
         resp = requests.get("https://surviv.io/" + link)
-        file = open(os.path.join(os.path.dirname(__file__), "./out/mp3s/" + link_trimmed), "bw")
+        file = open(join(dirname(__file__), "./out/mp3s/" + link_trimmed), "bw")
         file.write(resp.content)
         file.close()
     print("Done grabbing MP3s\n")

@@ -4,6 +4,7 @@ def grab_code():
     """
 
     import os
+    from os.path import join, dirname
     import requests
     import re
 
@@ -32,16 +33,16 @@ def grab_code():
     print("HTML retrieved\n")
     # Get HTML, and ensure nothing went horribly wrong
 
-    file = open(os.path.join(os.path.dirname(__file__), ".\\out\\code\\index.html"), "w", encoding="utf-8")
+    file = open(join(dirname(__file__), ".\\out\\code\\index.html"), "w", encoding="utf-8")
     file.write(resp)
     file.close()
     # Write HTML file
 
-    files = re.findall("js/[a-z]*\\.[0-9a-f]{8}\\.js", resp)
+    files = re.findall(r"js/[a-z]*\.[\da-f]{8}\.js", resp)
 
     for script in files:
         print("Downloading " + script)
-        file = open(os.path.join(os.path.dirname(__file__), ".\\out\\code\\" + script), "bw")
+        file = open(join(dirname(__file__), ".\\out\\code\\" + script), "bw")
 
         resp = requests.get("https://surviv.io/" + script, stream=True)
         length = resp.headers.get("content-length")
@@ -179,12 +180,12 @@ def solve_hex():
     del file
     # Check that auto indent was run just before this, and read the file
 
-    to_solve = set(re.findall("[^_](-?0x[0-9a-f]+(?: ?[*+/-] ?-?0x[0-9a-f]*)+)", script))
+    to_solve = set(re.findall(r"[^_](-?0x[\da-f]+(?: ?[*+/-] ?-?0x[\da-f]*)+)", script))
     print(str(len(to_solve)) + " ints to simplify")
     for element in to_solve:
         script = script.replace(element, str(eval_exp(element)))
 
-    regex = r"-?[0-9.]+ [+/*\-] -?[0-9.]+"
+    regex = r"-?[\d.]+ [+/*\-] -?[\d.]+"
     matches = set(re.findall(regex, script))
     print(str(len(matches)) + " decimals")
 
@@ -205,7 +206,7 @@ def solve_hex():
     for old, new in context_added.items():
         script = script.replace(old, new)
 
-    regex = r"-\([0-9\.]+\)"
+    regex = r"-\([\d\.]+\)"
     matches = set(re.findall(regex, script))
     print(str(len(matches)) + " expressions to simplify")
 
@@ -226,11 +227,12 @@ def autoindent():
     Indents and spaces out app.js
     """
     import jsbeautifier
-    import os
+    from os.path import join, dirname
+    from os import listdir
 
-    for script in os.listdir(".\\deobfuscated\\js"):
+    for script in listdir(".\\deobfuscated\\js"):
 
-        file = open(os.path.join(os.path.dirname(__file__), ".\\deobfuscated\\js\\" + script), "r", encoding="utf-8")
+        file = open(join(dirname(__file__), ".\\deobfuscated\\js\\" + script), "r", encoding="utf-8")
         text = file.readline()
         file.close()
         if text.startswith("//"):
@@ -242,8 +244,8 @@ def autoindent():
         result = jsbeautifier.beautify_file(".\\deobfuscated\\js\\" + script, opts)
         result = "// Indented\n" + result
 
-        with open(os.path.join(os.path.dirname(__file__),
-                               ".\\deobfuscated\\js\\" + script), "w", encoding="utf-8", newline="\n") as writer:
+        with open(join(dirname(__file__),
+                       ".\\deobfuscated\\js\\" + script), "w", encoding="utf-8", newline="\n") as writer:
             print("Writing " + script)
             writer.write(result)
             writer.close()
@@ -276,12 +278,12 @@ def fill_strings():
     line = script.split("\n")[1][:-1]
     # Get the big list that starts with a0_, and return it's name and the content of the list
 
-    regex = "a0_0x[0-9a-f]+"
+    regex = r"a0_0x[\da-f]+"
     list_name = re.findall(regex, line)[0]
     big_list = ast.literal_eval(line[line.find("["):])
     # Get the list and parse it
 
-    regex = "\\(" + list_name + ", ([0-9]+?)\\)"
+    regex = "\\(" + list_name + r", ([\d]+?)\)"
     shift_amount = int(re.findall(regex, script)[0]) * -1
     del regex
     from collections import deque
@@ -297,26 +299,26 @@ def fill_strings():
     del script_as_list
     # Remove the list
 
-    regex = r"""var (a0_0x[0-9a-f]{3,7}) = function\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}\) \{
-    _0x[0-9a-f]{6} = _0x[0-9a-f]{6} - \(0\);
-    var _0x[0-9a-f]{6} = """ + list_name + r"""\[_0x[0-9a-f]{6}];
-    return _0x[0-9a-f]{6};
+    regex = r"""var (a0_0x[\da-f]{3,7}) = function\(_0x[\da-f]{6}, _0x[\da-f]{6}\) \{
+    _0x[\da-f]{6} = _0x[\da-f]{6} - \(0\);
+    var _0x[\da-f]{6} = """ + list_name + r"""\[_0x[\da-f]{6}];
+    return _0x[\da-f]{6};
 };"""
     alt_name = re.findall(regex, script)[0]
     del regex
     # There is a a function that (as far as I can tell) does nothing except rename it
     # This finds the new name
 
-    regex = r"""var a0_[0-9a-f]{3,7} = function\(_0x[0-9a-f]{6}, _0x[0-9a-f]{6}\) \{
-        _0x[0-9a-f]{6} = _0x[0-9a-f]{6} - \(0\);
-        var _0x[0-9a-f]{6} = """ + list_name + r"""\[_0x[0-9a-f]{6}];
-        return _0x[0-9a-f]{6};
+    regex = r"""var a0_[\da-f]{3,7} = function\(_0x[\da-f]{6}, _0x[\da-f]{6}\) \{
+        _0x[\da-f]{6} = _0x[\da-f]{6} - \(0\);
+        var _0x[\da-f]{6} = """ + list_name + r"""\[_0x[\da-f]{6}];
+        return _0x[\da-f]{6};
     };"""
     script = re.sub(regex, "", script)
     del regex
     # Delete the function
 
-    regex = alt_name + "\\('(0x[0-9a-f]+?)'\\)"
+    regex = alt_name + r"\\('(0x[\da-f]+?)'\\)"
     matches = re.findall(regex, script)
     del regex
     # Find usages of the alternate name
@@ -380,10 +382,10 @@ def remove_char_code_lists():
 
     usages = len(re.findall("fromCharCode", script))
 
-    regex = """(_0x[0-9a-f]{3,6}) = function _0x[0-9a-f]{3,6}\\(_0x[0-9a-f]{3,6}\\) \\{
- {20}return _0x[0-9a-f]{3,6}\\['map'\\]\\(function\\(_0x[0-9a-f]{3,6}\\) \\{
- {24}return String\\['fromCharCode'\\]\\(_0x[0-9a-f]{3,6}\\);
- {20}\\}\\)\\['join'\\]\\(''\\);
+    regex = r"""(_0x[\da-f]{3,6}) = function _0x[\da-f]{3,6}\(_0x[\da-f]{3,6}\) \{
+ {20}return _0x[\da-f]{3,6}\['map'\]\(function\(_0x[\da-f]{3,6}\) \{
+ {24}return String\['fromCharCode'\]\(_0x[\da-f]{3,6}\);
+ {20}\}\)\['join'\]\(''\);
  {16}},"""
     functions = re.findall(regex, script)
     del regex
@@ -393,14 +395,14 @@ def remove_char_code_lists():
     del usages
 
     for i in functions:
-        regex = i + "\\((\\[(?:[0-9]+, )+[0-9]+?\\])\\)"
+        regex = i + r"\((\[(?:[\d]+, )+[\d]+?\])\)"
         matches = re.findall(regex, script)
 
         if len(matches) + 1 == len(re.findall(i, script)):
-            regex = i + """ = function _0x[0-9a-f]{3,6}\\(_0x[0-9a-f]{3,6}\\) \\{
- {20}return _0x[0-9a-f]{3,6}\\['map'\\]\\(function\\(_0x[0-9a-f]{3,6}\\) \\{
- {24}return String\\['fromCharCode'\\]\\(_0x[0-9a-f]{3,6}\\);
- {20}\\}\\)\\['join'\\]\\(''\\);
+            regex = i + r""" = function _0x[\da-f]{3,6}\(_0x[\da-f]{3,6}\) \{
+ {20}return _0x[\da-f]{3,6}\['map'\]\(function\(_0x[\da-f]{3,6}\) \{
+ {24}return String\['fromCharCode'\]\(_0x[\da-f]{3,6}\);
+ {20}\}\)\['join'\]\(''\);
  {16}},"""
             script = re.sub(regex, "", script)
         # If all the usages are either ones this script can handle or the definition, remove the definition

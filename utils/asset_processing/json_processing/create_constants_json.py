@@ -8,26 +8,26 @@ def write_constants_json(script: str, root_dir):
     """
     import re
     from json import loads, dump
-    import os
+    from os.path import join, dirname
 
     print("Starting constants.json")
 
-    regex = r"""'[0-9a-f]{8}': function\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\) {
+    regex = r"""'[\da-f]{8}': function\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}\) {
  {12}'use strict';
- {12}_0x[0-9a-f]{4,6}\['exports'] = ({.*?});"""
+ {12}_0x[\da-f]{4,6}\['exports'] = ({.*?});"""
 
     function = re.findall(regex, script, re.DOTALL)[0]
     del regex, script
 
     function = function.replace("'", '"')
-    regex = "[^_]0x[0-9a-f]+"
+    regex = r"[^_]0x[\da-f]+"
     hex_matches = re.findall(regex, function)
     for hex_function in hex_matches:
         function = function.replace(hex_function, str(int(hex_function, 16)), 1)
     del hex_matches, regex, hex_function
 
     function = loads(function)
-    file = open(os.path.join(os.path.dirname(__file__), root_dir + "constants.json"), "w")
+    file = open(join(dirname(__file__), root_dir + "constants.json"), "w")
     dump(function, file, indent=4)
     file.close()
 

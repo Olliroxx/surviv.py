@@ -4,7 +4,8 @@ This script grabs most of the svgs (guns, melees and other items), most of them 
 
 from json import load
 import requests
-import os
+from os.path import join, dirname
+from os import mkdir
 
 master_dict = {}
 sources = [
@@ -15,7 +16,7 @@ sources = [
 # The names of the json files to read from
 
 for file in sources:
-    file = open(os.path.join(os.path.dirname(__file__), "jsons/"+file+".json"), "r")
+    file = open(join(dirname(__file__), "jsons/"+file+".json"), "r")
     data = load(file)
     file.close()
     master_dict = master_dict | data
@@ -33,7 +34,7 @@ del key, value, master_dict
 print(str(len(svg_names)) + " sprites to download")
 
 try:
-    os.mkdir("../out/svgs/loot")
+    mkdir("../out/svgs/loot")
 except FileExistsError:
     pass
 
@@ -41,7 +42,7 @@ sprite_number = 0
 for name in svg_names:
     sprite_number += 1
     print("Downloading " + name + ".svg, " + str(sprite_number)+"/"+str(len(svg_names)))
-    file = open(os.path.join(os.path.dirname(__file__), "../out/svgs/loot/"+name+".svg"), "bw")
+    file = open(join(dirname(__file__), "../out/svgs/loot/"+name+".svg"), "bw")
     resp = requests.get("https://surviv.io/img/loot/"+name+".svg")
     file.close()
 # Get and write all the sprites

@@ -18,10 +18,11 @@ def update_definitions():
     global map_definitions
     global constants
 
-    import os
-    def_file = open(os.path.join(os.path.dirname(__file__), "./configs/map_data.json"))
+    from os.path import dirname, join
+
+    def_file = open(join(dirname(__file__), "./configs/map_data.json"))
     map_definitions = load(def_file)
-    constants_file = open(os.path.join(os.path.dirname(__file__), "configs/constants.json"))
+    constants_file = open(join(dirname(__file__), "configs/constants.json"))
     constants = load(constants_file)
 
 

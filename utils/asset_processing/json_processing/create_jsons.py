@@ -90,7 +90,7 @@ def basic_simplify(data):
     # Becomes
     # A
 
-    regex = "[^_]0x[0-9a-f]+"
+    regex = r"[^_]0x[\da-f]+"
     hex_matches = re.findall(regex, data)
     for hex_data in hex_matches:
         data = data.replace(hex_data, hex_data[0] + str(int(hex_data[1:], 16)), 1)
@@ -134,7 +134,7 @@ def solve_expressions(data: str):
     changed = True
     while changed:
         changed = False
-        regex = "(?:-?[0-9\\.]+ ?[+*\\-/] )+-?[0-9\\.]+"
+        regex = r"(?:-?[\d\.]+ ?[+*\-/] )+-?[\d\.]+"
         expression_matches = re.findall(regex, data)
         for match in expression_matches:
             solved = solve_expression(match)
@@ -142,7 +142,7 @@ def solve_expressions(data: str):
             changed = True
         # Solve expressions (like 2+1)
 
-        regex = "-?\\(-?[0-9\\.]+\\)"
+        regex = r"-?\(-?[\d\.]+\)"
         bracket_matches = re.findall(regex, data)
         for match in bracket_matches:
             solved = str(solve_expression(match))
@@ -201,11 +201,11 @@ def solve_vars(data: list, functions=None, solved=None):
     if functions is None:
         functions = {}
 
-    needs_solving_regex = r"_0x[0-9a-f]{4,}[\[\(]"
+    needs_solving_regex = r"_0x[\da-f]{4,}[\[\(]"
 
     unsolved = {}
     for var in data:
-        name, content = re.split("(?<=[0-9a-f]) = ", var, 1)
+        name, content = re.split(r"(?<=[\da-f]) = ", var, 1)
         name = name.strip(" ")
         content = content.strip(" ")
         unsolved[name] = content
@@ -273,18 +273,18 @@ def handler_generic(filename="", return_processed=False):
 
     def handler(data: str):
         import re
-        import os
+        from os.path import join, dirname
         import json
 
         data = data.split("var ")
         for i in data:
-            if re.findall("_0x[0-9a-f]{4,6} = {", i):
+            if re.findall(r"_0x[\da-f]{4,6} = {", i):
                 data = i
                 break
         if type(data) == list:
             data = data[-1]
 
-        data = re.sub("_0x[0-9a-f]{4,6} = ", "", data, count=1)
+        data = re.sub(r"_0x[\da-f]{4,6} = ", "", data, count=1)
         data = re.sub(";.*", "", data, flags=re.DOTALL)
         data = basic_simplify(data)
         # General cleaning
@@ -293,7 +293,7 @@ def handler_generic(filename="", return_processed=False):
         if return_processed:
             return data
         else:
-            with open(os.path.join(os.path.dirname(__file__), filename), "w") as file:
+            with open(join(dirname(__file__), filename), "w") as file:
                 json.dump(data, file, indent=4)
 
     return handler
@@ -392,14 +392,14 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
     def handler(data: str):
         import re
         import json
-        import os
+        from os.path import join, dirname
 
         data = basic_simplify(data)
 
         data = data.split("var ")
         functions_string = []
         longest = ""
-        function_regex = r"""[\"'][0-9a-f]{8}[\"']: function\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\) \{
+        function_regex = r"""[\"'][\da-f]{8}[\"']: function\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}\) \{
  {12}[\"']use strict[\"'];"""
         for i in data:
             if len(i) > len(longest):
@@ -411,18 +411,18 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
         # Split the function, with "var " at the split points
         # Find the longest one and discard everything else, except functions which might need a handler
 
-        op_bullet_regex = r"""function _0x[0-9a-f]{4,6}\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\) \{
- {16}return _0x[0-9a-f]{4,6}\[[\"']mergeDeep[\"']\]\(\{\}. _0x[0-9a-f]{4,6}\[_0x[0-9a-f]{4,6}\], \{
- {20}[\"']baseType[\"']: _0x[0-9a-f]{4,6}
- {16}\}, _0x[0-9a-f]{4,6}\);
+        op_bullet_regex = r"""function _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}\) \{
+ {16}return _0x[\da-f]{4,6}\[[\"']mergeDeep[\"']\]\(\{\}. _0x[\da-f]{4,6}\[_0x[\da-f]{4,6}\], \{
+ {20}[\"']baseType[\"']: _0x[\da-f]{4,6}
+ {16}\}, _0x[\da-f]{4,6}\);
  {12}\}"""
-        merge_dicts_regex = "(_0x[0-9a-f]{4,6})\\[[\"']mergeDeep[\"']\\]"
+        merge_dicts_regex = r"(_0x[\da-f]{4,6})\\[[\"']mergeDeep[\"']\\]"
         functions = {}
         for function in functions_string:
             has_handler = False
             if re.findall(op_bullet_regex, function):
-                key = re.findall("function (_0x[0-9a-f]{4,6})", function)[0]
-                source_dict = re.findall("(_0x[0-9a-f]{4,6})\\[_0x[0-9a-f]{4,6}]", function)[0]
+                key = re.findall(r"function (_0x[\da-f]{4,6})", function)[0]
+                source_dict = re.findall(r"(_0x[\da-f]{4,6})\[_0x[\da-f]{4,6}]", function)[0]
                 value = op_bullet_setup(source_dict)
                 functions[key] = value
                 has_handler = True
@@ -443,7 +443,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
 
         data = split_bracket_level(data, trim_start=True)
 
-        simple_value_regex = "_0x[0-9a-f]{4,6} = (?:-?[0-9.]+|{(?:(?!_0x).)*})"
+        simple_value_regex = r"_0x[\da-f]{4,6} = (?:-?[\d.]+|{(?:(?!_0x).)*})"
         simple_values = {}
         to_remove = []
         solved = {}
@@ -457,7 +457,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
                     value = basic_simplify(value)
                     simple_values[key] = value
                 else:
-                    key = re.findall("_0x[0-9a-f]{4,6}", variable)[0]
+                    key = re.findall(r"_0x[\da-f]{4,6}", variable)[0]
                     start = variable.index("{")
                     value = variable[start-1:]
                     value = basic_simplify(value)
@@ -506,7 +506,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
                     raise ValueError("Cannot have categories other than 0 or 1 in normal mode")
         # Input validation
 
-        with open(os.path.join(os.path.dirname(__file__), filename), "w") as file:
+        with open(join(dirname(__file__), filename), "w") as file:
             if has_1:
                 for i in range(len(result)):
                     if categories[i]:
@@ -559,13 +559,13 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False, skip_cons
     del line, file
     # Check at what stage this is being run
 
-    regex = """'[0-9a-f]{8}': function\\(_0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}, _0x[0-9a-f]{4,6}\\) {
+    regex = r"""'[\da-f]{8}': function\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}\) {
  {12}'use strict';
- {12}var _0x[a-f0-9]{4,6} = \\[(_0x[0-9a-f]{4,6}\\('[0-9a-f]{8}'\\)(?:, _0x[0-9a-f]{4,6}\\('[0-9a-f]{8}'\\))*)]"""
+ {12}var _0x[a-f\d]{4,6} = \[(_0x[\da-f]{4,6}\('[\da-f]{8}'\)(?:, _0x[\da-f]{4,6}\('[\da-f]{8}'\))*)]"""
     matches = re.findall(regex, script)
     if len(matches) != 1:
         raise RuntimeError
-    regex = "[a-f0-9]{8}"
+    regex = r"[a-f\d]{8}"
     matches = re.findall(regex, matches[0])
     del regex
     # There's a function that contains the names of other functions with the data we want in them. This finds that function
@@ -603,9 +603,9 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False, skip_cons
 
         for match in matches:
             print("Starting match " + str(matches.index(match)+1) + " of " + str(len(matches)))
-            regex = "'" + match + r"""': function\(_0x[0-9a-f]{4,6}(?:, _0x[0-9a-f]{4,6})*\) {
+            regex = "'" + match + r"""': function\(_0x[\da-f]{4,6}(?:, _0x[\da-f]{4,6})*\) {
  {12}'use strict';.*?
-(?= {8}'[0-9a-f]{8}')"""
+(?= {8}'[\da-f]{8}')"""
             matches_function = re.findall(regex, script, flags=re.DOTALL)
             if len(matches_function) != 1:
                 raise RuntimeError
