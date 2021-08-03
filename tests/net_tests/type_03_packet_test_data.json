@@ -23,6 +23,56 @@
       "inputs": [],
       "useItem": ""
     },
-    "output": "0000ff0318000000"
+    "output": "0000ff0308000000"
+  },{
+    "input": {
+      "seq": 45,
+      "moveLeft": false,
+      "moveRight": true,
+      "moveUp": false,
+      "moveDown": true,
+      "shootStart": false,
+      "portrait": false,
+      "touchMoveActive": false,
+      "shootHold": true,
+      "touchMoveDir": {
+          "x": 1,
+          "y": 0
+      },
+      "touchMoveLen": 255,
+      "toMouseDir": {
+          "x": -0.9014122700543494,
+          "y": 0.43296179900248094
+      },
+      "toMouseLen": 6.442903785709542,
+      "inputs": [],
+      "useItem": ""
+    },
+    "output": "2d2a3274ab010000"
+  },{
+    "input": {
+      "seq": 89,
+      "moveLeft": false,
+      "moveRight": false,
+      "moveUp": false,
+      "moveDown": false,
+      "shootStart": false,
+      "portrait": false,
+      "touchMoveActive": false,
+      "shootHold": false,
+      "touchMoveDir": {
+          "x": 1,
+          "y": 0
+      },
+      "touchMoveLen": 255,
+      "toMouseDir": {
+          "x": 0.9789895393317617,
+          "y": 0.20391047515756794
+      },
+      "toMouseLen": 26.6048127993657,
+      "inputs": [],
+      "useItem": "painkiller"
+    },
+    "output": "5900f4a3a9068b01"
   }
 ]

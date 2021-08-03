@@ -120,7 +120,7 @@ class BitString:
         return bytes(self._view)
 
     def __str__(self):
-        return self._view.hex()
+        return self.get_trimmed().hex()
 
     def _set_bit(self, offset, bit):
         if bit:
@@ -459,20 +459,13 @@ class BitString:
         self._write_ascii_string(self, text, length)
 
     def write_float(self, val, mini, maxi, size):
-        from math import ceil, floor
+        from math import floor
         step_count = (1 << size) - 1
         clamped = sorted([val, mini, maxi])[1]
         fraction = (clamped - mini) / (maxi - mini)
         result = fraction * step_count + 0.5
 
-        lowest = floor(result)
-        if (result - lowest) < .50:
-            result = lowest
-        else:
-            result = ceil(result)
-        # Python's rounding behaviour is slightly different to JS', this code imitates it
-
-        self.write_bits(round(result), size)
+        self.write_bits(floor(result), size)
 
     def write_vec(self, xMin, yMin, xMax, yMax, x, y, size):
         self.write_float(x, xMin, xMax, size)

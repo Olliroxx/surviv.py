@@ -1,12 +1,11 @@
 import unittest
 from survivpy_net import ingame
-from pytest import approx
 
 ASCII_CHARS = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefhijklmnopqrstuvwxyz{|}~"
 TARGET_HEX_BS_RW = \
     ("202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f50515253545556575"
      "8595a5b5c5d5e5f6061626364656668696a6b6c6d6e6f707172737475767778797a7b7c7d7e0001fc0102fc0300fcff01000200fcff030000"
-     "00fcffffff0100000002000000fcffffff03000000000000fe0000200b5ddc46e5009e999d999d999d99999898686b9b686b03")
+     "00fcffffff0100000002000000fcffffff03000000000000fe0000200b5ddc46e5009a99999999999999959494686b97686b03")
 
 
 class DummyGameState:
@@ -69,7 +68,7 @@ class test_bs(unittest.TestCase):
         bs.write_float32(1)
         bs.write_float32(100)
         bs.write_float32(0.0002)
-        bs.write_float(-0.0039215686, 1, -1, 8)
+        bs.write_float(0, 1, -1, 8)
         bs.write_float(0.2, 1, -1, 16)
         bs.write_float(3.6, 0, 9, 16)
         bs.write_vec(0, 0, 9, 9, 3.6, 3.6, 16)
@@ -102,15 +101,15 @@ class test_bs(unittest.TestCase):
         self.assertEqual(0, bs.read_float32())
         self.assertEqual(1, bs.read_float32())
         self.assertEqual(100, bs.read_float32())
-        self.assertEqual(0.0002, approx(bs.read_float32()))
-        self.assertEqual(-0.0039215686, approx(bs.read_float(1, -1, 8), rel=0.1))
-        self.assertEqual(0.2, approx(bs.read_float(1, -1, 16), rel=0.1))
-        self.assertEqual(3.60013733, approx(bs.read_float(0, 9, 16), rel=0.1))
-        self.assertEqual((3.6, 3.6), approx(bs.read_vec(0, 0, 9, 9, 16), rel=0.1))
-        self.assertEqual((-0.707, -0.707), approx(bs.read_unit_vec(8), rel=0.1))
-        self.assertEqual((-0.707, 0.707), approx(bs.read_unit_vec(8), rel=0.1))
-        self.assertEqual((0.707, -0.707), approx(bs.read_unit_vec(8), rel=0.1))
-        self.assertEqual((0.707, 0.707), approx(bs.read_unit_vec(8), rel=0.1))
+        self.assertEqual(0.00019999999494757503, bs.read_float32())
+        self.assertEqual(-0.0039215686274509665, bs.read_float(1, -1, 8))
+        self.assertEqual(0.19999999999999996, bs.read_float(1, -1, 16))
+        self.assertEqual(3.6, bs.read_float(0, 9, 16))
+        self.assertEqual((3.6, 3.6), bs.read_vec(0, 0, 9, 9, 16))
+        self.assertEqual((-0.7098749019607843, -0.7098749019607843), bs.read_unit_vec(8))
+        self.assertEqual((-0.7098749019607843, 0.7098749019607842), bs.read_unit_vec(8))
+        self.assertEqual((0.7098749019607842, -0.7098749019607843), bs.read_unit_vec(8))
+        self.assertEqual((0.7098749019607842, 0.7098749019607842), bs.read_unit_vec(8))
 
 
 if __name__ == '__main__':
