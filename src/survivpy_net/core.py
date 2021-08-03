@@ -249,7 +249,21 @@ class River:
 
 class Map:
     """
-    Contains bullets, objects and everything else seen in the main viewport
+    Contains bullets, objects and everything else seen in the main view area.
+
+    Properties of note:
+     * map_name: gamemode, like classic, potato, cobalt
+     * places: list of pieces of text that appear on the minimap
+     * ground_patches: list of differently coloured patches on the ground (does not include shore, water or riverbanks)
+     * static_objects: object used to make the map view, probably out of date near the end of the game
+     * objects: (most) objects close enough to the player to be rendered, always up to date
+     * gas: state of the circle
+     * bullets
+     * explosions
+     * emotes: includes gun emotes in potato
+     * planes: plane shadows
+     * airstrike_zones: airstrike circles from 50v50
+     * map_indicators: pings, airdrops and airstrikes
     """
 
     def __init__(self, map_dict):
@@ -387,8 +401,16 @@ class Map:
 
 class GameInstance:
     """
-    This is mostly just things to do with the current player/team.
-    You probably only want GameInstance.map
+    This is mostly just things to do with the current player/team
+
+    Properties of note:
+    * status: status of the connection (connecting, connected, closed)
+    * team_size: solos, duos or sqauds
+    * player_infos: teammates
+    * active_player: info about the player controlled by the user or the player that is being spectated
+    * active_player_id: id of the focused player
+    * map: most of the interesting data, can be none if the map packet hasn't been received yet
+
     """
 
     def __init__(self):

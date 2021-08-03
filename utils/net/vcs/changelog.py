@@ -1,3 +1,8 @@
+"""
+Creates a diff for https://surviv.io/changelog.html
+"""
+
+
 def get_surviv_changelog():
     """
     Gets the changelog from https://surviv.io/changelog.html.

@@ -1,3 +1,8 @@
+"""
+Needs deobfuscate.py to run, then copies input and output and creates a diff between the latest version and previous version.
+"""
+
+
 def unwrap(text):
     """
     Turns:
