@@ -1,3 +1,7 @@
+from misc_utils import get_app
+import re
+
+
 def grab_code():
     """
     Downloads the index.html of surviv.io, and the current js files
@@ -6,7 +10,6 @@ def grab_code():
     import os
     from os.path import join, dirname
     import requests
-    import re
 
     import shutil
     folders = [".\\deobfuscated", ".\\out\\code"]
@@ -146,14 +149,14 @@ def find_usages(solved_items, script):
 
     for old, new in solved_items:
         for each in findall(r"([^\d])" + escape(old) + r"([^\d])", script):
-            result[each[0]+old+each[1]] = each[0]+new+each[1]
+            result[each[0] + old + each[1]] = each[0] + new + each[1]
 
     return result
 
 
 def split_list(to_split, size):
     for i in range(0, len(to_split), size):
-        yield tuple(to_split)[i:i+size]
+        yield tuple(to_split)[i:i + size]
 
 
 def solve_hex():
@@ -162,8 +165,6 @@ def solve_hex():
     This function swaps them out for the results (currently only ints)
     """
 
-    import re
-    from misc_utils import get_app
     from multiprocessing import Pool
     from os import cpu_count
     from math import ceil
@@ -193,11 +194,11 @@ def solve_hex():
     for match in matches:
         solved[match] = str(eval_exp(match))
 
-    split_size = ceil(len(solved)/cpu_count())
+    split_size = ceil(len(solved) / cpu_count())
     split = split_list(solved.items(), split_size)
 
     with Pool() as p:
-        result = p.starmap(find_usages, zip(split, [script]*cpu_count()))
+        result = p.starmap(find_usages, zip(split, [script] * cpu_count()))
 
     context_added = {}
     for item in result:
@@ -261,8 +262,6 @@ def fill_strings():
     This script changes the list references into strings.
     """
     import ast
-    import re
-    from misc_utils import get_app
 
     file = get_app()
     line = file.readline()
@@ -318,7 +317,7 @@ def fill_strings():
     del regex
     # Delete the function
 
-    regex = alt_name + r"\\('(0x[\da-f]+?)'\\)"
+    regex = alt_name + r"\('(0x[\da-f]+?)'\)"
     matches = re.findall(regex, script)
     del regex
     # Find usages of the alternate name
@@ -326,7 +325,9 @@ def fill_strings():
     print(str(len(matches)) + " strings to fill")
 
     for match in matches:
-        script = script.replace(alt_name + "('" + match + "')", "'" + big_list[int(match, 16)].replace("\n", r"\x0a").replace("'", r"\'") + "'")  # noqa: E501
+        script = script.replace(alt_name + "('" + match + "')",
+                                "'" + big_list[int(match, 16)].replace("\n", r"\x0a").replace("'",
+                                                                                              r"\'") + "'")  # noqa: E501
         # More readable, slower version:
         # number = int(match, 16)
         # to_replace = alt_name + "('" + match + "')"
@@ -339,8 +340,7 @@ def fill_strings():
     # Replace usages
     script = script.replace("//Hex simplified\n", "//Strings filled\n", 1)
 
-    from re import sub
-    script = sub(r"https://web\.archive\.org/web/\d{14}/", "", script)
+    script = re.sub(r"https://web\.archive\.org/web/\d{14}/", "", script)
     # Make scripts from archive.org diffable
 
     file = get_app("w")
@@ -367,8 +367,6 @@ def remove_char_code_lists():
     In one or two places, instead of strings, lists of the char codes are used instead.
     This replaces those lists with the actual strings.
     """
-    import re
-    from misc_utils import get_app
 
     with get_app() as file:
         line = file.readline()
@@ -413,7 +411,6 @@ def remove_char_code_lists():
             x = ast.literal_eval(x)
             del ast
             script = re.sub("list_to_string\\(" + re.escape(str(x)) + "\\)", "'" + list_to_string(x) + "'", script)
-    del regex, x, functions, matches, i
 
     script = script.replace("//Strings filled\n", "//Unicode lists filled\n", 1)
 
@@ -426,8 +423,6 @@ def add_bools():
     """
     Replaces !![] with true and ![] with false
     """
-    from misc_utils import get_app
-
     with get_app() as file:
         line = file.readline()
         if line != "//Unicode lists filled\n":
@@ -443,6 +438,44 @@ def add_bools():
     with get_app("w") as file:
         file.write(script)
     print("Bools added\n")
+
+
+def process_jsons():
+    """
+    Parses json
+    """
+    from json import loads, dumps
+    from textwrap import indent
+
+    with get_app() as file:
+        line = file.readline()
+        if line != "//Bools added\n":
+            file.close()
+            raise RuntimeError("This script should be run right after the charcode lists have been filled")
+        script = line + file.read()
+    del line
+
+    print("Parsing json")
+
+    regex = r" \= JSON\[\'parse\'\]\(\'.*\'\);"
+    replacements = {}
+    for to_parse in re.findall(regex, script):
+        parse_data = to_parse[18:-3]
+        parse_data = parse_data.replace("\\'", "'")
+        parse_data = parse_data.replace("\\x22", "\x22")
+        parse_data = parse_data.replace("\\x20", "\x20")
+        parsed = loads(parse_data)
+        result = dumps(parsed, indent=4)
+        result = indent(result, " " * 12)
+        replacements[to_parse] = result
+
+    for old, new in replacements.items():
+        script = script.replace(old, new)
+
+    script = script.replace("//Bools added\n", "//Json parsed\n")
+    with get_app("w") as file:
+        file.write(script)
+    print("Json parsed")
 
 
 def main(dl_assets=False, redownload=True, deobfuscate=True):
@@ -479,7 +512,7 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
         fill_strings()
         remove_char_code_lists()
         add_bools()
-        print()
+        process_jsons()
 
 
 if __name__ == "__main__":
