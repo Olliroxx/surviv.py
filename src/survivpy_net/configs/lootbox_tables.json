@@ -1,0 +1,184 @@
+{
+    "loot_box_01": {
+        "name": "Loot Box Common",
+        "type": "lootBox",
+        "lootPool": "parma_crate_s7",
+        "price": 100,
+        "probabilities": [
+            {
+                "rarity": 0,
+                "weight": 0
+            },
+            {
+                "rarity": 1,
+                "weight": 0.7
+            },
+            {
+                "rarity": 2,
+                "weight": 0.25
+            },
+            {
+                "rarity": 3,
+                "weight": 0.05
+            },
+            {
+                "rarity": 4,
+                "weight": 0
+            },
+            {
+                "rarity": 5,
+                "weight": 0
+            }
+        ]
+    },
+    "loot_box_02": {
+        "name": "Loot Box Rare",
+        "type": "lootBox",
+        "lootPool": "hydra_crate_s7",
+        "price": 250,
+        "probabilities": [
+            {
+                "rarity": 0,
+                "weight": 0
+            },
+            {
+                "rarity": 1,
+                "weight": 0
+            },
+            {
+                "rarity": 2,
+                "weight": 0.65
+            },
+            {
+                "rarity": 3,
+                "weight": 0.3
+            },
+            {
+                "rarity": 4,
+                "weight": 0.05
+            },
+            {
+                "rarity": 5,
+                "weight": 0
+            }
+        ]
+    },
+    "loot_box_03": {
+        "name": "Loot Box Epic",
+        "type": "lootBox",
+        "lootPool": "rdctd_crate_s7",
+        "price": 700,
+        "probabilities": [
+            {
+                "rarity": 0,
+                "weight": 0
+            },
+            {
+                "rarity": 1,
+                "weight": 0
+            },
+            {
+                "rarity": 2,
+                "weight": 0
+            },
+            {
+                "rarity": 3,
+                "weight": 0.65
+            },
+            {
+                "rarity": 4,
+                "weight": 0.25
+            },
+            {
+                "rarity": 5,
+                "weight": 0.1
+            }
+        ]
+    },
+    "limited_loot_box_pre_vacation_2020": {
+        "name": "2020 Holiday Crate",
+        "type": "lootBox",
+        "lootPool": "limited_pre_vacation_crate_2020",
+        "startDate": "2020-12-21T20:00:00.999Z",
+        "endDate": "2020-12-24T20:00:00.999Z",
+        "isLimited": true,
+        "price": 400,
+        "backgroundColor": "#3FAE4A",
+        "textColor": "#1C4F20",
+        "shadowColor": "#1A6922",
+        "img": "limited_loot_box_pre_vacation_2020.svg",
+        "timer": {
+            "backgroundColor": "#AF1C24",
+            "color": "#FFFFFF"
+        },
+        "probabilities": [
+            {
+                "rarity": 0,
+                "weight": 0
+            },
+            {
+                "rarity": 1,
+                "weight": 0
+            },
+            {
+                "rarity": 2,
+                "weight": 0
+            },
+            {
+                "rarity": 3,
+                "weight": 0.6
+            },
+            {
+                "rarity": 4,
+                "weight": 0.4
+            },
+            {
+                "rarity": 5,
+                "weight": 0
+            }
+        ]
+    },
+    "limited_loot_box_post_xmas_2020": {
+        "name": "New Year Crate",
+        "type": "lootBox",
+        "lootPool": "limited_post_xmas_crate_2020",
+        "startDate": "2021-01-05T20:00:00.999Z",
+        "endDate": "2021-01-08T20:00:00.999Z",
+        "isLimited": true,
+        "price": 700,
+        "backgroundColor": "#3FAE4A",
+        "textColor": "#1C4F20",
+        "shadowColor": "#1A6922",
+        "img": "limited_loot_box_post_xmas_2020.svg",
+        "timer": {
+            "backgroundColor": "#AF1C24",
+            "color": "#FFFFFF"
+        },
+        "probabilities": [
+            {
+                "rarity": 0,
+                "weight": 0
+            },
+            {
+                "rarity": 1,
+                "weight": 0
+            },
+            {
+                "rarity": 2,
+                "weight": 0
+            },
+            {
+                "rarity": 3,
+                "weight": 0.5
+            },
+            {
+                "rarity": 4,
+                "weight": 0.3
+            },
+            {
+                "rarity": 5,
+                "weight": 0.2
+            }
+        ]
+    }
+}

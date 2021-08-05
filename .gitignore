@@ -82,4 +82,3 @@ venv.bak/
 /utils/asset_processing/json_processing/csvs/*
 /utils/asset_processing/json_processing/jsons/*
 /utils/net/vcs/changelogs/*
-/src/survivpy_net/configs/*

@@ -1,0 +1,62 @@
+{
+    "prices_1": {
+        "name": "Prices 1",
+        "type": "price",
+        "rarities": [
+            {
+                "rarity": 0,
+                "price": 1
+            },
+            {
+                "rarity": 1,
+                "price": 10
+            },
+            {
+                "rarity": 2,
+                "price": 20
+            },
+            {
+                "rarity": 3,
+                "price": 40
+            },
+            {
+                "rarity": 4,
+                "price": 80
+            },
+            {
+                "rarity": 5,
+                "price": 250
+            }
+        ]
+    },
+    "prices_2": {
+        "name": "Prices 2",
+        "type": "price",
+        "rarities": [
+            {
+                "rarity": 0,
+                "price": 50
+            },
+            {
+                "rarity": 1,
+                "price": 50
+            },
+            {
+                "rarity": 2,
+                "price": 120
+            },
+            {
+                "rarity": 3,
+                "price": 300
+            },
+            {
+                "rarity": 4,
+                "price": 750
+            },
+            {
+                "rarity": 5,
+                "price": 3000
+            }
+        ]
+    }
+}

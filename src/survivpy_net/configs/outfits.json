@@ -1,0 +1,3183 @@
+{
+    "outfitBase": {
+        "baseType": "outfitBase",
+        "name": "Basic Outfit",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitBase.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 0,
+        "lore": "Pure and simple."
+    },
+    "outfitDemo": {
+        "baseType": "outfitBase",
+        "name": "Demo",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 13068903,
+            "baseSprite": "player-base-02.img",
+            "handTint": 11882573,
+            "handSprite": "player-hands-02.img",
+            "footTint": 11882573,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 10368820,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitDemo.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDrop": true,
+        "rarity": 0
+    },
+    "outfitTank": {
+        "baseType": "outfitBase",
+        "name": "Tank",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 15382883,
+            "baseSprite": "player-base-02.img",
+            "handTint": 14197835,
+            "handSprite": "player-hands-02.img",
+            "footTint": 14197835,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 12553007,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitTank.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDrop": true,
+        "rarity": 0
+    },
+    "outfitMedic": {
+        "baseType": "outfitBase",
+        "name": "Medic",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 14449116,
+            "baseSprite": "player-base-02.img",
+            "handTint": 12866756,
+            "handSprite": "player-hands-02.img",
+            "footTint": 12866756,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 11089833,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitMedic.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDrop": true,
+        "rarity": 0
+    },
+    "outfitScout": {
+        "baseType": "outfitBase",
+        "name": "Scout",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 11326819,
+            "baseSprite": "player-base-02.img",
+            "handTint": 9880138,
+            "handSprite": "player-hands-02.img",
+            "footTint": 9880138,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 8630324,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitScout.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDrop": true,
+        "rarity": 0
+    },
+    "outfitSniper": {
+        "baseType": "outfitBase",
+        "name": "Sniper",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 9293531,
+            "baseSprite": "player-base-02.img",
+            "handTint": 7387849,
+            "handSprite": "player-hands-02.img",
+            "footTint": 7387849,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 5415860,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitSniper.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDrop": true,
+        "rarity": 0
+    },
+    "outfitAssault": {
+        "baseType": "outfitBase",
+        "name": "Assault",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 14339929,
+            "baseSprite": "player-base-02.img",
+            "handTint": 13024064,
+            "handSprite": "player-hands-02.img",
+            "footTint": 13024064,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 10918952,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitAssault.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDrop": true,
+        "rarity": 0
+    },
+    "outfitWhiteDay": {
+        "baseType": "outfitBase",
+        "name": "Marshmallow Suit",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitWhiteDay.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-white.img",
+            "footTint": 13024064,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-circle-base-03.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-whiteDay.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 0
+    },
+    "outfitTurkey": {
+        "baseType": "outfitBase",
+        "name": "Fowl Facade",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 15781563,
+            "baseSprite": "player-base-outfitTurkey.img",
+            "handTint": 10818304,
+            "handSprite": "player-hands-02.img",
+            "footTint": 10818304,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 11031846,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitTurkey.img",
+            "tint": 15781563
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": "M1100 not included."
+    },
+    "outfitWinter": {
+        "baseType": "outfitBase",
+        "name": "Winter Onesie",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitWinter.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-winter.img",
+            "footTint": 4168127,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 4168127,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitWinter.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": "Sleep well."
+    },
+    "outfitGeometric": {
+        "baseType": "outfitBase",
+        "name": "Geometric",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitGeometric.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-geometric.img",
+            "footTint": 544848,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 544848,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitGeometric.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": "What a square."
+    },
+    "outfitMilitary": {
+        "baseType": "outfitBase",
+        "name": "Military",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitMilitary.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-military.img",
+            "footTint": 4873026,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 4873026,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitMilitary.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": "Hide now."
+    },
+    "outfitDev": {
+        "baseType": "outfitBase",
+        "name": "Developer Swag",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 3442216,
+            "baseSprite": "player-base-outfitDC.img",
+            "handTint": 6937122,
+            "handSprite": "player-hands-02.img",
+            "footTint": 6937122,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 2902793,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitDev.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": "Two-time limited edition print."
+    },
+    "outfitMod": {
+        "baseType": "outfitBase",
+        "name": "Discord Moderatr",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 3380187,
+            "baseSprite": "player-base-outfitDC.img",
+            "handTint": 9684974,
+            "handSprite": "player-hands-02.img",
+            "footTint": 9684974,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 1529478,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitMod.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": "For those who wield the power of the pan."
+    },
+    "outfitWheat": {
+        "baseType": "outfitBase",
+        "name": "Splintered Wheat",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitWheat.img",
+            "handTint": 15785362,
+            "handSprite": "player-hands-01.img",
+            "footTint": 15785362,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 13346845,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitWheat.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 0
+    },
+    "outfitNoir": {
+        "baseType": "outfitBase",
+        "name": "Neo Noir",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 1776411,
+            "baseSprite": "player-base-02.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-02.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 7829367,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 1776411
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitRedLeaderAged": {
+        "baseType": "outfitBase",
+        "name": "Weathered Red",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 10098712,
+            "baseSprite": "player-base-02.img",
+            "handTint": 16711680,
+            "handSprite": "player-hands-02.img",
+            "footTint": 16711680,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 5442572,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 10098712
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitBlueLeaderAged": {
+        "baseType": "outfitBase",
+        "name": "Stifled Blue",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 1523353,
+            "baseSprite": "player-base-02.img",
+            "handTint": 20223,
+            "handSprite": "player-hands-02.img",
+            "footTint": 20223,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 794700,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 1523353
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitRedLeader": {
+        "baseType": "outfitBase",
+        "name": "Red Leader",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 10158080,
+            "baseSprite": "player-base-02.img",
+            "handTint": 16711680,
+            "handSprite": "player-hands-02.img",
+            "footTint": 16711680,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 5439488,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 8650752
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDrop": true
+    },
+    "outfitBlueLeader": {
+        "baseType": "outfitBase",
+        "name": "Blue Leader",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 12187,
+            "baseSprite": "player-base-02.img",
+            "handTint": 20223,
+            "handSprite": "player-hands-02.img",
+            "footTint": 20223,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 5964,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 13223
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDrop": true
+    },
+    "outfitSpetsnaz": {
+        "baseType": "outfitBase",
+        "name": "Siberian Assault",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitSpetsnaz.img",
+            "handTint": 15000804,
+            "handSprite": "player-hands-01.img",
+            "footTint": 15000804,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 13816530,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitSpetsnaz.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 0
+    },
+    "outfitWoodsCloak": {
+        "baseType": "outfitBase",
+        "name": "Greencloak",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 2817792,
+            "baseSprite": "player-base-02.img",
+            "handTint": 16711594,
+            "handSprite": "player-hands-02.img",
+            "footTint": 16711594,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 15635271,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 2817792
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitElf": {
+        "baseType": "outfitBase",
+        "name": "Tallo\\x27s Little Helper",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 12845056,
+            "baseSprite": "player-base-01.img",
+            "handTint": 1489152,
+            "handSprite": "player-hands-01.img",
+            "footTint": 1489152,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 365312,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 1489152
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitImperial": {
+        "baseType": "outfitBase",
+        "name": "Imperial Seal",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 12320813,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 12625727,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 12320813
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitLumber": {
+        "baseType": "outfitBase",
+        "name": "Woodcutte\\x27s Wrap",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitLumber.img",
+            "handTint": 8258312,
+            "handSprite": "player-hands-02.img",
+            "footTint": 8258312,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 4854547,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitLumber.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 1
+    },
+    "outfitVerde": {
+        "baseType": "outfitBase",
+        "name": "Poncho Verde",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 1785868,
+            "baseSprite": "player-base-02.img",
+            "handTint": 11912587,
+            "handSprite": "player-hands-02.img",
+            "footTint": 11912587,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 11238441,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 1785868
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitPineapple": {
+        "baseType": "outfitBase",
+        "name": "Valiant Pineapple",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 10027008,
+            "baseSprite": "player-base-02.img",
+            "handTint": 4985105,
+            "handSprite": "player-hands-02.img",
+            "footTint": 4985105,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 16763904,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 10027008
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitTarkhany": {
+        "baseType": "outfitBase",
+        "name": "Tarkhany Regal",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 4927107,
+            "baseSprite": "player-base-02.img",
+            "handTint": 16757760,
+            "handSprite": "player-hands-02.img",
+            "footTint": 16757760,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 4661344,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 4927107
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitWaterElem": {
+        "baseType": "outfitBase",
+        "name": "Water Elemental",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 7143401,
+            "baseSprite": "player-base-02.img",
+            "handTint": 15990876,
+            "handSprite": "player-hands-02.img",
+            "footTint": 15990876,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 32644,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 7143401
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitHeaven": {
+        "baseType": "outfitBase",
+        "name": "Celestial Garb",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitHeaven.img",
+            "handTint": 13762639,
+            "handSprite": "player-hands-02.img",
+            "footTint": 13762639,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 36503,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitHeaven.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 0
+    },
+    "outfitMeteor": {
+        "baseType": "outfitBase",
+        "name": "Falling Star",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 9764864,
+            "baseSprite": "player-base-02.img",
+            "handTint": 16742400,
+            "handSprite": "player-hands-02.img",
+            "footTint": 16742400,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 4727582,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 9764864
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitIslander": {
+        "baseType": "outfitBase",
+        "name": "Island Time",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16762368,
+            "baseSprite": "player-base-01.img",
+            "handTint": 148992,
+            "handSprite": "player-hands-01.img",
+            "footTint": 148992,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 4495104,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 16762368
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitAqua": {
+        "baseType": "outfitBase",
+        "name": "Aquatic Avenger",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 47778,
+            "baseSprite": "player-base-01.img",
+            "handTint": 65502,
+            "handSprite": "player-hands-01.img",
+            "footTint": 65502,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 536620,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 47778
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitCoral": {
+        "baseType": "outfitBase",
+        "name": "Coral Guise",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16736103,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16746895,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16746895,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16772298,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 16736103
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitKhaki": {
+        "baseType": "outfitBase",
+        "name": "The Initiative",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 12824197,
+            "baseSprite": "player-base-02.img",
+            "handTint": 9404516,
+            "handSprite": "player-hands-02.img",
+            "footTint": 9404516,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 4208940,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 12824197
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 1
+    },
+    "outfitParma": {
+        "baseType": "outfitBase",
+        "name": "PARMA Jumpsuit",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 8746585,
+            "baseSprite": "player-base-01.img",
+            "handTint": 12824197,
+            "handSprite": "player-hands-01.img",
+            "footTint": 12824197,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 4208940,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitParma.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": "Next generation inversion."
+    },
+    "outfitParmaPrestige": {
+        "baseType": "outfitBase",
+        "name": "The Core Jumpsuit",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitParmaPrestige.img",
+            "handTint": 11113323,
+            "handSprite": "player-hands-02.img",
+            "footTint": 11113323,
+            "footSprite": "player-feet-02.img",
+            "backpackTint": 6640177,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitParmaPrestige.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": "Special issue for staffers at Bunker 1."
+    },
+    "outfitCasanova": {
+        "baseType": "outfitBase",
+        "name": "Casanova Silks",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 4327436,
+            "baseSprite": "player-base-01.img",
+            "handTint": 7602183,
+            "handSprite": "player-hands-01.img",
+            "footTint": 7602183,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 1052688,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 4327436
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitPrisoner": {
+        "baseType": "outfitBase",
+        "name": "The New Black",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16735266,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16545059,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16545059,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16756224,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 16735266
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitJester": {
+        "baseType": "outfitBase",
+        "name": "Jeste\\x27s Folly",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 7798904,
+            "baseSprite": "player-base-01.img",
+            "handTint": 4915276,
+            "handSprite": "player-hands-01.img",
+            "footTint": 4915276,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 936960,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 7798904
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        }
+    },
+    "outfitWoodland": {
+        "baseType": "outfitBase",
+        "name": "Woodland Combat",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 2831146,
+            "baseSprite": "player-base-01.img",
+            "handTint": 5925970,
+            "handSprite": "player-hands-01.img",
+            "footTint": 5925970,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 5056000,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitWoodland.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 1,
+        "lore": "Common component of PARMA survival caches."
+    },
+    "outfitRoyalFortune": {
+        "baseType": "outfitBase",
+        "name": "Royal Fortune",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 8333091,
+            "baseSprite": "player-base-01.img",
+            "handTint": 15254058,
+            "handSprite": "player-hands-01.img",
+            "footTint": 15254058,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 9981696,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitRoyalFortune.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 3
+    },
+    "outfitKeyLime": {
+        "baseType": "outfitBase",
+        "name": "Key Lime",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 13107007,
+            "baseSprite": "player-base-01.img",
+            "handTint": 15662941,
+            "handSprite": "player-hands-01.img",
+            "footTint": 15662941,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 12355383,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitKeyLime.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 1,
+        "lore": "Not for eating."
+    },
+    "outfitCobaltShell": {
+        "baseType": "outfitBase",
+        "name": "Cobalt Shell",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 11095,
+            "baseSprite": "player-base-01.img",
+            "handTint": 2711164,
+            "handSprite": "player-hands-01.img",
+            "footTint": 2711164,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 19093,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitCobaltShell.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 1,
+        "lore": "It means bluish."
+    },
+    "outfitCarbonFiber": {
+        "baseType": "outfitBase",
+        "name": "Carbon Fiber",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 2171169,
+            "baseSprite": "player-base-01.img",
+            "handTint": 1842204,
+            "handSprite": "player-hands-01.img",
+            "footTint": 1842204,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 3552822,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitCarbonFiber.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": "Military-grade, fine spun filament."
+    },
+    "outfitDarkGloves": {
+        "baseType": "outfitBase",
+        "name": "The Professional",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 12482560,
+            "handSprite": "player-hands-01.img",
+            "footTint": 12482560,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 10708736,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitDarkGloves.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": "True survivrs wear the dark gloves."
+    },
+    "outfitDarkShirt": {
+        "baseType": "outfitBase",
+        "name": "The Semi-Pro",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 12482560,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 15183443,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitDarkShirt.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 0,
+        "lore": "Some survivrs wear the dark shirt."
+    },
+    "outfitGhillie": {
+        "baseType": "outfitBase",
+        "name": "Ghillie Suit",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 8630096,
+            "baseSprite": "player-base-01.img",
+            "handTint": 8630096,
+            "handSprite": "player-hands-01.img",
+            "footTint": 8630096,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 6697728,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-01.img",
+            "tint": 8630096
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "ghillie": true
+    },
+    "outfitDesertCamo": {
+        "baseType": "outfitBase",
+        "name": "Desert Camo",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 13736782,
+            "baseSprite": "player-base-01.img",
+            "handTint": 11169046,
+            "handSprite": "player-hands-01.img",
+            "footTint": 11169046,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16763778,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitDesertCamo.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 1
+    },
+    "outfitCamo": {
+        "baseType": "outfitBase",
+        "name": "Forest Camo",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 10066278,
+            "baseSprite": "player-base-01.img",
+            "handTint": 8684631,
+            "handSprite": "player-hands-01.img",
+            "footTint": 8684631,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 6710835,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitCamo.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "rarity": 1,
+        "lore": "Be one with the trees."
+    },
+    "outfitRed": {
+        "baseType": "outfitBase",
+        "name": "Target Practice",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16711680,
+            "baseSprite": "player-base-01.img",
+            "handTint": 13893632,
+            "handSprite": "player-hands-01.img",
+            "footTint": 13893632,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 11993088,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitRed.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": "On the plus side, they wo\\x27t see you bleed."
+    },
+    "outfitWhite": {
+        "baseType": "outfitBase",
+        "name": "Arctic Avenger",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 14935011,
+            "baseSprite": "player-base-01.img",
+            "handTint": 15658734,
+            "handSprite": "player-hands-01.img",
+            "footTint": 15658734,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 14474460,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitWhite.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": "No business like snow business."
+    },
+    "outfitSunset": {
+        "baseType": "outfitBase",
+        "name": "Sunset",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitSunset.img",
+            "handTint": 12487083,
+            "handSprite": "player-hands-01.img",
+            "footTint": 12487083,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 6458057,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitSunset.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": ""
+    },
+    "outfitDeepPurple": {
+        "baseType": "outfitBase",
+        "name": "Deep Purple",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 14935011,
+            "baseSprite": "player-base-outfitDeepPurple.img",
+            "handTint": 9468830,
+            "handSprite": "player-hands-01.img",
+            "footTint": 9468830,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 9468830,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitDeepPurple.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": ""
+    },
+    "outfitSplotchfest": {
+        "baseType": "outfitBase",
+        "name": "Splotchfest",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitSplotchfest.img",
+            "handTint": 6530876,
+            "handSprite": "player-hands-01.img",
+            "footTint": 6530876,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 6530876,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitSplotchfest.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitClaymore": {
+        "baseType": "outfitBase",
+        "name": "Clay More",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 14935011,
+            "baseSprite": "player-base-outfitClayMore.img",
+            "handTint": 11030570,
+            "handSprite": "player-hands-01.img",
+            "footTint": 11030570,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 15632257,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitClayMore.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": ""
+    },
+    "outfitChromesis": {
+        "baseType": "outfitBase",
+        "name": "Chromesis",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitChromesis.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-chrome.img",
+            "footTint": 9803157,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 9803157,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitChromesis.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": "",
+        "accessory": {
+            "sprite": "outfit-chrome-accessory.img",
+            "topUI": 55
+        }
+    },
+    "outfitFragtastic": {
+        "baseType": "outfitBase",
+        "name": "Fragtastic",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 6445342,
+            "handTint": 8418603,
+            "footTint": 8418603,
+            "backpackTint": 9474192
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitFragtastic.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": "Created by Hatsune Blake"
+    },
+    "outfitRusticSands": {
+        "baseType": "outfitBase",
+        "name": "Rustic Sands",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16439928,
+            "handTint": 7422486,
+            "footTint": 7422486,
+            "backpackTint": 8071191
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitRusticSands.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": "Created by FrankzeeTank"
+    },
+    "outfitWaves": {
+        "baseType": "outfitBase",
+        "name": "Waves",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitWaves.img",
+            "handTint": 3962264,
+            "footTint": 3962264,
+            "backpackTint": 1389637
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitWaves.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": "Created by Fonpard"
+    },
+    "outfitUrbanCamo": {
+        "baseType": "outfitBase",
+        "name": "Urban Camo",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitUrbanCamo.img",
+            "handTint": 2834524,
+            "footTint": 2834524,
+            "backpackTint": 10859210
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitUrbanCamo.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": ""
+    },
+    "outfitNeonEyesore": {
+        "baseType": "outfitBase",
+        "name": "Neon Eyesore",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 7666941,
+            "handTint": 7731788,
+            "footTint": 7731788,
+            "backpackTint": 16776789
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitNeonEyesore.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": "Created by Savage_Wuhan (Jerrie123)",
+        "description": "For your eyes only"
+    },
+    "outfitGiraffe": {
+        "baseType": "outfitBase",
+        "name": "Giraffe",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitGiraffe.img",
+            "handTint": 15840836,
+            "footTint": 15840836,
+            "backpackTint": 15840836,
+            "backpackSprite": "player-circle-base-02.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitGiraffe.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitCow": {
+        "baseType": "outfitBase",
+        "name": "Cow",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitCow.img",
+            "handTint": 16777215,
+            "footTint": 16777215,
+            "backpackTint": 16777215
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitCow.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitMojo": {
+        "baseType": "outfitBase",
+        "name": "Mojo",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitMojo.img",
+            "handTint": 15124237,
+            "footTint": 15124237,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-mojo.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitMojo.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": ""
+    },
+    "outfitZebra": {
+        "baseType": "outfitBase",
+        "name": "Zebra",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitZebra.img",
+            "handTint": 16777215,
+            "footTint": 16777215,
+            "backpackTint": 16777215
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitZebra.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": ""
+    },
+    "outfitAstronaut": {
+        "baseType": "outfitBase",
+        "name": "Astronaut",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitAstronaut.img",
+            "handTint": 16777215,
+            "footTint": 16777215,
+            "backpackTint": 16750080
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitAstronaut.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": "",
+        "accessory": {
+            "sprite": "player-accessory-outfitAstronaut.img",
+            "scale": 0.27,
+            "scaleUI": 0.38
+        }
+    },
+    "outfitDiamondy": {
+        "baseType": "outfitBase",
+        "name": "Diamondy",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 12577023,
+            "handTint": 16302391,
+            "footTint": 16302391,
+            "backpackTint": 16302391
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitDiamondy.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": "",
+        "accessory": {
+            "sprite": "player-accessory-outfitDiamondy.img",
+            "anchor": {
+                "x": 0.6,
+                "y": 0.5
+            },
+            "topUI": 55
+        }
+    },
+    "outfitMecha": {
+        "baseType": "outfitBase",
+        "name": "Mecha",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 15592941,
+            "handTint": 16777215,
+            "handSprite": "player-hands-outfitMecha.img",
+            "footTint": 5996250,
+            "backpackTint": 5996250
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitMecha.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": "",
+        "accessory": {
+            "sprite": "player-accessory-outfitMecha.img",
+            "anchor": {
+                "x": 0.6,
+                "y": 0.5
+            },
+            "topUI": 55
+        }
+    },
+    "outfitFireball": {
+        "baseType": "outfitBase",
+        "name": "Fireball",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 12266256,
+            "handTint": 16777215,
+            "handSprite": "player-hands-outfitFireball.img",
+            "footTint": 13644309,
+            "backpackTint": 13644309
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitFireball.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": "",
+        "accessory": {
+            "sprite": "player-accessory-outfitFireball.img",
+            "anchor": {
+                "x": 0.6,
+                "y": 0.5
+            },
+            "topUI": 55
+        }
+    },
+    "outfitBarrel": {
+        "baseType": "outfitBase",
+        "name": "Barrel Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 3750201
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "barrel_01",
+        "baseScale": 0.8
+    },
+    "outfitWoodBarrel": {
+        "baseType": "outfitBase",
+        "name": "Wood Barrel Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 11235106
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "barrel_02",
+        "baseScale": 1
+    },
+    "outfitStone": {
+        "baseType": "outfitBase",
+        "name": "Stone Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 7434609
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "stone_01",
+        "baseScale": 0.9
+    },
+    "outfitTree": {
+        "baseType": "outfitBase",
+        "name": "Tree Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 4599058
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "tree_07",
+        "baseScale": 1
+    },
+    "outfitTreeSpooky": {
+        "baseType": "outfitBase",
+        "name": "Spooky Tree Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 1775895
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "tree_05",
+        "baseScale": 1
+    },
+    "outfitStump": {
+        "baseType": "outfitBase",
+        "name": "Stump Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 8602624
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "tree_09",
+        "baseScale": 1
+    },
+    "outfitBush": {
+        "baseType": "outfitBase",
+        "name": "Bush Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 3889951
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "bush_01b",
+        "baseScale": 1
+    },
+    "outfitLeafPile": {
+        "baseType": "outfitBase",
+        "name": "Leaf Pile Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 16731392
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "bush_06b",
+        "baseScale": 1
+    },
+    "outfitCrate": {
+        "baseType": "outfitBase",
+        "name": "Crate Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 6697728
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "crate_01",
+        "baseScale": 1
+    },
+    "outfitTable": {
+        "baseType": "outfitBase",
+        "name": "Table Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 6697728
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "table_01",
+        "baseScale": 1
+    },
+    "outfitSoviet": {
+        "baseType": "outfitBase",
+        "name": "Soviet Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 6697728
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "crate_02",
+        "baseScale": 1
+    },
+    "outfitAirdrop": {
+        "baseType": "outfitBase",
+        "name": "Air Drop Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 6579300
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "crate_10",
+        "baseScale": 1
+    },
+    "outfitOven": {
+        "baseType": "outfitBase",
+        "name": "Oven Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 14935011
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "oven_01",
+        "baseScale": 1
+    },
+    "outfitRefrigerator": {
+        "baseType": "outfitBase",
+        "name": "Fridge Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 7733259
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "refrigerator_01b",
+        "baseScale": 1
+    },
+    "outfitVending": {
+        "baseType": "outfitBase",
+        "name": "Vending Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 10925
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "vending_01",
+        "baseScale": 1
+    },
+    "outfitPumpkin": {
+        "baseType": "outfitBase",
+        "name": "Pumpkin Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 15889667
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "pumpkin_01",
+        "baseScale": 1
+    },
+    "outfitWoodpile": {
+        "baseType": "outfitBase",
+        "name": "Woodpile Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 9455616
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "woodpile_01",
+        "baseScale": 1
+    },
+    "outfitToilet": {
+        "baseType": "outfitBase",
+        "name": "Toilet Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "toilet_02",
+        "baseScale": 1
+    },
+    "outfitBushRiver": {
+        "baseType": "outfitBase",
+        "name": "River Bush Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 5339946
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "bush_04",
+        "baseScale": 1
+    },
+    "outfitCrab": {
+        "baseType": "outfitBase",
+        "name": "Crab Pot Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 16592920
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "crate_20",
+        "baseScale": 1
+    },
+    "outfitStumpAxe": {
+        "baseType": "outfitBase",
+        "name": "Stump Axe Costume",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16303476,
+            "baseSprite": "player-base-01.img",
+            "handTint": 16303476,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16303476,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 8480055,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "tint": 11100701
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "obstacleType": "tree_02h",
+        "baseScale": 1
+    },
+    "outfitSpeedo": {
+        "baseType": "outfitBase",
+        "name": "Basic Outfit",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitSpeedo.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-speedo.img",
+            "footTint": 9803157,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 9803157,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-speedo.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDrop": false,
+        "rarity": 1
+    },
+    "outfitBlueLava": {
+        "baseType": "outfitBase",
+        "name": "BlueLava",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitBlueLava.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-outfitBlueLava.img",
+            "footTint": 16777215,
+            "backpackTint": 16777215,
+            "backpackSprite": "player-circle-base-outfitBlueLava.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitBlueLava.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": ""
+    },
+    "outfitInfernoCamo": {
+        "baseType": "outfitBase",
+        "name": "Inferno Camo",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitInferno.img",
+            "handTint": 15228682,
+            "footTint": 15228682,
+            "backpackTint": 15228682
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitInferno.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitSpeedoSunburn": {
+        "baseType": "outfitBase",
+        "name": "Speedo Sunburn",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitSpeedoSunburn.img",
+            "handTint": 16037119,
+            "footTint": 16037119,
+            "backpackTint": 16650006
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitSpeedoSunburn.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": ""
+    },
+    "outfitMango": {
+        "baseType": "outfitBase",
+        "name": "Mango",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-outfitMango.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-outfitMango.img",
+            "footTint": 16777215,
+            "backpackTint": 8218174
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-outfitMango.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": "Created by Calieh"
+    },
+    "outfitParrot": {
+        "baseType": "outfitBase",
+        "name": "Parrot",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 4748332,
+            "baseSprite": "player-base-01.img",
+            "handTint": 15385426,
+            "handSprite": "player-hands-01.img",
+            "footTint": 15385426,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 12330522,
+            "backpackSprite": "player-circle-base-01.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-parrot.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": "Created by Mxstyc"
+    },
+    "outfitCrusader": {
+        "baseType": "outfitBase",
+        "name": "Crusader",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-crusader.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-crusader.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-crusader.img"
+        },
+        "lootImg": {
+            "sprite": "loot-crusader-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": "Created by avika"
+    },
+    "outfitLasrDisk": {
+        "baseType": "outfitBase",
+        "name": "Lasr Disk",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-lasr-disk.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-lasr-disk.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-lasr-disk.img"
+        },
+        "lootImg": {
+            "sprite": "loot-lasr-disk-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitBeachCamo": {
+        "baseType": "outfitBase",
+        "name": "Beach Camo",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-beach-camo.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-beach-camo.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-beach-camo.img"
+        },
+        "lootImg": {
+            "sprite": "loot-beach-camo-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitForest": {
+        "baseType": "outfitBase",
+        "name": "Forest",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-forest.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-forest.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-forest.img"
+        },
+        "lootImg": {
+            "sprite": "loot-forest-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": ""
+    },
+    "outfitGingerbread": {
+        "baseType": "outfitBase",
+        "name": "Gingerbread",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-gingerbread.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-gingerbread.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-gingerbread.img"
+        },
+        "lootImg": {
+            "sprite": "loot-gingerbread-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitVenom": {
+        "baseType": "outfitBase",
+        "name": "Venom",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-venom.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-venom.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-venom.img"
+        },
+        "lootImg": {
+            "sprite": "loot-venom-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": "Created by CaptainPoultry"
+    },
+    "outfitBlueMecha": {
+        "baseType": "outfitBase",
+        "name": "Blue Mecha",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-blue-mecha.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-blue-mecha.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-blue-mecha.img"
+        },
+        "lootImg": {
+            "sprite": "loot-blue-mecha-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": ""
+    },
+    "outfitEventHorizon": {
+        "baseType": "outfitBase",
+        "name": "Event Horizon",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-event-horizon.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-event-horizon.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-event-horizon.img"
+        },
+        "lootImg": {
+            "sprite": "loot-event-horizon-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": "Created by Roamer"
+    },
+    "outfitGrinch": {
+        "baseType": "outfitBase",
+        "name": "Grinch",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-grinch.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-grinch.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 12592935
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-grinch.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": ""
+    },
+    "outfitSnowman": {
+        "baseType": "outfitBase",
+        "name": "Snowman",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-snowman.img",
+            "handTint": 12592935,
+            "handSprite": "player-hands-01.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 12592935
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-snowman.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": ""
+    },
+    "outfitChritstmasTree": {
+        "baseType": "outfitBase",
+        "name": "Chritstmas Tree",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-christmastree.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-christmastree.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 12592935
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-christmastree.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": ""
+    },
+    "outfitYinYang": {
+        "baseType": "outfitBase",
+        "name": "Yin Yang",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-yin-yang.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-yin-yang.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 0,
+            "backpackSprite": "player-back-yin-yang.img"
+        },
+        "lootImg": {
+            "sprite": "loot-yin-yang-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": "Created by Spy"
+    },
+    "outfitTiki": {
+        "baseType": "outfitBase",
+        "name": "Tiki",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-tiki.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-tiki.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-tiki.img"
+        },
+        "lootImg": {
+            "sprite": "loot-tiki-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitMachoLucha2": {
+        "baseType": "outfitBase",
+        "name": "Macho Lucha",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-macho-lucha.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-macho-lucha.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "macho-lucha-back.img"
+        },
+        "lootImg": {
+            "sprite": "loot-macho-lucha-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": ""
+    },
+    "outfitCalaca": {
+        "baseType": "outfitBase",
+        "name": "Calaca",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-calaca.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-calaca.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-calaca.img"
+        },
+        "lootImg": {
+            "sprite": "loot-shirt-calaca.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": ""
+    },
+    "outfitSortaBlue": {
+        "baseType": "outfitBase",
+        "name": "Sorta Blue",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-sorta-blue.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-sorta-blue.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-sorta-blue.img"
+        },
+        "lootImg": {
+            "sprite": "loot-sorta-blue-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": "Created by StraightUpFoReal"
+    },
+    "outfitMellow": {
+        "baseType": "outfitBase",
+        "name": "Mellow",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-mellow.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-mellow.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-mellow.img"
+        },
+        "lootImg": {
+            "sprite": "loot-mellow-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": "Created by Jabari"
+    },
+    "outfitBengal": {
+        "baseType": "outfitBase",
+        "name": "Bengal",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-bengal.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-bengal.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-bengal.img"
+        },
+        "lootImg": {
+            "sprite": "loot-bengal-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitUnderbrush": {
+        "baseType": "outfitBase",
+        "name": "Underbrush",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-underbrush.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-underbrush.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-underbrush.img"
+        },
+        "lootImg": {
+            "sprite": "loot-underbrush-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": "Created by Mxstyc"
+    },
+    "outfitMagmatic": {
+        "baseType": "outfitBase",
+        "name": "Magmatic",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-magmatic.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-magmatic.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-magmatic.img"
+        },
+        "lootImg": {
+            "sprite": "loot-magmatic-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": ""
+    },
+    "outfitPurpleMecha": {
+        "baseType": "outfitBase",
+        "name": "Purple Mecha",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-purple-mecha.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-purple-mecha.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-purple-mecha.img"
+        },
+        "lootImg": {
+            "sprite": "loot-purple-mecha-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": ""
+    },
+    "outfitRosePetals": {
+        "baseType": "outfitBase",
+        "name": "Rose Petals",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-rose-petals.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-rose-petals.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-rose-petals.img"
+        },
+        "lootImg": {
+            "sprite": "loot-rose-petals-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": "Created by DotDot"
+    },
+    "outfitViper": {
+        "baseType": "outfitBase",
+        "name": "Viper",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-viper.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-viper.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-viper.img"
+        },
+        "lootImg": {
+            "sprite": "loot-viper-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": ""
+    },
+    "outfitFullCircle": {
+        "baseType": "outfitBase",
+        "name": "Full Circle",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-full-circle.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-full-circle.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-full-circle.img"
+        },
+        "lootImg": {
+            "sprite": "loot-full-circle-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 1,
+        "lore": ""
+    },
+    "outfitPleasingPart": {
+        "baseType": "outfitBase",
+        "name": "Pleasing Part",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-pleasing-part.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-pleasing-part.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-pleasing-part.img"
+        },
+        "lootImg": {
+            "sprite": "loot-pleasing-part-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": ""
+    },
+    "outfitItJustMist": {
+        "baseType": "outfitBase",
+        "name": "It Just Mist",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-it-just-mist.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-it-just-mist.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-it-just-mist.img"
+        },
+        "lootImg": {
+            "sprite": "loot-it-just-mist-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": ""
+    },
+    "outfitOneInAMelon": {
+        "baseType": "outfitBase",
+        "name": "One In A Melon",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-one-in-a-melon.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-one-in-a-melon.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-one-in-a-melon.img"
+        },
+        "lootImg": {
+            "sprite": "loot-one-in-a-melon-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitColdestEdge": {
+        "baseType": "outfitBase",
+        "name": "Coldest Edge",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-coldest-edge.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-coldest-edge.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-coldest-edge.img"
+        },
+        "lootImg": {
+            "sprite": "loot-coldest-edge-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitRetroSunset": {
+        "baseType": "outfitBase",
+        "name": "Retro Sunset",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-retro-sunset.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-retro-sunset.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-retro-sunset.img"
+        },
+        "lootImg": {
+            "sprite": "loot-retro-sunset-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitBoet": {
+        "baseType": "outfitBase",
+        "name": "Boet",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-boet.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-boet.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-boet.img"
+        },
+        "lootImg": {
+            "sprite": "loot-boet-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitOldKumo": {
+        "baseType": "outfitBase",
+        "name": "Old Kumo",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-old-kumo.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-old-kumo.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-old-kumo.img"
+        },
+        "lootImg": {
+            "sprite": "loot-old-kumo-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 3,
+        "lore": ""
+    },
+    "outfitPanteraOnca": {
+        "baseType": "outfitBase",
+        "name": "Pantera Onca",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-pantera-onca.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-pantera-onca.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-pantera-onca.img"
+        },
+        "lootImg": {
+            "sprite": "loot-pantera-onca-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 2,
+        "lore": ""
+    },
+    "outfitTipTheScales": {
+        "baseType": "outfitBase",
+        "name": "Tip The Scales",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-tip-the-scales.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-tip-the-scales.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-tip-the-scales.img"
+        },
+        "lootImg": {
+            "sprite": "loot-tip-the-scales-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": ""
+    },
+    "outfitAvocadoh": {
+        "baseType": "outfitBase",
+        "name": "Avocadoh",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-avocadoh.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-avocadoh.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-avocadoh.img"
+        },
+        "lootImg": {
+            "sprite": "loot-avocadoh-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 4,
+        "lore": ""
+    },
+    "outfitEyes-T": {
+        "baseType": "outfitBase",
+        "name": "Eyes-T",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-eyes-t.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-eyes-t.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-eyes-t.img"
+        },
+        "lootImg": {
+            "sprite": "loot-eyes-t-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": ""
+    },
+    "outfitEggnite": {
+        "baseType": "outfitBase",
+        "name": "Eggnite",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-eggnite.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-eggnite.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-eggnite.img"
+        },
+        "lootImg": {
+            "sprite": "loot-eggnite-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": ""
+    }
+}

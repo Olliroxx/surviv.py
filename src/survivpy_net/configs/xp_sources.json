@@ -1,0 +1,207 @@
+{
+    "xp_10": {
+        "name": "XP",
+        "type": "xp",
+        "xp": 8,
+        "lootImg": {
+            "sprite": "loot-xp-book-01.img",
+            "tint": 16777215,
+            "border": "loot-circle-outer-05.img",
+            "borderTint": 16777215,
+            "scale": 0.2
+        },
+        "sound": {
+            "drop": "xp_drop_01",
+            "pickup": "xp_pickup_01"
+        },
+        "emitter": "xp_common"
+    },
+    "xp_25": {
+        "name": "XP",
+        "type": "xp",
+        "xp": 24,
+        "lootImg": {
+            "sprite": "loot-xp-book-01.img",
+            "tint": 16777215,
+            "border": "loot-circle-outer-05.img",
+            "borderTint": 16777215,
+            "scale": 0.2
+        },
+        "sound": {
+            "drop": "xp_drop_02",
+            "pickup": "xp_pickup_02"
+        },
+        "emitter": "xp_rare"
+    },
+    "xp_100": {
+        "name": "XP",
+        "type": "xp",
+        "xp": 96,
+        "lootImg": {
+            "sprite": "loot-xp-book-01.img",
+            "tint": 16777215,
+            "border": "loot-circle-outer-05.img",
+            "borderTint": 16777215,
+            "scale": 0.2
+        },
+        "sound": {
+            "drop": "xp_drop_02",
+            "pickup": "xp_pickup_02"
+        },
+        "emitter": "xp_mythic"
+    },
+    "xp_book_tallow": {
+        "baseType": "xp_10",
+        "name": "Tallo\\x27s Journal",
+        "type": "xp",
+        "xp": 8,
+        "lootImg": {
+            "sprite": "loot-xp-book-01.img"
+        },
+        "sound": {
+            "drop": "xp_drop_01",
+            "pickup": "xp_pickup_01"
+        },
+        "emitter": "xp_common"
+    },
+    "xp_book_greene": {
+        "baseType": "xp_10",
+        "name": "Green\\x27s Infinite Wisdom",
+        "type": "xp",
+        "xp": 8,
+        "lootImg": {
+            "sprite": "loot-xp-book-02.img"
+        },
+        "sound": {
+            "drop": "xp_drop_01",
+            "pickup": "xp_pickup_01"
+        },
+        "emitter": "xp_common"
+    },
+    "xp_book_parma": {
+        "baseType": "xp_10",
+        "name": "The PARMA Papers",
+        "type": "xp",
+        "xp": 8,
+        "lootImg": {
+            "sprite": "loot-xp-book-03.img"
+        },
+        "sound": {
+            "drop": "xp_drop_01",
+            "pickup": "xp_pickup_01"
+        },
+        "emitter": "xp_common"
+    },
+    "xp_book_nevelskoy": {
+        "baseType": "xp_10",
+        "name": "The Nevelskoy Report",
+        "type": "xp",
+        "xp": 8,
+        "lootImg": {
+            "sprite": "loot-xp-book-04.img"
+        },
+        "sound": {
+            "drop": "xp_drop_01",
+            "pickup": "xp_pickup_01"
+        },
+        "emitter": "xp_common"
+    },
+    "xp_book_rinzo": {
+        "baseType": "xp_10",
+        "name": "Rinz\\x27s Log",
+        "type": "xp",
+        "xp": 8,
+        "lootImg": {
+            "sprite": "loot-xp-book-05.img"
+        },
+        "sound": {
+            "drop": "xp_drop_01",
+            "pickup": "xp_pickup_01"
+        },
+        "emitter": "xp_common"
+    },
+    "xp_book_kuga": {
+        "baseType": "xp_10",
+        "name": "Memoirs of Kuga Kairy\u016b",
+        "type": "xp",
+        "xp": 8,
+        "lootImg": {
+            "sprite": "loot-xp-book-06.img"
+        },
+        "sound": {
+            "drop": "xp_drop_01",
+            "pickup": "xp_pickup_01"
+        },
+        "emitter": "xp_common"
+    },
+    "xp_glasses": {
+        "baseType": "xp_25",
+        "name": "Len\\x27s Spectacles",
+        "type": "xp",
+        "xp": 24,
+        "lootImg": {
+            "sprite": "loot-xp-glasses-01.img"
+        },
+        "sound": {
+            "drop": "xp_drop_02",
+            "pickup": "xp_pickup_02"
+        },
+        "emitter": "xp_rare"
+    },
+    "xp_compass": {
+        "baseType": "xp_25",
+        "name": "Am\u00e9li\\x27s True Compass",
+        "type": "xp",
+        "xp": 24,
+        "lootImg": {
+            "sprite": "loot-xp-compass-01.img"
+        },
+        "sound": {
+            "drop": "xp_drop_02",
+            "pickup": "xp_pickup_02"
+        },
+        "emitter": "xp_rare"
+    },
+    "xp_stump": {
+        "baseType": "xp_25",
+        "name": "Ravenston\\x27s Bloody Stump",
+        "type": "xp",
+        "xp": 24,
+        "lootImg": {
+            "sprite": "loot-xp-stump-01.img"
+        },
+        "sound": {
+            "drop": "xp_drop_02",
+            "pickup": "xp_pickup_02"
+        },
+        "emitter": "xp_rare"
+    },
+    "xp_bone": {
+        "baseType": "xp_25",
+        "name": "Bone of Gordon",
+        "type": "xp",
+        "xp": 24,
+        "lootImg": {
+            "sprite": "loot-xp-bone-01.img"
+        },
+        "sound": {
+            "drop": "xp_drop_02",
+            "pickup": "xp_pickup_02"
+        },
+        "emitter": "xp_rare"
+    },
+    "xp_donut": {
+        "baseType": "xp_100",
+        "name": "Cake Donut",
+        "type": "xp",
+        "xp": 96,
+        "lootImg": {
+            "sprite": "loot-xp-donut-01.img"
+        },
+        "sound": {
+            "drop": "xp_drop_02",
+            "pickup": "xp_pickup_02"
+        },
+        "emitter": "xp_mythic"
+    }
+}

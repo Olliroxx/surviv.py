@@ -1,0 +1,26 @@
+{
+    "stim-1": {
+        "name": "Stim 1",
+        "type": "event",
+        "xpBonus": 0.25,
+        "time": 1800000,
+        "delay": 172800000,
+        "rescheduled": false
+    },
+    "stim-2": {
+        "name": "Stim 2",
+        "type": "event",
+        "xpBonus": 0.25,
+        "time": 1800000,
+        "delay": 345600000,
+        "rescheduled": true
+    },
+    "stim-3": {
+        "name": "Stim 3",
+        "type": "event",
+        "xpBonus": 0.25,
+        "time": 1800000,
+        "delay": 604800000,
+        "rescheduled": true
+    }
+}
