@@ -197,8 +197,10 @@ def solve_hex():
     split_size = ceil(len(solved) / cpu_count())
     split = split_list(solved.items(), split_size)
 
-    with Pool() as p:
-        result = p.starmap(find_usages, zip(split, [script] * cpu_count()))
+    p = Pool()
+    result = p.starmap(find_usages, zip(split, [script] * cpu_count()))
+    p.join()
+    p.close()
 
     context_added = {}
     for item in result:
@@ -516,4 +518,4 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
 
 
 if __name__ == "__main__":
-    main()
+    main(dl_assets=True)

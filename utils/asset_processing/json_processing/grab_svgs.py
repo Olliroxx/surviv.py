@@ -3,7 +3,7 @@ This script grabs most of the svgs (guns, melees and other items), most of them 
 """
 
 from json import load
-import requests
+from requests import get
 from os.path import join, dirname
 from os import mkdir
 
@@ -42,9 +42,9 @@ sprite_number = 0
 for name in svg_names:
     sprite_number += 1
     print("Downloading " + name + ".svg, " + str(sprite_number)+"/"+str(len(svg_names)))
-    file = open(join(dirname(__file__), "../out/svgs/loot/"+name+".svg"), "bw")
-    resp = requests.get("https://surviv.io/img/loot/"+name+".svg")
-    file.close()
+    resp = get("https://surviv.io/img/loot/"+name+".svg")
+    with open(join(dirname(__file__), "../out/svgs/loot/"+name+".svg"), "bw") as file:
+        file.write(resp.content)
 # Get and write all the sprites
 
 print("Done")
