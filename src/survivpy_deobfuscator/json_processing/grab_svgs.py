@@ -34,7 +34,7 @@ del key, value, master_dict
 print(str(len(svg_names)) + " sprites to download")
 
 try:
-    mkdir("../out/svgs/loot")
+    mkdir("../../../utils/asset_processing/out/svgs/loot")
 except FileExistsError:
     pass
 

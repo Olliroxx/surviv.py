@@ -64,8 +64,8 @@ def grab_code():
 
         file.close()
 
-    shutil.rmtree(".\\deobfuscated")
-    shutil.copytree(".\\out\\code", ".\\deobfuscated")
+    shutil.rmtree("../../utils/asset_processing/deobfuscated")
+    shutil.copytree(".\\out\\code", "../../utils/asset_processing/deobfuscated")
     print("Done downloading\n")
 
 
@@ -233,7 +233,7 @@ def autoindent():
     from os.path import join, dirname
     from os import listdir
 
-    for script in listdir(".\\deobfuscated\\js"):
+    for script in listdir("../../utils/asset_processing/deobfuscated/js"):
 
         file = open(join(dirname(__file__), ".\\deobfuscated\\js\\" + script), "r", encoding="utf-8")
         text = file.readline()
@@ -501,7 +501,7 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
     else:
         from os import mkdir
         try:
-            mkdir("deobfuscated")
+            mkdir("../../utils/asset_processing/deobfuscated")
         except FileExistsError:
             pass
         del mkdir

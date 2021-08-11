@@ -16,7 +16,7 @@ def handle_sounds_dict(sounds):
 
 def main():
     print("Loading weapon definitions...")
-    with open("../../../src/survivpy_net/configs/guns.json") as file:
+    with open("../../survivpy_net/configs/guns.json") as file:
         data = load(file)
     del file
 
