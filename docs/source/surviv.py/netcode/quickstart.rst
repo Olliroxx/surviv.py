@@ -1,7 +1,13 @@
 Quickstart
 ==========
 
-This is a tutorial on how to write a program that connects to a surviv game
+This is a tutorial on how to write a program that connects to a surviv game.
+
+Before you can connect, you need to copy a set of .json files to ./configs (relative to your script).
+A set of configs are bundled with every release, but they might be outdated when the script is run.
+To generate a set of configs, run surviv_deob from the command line in the same directory as the script.
+This will make a set of directories, delete all of them except for jsons and rename it to configs.
+This takes a long time and is processor intensive at times.
 
 The smallest possible script:
 

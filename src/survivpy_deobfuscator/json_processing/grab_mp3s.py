@@ -10,13 +10,13 @@ def handle_sounds_dict(sounds):
         if not isfile("./out/mp3s/guns/"+value+".mp3") and value:
             print("Downloading "+value+".mp3")
             resp = get("https://surviv.io/audio/guns/"+value+".mp3")
-            with open("../out/mp3s/guns/"+value+".mp3", "bw") as file:
+            with open("./out/mp3s/guns/"+value+".mp3", "bw") as file:
                 file.write(resp.content)
 
 
-def main():
+def grab_mp3s():
     print("Loading weapon definitions...")
-    with open("../../survivpy_net/configs/guns.json") as file:
+    with open("./jsons/guns.json") as file:
         data = load(file)
     del file
 
@@ -28,4 +28,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    grab_mp3s()

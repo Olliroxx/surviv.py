@@ -18,9 +18,9 @@ def update_definitions():
     global map_definitions
     global constants
 
-    def_file = open("./configs/map_data.json")
+    def_file = open("../../utils/net/configs/map_data.json")
     map_definitions = load(def_file)
-    constants_file = open("configs/constants.json")
+    constants_file = open("../../utils/net/configs/constants.json")
     constants = load(constants_file)
 
 

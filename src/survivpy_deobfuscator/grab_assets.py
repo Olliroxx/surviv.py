@@ -21,19 +21,19 @@ def grab_pngs(to_parse):
     import multiprocessing
 
     try:
-        os.mkdir("out")
+        os.mkdir("./out")
     except FileExistsError:
         pass
     try:
-        os.mkdir("out/pngs")
+        os.mkdir("./out/pngs")
     except FileExistsError:
         pass
 
     from shutil import rmtree
-    rmtree("out/pngs")
+    rmtree("./out/pngs")
     del rmtree
-    os.mkdir("out/pngs")
-    os.mkdir("out/pngs/raw")
+    os.mkdir("./out/pngs")
+    os.mkdir("./out/pngs/raw")
 
     if type(to_parse) == str:
         parsed = json.loads(to_parse)
@@ -137,7 +137,7 @@ def grab_svgs(big_string: str):
     import requests
     from os import mkdir
 
-    print("\n\nWARNING: This script DOES NOT get all SVGs, look in json_processing for that\n")
+    print("\nWARNING: This script DOES NOT get all SVGs, look in json_processing for that\n")
     print("Finding SVGs")
     svg_links = []
     for svg in re.findall(r"img/[a-z\d/-_]*\.svg", big_string):
@@ -181,7 +181,7 @@ def grab_mp3s(big_list: list):
     import requests
     from os import mkdir
 
-    print("\n\nWARNING: This script DOES NOT get all MP3s, look in json_processing for that\n")
+    print("\nWARNING: This script DOES NOT get all MP3s, look in json_processing for that\n")
     print("Finding MP3s")
     mp3_links = []
     for string in big_list:
@@ -224,7 +224,6 @@ def grab_mp3s(big_list: list):
 
 def grab_assets(grab_all, mp3s=False, svgs=False, pngs=False):
     """
-    uses
     :param grab_all: overrides other args
     :param mp3s:
     :param svgs:
@@ -234,6 +233,7 @@ def grab_assets(grab_all, mp3s=False, svgs=False, pngs=False):
 
     import ast
     from survivpy_deobfuscator.misc_utils import get_app
+    from re import findall
 
     if grab_all:
         mp3s = True
@@ -243,10 +243,11 @@ def grab_assets(grab_all, mp3s=False, svgs=False, pngs=False):
 
     file = get_app()
     file.readline()
-    line = file.readline()[16:][:-2]
+    line = file.readline()
+    png_candidates = findall(r" = JSON\[a0_0x[\da-f]{4,6}\('0x[\da-f]{4,6}'\)]\('(.*)'\);", line + file.read())
     file.close()
     del file
-    big_list = ast.literal_eval(line)
+    big_list = ast.literal_eval(line[16:][:-2])
     del line
 
     if mp3s:
@@ -261,16 +262,14 @@ def grab_assets(grab_all, mp3s=False, svgs=False, pngs=False):
 
     if pngs:
         big_string = None
-        for x in big_list:
-            if x.count("sourceSize"):  # and x.count("-100-"):
-                # The mapping strings are the only strings in the big list to have "sourceSize" in them
-                # There seems to be a set of half size/resolution assets, but they have -50- instead of -100-
-                big_string = x
-        del x
+        for each in png_candidates:
+            if each.count("sourceSize"):
+                big_string = each
+                break
+        big_string = big_string.replace(r"\x22", "\x22")
+        big_string = big_string.replace(r"\x20", "\x20")
 
-        if big_string is None:
-            raise RuntimeError("Full-size mapping string not found")
-
+        print("Starting PNGs")
         grab_pngs(big_string)
         print("PNGs done")
 

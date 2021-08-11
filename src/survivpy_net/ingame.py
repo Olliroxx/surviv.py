@@ -26,12 +26,11 @@ logger = getLogger("survivpy_net")
 def update_constants():
     global constants
     from json import load
-    import pathlib
-    constants_file = open(pathlib.Path(__file__).parent / "./configs/constants.json")
+    constants_file = open("./configs/constants.json")
     constants = constants | load(constants_file)
     constants_file.close()
 
-    mtypes_file = open(pathlib.Path(__file__).parent / "./configs/objects.json")
+    mtypes_file = open("./configs/objects.json")
     mtypes_dict = load(mtypes_file)["objects"]
     mtypes_file.close()
     constants["mtypes"] = list(mtypes_dict.keys())
@@ -42,7 +41,7 @@ def update_constants():
              "death_effects", "lootbox_tables", "item_pools", "xp_boost_events", "market_min_values", "npcs")
     gtypes_dict = {}
     for file in files:
-        file = open(pathlib.Path(__file__).parent / ("./configs/" + file + ".json"))
+        file = open(("./configs/" + file + ".json"))
         data = load(file)
         file.close()
         gtypes_dict = gtypes_dict | data

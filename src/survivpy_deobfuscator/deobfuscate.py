@@ -198,7 +198,6 @@ def solve_hex():
 
     p = Pool()
     result = p.starmap(find_usages, zip(split, [script] * cpu_count()))
-    p.join()
     p.close()
 
     context_added = {}
@@ -251,7 +250,6 @@ def autoindent():
             writer.close()
 
         print("Done indenting " + script)
-        print()
 
 
 def fill_strings():
@@ -456,9 +454,8 @@ def process_jsons():
 
     print("Parsing json")
 
-    regex = r" \= JSON\[\'parse\'\]\(\'.*\'\);"
     replacements = {}
-    for to_parse in re.findall(regex, script):
+    for to_parse in re.findall(r" = JSON\['parse']\('.*'\);", script):
         parse_data = to_parse[18:-3]
         parse_data = parse_data.replace("\\'", "'")
         parse_data = parse_data.replace("\\x22", "\x22")
@@ -491,7 +488,7 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
     :param redownload: If false will use already downloaded copies
     :param deobfuscate: If you don't want to deobfuscate, set to false (just for assets)
     """
-    from grab_assets import grab_assets
+    from .grab_assets import grab_assets
 
     if redownload:
         grab_code()

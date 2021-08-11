@@ -8,3 +8,4 @@
  * Add docs for json processing scripts
  * Check what docs are missing/incomplete
  * Make diagram (or something else) to show what order deobfuscation scripts are used in
+ * Add logging to deobfuscation scripts

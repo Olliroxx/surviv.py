@@ -18,9 +18,10 @@ def _parse_args():
 def one_click_deob():
     args = _parse_args()
 
-    from .deobfuscate import main
-    from .json_processing.create_jsons import create_jsons
-    from .json_processing.grab_svgs import grab_svgs
+    from survivpy_deobfuscator.deobfuscate import main
+    from survivpy_deobfuscator.json_processing.create_jsons import create_jsons
+    from survivpy_deobfuscator.json_processing.grab_svgs import grab_svgs
+    from survivpy_deobfuscator.json_processing.grab_mp3s import grab_mp3s
 
     if args.code_only and args.assets:
         raise ValueError("Incompatible arguments")
@@ -32,6 +33,7 @@ def one_click_deob():
 
     if args.assets:
         grab_svgs()
+        grab_mp3s()
 
 
 if __name__ == '__main__':
