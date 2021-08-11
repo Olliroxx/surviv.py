@@ -181,6 +181,7 @@ def grab_mp3s(big_list: list):
     import requests
     from os import mkdir
 
+    print("\n\nWARNING: This script DOES NOT get all MP3s, look in json_processing for that\n")
     print("Finding MP3s")
     mp3_links = []
     for string in big_list:
