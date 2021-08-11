@@ -53,7 +53,7 @@ class Profile:
         self.update_currency()
 
         from json import load
-        with open("../../utils/net/configs/constants.json") as file:
+        with open("./configs/constants.json") as file:
             data = load(file)
 
         self.version = data["protocolVersion"]
