@@ -1,4 +1,4 @@
-from misc_utils import get_app
+from survivpy_deobfuscator.misc_utils import get_app
 import re
 
 
@@ -8,7 +8,6 @@ def grab_code():
     """
 
     import os
-    from os.path import join, dirname
     import requests
 
     import shutil
@@ -36,7 +35,7 @@ def grab_code():
     print("HTML retrieved\n")
     # Get HTML, and ensure nothing went horribly wrong
 
-    file = open(join(dirname(__file__), ".\\out\\code\\index.html"), "w", encoding="utf-8")
+    file = open("./out/code/index.html", "w", encoding="utf-8")
     file.write(resp)
     file.close()
     # Write HTML file
@@ -45,7 +44,7 @@ def grab_code():
 
     for script in files:
         print("Downloading " + script)
-        file = open(join(dirname(__file__), ".\\out\\code\\" + script), "bw")
+        file = open("./out/code/" + script, "bw")
 
         resp = requests.get("https://surviv.io/" + script, stream=True)
         length = resp.headers.get("content-length")
@@ -64,8 +63,8 @@ def grab_code():
 
         file.close()
 
-    shutil.rmtree(".\\deobfuscated")
-    shutil.copytree(".\\out\\code", ".\\deobfuscated")
+    shutil.rmtree("deobfuscated")
+    shutil.copytree("out/code", ".\\deobfuscated")
     print("Done downloading\n")
 
 
@@ -228,12 +227,11 @@ def autoindent():
     Indents and spaces out app.js
     """
     import jsbeautifier
-    from os.path import join, dirname
     from os import listdir
 
-    for script in listdir(".\\deobfuscated\\js"):
+    for script in listdir("deobfuscated/js"):
 
-        file = open(join(dirname(__file__), ".\\deobfuscated\\js\\" + script), "r", encoding="utf-8")
+        file = open("./deobfuscated/js/" + script, "r", encoding="utf-8")
         text = file.readline()
         file.close()
         if text.startswith("//"):
@@ -242,11 +240,10 @@ def autoindent():
 
         print("Indenting " + script)
         opts = jsbeautifier.default_options()
-        result = jsbeautifier.beautify_file(".\\deobfuscated\\js\\" + script, opts)
+        result = jsbeautifier.beautify_file("./deobfuscated/js/" + script, opts)
         result = "// Indented\n" + result
 
-        with open(join(dirname(__file__),
-                       ".\\deobfuscated\\js\\" + script), "w", encoding="utf-8", newline="\n") as writer:
+        with open("./deobfuscated/js/" + script, "w", encoding="utf-8", newline="\n") as writer:
             print("Writing " + script)
             writer.write(result)
             writer.close()
@@ -492,7 +489,7 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
     :param redownload: If false will use already downloaded copies
     :param deobfuscate: If you don't want to deobfuscate, set to false (just for assets)
     """
-    from grab_assets import grab_assets
+    from survivpy_deobfuscator.grab_assets import grab_assets
 
     if redownload:
         grab_code()

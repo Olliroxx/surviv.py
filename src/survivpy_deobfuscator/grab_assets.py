@@ -21,19 +21,19 @@ def grab_pngs(to_parse):
     import multiprocessing
 
     try:
-        os.mkdir("./out")
+        os.mkdir("out")
     except FileExistsError:
         pass
     try:
-        os.mkdir("./out/pngs")
+        os.mkdir("out/pngs")
     except FileExistsError:
         pass
 
     from shutil import rmtree
-    rmtree("./out/pngs")
+    rmtree("out/pngs")
     del rmtree
-    os.mkdir("./out/pngs")
-    os.mkdir("./out/pngs/raw")
+    os.mkdir("out/pngs")
+    os.mkdir("out/pngs/raw")
 
     if type(to_parse) == str:
         parsed = json.loads(to_parse)
@@ -49,7 +49,6 @@ def grab_pngs(to_parse):
 def write_bigimage(key, parse_data):
     from requests import get
     import png
-    from os.path import join, dirname
     from os import mkdir, listdir
 
     if key == "raw":
@@ -74,7 +73,7 @@ def write_bigimage(key, parse_data):
         if listdir(path=cwd):
             continue
         print(bigimage_name + ": Downloading")
-        with open(join(dirname(__file__), "./out/pngs/raw/" + bigimage_name), "bw") as file:
+        with open("./out/pngs/raw/" + bigimage_name, "bw") as file:
             resp = get("https://surviv.io/assets/" + bigimage_name, stream=True)
             length = resp.headers.get("content-length")
 
@@ -91,7 +90,7 @@ def write_bigimage(key, parse_data):
         bigimage_name = bigimage["meta"]["image"]
         frames = bigimage["frames"]
 
-        file = open(join(dirname(__file__), "./out/pngs/raw/" + bigimage_name), "br")
+        file = open("./out/pngs/raw/" + bigimage_name, "br")
         reader = png.Reader(file=file)
         bigimage_data = reader.asRGBA()
 
@@ -136,7 +135,6 @@ def write_bigimage(key, parse_data):
 def grab_svgs(big_string: str):
     import re
     import requests
-    from os.path import join, dirname
     from os import mkdir
 
     print("\n\nWARNING: This script DOES NOT get all SVGs, look in json_processing for that\n")
@@ -151,13 +149,13 @@ def grab_svgs(big_string: str):
     svg_folders = ["./out/svgs", "./out/svgs/gui", "./out/svgs/loot", "./out/svgs/emotes", "./out/svgs/modals"]
 
     try:
-        mkdir("./out")
+        mkdir("out")
     except FileExistsError:
         pass
 
     from shutil import rmtree
     try:
-        rmtree("./out/svgs")
+        rmtree("out/svgs")
     except FileNotFoundError:
         pass
     del rmtree
@@ -172,7 +170,7 @@ def grab_svgs(big_string: str):
     for link in svg_links:
         link_trimmed = link[4:]
         resp = requests.get("https://surviv.io/" + link)
-        file = open(join(dirname(__file__), "./out/svgs/" + link_trimmed), "bw")
+        file = open("./out/svgs/" + link_trimmed, "bw")
         file.write(resp.content)
         file.close()
     print("Done grabbing SVGs\n")
@@ -181,7 +179,6 @@ def grab_svgs(big_string: str):
 def grab_mp3s(big_list: list):
     import re
     import requests
-    from os.path import join, dirname
     from os import mkdir
 
     print("Finding MP3s")
@@ -197,13 +194,13 @@ def grab_mp3s(big_list: list):
                    "./out/mp3s/ambient", "./out/mp3s/reverb"]
 
     try:
-        mkdir("./out")
+        mkdir("out")
     except FileExistsError:
         pass
 
     from shutil import rmtree
     try:
-        rmtree("./out/mp3s")
+        rmtree("out/mp3s")
     except FileNotFoundError:
         pass
     del rmtree
@@ -218,7 +215,7 @@ def grab_mp3s(big_list: list):
     for link in mp3_links:
         link_trimmed = link[6:]
         resp = requests.get("https://surviv.io/" + link)
-        file = open(join(dirname(__file__), "./out/mp3s/" + link_trimmed), "bw")
+        file = open("./out/mp3s/" + link_trimmed, "bw")
         file.write(resp.content)
         file.close()
     print("Done grabbing MP3s\n")
@@ -235,7 +232,7 @@ def grab_assets(grab_all, mp3s=False, svgs=False, pngs=False):
     """
 
     import ast
-    from misc_utils import get_app
+    from survivpy_deobfuscator.misc_utils import get_app
 
     if grab_all:
         mp3s = True

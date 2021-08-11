@@ -1,3 +1,6 @@
+KNOWN_SAFE_VERSION = 108
+
+
 class Profile:
     """
     Some attributes of note:
@@ -49,7 +52,13 @@ class Profile:
         self.update_pass()
         self.update_currency()
 
-        self.version = 107
+        from json import load
+        with open("./configs/constants.json") as file:
+            data = load(file)
+
+        self.version = data["protocolVersion"]
+        if self.version != KNOWN_SAFE_VERSION:
+            raise RuntimeWarning("Protocol version is not known safe, things may break or work fine")
 
     def update_currency(self):
         """
@@ -194,6 +203,8 @@ class Profile:
         resp = self.session.post("https://surviv.io/api/find_game", json=settings).json()
 
         if "res" not in resp:
+            if resp == {"err": "invalid_protocol"}:
+                raise IOError("Configs are out of date, cannot join.")
             raise IOError("Server returned non-ok response: " + str(resp))
 
         self._update_game_settings()

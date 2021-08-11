@@ -1,7 +1,6 @@
 def create_game_modes(script, root_dir):
     import re
     from json import loads, dump
-    from os.path import join, dirname
 
     print("Starting map_data.json")
 
@@ -68,7 +67,7 @@ def create_game_modes(script, root_dir):
         output[friendly_name] = output[base_function_friendly] | output[friendly_name]
     # Solve derived modes
 
-    map_json_file = open(join(dirname(__file__), root_dir+"map_data.json"), "w")
+    map_json_file = open(root_dir+"map_data.json", "w")
     dump(output, map_json_file, indent=4)
     map_json_file.close()
 

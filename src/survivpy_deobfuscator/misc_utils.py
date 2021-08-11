@@ -12,15 +12,14 @@ def get_app(mode="r"):
     :param mode: If the file object should be in read or write mode
     :return: File object for app.js
     """
-    from os.path import abspath, dirname
     from os import listdir
 
     file = None
-    for script in listdir(dirname(abspath(__file__))+".\\deobfuscated\\js"):
+    for script in listdir("./deobfuscated/js"):
         if script.count("app"):
             if file is not None:
                 raise RuntimeError("There must be exactly one app.js script in out/code/js")
-            file = open(dirname(abspath(__file__))+".\\deobfuscated\\js\\" + script, mode, encoding="utf-8")
+            file = open("./deobfuscated/js/" + script, mode, encoding="utf-8")
     if file is None:
         raise RuntimeError("There must be exactly one app.js script in out/code/js")
     return file

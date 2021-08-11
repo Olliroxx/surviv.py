@@ -18,11 +18,9 @@ def update_definitions():
     global map_definitions
     global constants
 
-    from os.path import dirname, join
-
-    def_file = open(join(dirname(__file__), "./configs/map_data.json"))
+    def_file = open("./configs/map_data.json")
     map_definitions = load(def_file)
-    constants_file = open(join(dirname(__file__), "configs/constants.json"))
+    constants_file = open("configs/constants.json")
     constants = load(constants_file)
 
 
@@ -155,11 +153,6 @@ class River:
             shore_widths.append(shore_width)
             shore_width += water_width
 
-            water_corner1 = None
-            water_corner2 = None
-            shore_corner1 = None
-            shore_corner2 = None
-
             if looped:
                 _0xb6810b = point.sub_point(self.center)
                 _0x473647 = _0xb6810b.length()
@@ -172,26 +165,23 @@ class River:
                 water_corner2 = point.add_point(_0xb6810b.mul(-_0x29a0be))
                 shore_corner1 = point.add_point(_0xb6810b.mul(water_width))
                 shore_corner2 = point.add_point(_0xb6810b.mul(-_0x2bde26))
-            elif source_river:
+            else:
                 water_corner1 = point.mul(water_width)
                 water_corner2 = point.mul(-water_width)
                 shore_corner1 = point.mul(shore_width)
                 shore_corner2 = point.mul(-shore_width)
 
-                water_corner1 = _0x46712b(point, water_corner1, Poly(water_poly))
-                water_corner2 = _0x46712b(point, water_corner2, Poly(water_poly))
-                shore_corner1 = _0x46712b(point, shore_corner1, Poly(shore_poly))
-                shore_corner2 = _0x46712b(point, shore_corner2, Poly(shore_poly))
+                if source_river:
 
-                water_corner1 = point.add_point(water_corner1)
-                water_corner2 = point.add_point(water_corner2)
-                shore_corner1 = point.add_point(shore_corner1)
-                shore_corner2 = point.add_point(shore_corner2)
+                    water_corner1 = _0x46712b(point, water_corner1, Poly(water_poly))
+                    water_corner2 = _0x46712b(point, water_corner2, Poly(water_poly))
+                    shore_corner1 = _0x46712b(point, shore_corner1, Poly(shore_poly))
+                    shore_corner2 = _0x46712b(point, shore_corner2, Poly(shore_poly))
 
-                logger.warning("Rare river, maybe investigate. Points: " + str(points))
-                logger.debug("Rare river info, width: " + str(width))
-                logger.debug("Rare river info, looped: " + str(looped))
-                logger.debug("Rare river info, other rivers: " + str(other_rivers))
+                    water_corner1 = point.add_point(water_corner1)
+                    water_corner2 = point.add_point(water_corner2)
+                    shore_corner1 = point.add_point(shore_corner1)
+                    shore_corner2 = point.add_point(shore_corner2)
 
             water_corner1 = min_max.clamp_point(water_corner1)
             water_corner2 = min_max.clamp_point(water_corner2)

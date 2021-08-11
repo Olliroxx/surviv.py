@@ -77,8 +77,11 @@ venv.bak/
 
 .idea/
 
-/utils/asset_processing/out/*
-/utils/asset_processing/deobfuscated/*
-/utils/asset_processing/json_processing/csvs/*
-/utils/asset_processing/json_processing/jsons/*
+/src/survivpy_deobfuscator/out/*
+/src/survivpy_deobfuscator/deobfuscated/*
+/src/survivpy_deobfuscator/json_processing/csvs/*
+/src/survivpy_deobfuscator/json_processing/jsons/*
 /utils/net/vcs/changelogs/*
+/out/
+/deobfuscated/
+/jsons/

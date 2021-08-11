@@ -1,3 +1,8 @@
+"""
+Creates weapon stats CSVs
+"""
+
+
 def flatten_dict(to_flatten: dict, name: str, output: dict):
     """
     Turns
@@ -41,9 +46,8 @@ def make_table(infile: str, defaults: dict):
     :return:
     """
     from json import load
-    from os.path import join, dirname
 
-    with open(join(dirname(__file__), infile)) as file:
+    with open(infile) as file:
         data = load(file)
 
     list_of_dicts = []
@@ -68,9 +72,8 @@ def write_table(table: list, fname: str):
     :return:
     """
     from csv import DictWriter
-    from os.path import join, dirname
 
-    file = open(join(dirname(__file__), fname), "w", newline="")
+    file = open(fname, "w", newline="")
     fields = table[0].keys()
     writer = DictWriter(file, fields)
     writer.writeheader()
@@ -206,7 +209,7 @@ if __name__ == '__main__':
     try:
         from os import mkdir
 
-        mkdir("./ csvs")
+        mkdir("./csvs")
         del mkdir
     except FileExistsError:
         pass

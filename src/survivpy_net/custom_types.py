@@ -29,6 +29,9 @@ class GenericXYObject:
     def __str__(self):
         return str((self.x, self.y))
 
+    def __iter__(self):
+        return iter((self.x, self.y))
+
 
 class Point(GenericXYObject):
     def copy(self):
@@ -129,7 +132,12 @@ class Vector:
                 self.x = args[0]["x"] if "x" in args[0] else args[0]["X"]
                 self.y = args[0]["y"] if "y" in args[0] else args[0]["Y"]
 
+            elif type(args[0]) == Vector:
+                self.x = args[0].x
+                self.y = args[0].y
+
             else:
+                print()
                 raise ValueError
 
         elif kwargs:
@@ -277,6 +285,9 @@ class Poly:
             x, y = zip(*points)
             self.mid = Point(sum(x) / len(x), sum(y) / len(y))
             self.edges = EndpointLine.lines_from_poly(self.points)
+
+        else:
+            self.points = []
 
     def __getitem__(self, item):
         return self.points[item]

@@ -57,7 +57,6 @@ def split_bracket_level(data: str, trim_start=True, ignore_unbalanced=False, bra
 def write_objects_json(script, root_dir):
     import re
     import json
-    from os.path import join, dirname
 
     regex = r"""(?:_0x[\da-f]{4,6} = _0x[\da-f]{4,6}\('[\da-f]{8}'\),
  +)+_0x[\da-f]{4,6} = 'production' === 'dev'[,;](?:
@@ -142,7 +141,9 @@ def write_objects_json(script, root_dir):
         result["materials"] = json.loads(var_matches[1][29:].replace("'", '"'))
         main_list = var_matches[0]
     else:
-        result["materials"] = json.loads(var_matches[0][29:].replace("'", '"'))
+        materials = var_matches[0]
+        materials_dict = materials.split(" = ", 1)[1]
+        result["materials"] = json.loads(materials_dict.replace("'", '"'))
         main_list = var_matches[1]
     # Find the variable that contains the material properties
 
@@ -155,7 +156,7 @@ def write_objects_json(script, root_dir):
 
     result["objects"] = solve_main(main_list, functions, solve_at_runtime)
 
-    file = open(join(dirname(__file__), root_dir + "objects.json"), "w")
+    file = open(root_dir + "objects.json", "w")
     json.dump(result, file, indent=4)
     print("Done writing objects")
     # Write file
@@ -220,10 +221,10 @@ def add_extended_functions(data: str, solved_functions: dict):
         return dumps(target | source)
 
     replacements = {
-        r"_0x[\da-f]{4,6}\\['createAabbExtents'\\]": create_rect,
-        r"_0x[\da-f]{4,6}\\['create'\\]": create_point,
-        r"_0x[\da-f]{4,6}\\['createCircle'\\]": create_circle,
-        r"_0x[\da-f]{4,6}\\['copy'\\]": copy_point,
+        r"_0x[\da-f]{4,6}\['createAabbExtents'\]": create_rect,
+        r"_0x[\da-f]{4,6}\['create'\]": create_point,
+        r"_0x[\da-f]{4,6}\['createCircle'\]": create_circle,
+        r"_0x[\da-f]{4,6}\['copy'\]": copy_point,
         "Object\\['assign']": object_assign
     }
 
@@ -317,7 +318,7 @@ def function_list_to_dict(data: list):
         }
 
     tinted_regex = r"""
- {12}function _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}\\) {
+ {12}function _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}\) {
  {16}return {
  {20}'sprite': _0x[\da-f]{4,6},
  {20}'scale': 0\.5,
@@ -620,7 +621,7 @@ def solve_hex(args: str):
 
 
 def recursive_simplify(args, functions):
-    from utils.asset_processing.misc_utils import DataNeededError
+    from survivpy_deobfuscator.misc_utils import DataNeededError
     import re
     import json
 
@@ -672,7 +673,7 @@ def simplify_template_functions(templates, functions):
     :return:
     """
     from textwrap import dedent
-    from utils.asset_processing.misc_utils import DataNeededError
+    from survivpy_deobfuscator.misc_utils import DataNeededError
     import re
 
     while templates:

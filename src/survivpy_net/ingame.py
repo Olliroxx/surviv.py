@@ -1523,7 +1523,9 @@ class GameConnection:
 
         update_constants()
 
-        from survivpy_net.core import GameInstance
+        from survivpy_net.core import GameInstance, update_definitions
+        update_definitions()
+
         self._loadout_stats = None
         self._quest_priv = None
         self._loadout_priv = None

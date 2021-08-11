@@ -88,10 +88,9 @@ def get_json():
     """
 
     from json import load
-    from os.path import join, dirname
 
     try:
-        file = open(join(dirname(__file__), "changelogs/app_changelog.json"), "r")
+        file = open("changelogs/app_changelog.json", "r")
         data = load(file)
         file.close()
     except FileNotFoundError:
@@ -109,9 +108,8 @@ def write_json(data):
     """
 
     from json import dump
-    from os.path import join, dirname
 
-    file = open(join(dirname(__file__), "./changelogs/app_changelog.json"), "w")
+    file = open("./changelogs/app_changelog.json", "w")
     dump(data, file, indent=4)
     file.close()
 
@@ -122,18 +120,16 @@ def get_complex_app():
     """
 
     from os import listdir
-    from os.path import abspath, dirname, join
     from re import sub
 
     result = {}
 
     file = None
-    for script in listdir(join(dirname(abspath(__file__)), "../../asset_processing/deobfuscated/js/")):
+    for script in listdir("./deobfuscated/js/"):
         if script.count("app"):
             if file is not None:
                 raise RuntimeError("There must be exactly one app.js script in out/code/js")
-            file = open(join(dirname(abspath(__file__)), "../../asset_processing/deobfuscated/js/" + script), "r",
-                        encoding="utf-8")
+            file = open("./deobfuscated/js/" + script, "r", encoding="utf-8")
     if file is None:
         raise RuntimeError("There must be exactly one app.js script in out/code/js")
     script = file.read()
@@ -198,23 +194,21 @@ def check_complex_ver(app_dict):
 
 def update_changelog(changelog, app_dict, time):
     from os import mkdir
-    from os.path import dirname, join, realpath
+    from os.path import realpath
     from hashlib import sha3_256
 
     small_hash = get_small_hash(app_dict["raw"])
-    mkdir(join(dirname(__file__), "./changelogs/" + small_hash))
+    mkdir("./changelogs/" + small_hash)
 
-    file = open(join(dirname(__file__), "./changelogs/" + small_hash + "/raw_" + small_hash + ".js"), mode="w",
-                encoding="utf-8")
+    file = open("./changelogs/" + small_hash + "/raw_" + small_hash + ".js", mode="w", encoding="utf-8")
     file.write(app_dict["raw"])
     file.close()
 
-    file = open(join(dirname(__file__), "./changelogs/" + small_hash + "/deob_" + small_hash + ".js"), mode="w",
-                encoding="utf-8")
+    file = open("./changelogs/" + small_hash + "/deob_" + small_hash + ".js", mode="w", encoding="utf-8")
     file.write(app_dict["deobfuscated"])
     file.close()
 
-    diffable_path = join(dirname(__file__), "./changelogs/" + small_hash + "/diff_" + small_hash + ".js")
+    diffable_path = "./changelogs/" + small_hash + "/diff_" + small_hash + ".js"
     file = open(diffable_path, mode="w", encoding="utf-8")
     file.write(app_dict["diffable"])
     file.close()
@@ -244,7 +238,6 @@ def update_changelog(changelog, app_dict, time):
     if changelog["newest"] is not None:
         prev_diffable_hash = changelog["newest"]
         prev_diffable_path = changelog["updates"][prev_diffable_hash]["versions"]["diff"]["location"]
-        prev_diffable_path = join(dirname(__file__), prev_diffable_path)
         prev_diffable_path = realpath(prev_diffable_path)
         # Get the diffable version of the previous script
 

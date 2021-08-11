@@ -7,7 +7,7 @@ The smallest possible script:
 
 .. code-block:: py
 
-    import surviv_net as spn
+    import survivpy_net as spn
 
     profile = spn.pregame.Profile()
     # user_id = profile.id

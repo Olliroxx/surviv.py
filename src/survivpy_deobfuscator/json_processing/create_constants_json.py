@@ -8,7 +8,6 @@ def write_constants_json(script: str, root_dir):
     """
     import re
     from json import loads, dump
-    from os.path import join, dirname
 
     print("Starting constants.json")
 
@@ -27,7 +26,7 @@ def write_constants_json(script: str, root_dir):
     del hex_matches, regex, hex_function
 
     function = loads(function)
-    file = open(join(dirname(__file__), root_dir + "constants.json"), "w")
+    file = open(root_dir + "constants.json", "w")
     dump(function, file, indent=4)
     file.close()
 

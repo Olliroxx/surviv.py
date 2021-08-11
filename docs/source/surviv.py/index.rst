@@ -6,3 +6,4 @@ This is the documentation for the client and netcode
 
     netcode/index
     client/index
+    deobfuscation/index

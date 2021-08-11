@@ -39,10 +39,9 @@ def get_json_changelog():
     """
 
     from json import load
-    from os.path import join, dirname
 
     try:
-        file = open(join(dirname(__file__), "changelogs/changelog_changelog.json"), "r")
+        file = open("./changelogs/changelog_changelog.json", "r")
         data = load(file)
         file.close()
     except FileNotFoundError:
@@ -60,9 +59,8 @@ def write_json_changelog(data):
     """
 
     from json import dump
-    from os.path import join, dirname
 
-    file = open(join(dirname(__file__), "./changelogs/changelog_changelog.json"), "w")
+    file = open("./changelogs/changelog_changelog.json", "w")
     dump(data, file, indent=4)
     file.close()
 

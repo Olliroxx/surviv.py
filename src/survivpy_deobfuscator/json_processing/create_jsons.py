@@ -196,7 +196,7 @@ def solve_vars(data: list, functions=None, solved=None):
     if solved is None:
         solved = {}
     import re
-    from utils.asset_processing.misc_utils import DataNeededError
+    from survivpy_deobfuscator.misc_utils import DataNeededError
 
     if functions is None:
         functions = {}
@@ -273,7 +273,6 @@ def handler_generic(filename="", return_processed=False):
 
     def handler(data: str):
         import re
-        from os.path import join, dirname
         import json
 
         data = data.split("var ")
@@ -293,7 +292,7 @@ def handler_generic(filename="", return_processed=False):
         if return_processed:
             return data
         else:
-            with open(join(dirname(__file__), filename), "w") as file:
+            with open(filename, "w") as file:
                 json.dump(data, file, indent=4)
 
     return handler
@@ -318,7 +317,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
          * The result of value of 1 must be a dict
          * The keys of the result dict are used instead of the values from categories
     """
-    from utils.asset_processing.misc_utils import DataNeededError
+    from survivpy_deobfuscator.misc_utils import DataNeededError
 
     def op_bullet_setup(source_dict_name: str):
         """
@@ -392,7 +391,6 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
     def handler(data: str):
         import re
         import json
-        from os.path import join, dirname
 
         data = basic_simplify(data)
 
@@ -416,7 +414,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
  {20}[\"']baseType[\"']: _0x[\da-f]{4,6}
  {16}\}, _0x[\da-f]{4,6}\);
  {12}\}"""
-        merge_dicts_regex = r"(_0x[\da-f]{4,6})\\[[\"']mergeDeep[\"']\\]"
+        merge_dicts_regex = r"(_0x[\da-f]{4,6})\[[\"']mergeDeep[\"']\]"
         functions = {}
         for function in functions_string:
             has_handler = False
@@ -506,7 +504,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
                     raise ValueError("Cannot have categories other than 0 or 1 in normal mode")
         # Input validation
 
-        with open(join(dirname(__file__), filename), "w") as file:
+        with open(filename, "w") as file:
             if has_1:
                 for i in range(len(result)):
                     if categories[i]:
@@ -530,7 +528,7 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
     return handler
 
 
-def create_jsons(root_dir: str, skip_simple=False, skip_objects=False, skip_constants=False, skip_game_modes=False):
+def create_jsons(root_dir="jsons/", skip_simple=False, skip_objects=False, skip_constants=False, skip_game_modes=False):
     """
     This is the main function of create_jsons.py
 
@@ -540,20 +538,22 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False, skip_cons
     :param skip_simple: skips straight to objects
     :param root_dir: The output directory
     """
-    from utils.asset_processing.misc_utils import get_app
-    from utils.asset_processing.json_processing import create_gamemodes_json, create_constants_json, create_objects_json
+    from survivpy_deobfuscator.misc_utils import get_app
+    from survivpy_deobfuscator.json_processing import create_constants_json
+    from survivpy_deobfuscator.json_processing import create_objects_json
+    from survivpy_deobfuscator.json_processing import create_gamemodes_json
     import re
     import os
 
     try:
-        os.mkdir("./jsons")
+        os.mkdir("jsons")
     except FileExistsError:
         pass
     del os
 
     with get_app() as file:
         line = file.readline()
-        if line != "//Bools added\n":
+        if line != "//Json parsed\n":
             raise RuntimeError("The script should be run right after the boolean adder")
         script = line + file.read()
     del line, file
@@ -646,4 +646,4 @@ def create_jsons(root_dir: str, skip_simple=False, skip_objects=False, skip_cons
 
 
 if __name__ == '__main__':
-    create_jsons("./jsons/")
+    create_jsons("jsons/")
