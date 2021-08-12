@@ -359,63 +359,6 @@ def list_to_string(data):
     return string
 
 
-def remove_char_code_lists():
-    """
-    In one or two places, instead of strings, lists of the char codes are used instead.
-    This replaces those lists with the actual strings.
-    """
-
-    with get_app() as file:
-        line = file.readline()
-        if line != "//Strings filled\n":
-            file.close()
-            raise RuntimeError("This script should be run right after the strings have been filled")
-        script = line + file.read()
-    del line
-
-    print("Removing (some) charcode lists")
-
-    usages = len(re.findall("fromCharCode", script))
-
-    regex = r"""(_0x[\da-f]{3,6}) = function _0x[\da-f]{3,6}\(_0x[\da-f]{3,6}\) \{
- {20}return _0x[\da-f]{3,6}\['map'\]\(function\(_0x[\da-f]{3,6}\) \{
- {24}return String\['fromCharCode'\]\(_0x[\da-f]{3,6}\);
- {20}\}\)\['join'\]\(''\);
- {16}},"""
-    functions = re.findall(regex, script)
-    del regex
-
-    if len(functions) < usages:
-        print("More usages than functions")
-    del usages
-
-    for i in functions:
-        regex = i + r"\((\[(?:[\d]+, )+[\d]+?\])\)"
-        matches = re.findall(regex, script)
-
-        if len(matches) + 1 == len(re.findall(i, script)):
-            regex = i + r""" = function _0x[\da-f]{3,6}\(_0x[\da-f]{3,6}\) \{
- {20}return _0x[\da-f]{3,6}\['map'\]\(function\(_0x[\da-f]{3,6}\) \{
- {24}return String\['fromCharCode'\]\(_0x[\da-f]{3,6}\);
- {20}\}\)\['join'\]\(''\);
- {16}},"""
-            script = re.sub(regex, "", script)
-        # If all the usages are either ones this script can handle or the definition, remove the definition
-
-        script = re.sub(i, "list_to_string", script)
-        for x in matches:
-            import ast
-            x = ast.literal_eval(x)
-            del ast
-            script = re.sub("list_to_string\\(" + re.escape(str(x)) + "\\)", "'" + list_to_string(x) + "'", script)
-
-    script = script.replace("//Strings filled\n", "//Unicode lists filled\n", 1)
-
-    with get_app("w") as file:
-        file.write(script)
-    print("Charcode lists removed\n")
-
-
 def add_bools():
     """
     Replaces !![] with true and ![] with false
@@ -506,7 +449,6 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
     if deobfuscate:
         solve_hex()
         fill_strings()
-        remove_char_code_lists()
         add_bools()
         process_jsons()
 

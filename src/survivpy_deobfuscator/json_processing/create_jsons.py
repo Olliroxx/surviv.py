@@ -595,7 +595,7 @@ def create_jsons(root_dir="jsons/", skip_simple=False, skip_objects=False, skip_
         ("price", 16, handler_generic(root_dir + "market_min_values.json")),  # Black market minimum prices (and taxes?)
         ("motherShip", 3, handler_generic(root_dir + "npcs.json")),  # NPCs (so far only mothership+skitters from contact
     ]
-    # Format : string, threshold, handler function
+    # Format: string, threshold, handler function
     # If [string] is found more times than (or equal to) [threshold], then [handler function] is used
 
     if not skip_simple:
