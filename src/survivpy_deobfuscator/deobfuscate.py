@@ -365,7 +365,7 @@ def add_bools():
     """
     with get_app() as file:
         line = file.readline()
-        if line != "//Unicode lists filled\n":
+        if line != "//Strings filled\n":
             file.close()
             raise RuntimeError("This script should be run right after the charcode lists have been filled")
         script = line + file.read()
@@ -373,7 +373,7 @@ def add_bools():
 
     script = script.replace("!![]", "true")
     script = script.replace("![]", "false")
-    script = script.replace("//Unicode lists filled\n", "//Bools added\n", 1)
+    script = script.replace("//Strings filled\n", "//Bools added\n", 1)
 
     with get_app("w") as file:
         file.write(script)
@@ -391,7 +391,7 @@ def process_jsons():
         line = file.readline()
         if line != "//Bools added\n":
             file.close()
-            raise RuntimeError("This script should be run right after the charcode lists have been filled")
+            raise RuntimeError("This script should be run right after the bools have been added")
         script = line + file.read()
     del line
 
