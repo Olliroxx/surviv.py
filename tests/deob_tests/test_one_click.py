@@ -51,3 +51,6 @@ class test_one_click(TestCase):
             actual.close()
 
             self.assertEqual(target_content, actual_content)
+
+        rmtree("./deobfuscated")
+        rmtree("./jsons")
