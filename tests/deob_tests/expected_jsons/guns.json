@@ -1,0 +1,194 @@
+{
+    "gun_template": {
+        "name": "Template gun",
+        "type": "gun",
+        "quality": 0,
+        "fireMode": "auto",
+        "caseTiming": "shoot",
+        "ammo": "9mm",
+        "ammoSpawnCount": 0,
+        "maxClip": 0,
+        "maxReload": 0,
+        "extendedClip": 0,
+        "extendedReload": 0,
+        "reloadTime": 0,
+        "fireDelay": 0.1,
+        "switchDelay": 0.75,
+        "barrelLength": 2.625,
+        "barrelOffset": 0,
+        "recoilTime": 9932111872,
+        "moveSpread": 0,
+        "shotSpread": 0,
+        "bulletCount": 0,
+        "bulletType": "bullet_template",
+        "bulletTypeBonus": "bullet_template_bonus",
+        "headshotMult": 2,
+        "size": "med",
+        "speed": {
+            "equip": 0,
+            "attack": 0
+        },
+        "lootImg": {
+            "sprite": "loot-weapon-mp5.img",
+            "tint": 65280,
+            "border": "loot-circle-outer-01.img",
+            "borderTint": 0,
+            "scale": 0.3
+        },
+        "worldImg": {
+            "sprite": "gun-med-01.img",
+            "scale": {
+                "x": 0.5,
+                "y": 0.49
+            },
+            "tint": 1184274,
+            "leftHandOffset": {
+                "x": 0,
+                "y": 0
+            },
+            "recoil": 1
+        },
+        "particle": {
+            "shellScale": 1,
+            "shellOffset": 0.375
+        },
+        "sound": {
+            "shoot": "mp5_01",
+            "reload": "mp5_reload_01",
+            "pickup": "gun_pickup_01",
+            "empty": "empty_fire_01",
+            "deploy": "mp5_switch_01"
+        }
+    },
+    "bugle": {
+        "name": "Bugle",
+        "type": "gun",
+        "quality": 0,
+        "fireMode": "single",
+        "caseTiming": "shoot",
+        "noDrop": true,
+        "noPotatoSwap": true,
+        "pistol": true,
+        "ignoreDetune": true,
+        "ammo": "bugle_ammo",
+        "ammoSpawnCount": 0,
+        "maxClip": 1,
+        "maxReload": 1,
+        "extendedClip": 4,
+        "extendedReload": 1,
+        "reloadTime": 0.01,
+        "fireDelay": 1,
+        "switchDelay": 0.3,
+        "barrelLength": 3,
+        "barrelOffset": 0,
+        "recoilTime": 10000000000,
+        "moveSpread": 1,
+        "shotSpread": 1,
+        "bulletCount": 1,
+        "bulletType": "bullet_bugle",
+        "noSplinter": true,
+        "headshotMult": 1,
+        "speed": {
+            "equip": 0,
+            "attack": 0
+        },
+        "lootImg": {
+            "sprite": "loot-weapon-bugle.img",
+            "tint": 65280,
+            "border": "loot-circle-outer-01.img",
+            "borderTint": 0,
+            "scale": 0.3
+        },
+        "worldImg": {
+            "sprite": "gun-bugle-01.img",
+            "scale": {
+                "x": 0.5,
+                "y": 0.5
+            },
+            "tint": 16777215,
+            "leftHandOffset": {
+                "x": 12,
+                "y": 0
+            },
+            "recoil": 4
+        },
+        "particle": {
+            "shellScale": 4,
+            "shellOffset": 2,
+            "shellForward": 1
+        },
+        "sound": {
+            "shoot": "bugle_01",
+            "shootTeam": {
+                "1": "bugle_01",
+                "2": "bugle_02"
+            },
+            "shootAlt": "bugle_03",
+            "reload": "",
+            "pickup": "stow_weapon_01",
+            "empty": "empty_fire_01",
+            "deploy": "stow_weapon_01"
+        }
+    },
+    "vss": {
+        "name": "VSS",
+        "type": "gun",
+        "quality": 1,
+        "fireMode": "single",
+        "caseTiming": "shoot",
+        "ammo": "9mm",
+        "ammoSpawnCount": 60,
+        "maxClip": 20,
+        "maxReload": 20,
+        "extendedClip": 30,
+        "extendedReload": 30,
+        "reloadTime": 2.3,
+        "fireDelay": 0.16,
+        "switchDelay": 0.75,
+        "barrelLength": 3.7,
+        "barrelOffset": 0,
+        "recoilTime": 10000000000,
+        "moveSpread": 3,
+        "shotSpread": 2,
+        "bulletCount": 1,
+        "bulletType": "bullet_vss",
+        "bulletTypeBonus": "bullet_vss_bonus",
+        "headshotMult": 2,
+        "speed": {
+            "equip": 0,
+            "attack": 0
+        },
+        "lootImg": {
+            "sprite": "loot-weapon-vss.img",
+            "tint": 65280,
+            "border": "loot-circle-outer-01.img",
+            "borderTint": 0,
+            "scale": 0.3
+        },
+        "worldImg": {
+            "sprite": "gun-vss-01.img",
+            "scale": {
+                "x": 0.5,
+                "y": 0.5
+            },
+            "tint": 16777215,
+            "leftHandOffset": {
+                "x": 9,
+                "y": 0
+            },
+            "recoil": 1
+        },
+        "particle": {
+            "shellScale": 1,
+            "shellOffset": 0.375
+        },
+        "sound": {
+            "shoot": "vss_01",
+            "reload": "vss_reload_01",
+            "pickup": "gun_pickup_01",
+            "empty": "empty_fire_01",
+            "deploy": "vss_switch_01",
+            "fallOff": 3
+        }
+    }
+}

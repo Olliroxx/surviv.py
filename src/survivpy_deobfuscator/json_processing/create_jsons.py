@@ -554,7 +554,7 @@ def create_jsons(root_dir="jsons/", skip_simple=False, skip_objects=False, skip_
     with get_app() as file:
         line = file.readline()
         if line != "//Json parsed\n":
-            raise RuntimeError("The script should be run right after the boolean adder")
+            raise RuntimeError("The script should be run right after the json parser")
         script = line + file.read()
     del line, file
     # Check at what stage this is being run
@@ -565,9 +565,7 @@ def create_jsons(root_dir="jsons/", skip_simple=False, skip_objects=False, skip_
     matches = re.findall(regex, script)
     if len(matches) != 1:
         raise RuntimeError
-    regex = r"[a-f\d]{8}"
-    matches = re.findall(regex, matches[0])
-    del regex
+    matches = re.findall(r"[a-f\d]{8}", matches[0])
     # There's a function that contains the names of other functions with the data we want in them. This finds that function
 
     filters = [
@@ -593,7 +591,7 @@ def create_jsons(root_dir="jsons/", skip_simple=False, skip_objects=False, skip_
         ("itemPool", 6, handler_generic(root_dir + "item_pools.json")),  # Item pools
         ("rescheduled", 3, handler_generic(root_dir + "xp_boost_events.json")),  # XP boost times and amounts
         ("price", 16, handler_generic(root_dir + "market_min_values.json")),  # Black market minimum prices (and taxes?)
-        ("motherShip", 3, handler_generic(root_dir + "npcs.json")),  # NPCs (so far only mothership+skitters from contact
+        ("motherShip", 3, handler_generic(root_dir + "npcs.json")),  # NPCs (so far only mothership+skitters from contact)
     ]
     # Format: string, threshold, handler function
     # If [string] is found more times than (or equal to) [threshold], then [handler function] is used

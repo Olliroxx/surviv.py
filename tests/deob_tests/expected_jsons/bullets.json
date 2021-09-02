@@ -1,0 +1,87 @@
+{
+    "bullet_template": {
+        "type": "bullet",
+        "damage": 0,
+        "obstacleDamage": 0,
+        "falloff": 0.0,
+        "distance": 0,
+        "speed": 0,
+        "variance": 0,
+        "shrapnel": false,
+        "tracerColor": "9mm",
+        "tracerWidth": 0.0,
+        "tracerLength": 0.0
+    },
+    "bullet_fakegun1": {
+        "type": "bullet",
+        "damage": 0,
+        "obstacleDamage": 1,
+        "falloff": 0.0,
+        "distance": 0,
+        "speed": 1,
+        "variance": 1.5,
+        "shrapnel": false,
+        "tracerColor": "test tracer color",
+        "tracerWidth": 3.141592653589793,
+        "tracerLength": 0.0
+    },
+    "bullet_fakegun2": {
+        "type": "bullet",
+        "damage": 0,
+        "obstacleDamage": 0,
+        "falloff": 0.0,
+        "distance": 0,
+        "speed": 0,
+        "variance": 0,
+        "shrapnel": false,
+        "tracerColor": "tallo\\x27s_tracerColor",
+        "tracerWidth": 0.0,
+        "tracerLength": 0.0
+    },
+    "falloff_filler": {
+        "falloff1": "falloff",
+        "falloff2": "falloff"
+    },
+    "bullet_template_bonus": {
+        "baseType": "bullet_template",
+        "type": "bullet",
+        "damage": 0,
+        "obstacleDamage": 0,
+        "falloff": 0.0,
+        "distance": 100.0,
+        "speed": 102.0,
+        "variance": 0,
+        "shrapnel": false,
+        "tracerColor": "9mm",
+        "tracerWidth": 0.0,
+        "tracerLength": 0.0
+    },
+    "bullet_fakegun1_bonus": {
+        "baseType": "bullet_fakegun1",
+        "type": "bullet",
+        "damage": 0,
+        "obstacleDamage": 1,
+        "falloff": 0.0,
+        "distance": 100.0,
+        "speed": 102.0,
+        "variance": 1.5,
+        "shrapnel": false,
+        "tracerColor": "test tracer color",
+        "tracerWidth": 3.141592653589793,
+        "tracerLength": 0.0
+    },
+    "bullet_fakegun2_bonus": {
+        "baseType": "bullet_fakegun2",
+        "type": "bullet",
+        "damage": 0,
+        "obstacleDamage": 0,
+        "falloff": 0.0,
+        "distance": 100.0,
+        "speed": 102.0,
+        "variance": 0,
+        "shrapnel": false,
+        "tracerColor": "tallo\\x27s_tracerColor",
+        "tracerWidth": 0.0,
+        "tracerLength": 0.0
+    }
+}

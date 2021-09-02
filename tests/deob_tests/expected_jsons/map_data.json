@@ -1,0 +1,497 @@
+{
+    "main": {
+        "mapId": 0,
+        "desc": {
+            "name": "Normal",
+            "icon": "img/gui/emote.svg",
+            "buttonCss": "",
+            "buttonText": "index-play-mode-main"
+        },
+        "assets": {
+            "audio": [
+                {
+                    "name": "club_music_01",
+                    "channel": "ambient"
+                },
+                {
+                    "name": "club_music_02",
+                    "channel": "ambient"
+                },
+                {
+                    "name": "ambient_steam_01",
+                    "channel": "ambient"
+                }
+            ],
+            "atlases": [
+                "gradient",
+                "loadout",
+                "loadout2",
+                "shared",
+                "main"
+            ]
+        },
+        "biome": {
+            "colors": {
+                "background": 2118510,
+                "water": 3310251,
+                "waterRipple": 11792639,
+                "beach": 13480795,
+                "riverbank": 9461284,
+                "grass": 8433481,
+                "underground": 1772803,
+                "playerSubmerge": 2854052,
+                "playerGhillie": 8630096
+            },
+            "valueAdjust": 1,
+            "sound": {
+                "riverShore": "sand"
+            },
+            "particles": {
+                "camera": ""
+            },
+            "tracerColors": {},
+            "airdrop": {
+                "planeImg": "map-plane-01.img",
+                "planeSound": "plane_01",
+                "airdropImg": "map-chute-01.img"
+            }
+        },
+        "gameMode": {
+            "maxPlayers": 80,
+            "killLeaderEnabled": true
+        }
+    },
+    "main_spring": {
+        "mapId": 0,
+        "desc": {
+            "name": "Awesome Blossoms",
+            "icon": "img/loot/loot-blossom-icon.svg",
+            "buttonCss": "btn-mode-blossoms",
+            "buttonText": "index-play-mode-spring"
+        },
+        "assets": {
+            "audio": [],
+            "atlases": [
+                "gradient",
+                "loadout",
+                "loadout2",
+                "shared",
+                "main",
+                "valentine"
+            ]
+        },
+        "biome": {
+            "colors": {
+                "background": 2118510,
+                "water": 3310251,
+                "waterRipple": 11792639,
+                "beach": 16035400,
+                "riverbank": 9079434,
+                "grass": 6066442,
+                "underground": 1772803,
+                "playerSubmerge": 2854052,
+                "playerGhillie": 4285194
+            },
+            "sound": {
+                "riverShore": "stone"
+            },
+            "particles": {
+                "camera": "falling_leaf_spring"
+            }
+        },
+        "gameMode": {
+            "maxPlayers": 80,
+            "killLeaderEnabled": true
+        }
+    },
+    "main_summer": {
+        "mapId": 0,
+        "desc": {
+            "name": "Normal",
+            "icon": "img/gui/emote.svg",
+            "buttonCss": "",
+            "buttonText": "index-play-mode-main"
+        },
+        "assets": {
+            "audio": [
+                {
+                    "name": "club_music_01",
+                    "channel": "ambient"
+                },
+                {
+                    "name": "club_music_02",
+                    "channel": "ambient"
+                },
+                {
+                    "name": "ambient_steam_01",
+                    "channel": "ambient"
+                }
+            ],
+            "atlases": [
+                "gradient",
+                "loadout",
+                "loadout2",
+                "shared",
+                "main"
+            ]
+        },
+        "biome": {
+            "colors": {
+                "background": 2118510,
+                "water": 3310251,
+                "waterRipple": 11792639,
+                "beach": 14458408,
+                "riverbank": 10711321,
+                "grass": 6460706,
+                "underground": 1772803,
+                "playerSubmerge": 2854052,
+                "playerGhillie": 6658085
+            }
+        },
+        "gameMode": {
+            "maxPlayers": 80,
+            "killLeaderEnabled": true
+        }
+    },
+    "woods": {
+        "mapId": 2,
+        "desc": {
+            "name": "Woods",
+            "icon": "img/gui/player-king-woods.svg",
+            "buttonCss": "btn-mode-woods",
+            "buttonText": "index-play-mode-woods"
+        },
+        "assets": {
+            "audio": [
+                {
+                    "name": "vault_change_02",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "log_01",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "log_02",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "helmet03_forest_pickup_01",
+                    "channel": "ui"
+                },
+                {
+                    "name": "ability_stim_01",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "leader_dead_01",
+                    "channel": "ui"
+                }
+            ],
+            "atlases": [
+                "gradient",
+                "loadout",
+                "loadout2",
+                "shared",
+                "woods"
+            ]
+        },
+        "biome": {
+            "colors": {
+                "background": 2118510,
+                "water": 3310251,
+                "waterRipple": 11792639,
+                "beach": 15709019,
+                "riverbank": 7812619,
+                "grass": 9339690,
+                "underground": 1772803,
+                "playerSubmerge": 2854052
+            },
+            "particles": {
+                "camera": "falling_leaf"
+            }
+        },
+        "gameMode": {
+            "maxPlayers": 80,
+            "woodsMode": true
+        }
+    },
+    "woods_snow": {
+        "mapId": 2,
+        "desc": {
+            "name": "Woods",
+            "icon": "img/gui/player-king-woods.svg",
+            "buttonCss": "btn-mode-woods",
+            "buttonText": "index-play-mode-woods"
+        },
+        "assets": {
+            "audio": [
+                {
+                    "name": "vault_change_02",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "footstep_08",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "footstep_09",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "helmet03_forest_pickup_01",
+                    "channel": "ui"
+                },
+                {
+                    "name": "ability_stim_01",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "leader_dead_01",
+                    "channel": "ui"
+                },
+                {
+                    "name": "snowball_01",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "snowball_02",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "snowball_pickup_01",
+                    "channel": "ui"
+                }
+            ],
+            "atlases": [
+                "gradient",
+                "loadout",
+                "loadout2",
+                "shared",
+                "woods",
+                "snow"
+            ]
+        },
+        "biome": {
+            "colors": {
+                "background": 603705,
+                "water": 806225,
+                "waterRipple": 11792639,
+                "beach": 13480795,
+                "riverbank": 9461284,
+                "grass": 12434877,
+                "underground": 1772803,
+                "playerSubmerge": 2854052
+            },
+            "particles": {
+                "camera": "falling_snow_slow"
+            },
+            "tracerColors": {
+                "762mm": {
+                    "regular": 9871846,
+                    "saturated": 11257087,
+                    "alphaRate": 0.96,
+                    "alphaMin": 0.4
+                }
+            }
+        },
+        "gameMode": {
+            "maxPlayers": 80,
+            "woodsMode": true
+        }
+    },
+    "woods_spring": {
+        "mapId": 2,
+        "desc": {
+            "name": "Woods",
+            "icon": "img/gui/player-king-woods.svg",
+            "buttonCss": "btn-mode-woods",
+            "buttonText": "index-play-mode-woods"
+        },
+        "assets": {
+            "audio": [
+                {
+                    "name": "vault_change_02",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "log_01",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "log_02",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "helmet03_forest_pickup_01",
+                    "channel": "ui"
+                },
+                {
+                    "name": "ability_stim_01",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "leader_dead_01",
+                    "channel": "ui"
+                }
+            ],
+            "atlases": [
+                "gradient",
+                "loadout",
+                "loadout2",
+                "shared",
+                "woods"
+            ]
+        },
+        "biome": {
+            "colors": {
+                "background": 2118510,
+                "water": 3310251,
+                "waterRipple": 11792639,
+                "beach": 15709019,
+                "riverbank": 9079434,
+                "grass": 4351497,
+                "underground": 1772803,
+                "playerSubmerge": 2854052
+            },
+            "sound": {
+                "riverShore": "stone"
+            },
+            "particles": {
+                "camera": "falling_leaf_spring"
+            }
+        },
+        "gameMode": {
+            "maxPlayers": 80,
+            "woodsMode": true
+        }
+    },
+    "storm": {
+        "mapId": 15,
+        "desc": {
+            "name": "Storm",
+            "icon": "img/gui/storm-icon.svg",
+            "buttonCss": "btn-mode-storm"
+        },
+        "assets": {
+            "audio": [
+                {
+                    "name": "vault_change_02",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "log_01",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "log_02",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "helmet03_forest_pickup_01",
+                    "channel": "ui"
+                },
+                {
+                    "name": "ability_stim_01",
+                    "channel": "sfx"
+                },
+                {
+                    "name": "leader_dead_01",
+                    "channel": "ui"
+                }
+            ],
+            "atlases": [
+                "gradient",
+                "loadout",
+                "loadout2",
+                "shared",
+                "woods",
+                "storm"
+            ]
+        },
+        "biome": {
+            "colors": {
+                "background": 2118510,
+                "water": 4548977,
+                "waterRipple": 11792639,
+                "beach": 15709019,
+                "riverbank": 7812619,
+                "grass": 9339690,
+                "underground": 1772803,
+                "playerSubmerge": 2854052
+            },
+            "particles": {
+                "camera": "falling_rain_fast"
+            }
+        },
+        "gameMode": {
+            "maxPlayers": 80,
+            "woodsMode": true,
+            "rainMode": true
+        }
+    },
+    "contact": {
+        "mapId": 17,
+        "desc": {
+            "name": "Contact",
+            "icon": "img/loot/loot-contact.svg",
+            "buttonCss": "btn-mode-contact",
+            "buttonText": "index-play-mode-contact"
+        },
+        "assets": {
+            "audio": [
+                {
+                    "name": "club_music_01",
+                    "channel": "ambient"
+                },
+                {
+                    "name": "club_music_02",
+                    "channel": "ambient"
+                },
+                {
+                    "name": "ambient_steam_01",
+                    "channel": "ambient"
+                }
+            ],
+            "atlases": [
+                "gradient",
+                "loadout",
+                "loadout2",
+                "shared",
+                "main",
+                "contact"
+            ]
+        },
+        "biome": {
+            "colors": {
+                "background": 2118510,
+                "water": 8347647,
+                "waterRipple": 11792639,
+                "beach": 6780065,
+                "riverbank": 5069707,
+                "grass": 2963549,
+                "underground": 1772803,
+                "playerSubmerge": 2854052,
+                "playerGhillie": 8630096
+            },
+            "valueAdjust": 1,
+            "sound": {
+                "riverShore": "sand"
+            },
+            "particles": {
+                "camera": ""
+            },
+            "tracerColors": {},
+            "airdrop": {
+                "planeImg": "map-plane-01.img",
+                "planeSound": "plane_01",
+                "airdropImg": "map-chute-01.img"
+            }
+        },
+        "gameMode": {
+            "maxPlayers": 80,
+            "killLeaderEnabled": true,
+            "contactMode": true
+        }
+    }
+}

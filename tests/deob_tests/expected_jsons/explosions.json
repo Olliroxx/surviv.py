@@ -1,0 +1,34 @@
+{
+    "explosion_template": {
+        "type": "explosion",
+        "damage": 0,
+        "obstacleDamage": 0,
+        "rad": {
+            "min": 0,
+            "max": 0
+        },
+        "shrapnelCount": 0,
+        "shrapnelType": "shrapnel_frag",
+        "explosionEffectType": "frag",
+        "decalType": "decal_frag_explosion"
+    },
+    "explosion_1": {
+        "type": "explosion",
+        "damage": 1,
+        "obstacleDamage": 1,
+        "rad": {
+            "min": 3,
+            "max": 5
+        },
+        "shrapnelCount": 7,
+        "shrapnelType": "shrapnel_frag",
+        "explosionEffectType": "frag",
+        "decalType": "decal_frag_explosion"
+    },
+    "explosionEffectType_filler": {
+        "explosionEffectType1": "explosionEffectType",
+        "explosionEffectType2": "explosionEffectType",
+        "explosionEffectType3": "explosionEffectType",
+        "explosionEffectType4": "explosionEffectType"
+    }
+}

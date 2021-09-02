@@ -141,6 +141,7 @@ def get_complex_app():
     diffable = script
     diffable = sub(r"_0x[\da-f]{4,6}", "_0xxxxxx", diffable)
     diffable = sub(r"'[\da-f]{8}'", "'xxxxxxxx'", diffable)
+    diffable = sub(r"\\x20", "\x20", diffable)
 
     result["diffable"] = diffable
 

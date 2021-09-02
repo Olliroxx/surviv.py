@@ -90,31 +90,30 @@ def write_objects_json(script, root_dir):
     # Get the function containing the object info
 
     function_regex_base = "\n {12}function _0x[\\da-f]{4,6}\\(_0x[\\da-f]{4,6}(?:, _0x[\\da-f]{4,6})+\\) {\n.*?\n {12}}"
-    weighted_random_regex = r"""
- {12}function _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}\) {
+    weighted_random_regex = r""" {12}function _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}\) \{
  {16}var _0x[\da-f]{4,6} = \[];
- {16}for \(var _0x[\da-f]{4,6} in _0x[\da-f]{4,6}\) {
- {20}_0x[\da-f]{4,6}\['hasOwnProperty']\(_0x[\da-f]{4,6}\) && _0x[\da-f]{4,6}\['push']\({
+ {16}for \(var _0x[\da-f]{4,6} in _0x[\da-f]{4,6}\) \{
+ {20}_0x[\da-f]{4,6}\['hasOwnProperty']\(_0x[\da-f]{4,6}\) && _0x[\da-f]{4,6}\['push']\(\{
  {24}'type': _0x[\da-f]{4,6},
  {24}'weight': _0x[\da-f]{4,6}\[_0x[\da-f]{4,6}]
  {20}}\);
  {16}}
  {16}if \(_0x[\da-f]{4,6}\['length'] == 0\) throw new Error\('Invalid(?:\\x20| )obstacle(?:\\x20| )types'\);
  {16}var _0x[\da-f]{4,6} = 0;
- {16}for \(var _0x[\da-f]{4,6} = 0; _0x[\da-f]{4,6} < _0x[\da-f]{4,6}\['length']; _0x[\da-f]{4,6}\+\+\) {
+ {16}for \(var _0x[\da-f]{4,6} = 0; _0x[\da-f]{4,6} < _0x[\da-f]{4,6}\['length']; _0x[\da-f]{4,6}\+\+\) \{
  {20}_0x[\da-f]{4,6} \+= _0x[\da-f]{4,6}\[_0x[\da-f]{4,6}]\['weight'];
  {16}}
- {16}return function\(\) {
+ {16}return function\(\) \{
  {20}var _0x[\da-f]{4,6} = _0x[\da-f]{4,6}\['random']\(0, _0x[\da-f]{4,6}\),
  {24}_0x[\da-f]{4,6} = 0;
- {20}while \(_0x[\da-f]{4,6} > _0x[\da-f]{4,6}\[_0x[\da-f]{4,6}]\['weight']\) {
+ {20}while \(_0x[\da-f]{4,6} > _0x[\da-f]{4,6}\[_0x[\da-f]{4,6}]\['weight']\) \{
  {24}_0x[\da-f]{4,6} -= _0x[\da-f]{4,6}\[_0x[\da-f]{4,6}]\['weight'], _0x[\da-f]{4,6}\+\+;
  {20}}
  {20}return _0x[\da-f]{4,6}\[_0x[\da-f]{4,6}]\['type'];
  {16}};"""
     shipping_container_function_regex = r"""
- {12}function _0x[\da-f]{4,7}\(_0x[\da-f]{4,7}\) {
- {16}var _0x[\da-f]{4,7} = \[{.*?container.*?
+ {12}function _0x[\da-f]{4,7}\(_0x[\da-f]{4,7}\) \{
+ {16}var _0x[\da-f]{4,7} = \[\{.*?container.*?
  {20}}],
  {20}_0x[\da-f]{4,7} = \[\{.*?container.*? {20}}];
  {16}return \{.*?container.*?
@@ -137,7 +136,7 @@ def write_objects_json(script, root_dir):
 
     result = {}
 
-    if var_matches[0].count("metal") > var_matches[1].count("metal"):
+    if var_matches[0].count("destructible") > var_matches[1].count("destructible"):
         result["materials"] = json.loads(var_matches[1][29:].replace("'", '"'))
         main_list = var_matches[0]
     else:
@@ -390,8 +389,7 @@ def function_list_to_dict(data: list):
             "value": args
         })
 
-    weighted_random_regex = r"""
- {12}function _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}\) {
+    weighted_random_regex = r""" {12}function _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}\) {
  {16}var _0x[\da-f]{4,6} = \[];
  {16}for \(var _0x[\da-f]{4,6} in _0x[\da-f]{4,6}\) {
  {20}_0x[\da-f]{4,6}\['hasOwnProperty']\(_0x[\da-f]{4,6}\) && _0x[\da-f]{4,6}\['push']\({
@@ -858,3 +856,10 @@ def solve_main(main_dict, solved, solve_at_runtime):
                             match_num += 1
             # Solve, find and replace (for everything else)
     return recursive_simplify(main_dict, {})
+
+
+if __name__ == '__main__':
+    from survivpy_deobfuscator.misc_utils import get_app
+    with get_app() as file:
+        in_data = file.read()
+    write_objects_json(in_data, "./jsons")

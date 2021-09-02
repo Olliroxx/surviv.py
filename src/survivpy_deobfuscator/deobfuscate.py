@@ -133,9 +133,9 @@ def eval_(node):
         raise TypeError(node)
 
 
-def find_usages(solved_items, script):
+def add_context(solved_items, script):
     """
-    Used for adding multithreading to float processing, adds context characters to each match.
+    Used for adding multithreading to float, adds context characters to each match.
 
     Without this, `1 + 2` would replace `1 + 20` with `30`. Adding context characters avoids that.
 
@@ -147,7 +147,7 @@ def find_usages(solved_items, script):
     result = {}
 
     for old, new in solved_items:
-        for each in findall(r"([^\d])" + escape(old) + r"([^\d])", script):
+        for each in findall(r"([^\dx])" + escape(old) + r"([^\dx])", script):
             result[each[0] + old + each[1]] = each[0] + new + each[1]
 
     return result
@@ -180,39 +180,45 @@ def solve_hex():
     del file
     # Check that auto indent was run just before this, and read the file
 
-    to_solve = set(re.findall(r"[^_](-?0x[\da-f]+(?: ?[*+/-] ?-?0x[\da-f]*)+)", script))
-    print(str(len(to_solve)) + " ints to simplify")
-    for element in to_solve:
-        script = script.replace(element, str(eval_exp(element)))
-
-    regex = r"-?[\d.]+ [+/*\-] -?[\d.]+"
-    matches = set(re.findall(regex, script))
-    print(str(len(matches)) + " decimals")
+    matches = set(re.findall(r"[^_]-?0x[\da-f]+(?: ?[*+/-] ?-?0x[\da-f]*)+[ ,;)\]}]", script, re.DOTALL))
+    print(str(len(matches)) + " ints to simplify")
 
     solved = {}
     for match in matches:
-        solved[match] = str(eval_exp(match))
+        solved[match] = match[0] + str(eval_exp(match[1:-1])) + match[-1]
 
-    split_size = ceil(len(solved) / cpu_count())
-    split = split_list(solved.items(), split_size)
-
-    p = Pool()
-    result = p.starmap(find_usages, zip(split, [script] * cpu_count()))
-    p.close()
-
-    context_added = {}
-    for item in result:
-        context_added = context_added | item
-
-    for old, new in context_added.items():
+    for old, new in solved.items():
         script = script.replace(old, new)
 
-    regex = r"-\([\d\.]+\)"
+    matches = set(re.findall(r"-?[\d.]+ [+/*\-] -?[.\d]+", script))
+    print(str(len(matches)) + " decimals")
+
+    if matches:
+        solved = {}
+        for match in matches:
+            solved[match] = str(eval_exp(match))
+
+        split_size = ceil(len(solved) / cpu_count())
+        split = split_list(solved.items(), split_size)
+
+        p = Pool()
+        result = p.starmap(add_context, zip(split, [script] * cpu_count()))
+        p.close()
+
+        context_added = {}
+        for item in result:
+            context_added = context_added | item
+
+        for old, new in context_added.items():
+            script = script.replace(old, new)
+
+    regex = r"[ -]\([\d\.]+\)"
     matches = set(re.findall(regex, script))
     print(str(len(matches)) + " expressions to simplify")
 
     for match in matches:
-        script = script.replace(match, str(eval_exp(match)))
+        starting_space = " " if match[0] == " " else ""
+        script = script.replace(match, starting_space + str(eval_exp(match)))
 
     script = script.replace("// Indented\n", "//Hex simplified\n", 1)
 
@@ -279,7 +285,7 @@ def fill_strings():
     big_list = ast.literal_eval(line[line.find("["):])
     # Get the list and parse it
 
-    regex = "\\(" + list_name + r", ([\d]+?)\)"
+    regex = r"\(" + list_name + r", ([\d]+?)\)"
     shift_amount = int(re.findall(regex, script)[0]) * -1
     del regex
     from collections import deque
@@ -296,7 +302,7 @@ def fill_strings():
     # Remove the list
 
     regex = r"""var (a0_0x[\da-f]{3,7}) = function\(_0x[\da-f]{6}, _0x[\da-f]{6}\) \{
-    _0x[\da-f]{6} = _0x[\da-f]{6} - \(0\);
+    _0x[\da-f]{6} = _0x[\da-f]{6} - ?\(?0\)?;
     var _0x[\da-f]{6} = """ + list_name + r"""\[_0x[\da-f]{6}];
     return _0x[\da-f]{6};
 };"""
@@ -306,7 +312,7 @@ def fill_strings():
     # This finds the new name
 
     regex = r"""var a0_[\da-f]{3,7} = function\(_0x[\da-f]{6}, _0x[\da-f]{6}\) \{
-        _0x[\da-f]{6} = _0x[\da-f]{6} - \(0\);
+        _0x[\da-f]{6} = _0x[\da-f]{6} - ?\(?0\)?;
         var _0x[\da-f]{6} = """ + list_name + r"""\[_0x[\da-f]{6}];
         return _0x[\da-f]{6};
     };"""
@@ -322,9 +328,7 @@ def fill_strings():
     print(str(len(matches)) + " strings to fill")
 
     for match in matches:
-        script = script.replace(alt_name + "('" + match + "')",
-                                "'" + big_list[int(match, 16)].replace("\n", r"\x0a").replace("'",
-                                                                                              r"\'") + "'")  # noqa: E501
+        script = script.replace(alt_name + "('" + match + "')", "'" + big_list[int(match, 16)].replace("\n", r"\x0a").replace("'", r"\'") + "'")  # noqa: E501
         # More readable, slower version:
         # number = int(match, 16)
         # to_replace = alt_name + "('" + match + "')"
@@ -398,14 +402,16 @@ def process_jsons():
     print("Parsing json")
 
     replacements = {}
-    for to_parse in re.findall(r" = JSON\['parse']\('.*'\);", script):
-        parse_data = to_parse[18:-3]
+    for to_parse in re.findall(r"( = JSON\['parse']\('.*'\))[;,]", script):
+        parse_data = to_parse[18:-2]
         parse_data = parse_data.replace("\\'", "'")
         parse_data = parse_data.replace("\\x22", "\x22")
         parse_data = parse_data.replace("\\x20", "\x20")
         parsed = loads(parse_data)
         result = dumps(parsed, indent=4)
         result = indent(result, " " * 12)
+        result = result.lstrip(" ")
+        result = " = " + result
         replacements[to_parse] = result
 
     for old, new in replacements.items():

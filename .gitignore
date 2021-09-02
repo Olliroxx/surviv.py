@@ -83,5 +83,8 @@ venv.bak/
 /src/survivpy_deobfuscator/json_processing/jsons/*
 /utils/net/vcs/changelogs/*
 /out/
-/deobfuscated/
+/utils/net/vcs/deobfuscated/
 /jsons/
+/tests/deob_tests/jsons/
+/tests/deob_tests/deobfuscated/
+/deobfuscated/
