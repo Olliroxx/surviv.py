@@ -1,6 +1,6 @@
 Surviv.io
 =========
-Note: This is reverse engineered, accuracy may not be 100%
+Note: This is reverse engineered, may not be 100% accurate
 
 .. toctree::
    :maxdepth: 1
