@@ -1,3 +1,9 @@
+from logging import getLogger
+from ws4py.client.threadedclient import WebSocketClient
+from json import loads, dumps
+from time import time
+logger = getLogger("survivpy_net")
+
 KNOWN_SAFE_VERSION = 108
 
 
@@ -10,7 +16,8 @@ class Profile:
 
     :param id_: Optional, the user id to use. If not set will make a new account
     """
-    def __init__(self, id_=None,):
+
+    def __init__(self, id_=None, ):
 
         self.id = id_
         import requests
@@ -221,3 +228,121 @@ class Profile:
 
         from survivpy_net import ingame
         return ingame.GameConnection(uri, settings, self.version)
+
+    def build_player_data(self):
+        return {
+            "isMobile": self.is_mobile,
+            "loadout": {
+                "melee": self.loadout["melee"],
+                "outfit": self.loadout["outfit"]
+            },
+            "name": self.ign,
+            "unlinked": self.unlinked
+        }
+
+    def join_lobby(self, lobby_url):
+        return JoinLobbyClient(lobby_url, self.build_player_data())
+
+    def create_lobby(self, room_data):
+        """
+        Example ``room_data``:
+
+            .. code-block:: py
+
+            {
+                "autoFill": True,
+                "findingGame": False,
+                "gameModeIdx": 1,
+                "lastError": "",
+                "region": "eu",
+                "roomUrl": ""
+            }
+
+        """
+        return CreateLobbyClient(room_data, self.build_player_data())
+
+
+class _LobbyClient(WebSocketClient):
+    def __init__(self):
+        super().__init__("wss://surviv.io/team_v2")
+        self.state = {"state": "opening", "reason": ""}
+        self.local_player_id = 0
+        self.players = []
+        self.room = {}
+        self.game_data = None
+        self.time_since_packet = time()
+        self.connect()
+
+    def set_props(self, props):
+        self.send(dumps({"type": "setRoomProps", "data": props}))
+
+    def received_message(self, message):
+        message = message.data.decode("utf-8")
+
+        def keep_alive(data):
+            pass
+
+        def state(data):
+            self.local_player_id = data["localPlayerId"]
+            self.players = data["players"]
+            self.room = data["room"]
+
+        def join_game(data):
+            self.game_data = data
+
+        def kicked(data):
+            self.close(reason="Kicked")
+
+        def error(data):
+            self.close(reason="Error of type " + str(data["type"]))
+
+        self.time_since_packet = time()
+        message_handlers = {
+            "keepAlive": keep_alive,
+            "state": state,
+            "joinGame": join_game,
+            "kicked": kicked,
+            "error": error
+        }
+        message = loads(message)
+        if message["type"] not in message_handlers:
+            raise RuntimeError("Unexpected message type: " + str(message["type"]))
+        else:
+            message_handlers[message["type"]](message["data"])
+
+    def opened(self):
+        self.state = {"state": "open", "reason": ""}
+
+    def closed(self, code, reason=None):
+        self.state = {"state": "closed", "reason": reason}
+        self.game_data = None
+
+    def play_game(self, data):
+        self.send(dumps({"type": "playGame", "data": data}))
+
+    def game_complete(self):
+        self.send(dumps({"type": "gameComplete"}))
+        self.game_data = None
+
+    def kick(self, player_id):
+        self.send(dumps({"type": "kick", "data": {"playerId": str(player_id)}}))
+
+
+class CreateLobbyClient(_LobbyClient):
+    def __init__(self, room, player):
+        super().__init__()
+        self.join_data = {"playerData": player, "roomData": room}
+
+    def opened(self):
+        super().opened()
+        self.send(dumps({"type": "create", "data": self.join_data}))
+
+
+class JoinLobbyClient(_LobbyClient):
+    def __init__(self, room_url, player,):
+        super().__init__()
+        self.join_data = {"playerData": player, "roomUrl": room_url}
+
+    def opened(self):
+        super().opened()
+        self.send(dumps({"type": "join", "data": self.join_data}))
