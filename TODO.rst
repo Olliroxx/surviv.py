@@ -3,7 +3,6 @@
     * core and custom_types.py
     * deobfuscator script
  * Add the ability to use proxies
-    * Add proxy extraction
  * Add docs for VCS scripts
  * Add docs for json processing scripts
  * Check what docs are missing/incomplete
