@@ -52,5 +52,7 @@ class test_one_click(TestCase):
 
             self.assertEqual(target_content, actual_content)
 
+        self.assertEqual(listdir("./tests/deob_tests/expected_jsons"), listdir("./jsons/"))
+
         rmtree("./deobfuscated")
         rmtree("./jsons")

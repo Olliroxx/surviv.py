@@ -528,22 +528,21 @@ def handler_multidict(filename: str, categories=(0, 0, 1)):
     return handler
 
 
-def create_jsons(root_dir="jsons/", skip_simple=False, skip_objects=False, skip_constants=False, skip_game_modes=False):
+def create_jsons(root_dir="jsons/", skip=None):
     """
     This is the main function of create_jsons.py
 
-    :param skip_game_modes: skips making map_data.json
-    :param skip_constants: skips making constants.json
-    :param skip_objects: skips making objects.json
-    :param skip_simple: skips straight to objects
+    :param skip: list of operations to skip. Can be any or all of: simple, objects, constants, gamemodes, proxies
     :param root_dir: The output directory
     """
     from survivpy_deobfuscator.misc_utils import get_app
-    from survivpy_deobfuscator.json_processing import create_constants_json
-    from survivpy_deobfuscator.json_processing import create_objects_json
-    from survivpy_deobfuscator.json_processing import create_gamemodes_json
+    from survivpy_deobfuscator.json_processing import create_constants_json, create_gamemodes_json, create_objects_json,\
+        create_proxies_json
     import re
     import os
+
+    if skip is None:
+        skip = []
 
     try:
         os.mkdir("jsons")
@@ -596,7 +595,7 @@ def create_jsons(root_dir="jsons/", skip_simple=False, skip_objects=False, skip_
     # Format: string, threshold, handler function
     # If [string] is found more times than (or equal to) [threshold], then [handler function] is used
 
-    if not skip_simple:
+    if "simple" not in skip:
         print(str(len(matches)) + " matches, " + str(len(filters)) + " filters")
 
         for match in matches:
@@ -621,24 +620,22 @@ def create_jsons(root_dir="jsons/", skip_simple=False, skip_objects=False, skip_
 
         del match, function, matches, filters
         # Write every json except for objects
-        print("Simple jsons written, starting objects.json")
+        print("Simple jsons written")
     else:
         print("Skipping simple")
 
-    if skip_objects:
-        print("Skipping objects")
-    else:
-        create_objects_json.write_objects_json(script, root_dir)
+    ops = {
+        "objects": lambda: create_objects_json.write_objects_json(script, root_dir),
+        "constants": lambda: create_constants_json.write_constants_json(script, root_dir),
+        "gamemodes": lambda: create_gamemodes_json.create_game_modes(script, root_dir),
+        "proxies": lambda: create_proxies_json.get_proxies(script, root_dir),
+    }
 
-    if skip_constants:
-        print("Skipping constants")
-    else:
-        create_constants_json.write_constants_json(script, root_dir)
-
-    if skip_game_modes:
-        print("Skipping gamemodes")
-    else:
-        create_gamemodes_json.create_game_modes(script, root_dir)
+    for name, func in ops.items():
+        if name in skip:
+            print("Skipping "+name)
+        else:
+            func()
 
     print("Finished")
 

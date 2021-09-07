@@ -1,8 +1,8 @@
 _DESCRIPTION = "Download and deobfuscate .js files used by https://surviv.io. Also generates .json files."
 _USE_OLD = "Do not download new .js files. Will still download assets if --assets is used."
-_NO_CODE = "Do not re-deobfuscate code. Not compatible with --assets."
-_NO_JSONS = "Do not generate new jsons."
 _ASSETS = "Grab all assets (requires code)"
+_NO_JSONS = "Do not generate new jsons."
+_NO_CODE = "Do not re-deobfuscate code. Not compatible with --assets."
 
 
 def _parse_args(args=None):
@@ -10,9 +10,9 @@ def _parse_args(args=None):
 
     parser = ArgumentParser(description=_DESCRIPTION)
     parser.add_argument("--use-old", help=_USE_OLD, action="store_true")
-    parser.add_argument("--no-code", help=_NO_CODE, action="store_true")
     parser.add_argument("--assets", help=_ASSETS, action="store_true")
     parser.add_argument("--no-jsons", help=_NO_JSONS, action="store_true")
+    parser.add_argument("--no-code", help=_NO_CODE, action="store_true")
 
     return parser.parse_args(args)
 

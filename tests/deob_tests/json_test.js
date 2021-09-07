@@ -1755,6 +1755,99 @@
                 };
             _0x368f04['exports'] = _0x330bdb;
         },
+        '00000018': function(_0x2e93f6, _0xe2e298, _0x163ed1) {
+            'use strict';
+            var _0xfe36e2 = _0x163ed1('f05b4d6a'),
+                _0x5a7e54 = _0x25112d(_0xfe36e2);
+
+            function _0x25112d(_0x543f7e) {
+                return _0x543f7e && _0x543f7e['__esModule'] ? _0x543f7e : {
+                    'default': _0x543f7e
+                };
+            }
+            var _0x3e71d8 = _0x163ed1('00000019'),
+                _0x5ada4c = {
+                    'getProxyDef': function _0x1cc202() {
+                        if (false) {}
+                        var _0x45d20f = (0, _0x5a7e54['default'])(_0x3e71d8);
+                        for (var _0x1937b0 = 0; _0x1937b0 < _0x45d20f['length']; _0x1937b0++) {
+                            var _0x34ebe6 = _0x45d20f[_0x1937b0];
+                            if (window['location']['hostname']['indexOf'](_0x34ebe6) !== -1) return {
+                                'proxy': _0x34ebe6,
+                                'def': _0x3e71d8[_0x34ebe6]
+                            };
+                        }
+                        return null;
+                    }
+                };
+        },
+        '00000019': function(_0x49cd3c) {
+            _0x49cd3c['exports'] = {
+                "surviv.io": {
+                    "all": true
+                },
+                "surviv2.io": {
+                    "google": true,
+                    "discord": true
+                },
+                "2dbattleroyale.com": {
+                    "google": true,
+                    "discord": true
+                },
+                "2dbattleroyale.org": {
+                    "google": true,
+                    "discord": true
+                },
+                "piearesquared.info": {
+                    "google": true,
+                    "discord": true
+                },
+                "thecircleisclosing.com": {
+                    "google": true,
+                    "discord": true
+                },
+                "secantsecant.com": {
+                    "google": true,
+                    "discord": true
+                },
+                "parmainitiative.com": {
+                    "google": true,
+                    "discord": true
+                },
+                "ot38.club": {
+                    "google": true,
+                    "discord": true
+                },
+                "drchandlertallow.com": {
+                    "google": true,
+                    "discord": true
+                },
+                "rarepotato.com": {
+                    "google": true,
+                    "discord": true
+                },
+                "archimedesofsyracuse.info": {
+                    "google": true,
+                    "discord": true
+                },
+                "nevelskoygroup.com": {
+                    "google": true,
+                    "discord": true
+                },
+                "kugahi.com": {
+                    "google": true,
+                    "discord": true
+                },
+                "kugaheavyindustry.com": {
+                    "google": true,
+                    "discord": true
+                },
+                "chandlertallowmd.com": {
+                    "google": true,
+                    "discord": true
+                }
+            };
+        },
         'ffffffff': function(_0x0000, _0x0000, _0x0000) {
             'use strict';
 
