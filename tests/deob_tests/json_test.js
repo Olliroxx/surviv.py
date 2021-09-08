@@ -181,155 +181,105 @@
                         'category': _0x3b8fcb['Locked']
                     },
                     'emote_filler': {
-                        'emote1': 'emote'
-                        'emote2': 'emote'
-                        'emote3': 'emote'
-                        'emote4': 'emote'
-                        'emote5': 'emote'
-                        'emote6': 'emote'
-                        'emote7': 'emote'
-                        'emote8': 'emote'
-                        'emote9': 'emote'
-                        'emote10': 'emote'
-                        'emote11': 'emote'
-                        'emote12': 'emote'
-                        'emote13': 'emote'
-                        'emote14': 'emote'
-                        'emote15': 'emote'
-                        'emote16': 'emote'
-                        'emote17': 'emote'
-                        'emote18': 'emote'
-                        'emote19': 'emote'
-                        'emote20': 'emote'
-                        'emote21': 'emote'
-                        'emote22': 'emote'
-                        'emote23': 'emote'
-                        'emote24': 'emote'
-                        'emote25': 'emote'
-                        'emote26': 'emote'
-                        'emote27': 'emote'
-                        'emote28': 'emote'
-                        'emote29': 'emote'
-                        'emote30': 'emote'
-                        'emote31': 'emote'
-                        'emote32': 'emote'
-                        'emote33': 'emote'
-                        'emote34': 'emote'
-                        'emote35': 'emote'
-                        'emote36': 'emote'
-                        'emote37': 'emote'
-                        'emote38': 'emote'
-                        'emote39': 'emote'
-                        'emote40': 'emote'
-                        'emote41': 'emote'
-                        'emote42': 'emote'
-                        'emote43': 'emote'
-                        'emote44': 'emote'
-                        'emote45': 'emote'
-                        'emote46': 'emote'
-                        'emote47': 'emote'
-                        'emote48': 'emote'
-                        'emote49': 'emote'
-                        'emote50': 'emote'
-                        'emote51': 'emote'
-                        'emote52': 'emote'
-                        'emote53': 'emote'
-                        'emote54': 'emote'
-                        'emote55': 'emote'
-                        'emote56': 'emote'
-                        'emote57': 'emote'
-                        'emote58': 'emote'
-                        'emote59': 'emote'
-                        'emote60': 'emote'
-                        'emote61': 'emote'
-                        'emote62': 'emote'
-                        'emote63': 'emote'
-                        'emote64': 'emote'
-                        'emote65': 'emote'
-                        'emote66': 'emote'
-                        'emote67': 'emote'
-                        'emote68': 'emote'
-                        'emote69': 'emote'
-                        'emote70': 'emote'
-                        'emote71': 'emote'
-                        'emote72': 'emote'
-                        'emote73': 'emote'
-                        'emote74': 'emote'
-                        'emote75': 'emote'
-                        'emote76': 'emote'
-                        'emote77': 'emote'
-                        'emote78': 'emote'
-                        'emote79': 'emote'
-                        'emote80': 'emote'
-                        'emote81': 'emote'
-                        'emote82': 'emote'
-                        'emote83': 'emote'
-                        'emote84': 'emote'
-                        'emote85': 'emote'
-                        'emote86': 'emote'
-                        'emote87': 'emote'
-                        'emote88': 'emote'
-                        'emote89': 'emote'
-                        'emote90': 'emote'
-                        'emote91': 'emote'
-                        'emote92': 'emote'
-                        'emote93': 'emote'
-                        'emote94': 'emote'
-                        'emote95': 'emote'
-                        'emote96': 'emote'
-                        'emote97': 'emote'
-                        'emote98': 'emote'
-                        'emote99': 'emote'
-                        'emote100': 'emote'
-                        'emote101': 'emote'
-                        'emote102': 'emote'
-                        'emote103': 'emote'
-                        'emote104': 'emote'
-                        'emote105': 'emote'
-                        'emote106': 'emote'
-                        'emote107': 'emote'
-                        'emote108': 'emote'
-                        'emote109': 'emote'
-                        'emote110': 'emote'
-                        'emote111': 'emote'
-                        'emote112': 'emote'
-                        'emote113': 'emote'
-                        'emote114': 'emote'
-                        'emote115': 'emote'
-                        'emote116': 'emote'
-                        'emote117': 'emote'
-                        'emote118': 'emote'
-                        'emote119': 'emote'
-                        'emote120': 'emote'
-                        'emote121': 'emote'
-                        'emote122': 'emote'
-                        'emote123': 'emote'
-                        'emote124': 'emote'
-                        'emote125': 'emote'
-                        'emote126': 'emote'
-                        'emote127': 'emote'
-                        'emote128': 'emote'
-                        'emote129': 'emote'
-                        'emote130': 'emote'
-                        'emote131': 'emote'
-                        'emote132': 'emote'
-                        'emote133': 'emote'
-                        'emote134': 'emote'
-                        'emote135': 'emote'
-                        'emote136': 'emote'
-                        'emote137': 'emote'
-                        'emote138': 'emote'
-                        'emote139': 'emote'
-                        'emote140': 'emote'
-                        'emote141': 'emote'
-                        'emote142': 'emote'
-                        'emote143': 'emote'
-                        'emote144': 'emote'
-                        'emote145': 'emote'
-                        'emote146': 'emote'
-                        'emote147': 'emote'
-                        'emote148': 'emote'
-                        'emote149': 'emote'
+                        'emote1': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote2': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote3': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote4': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote5': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote6': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote7': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote8': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote9': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote10': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote11': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote12': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote13': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote14': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote15': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote16': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote17': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote18': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote19': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote20': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote21': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote22': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote23': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote24': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote25': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote26': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote27': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote28': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote29': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote30': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote31': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote32': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote33': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote34': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote35': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote36': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote37': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote38': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote39': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote40': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote41': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote42': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote43': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote44': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote45': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote46': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote47': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote48': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote49': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote50': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote51': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote52': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote53': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote54': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote55': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote56': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote57': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote58': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote59': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote60': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote61': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote62': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote63': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote64': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote65': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote66': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote67': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote68': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote69': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote70': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote71': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote72': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote73': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote74': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote75': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote76': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote77': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote78': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote79': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote80': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote81': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote82': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote83': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote84': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote85': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote86': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote87': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote88': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote89': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote90': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote91': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote92': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote93': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote94': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote95': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote96': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote97': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote98': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote'],
+                        'emote99': ['emote', 'emote', 'emote', 'emote', 'emote', 'emote']
                     }
                 };
             _0x1a1c8c['exports'] = _0x109274;

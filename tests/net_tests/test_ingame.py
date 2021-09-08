@@ -39,8 +39,6 @@ class test_packets(unittest.TestCase):
         self.assertEqual({"reason": "Generic error reason"}, packet.decode(DummyGameState()))
 
     def test_type3(self):
-        from os import listdir
-        print(listdir())
         ingame.update_constants()
         self.packet_with_json("type_03_packet_test_data.json", ingame.Type03Packet, self.assertEqual)
 

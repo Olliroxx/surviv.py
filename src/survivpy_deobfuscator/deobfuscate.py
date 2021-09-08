@@ -180,7 +180,7 @@ def solve_hex():
     del file
     # Check that auto indent was run just before this, and read the file
 
-    matches = set(re.findall(r"[^_]-?0x[\da-f]+(?: ?[*+/-] ?-?0x[\da-f]*)+[ ,;)\]}]", script, re.DOTALL))
+    matches = set(re.findall(r"[^_]-?0x[\da-f]+(?: ?[*+/-] ?-?0x[\da-f]*)+[ ,;)\]}\n]", script, re.DOTALL))
     print(str(len(matches)) + " ints to simplify")
 
     solved = {}

@@ -10,6 +10,18 @@ def get_file(target):
     return data
 
 
+def chunk_split(string):
+    """
+    Splits the script into chunks, with the "'00000000': function....." lines at the boundaries
+
+    :param string:
+    :return:
+    """
+    from re import split
+    regex = r" {8}'[\da-f]{8}': function"
+    return split(regex, string)
+
+
 class test_one_click(TestCase):
     def test_code(self):
 
@@ -25,6 +37,9 @@ class test_one_click(TestCase):
 
         one_click.one_click_deob(["--use-old", "--no-jsons"])
 
+        for expected, actual in zip(chunk_split(get_file("./tests/deob_tests/code_expected.js")),
+                                    chunk_split(get_file("./deobfuscated/js/app.12345678.js"))):
+            self.assertEqual(expected, actual)
         self.assertEqual(get_file("./tests/deob_tests/code_expected.js"), get_file("./deobfuscated/js/app.12345678.js"))
 
         rmtree("./deobfuscated")

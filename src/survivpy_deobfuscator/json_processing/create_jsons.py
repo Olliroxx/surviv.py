@@ -619,7 +619,6 @@ def create_jsons(root_dir="jsons/", skip=None):
                     break
 
         del match, function, matches, filters
-        # Write every json except for objects
         print("Simple jsons written")
     else:
         print("Skipping simple")
