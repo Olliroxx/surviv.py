@@ -8,3 +8,4 @@
  * Check what docs are missing/incomplete
  * Add logging to deobfuscation scripts
  * Add animation extraction
+ * Optimise float processing

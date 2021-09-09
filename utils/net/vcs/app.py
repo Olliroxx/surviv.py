@@ -2,6 +2,10 @@
 Needs deobfuscate.py to run, then copies input and output and creates a diff between the latest version and previous version.
 """
 
+RAW_APP_OVERRIDE = False
+RAW_APP_OVERRIDE_FNAME = "./out/code/js/app.ab0a4988.js"
+RAW_APP_TIME = 1631115954.35
+
 
 def unwrap(text):
     """
@@ -152,6 +156,12 @@ def get_app():
     """
     Gets raw, minified app.js
     """
+
+    if RAW_APP_OVERRIDE:
+        file = open(RAW_APP_OVERRIDE_FNAME, encoding="utf-8")
+        file_content = file.read()
+        file.close()
+        return file_content, RAW_APP_TIME
 
     from requests import get
     from re import findall
