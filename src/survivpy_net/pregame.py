@@ -339,7 +339,7 @@ class CreateLobbyClient(_LobbyClient):
 
 
 class JoinLobbyClient(_LobbyClient):
-    def __init__(self, room_url, player,):
+    def __init__(self, room_url, player):
         super().__init__()
         self.join_data = {"playerData": player, "roomUrl": room_url}
 

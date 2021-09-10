@@ -21,7 +21,7 @@ The smallest possible script:
 
     do_something(conn.state)
 
-Currently, linked accounts and lobbies are not supported, but if you want to reuse an unlinked id you can just pass it to Profile  
+Currently, linked accounts are not supported, but if you want to reuse an unlinked id you can just pass it to Profile
 To change inputs:
 
 .. code-block:: py
@@ -38,3 +38,25 @@ To change inputs:
         "useItem": ""
     }
     conn.send_input_msg(msg)
+
+Lobbies:
+
+.. code-block:: py
+
+
+    import survivpy_net as spn
+
+    profile = spn.pregame.Profile()
+
+    lobby_data = {
+        "autofill": True,
+        "findingGame": False,
+        "gameModeIdx": 1,
+        "lastError": "",
+        "region": "eu",
+        "roomUrl": ""
+    }
+    lobby = profile.create_lobby(lobby_data)
+    # lobby = profile.join_lobby("daWi")
+
+    lobby.set_props, play_game, kick, game_complete
