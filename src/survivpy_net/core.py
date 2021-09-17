@@ -126,6 +126,7 @@ class River:
                     _0x826f0 = _0x50e90b.perp()
                     if (normalised_point.x * _0x826f0.x + normalised_point.y * _0x826f0.y) < 0:
                         _0x826f0 = _0x826f0.mul(-1)
+                        # noinspection PyUnusedLocal
                         normalised_point = _0x826f0
                         modified_endpoint = True
                 # Maybe something with if the start/end of a river is horizontal/vertical?

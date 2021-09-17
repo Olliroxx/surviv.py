@@ -27,7 +27,7 @@ state
     * autofill : bool
     * enabledGameModeIdxs: list(int)
     * findingGame : bool
-    * gmaeModeIdx : int
+    * gameModeIdx : int
     * gameModeSelected : list(int)
     * lastError : str
     * maxPlayers : int

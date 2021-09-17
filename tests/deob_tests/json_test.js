@@ -1798,6 +1798,112 @@
                 }
             };
         },
+        '00000020': function(_0x0000, _0x00000, _0x000000) {
+            'use strict';
+            var _0x46f218 = _0x520e52('5e8b3cfc'),
+                _0x513bda = _0x44bc07(_0x46f218),
+                _0x5e6396 = _0x520e52('f05b4d6a'),
+                _0x4bbceb = _0x44bc07(_0x5e6396),
+                _0x1ac239, _0x166375, _0xe3815f, _0x10423d, _0x399457;
+
+            function _0x44bc07(_0x135a9f) {
+                return _0x135a9f && _0x135a9f['__esModule'] ? _0x135a9f : {
+                    'default': _0x135a9f
+                };
+            }
+            var _0x16b364 = _0x520e52('989ad62a'),
+                _0x2402b1 = _0x16b364['Anim'],
+                _0x133a32 = _0x520e52('0e566746'),
+                _0x25d30c = _0x520e52('10899aea'),
+                _0x267824 = function() {
+                    function _0x321022(_0x5a1cb6, _0x28d073, _0x13372a) {
+                        (0, _0x479115['default'])(this, _0x321022), this['pivot'] = _0x2287a4['copy'](_0x5a1cb6 || _0x2287a4['create'](0, 0)), this['rot'] = 0, this['pos'] = _0x2287a4['copy'](_0x13372a || _0x2287a4['create'](0, 0));
+                    }
+                    return (0, _0x53fe02['default'])(_0x321022, [{
+                        'key': 'copy',
+                        'value': function _0x42674e(_0x4d1980) {
+                            _0x2287a4['set'](this['pivot'], _0x4d1980['pivot']), this['rot'] = _0x4d1980['rot'], _0x2287a4['set'](this['pos'], _0x4d1980['pos']);
+                        }
+                    }, {
+                        'key': 'rotate',
+                        'value': function _0x548fd5(_0x10f6b3) {
+                            return this['rot'] = _0x10f6b3, this;
+                        }
+                    }, {
+                        'key': 'offset',
+                        'value': function _0x254a6a(_0x3dfb68) {
+                            return this['pos'] = _0x2287a4['copy'](_0x3dfb68), this;
+                        }
+                    }]), _0x321022;
+                }();
+
+            function _0x481243(_0x40c1af, _0x1c2d6f, _0x195ad3) {
+                return {
+                    'time': _0x40c1af,
+                    'fn': _0x1c2d6f,
+                    'args': _0x195ad3
+                };
+            }
+
+            var _0x2e2438 = {
+                    'fists': (_0x5a9f38 = {}, (0, _0x513bda['default'])(_0x5a9f38, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0x5a9f38, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))), _0x5a9f38),
+                    'downed': (_0x54c9c5 = {}, (0, _0x513bda['default'])(_0x54c9c5, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0x54c9c5, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))), (0, _0x513bda['default'])(_0x54c9c5, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-15.75, -9))), (0, _0x513bda['default'])(_0x54c9c5, _0x1145c3['FootR'], new _0x267824(_0x2287a4['create'](-15.75, 9))), _0x54c9c5)
+                },
+                _0x28944d = _0x5e3fe8['fists']['attack'],
+                _0x40d352 = _0x5e3fe8['saw']['attack'],
+                _0x473dfa = _0x5e3fe8['lasr_swrd']['attack'],
+                _0x111f02 = {
+                    'none': {
+                        'keyframes': [],
+                        'effects': []
+                    },
+                    'fists': {
+                        'keyframes': [_0x9dd69a(0, (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25)))), _0x9dd69a(_0x28944d['damageTimes'][0], (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](29.75, 1.75)))), _0x9dd69a(_0x28944d['cooldownTime'], (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))))],
+                        'effects': [_0x481243(0, 'animPlaySound', {
+                            'sound': 'swing'
+                        }), _0x481243(_0x28944d['damageTimes'][0], 'animMeleeCollision', {})]
+                    },
+                    'cut': {
+                        'keyframes': [_0x9dd69a(0, (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25)))), _0x9dd69a(_0x28944d['damageTimes'][0] * 0.25, (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))['rotate'](-Math['PI'] * 0.35))), _0x9dd69a(_0x28944d['damageTimes'][0] * 1.25, (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))['rotate'](Math['PI'] * 0.35))), _0x9dd69a(_0x28944d['cooldownTime'], (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))))],
+                        'effects': [_0x481243(0, 'animPlaySound', {
+                            'sound': 'swing'
+                        }), _0x481243(_0x28944d['damageTimes'][0], 'animMeleeCollision', {})]
+                    },
+                    'crawl_forward': {
+                        'keyframes': [_0x9dd69a(0, (_0xa02216 = {}, (0, _0x513bda['default'])(_0xa02216, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0xa02216, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-15.75, -9))), _0xa02216)), _0x9dd69a(_0x16b364['player']['crawlTime'] * 0.33, (_0x57819a = {}, (0, _0x513bda['default'])(_0x57819a, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](19.25, -10.5))), (0, _0x513bda['default'])(_0x57819a, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-20.25, -9))), _0x57819a)), _0x9dd69a(_0x16b364['player']['crawlTime'] * 0.66, (_0x2c69bc = {}, (0, _0x513bda['default'])(_0x2c69bc, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](5.25, -15.75))), (0, _0x513bda['default'])(_0x2c69bc, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-11.25, -9))), _0x2c69bc)), _0x9dd69a(_0x16b364['player']['crawlTime'] * 1, (_0x23153e = {}, (0, _0x513bda['default'])(_0x23153e, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0x23153e, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-15.75, -9))), _0x23153e))],
+                        'effects': []
+                    },
+                    'lasrSwrd_pose_1': {
+                        'keyframes': [_0x9dd69a(0, (_0x374882 = {}, (0, _0x513bda['default'])(_0x374882, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](10.5, 0))['rotate'](Math['PI'] * 0.3)), (0, _0x513bda['default'])(_0x374882, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](18, 0.5))['rotate'](Math['PI'] * 0.3)), _0x374882)), _0x9dd69a(_0x473dfa['poseTime'] * 0.5, (_0x339244 = {}, (0, _0x513bda['default'])(_0x339244, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](10.5, 0))['rotate'](-Math['PI'] * 0.2)), (0, _0x513bda['default'])(_0x339244, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](18, 0.5))['rotate'](-Math['PI'] * 0.2)), _0x339244)), _0x9dd69a(_0x473dfa['poseTime'], (_0x5b1b05 = {}, (0, _0x513bda['default'])(_0x5b1b05, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](10.5, 0))), (0, _0x513bda['default'])(_0x5b1b05, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](18, 0.5))), _0x5b1b05))],
+                        'effects': []
+                    },
+                    'sawSwing': {
+                        'keyframes': [_0x9dd69a(0, (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](1, 17.75)))), _0x9dd69a(_0x40d352['damageTimes'][0] * 0.4, (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](25, 6.25))['rotate'](Math['PI'] * 0.3))), _0x9dd69a(_0x40d352['damageTimes'][0], (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](25, 6.25))['rotate'](-Math['PI'] * 0.3))), _0x9dd69a(_0x40d352['damageTimes'][1] - 0.1, (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](25, 17.75))['rotate'](-Math['PI'] * 0.25))), _0x9dd69a(_0x40d352['damageTimes'][1] * 0.6, (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](-36, 7.75))['rotate'](-Math['PI'] * 0.25))), _0x9dd69a(_0x40d352['damageTimes'][1] + 0.2, (0, _0x513bda['default'])({}, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](1, 17.75))))],
+                        'effects': [_0x481243(0, 'animPlaySound', {
+                            'sound': 'swing'
+                        }), _0x481243(0.4, 'animPlaySound', {
+                            'sound': 'swing'
+                        }), _0x481243(_0x40d352['damageTimes'][0], 'animMeleeCollision', {}), _0x481243(_0x40d352['damageTimes'][1], 'animMeleeCollision', {
+                            'playerHit': 'playerHit2'
+                        })]
+                    },
+                    'crawl_forward': {
+                        'keyframes': [_0x9dd69a(0, (_0xa02216 = {}, (0, _0x513bda['default'])(_0xa02216, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0xa02216, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-15.75, -9))), _0xa02216)), _0x9dd69a(_0x16b364['player']['crawlTime'] * 0.33, (_0x57819a = {}, (0, _0x513bda['default'])(_0x57819a, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](19.25, -10.5))), (0, _0x513bda['default'])(_0x57819a, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-20.25, -9))), _0x57819a)), _0x9dd69a(_0x16b364['player']['crawlTime'] * 0.66, (_0x2c69bc = {}, (0, _0x513bda['default'])(_0x2c69bc, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](5.25, -15.75))), (0, _0x513bda['default'])(_0x2c69bc, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-11.25, -9))), _0x2c69bc)), _0x9dd69a(_0x16b364['player']['crawlTime'] * 1, (_0x23153e = {}, (0, _0x513bda['default'])(_0x23153e, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0x23153e, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-15.75, -9))), _0x23153e))],
+                        'effects': []
+                    },
+                    'revive': {
+                        'keyframes': [_0x9dd69a(0, (_0xe3815f = {}, (0, _0x513bda['default'])(_0xe3815f, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0xe3815f, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))), _0xe3815f)), _0x9dd69a(0.2, (_0x10423d = {}, (0, _0x513bda['default'])(_0x10423d, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](24.5, -8.75))), (0, _0x513bda['default'])(_0x10423d, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](5.25, 21))), _0x10423d)), _0x9dd69a(0.2 + _0x16b364['player']['reviveDuration'], (_0x399457 = {}, (0, _0x513bda['default'])(_0x399457, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](24.5, -8.75))), (0, _0x513bda['default'])(_0x399457, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](5.25, 21))), _0x399457))],
+                        'effects': []
+                    }
+                };
+            _0x331b2f['exports'] = {
+                'Pose': _0x267824,
+                'Bones': _0x1145c3,
+                'IdlePoses': _0x2e2438,
+                'Animations': _0x111f02
+            };
+
+        },
         'ffffffff': function(_0x0000, _0x0000, _0x0000) {
             'use strict';
 

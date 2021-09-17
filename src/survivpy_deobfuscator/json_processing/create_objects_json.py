@@ -201,6 +201,7 @@ def add_extended_functions(data: str, solved_functions: dict):
             "radius": float(radius)
         }
 
+    # noinspection PyUnusedLocal
     def create_point(args, functions):
         result = args.split(", ")
         return {
@@ -860,6 +861,6 @@ def solve_main(main_dict, solved, solve_at_runtime):
 
 if __name__ == '__main__':
     from survivpy_deobfuscator.misc_utils import get_app
-    with get_app() as file:
-        in_data = file.read()
+    with get_app() as in_file:
+        in_data = in_file.read()
     write_objects_json(in_data, "./jsons")

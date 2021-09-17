@@ -279,6 +279,7 @@ class _LobbyClient(WebSocketClient):
     def received_message(self, message):
         message = message.data.decode("utf-8")
 
+        # noinspection PyUnusedLocal
         def keep_alive(data):
             pass
 
@@ -290,6 +291,7 @@ class _LobbyClient(WebSocketClient):
         def join_game(data):
             self.game_data = data
 
+        # noinspection PyUnusedLocal
         def kicked(data):
             self.close(reason="Kicked")
 

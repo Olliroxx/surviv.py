@@ -532,12 +532,12 @@ def create_jsons(root_dir="jsons/", skip=None):
     """
     This is the main function of create_jsons.py
 
-    :param skip: list of operations to skip. Can be any or all of: simple, objects, constants, gamemodes, proxies
+    :param skip: list of operations to skip. Can be any or all of: simple, objects, constants, gamemodes, proxies, anims
     :param root_dir: The output directory
     """
     from survivpy_deobfuscator.misc_utils import get_app
     from survivpy_deobfuscator.json_processing import create_constants_json, create_gamemodes_json, create_objects_json,\
-        create_proxies_json
+        create_proxies_json, create_anims_json
     import re
     import os
 
@@ -628,6 +628,7 @@ def create_jsons(root_dir="jsons/", skip=None):
         "constants": lambda: create_constants_json.write_constants_json(script, root_dir),
         "gamemodes": lambda: create_gamemodes_json.create_game_modes(script, root_dir),
         "proxies": lambda: create_proxies_json.get_proxies(script, root_dir),
+        "anims": lambda: create_anims_json.get_anims(script, root_dir)
     }
 
     for name, func in ops.items():

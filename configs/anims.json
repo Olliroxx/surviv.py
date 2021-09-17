@@ -1,0 +1,1606 @@
+{
+    "idles": {
+        "fists": {
+            "HandL": [
+                14.0,
+                -12.25
+            ],
+            "HandR": [
+                14.0,
+                12.25
+            ]
+        },
+        "slash": {
+            "HandL": [
+                18.0,
+                -8.25
+            ],
+            "HandR": [
+                6.0,
+                20.25
+            ]
+        },
+        "meleeTwoHanded": {
+            "HandL": [
+                10.5,
+                -14.25
+            ],
+            "HandR": [
+                18.0,
+                6.25
+            ]
+        },
+        "meleeLasrSwrd": {
+            "HandL": [
+                10.5,
+                0.0
+            ],
+            "HandR": [
+                18.0,
+                0.5
+            ]
+        },
+        "meleeKatana": {
+            "HandL": [
+                8.5,
+                13.25
+            ],
+            "HandR": [
+                -3.0,
+                17.75
+            ]
+        },
+        "meleeNaginata": {
+            "HandL": [
+                19.0,
+                -7.25
+            ],
+            "HandR": [
+                8.5,
+                24.25
+            ]
+        },
+        "machete": {
+            "HandL": [
+                14.0,
+                -12.25
+            ],
+            "HandR": [
+                1.0,
+                17.75
+            ]
+        },
+        "rifle": {
+            "HandL": [
+                28.0,
+                5.25
+            ],
+            "HandR": [
+                14.0,
+                1.75
+            ]
+        },
+        "dualRifle": {
+            "HandL": [
+                5.75,
+                -16.0
+            ],
+            "HandR": [
+                5.75,
+                16.0
+            ]
+        },
+        "bullpup": {
+            "HandL": [
+                28.0,
+                5.25
+            ],
+            "HandR": [
+                24.0,
+                1.75
+            ]
+        },
+        "launcher": {
+            "HandL": [
+                20.0,
+                10.0
+            ],
+            "HandR": [
+                2.0,
+                22.0
+            ]
+        },
+        "pistol": {
+            "HandL": [
+                14.0,
+                1.75
+            ],
+            "HandR": [
+                14.0,
+                1.75
+            ]
+        },
+        "dualPistol": {
+            "HandL": [
+                15.75,
+                -8.75
+            ],
+            "HandR": [
+                15.75,
+                8.75
+            ]
+        },
+        "throwable": {
+            "HandL": [
+                15.75,
+                -9.625
+            ],
+            "HandR": [
+                15.75,
+                9.625
+            ]
+        }
+    },
+    "animations": {
+        "none": {
+            "keyframes": [],
+            "effects": []
+        },
+        "fists": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        12.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        29.75,
+                        1.75
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "cut": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        12.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.25,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        12.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": -1.0995574287564276
+                        }
+                    ]
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1.25,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        12.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": 1.0995574287564276
+                        }
+                    ]
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "cutReverse": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        1,
+                        17.75
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.4,
+                    "time_offset": 0,
+                    "pos": [
+                        25,
+                        6.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": 0.9424777960769379
+                        }
+                    ]
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1.4,
+                    "time_offset": 0,
+                    "pos": [
+                        25,
+                        6.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": -1.5707963267948966
+                        }
+                    ]
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "thrust": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        12.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.4,
+                    "time_offset": 0,
+                    "pos": [
+                        5,
+                        12.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": 0.3141592653589793
+                        }
+                    ]
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1.4,
+                    "time_offset": 0,
+                    "pos": [
+                        25,
+                        6.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": -0.0
+                        }
+                    ]
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "slash": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        18,
+                        -8.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        6,
+                        -22.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "hook": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        12.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "hook",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.25,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        12.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": 0.3141592653589793
+                        }
+                    ]
+                },
+                {
+                    "time": [
+                        "hook",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        24,
+                        1.75
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "hook",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1,
+                    "time_offset": "0.05",
+                    "pos": [
+                        14,
+                        12.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": -0.9424777960769379
+                        }
+                    ]
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "hook",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "pan": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        12.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": null
+                },
+                {
+                    "time": 0.15,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        22,
+                        -8.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": -0.6283185307179586
+                        }
+                    ]
+                },
+                {
+                    "time": 0.25,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        28,
+                        -8.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": 1.5707963267948966
+                        }
+                    ]
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "pan",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "axeSwing": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        10.5,
+                        -14.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "woodaxe",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.4,
+                    "time_offset": 0,
+                    "pos": [
+                        9,
+                        -14.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "woodaxe",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        9,
+                        -14.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": [
+                        "woodaxe",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "woodaxe",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "hammerSwing": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        10.5,
+                        -14.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "stonehammer",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.4,
+                    "time_offset": 0,
+                    "pos": [
+                        9,
+                        -14.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "stonehammer",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        9,
+                        -14.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": [
+                        "stonehammer",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "stonehammer",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "lasrSwrdSwing": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        8.5,
+                        13.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.3,
+                    "time_offset": 0,
+                    "pos": [
+                        8.5,
+                        13.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.9,
+                    "time_offset": 0,
+                    "pos": [
+                        8.5,
+                        13.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "lasrSwrd_pose_1": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        10.5,
+                        0
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "poseTime"
+                    ],
+                    "time_mult": 0.5,
+                    "time_offset": 0,
+                    "pos": [
+                        10.5,
+                        0
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": []
+        },
+        "lasrSwrd_pose_2": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        10.5,
+                        0
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "poseTime"
+                    ],
+                    "time_mult": 0.5,
+                    "time_offset": 0,
+                    "pos": [
+                        10.5,
+                        0
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": []
+        },
+        "lasrSwrd_pose_3": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        10.5,
+                        0
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "poseTime"
+                    ],
+                    "time_mult": 0.5,
+                    "time_offset": 0,
+                    "pos": [
+                        10.5,
+                        0
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": []
+        },
+        "katanaSwing": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        8.5,
+                        13.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "katana",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.3,
+                    "time_offset": 0,
+                    "pos": [
+                        8.5,
+                        13.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "katana",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.9,
+                    "time_offset": 0,
+                    "pos": [
+                        8.5,
+                        13.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": [
+                        "katana",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "katana",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "naginataSwing": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        19,
+                        -7.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "naginata",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.3,
+                    "time_offset": 0,
+                    "pos": [
+                        19,
+                        -7.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "naginata",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.9,
+                    "time_offset": 0,
+                    "pos": [
+                        19,
+                        -7.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": [
+                        "woodaxe",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "woodaxe",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "sawSwing": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        1,
+                        17.75
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "saw",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.4,
+                    "time_offset": 0,
+                    "pos": [
+                        25,
+                        6.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": 0.9424777960769379
+                        }
+                    ]
+                },
+                {
+                    "time": [
+                        "saw",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        25,
+                        6.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": -0.9424777960769379
+                        }
+                    ]
+                },
+                {
+                    "time": [
+                        "saw",
+                        "damageTimes",
+                        "1] - 0.1"
+                    ],
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        25,
+                        17.75
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": -0.7853981633974483
+                        }
+                    ]
+                },
+                {
+                    "time": [
+                        "saw",
+                        "damageTimes",
+                        1
+                    ],
+                    "time_mult": 0.6,
+                    "time_offset": 0,
+                    "pos": [
+                        -36,
+                        7.75
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": -0.7853981633974483
+                        }
+                    ]
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": "0.4",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "saw",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                },
+                {
+                    "time": [
+                        "saw",
+                        "damageTimes",
+                        1
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {
+                        "playerHit": "playerHit2"
+                    }
+                }
+            ]
+        },
+        "cutReverseShort": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        1,
+                        17.75
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandR",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "saw",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 0.4,
+                    "time_offset": 0,
+                    "pos": [
+                        25,
+                        6.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": 0.9424777960769379
+                        }
+                    ]
+                },
+                {
+                    "time": [
+                        "saw",
+                        "damageTimes",
+                        0
+                    ],
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        25,
+                        6.25
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandR",
+                    "transform": [
+                        {
+                            "type": "rotate",
+                            "amount": -0.9424777960769379
+                        }
+                    ]
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "fists",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "func": "animMeleeCollision",
+                    "args": {}
+                }
+            ]
+        },
+        "cook": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        15.75,
+                        -9.625
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": 0.1,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        -1.75
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": 0.3,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        -1.75
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": 0.4,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        22.75,
+                        -1.75
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "pullPin"
+                    }
+                },
+                {
+                    "time": "0.1",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animSetThrowableState",
+                    "args": {
+                        "state": "cook"
+                    }
+                }
+            ]
+        },
+        "throw": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        22.75,
+                        -1.75
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": 0.15,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        5.25,
+                        -15.75
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "throwing"
+                    }
+                },
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animSetThrowableState",
+                    "args": {
+                        "state": "throwing"
+                    }
+                },
+                {
+                    "time": "0",
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "func": "animThrowableParticles",
+                    "args": {}
+                }
+            ]
+        },
+        "crawl_forward": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        -12.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "player",
+                        "crawlTime"
+                    ],
+                    "time_mult": 0.33,
+                    "time_offset": 0,
+                    "pos": [
+                        19.25,
+                        -10.5
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "player",
+                        "crawlTime"
+                    ],
+                    "time_mult": 0.66,
+                    "time_offset": 0,
+                    "pos": [
+                        5.25,
+                        -15.75
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": []
+        },
+        "crawl_backward": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        -12.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "player",
+                        "crawlTime"
+                    ],
+                    "time_mult": 0.33,
+                    "time_offset": 0,
+                    "pos": [
+                        5.25,
+                        -15.75
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": [
+                        "player",
+                        "crawlTime"
+                    ],
+                    "time_mult": 0.66,
+                    "time_offset": 0,
+                    "pos": [
+                        19.25,
+                        -10.5
+                    ],
+                    "absolute_time": false,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": []
+        },
+        "revive": {
+            "keyframes": [
+                {
+                    "time": 0,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        14,
+                        -12.25
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                },
+                {
+                    "time": 0.2,
+                    "time_mult": 1,
+                    "time_offset": 0,
+                    "pos": [
+                        24.5,
+                        -8.75
+                    ],
+                    "absolute_time": true,
+                    "limb": "HandL",
+                    "transform": null
+                }
+            ],
+            "effects": []
+        }
+    }
+}

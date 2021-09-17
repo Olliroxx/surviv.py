@@ -1,5 +1,5 @@
 """
-This script grabs most of the svgs (guns, melees and other items), most of them dont have .svg at the end of their names
+This script grabs most of the svgs (guns, melees and other items), most of them don't have .svg at the end of their names
 """
 
 from json import load
