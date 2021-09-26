@@ -142,6 +142,14 @@
         "emitter": "heal_basics",
         "lore": ""
     },
+    "heal_double_barrier": {
+        "type": "heal_effect",
+        "name": "Double Barrier",
+        "rarity": 2,
+        "texture": "heal-double-barrier.img",
+        "emitter": "heal_double_barrier",
+        "lore": ""
+    },
     "boost_basic": {
         "type": "boost_effect",
         "name": "Basic Boost",
@@ -303,6 +311,14 @@
         "rarity": 4,
         "texture": "boost-hidden-village.img",
         "emitter": "boost_hidden_village",
+        "lore": ""
+    },
+    "boost_perfect_fit": {
+        "type": "boost_effect",
+        "name": "Perfect Fit",
+        "rarity": 3,
+        "texture": "boost-perfect-fit.img",
+        "emitter": "boost_perfect_fit",
         "lore": ""
     }
 }

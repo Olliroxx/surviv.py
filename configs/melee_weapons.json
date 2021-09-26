@@ -3307,6 +3307,382 @@
         "isSkin": true,
         "lore": ""
     },
+    "fist_bloody": {
+        "baseType": "fists",
+        "name": "Bloody",
+        "type": "melee",
+        "quality": 0,
+        "autoAttack": false,
+        "switchDelay": 0.25,
+        "damage": 24,
+        "obstacleDamage": 1,
+        "headshotMult": 1,
+        "attack": {
+            "offset": {
+                "x": 1.35,
+                "y": 0
+            },
+            "rad": 0.9,
+            "damageTimes": [
+                0.1
+            ],
+            "cooldownTime": 0.25
+        },
+        "speed": {
+            "equip": 1
+        },
+        "anim": {
+            "idlePose": "fists",
+            "attackAnims": [
+                "fists"
+            ]
+        },
+        "sound": {
+            "swing": "punch_swing_01",
+            "deploy": "stow_weapon_01",
+            "playerHit": "punch_hit_01"
+        },
+        "lootImg": {
+            "sprite": "loot-bloody-fists.img"
+        },
+        "rarity": 1,
+        "noPotatoSwap": true,
+        "handSprites": {
+            "spriteL": "player-fists-bloody-l.img",
+            "spriteR": "player-fists-bloody-r.img"
+        },
+        "isSkin": true,
+        "lore": ""
+    },
+    "fist_makeachoice": {
+        "baseType": "fists",
+        "name": "Make a Choice",
+        "type": "melee",
+        "quality": 0,
+        "autoAttack": false,
+        "switchDelay": 0.25,
+        "damage": 24,
+        "obstacleDamage": 1,
+        "headshotMult": 1,
+        "attack": {
+            "offset": {
+                "x": 1.35,
+                "y": 0
+            },
+            "rad": 0.9,
+            "damageTimes": [
+                0.1
+            ],
+            "cooldownTime": 0.25
+        },
+        "speed": {
+            "equip": 1
+        },
+        "anim": {
+            "idlePose": "fists",
+            "attackAnims": [
+                "fists"
+            ]
+        },
+        "sound": {
+            "swing": "punch_swing_01",
+            "deploy": "stow_weapon_01",
+            "playerHit": "punch_hit_01"
+        },
+        "lootImg": {
+            "sprite": "loot-make-a-choice-fists.img"
+        },
+        "rarity": 2,
+        "noPotatoSwap": true,
+        "handSprites": {
+            "spriteL": "player-fists-make-a-choice-l.img",
+            "spriteR": "player-fists-make-a-choice-r.img"
+        },
+        "isSkin": true,
+        "lore": ""
+    },
+    "fist_bologna": {
+        "baseType": "fists",
+        "name": "Bologna",
+        "type": "melee",
+        "quality": 0,
+        "autoAttack": false,
+        "switchDelay": 0.25,
+        "damage": 24,
+        "obstacleDamage": 1,
+        "headshotMult": 1,
+        "attack": {
+            "offset": {
+                "x": 1.35,
+                "y": 0
+            },
+            "rad": 0.9,
+            "damageTimes": [
+                0.1
+            ],
+            "cooldownTime": 0.25
+        },
+        "speed": {
+            "equip": 1
+        },
+        "anim": {
+            "idlePose": "fists",
+            "attackAnims": [
+                "fists"
+            ]
+        },
+        "sound": {
+            "swing": "punch_swing_01",
+            "deploy": "stow_weapon_01",
+            "playerHit": "punch_hit_01"
+        },
+        "lootImg": {
+            "sprite": "loot-bologna-fists.img"
+        },
+        "rarity": 2,
+        "noPotatoSwap": true,
+        "handSprites": {
+            "spriteL": "player-fists-bologna-l.img",
+            "spriteR": "player-fists-bologna-r.img"
+        },
+        "isSkin": true,
+        "lore": ""
+    },
+    "fist_flashy": {
+        "baseType": "fists",
+        "name": "Flashy",
+        "type": "melee",
+        "quality": 0,
+        "autoAttack": false,
+        "switchDelay": 0.25,
+        "damage": 24,
+        "obstacleDamage": 1,
+        "headshotMult": 1,
+        "attack": {
+            "offset": {
+                "x": 1.35,
+                "y": 0
+            },
+            "rad": 0.9,
+            "damageTimes": [
+                0.1
+            ],
+            "cooldownTime": 0.25
+        },
+        "speed": {
+            "equip": 1
+        },
+        "anim": {
+            "idlePose": "fists",
+            "attackAnims": [
+                "fists"
+            ]
+        },
+        "sound": {
+            "swing": "punch_swing_01",
+            "deploy": "stow_weapon_01",
+            "playerHit": "punch_hit_01"
+        },
+        "lootImg": {
+            "sprite": "loot-flashy-fists.img"
+        },
+        "rarity": 3,
+        "noPotatoSwap": true,
+        "handSprites": {
+            "spriteL": "player-fists-flashy-l.img",
+            "spriteR": "player-fists-flashy-r.img"
+        },
+        "isSkin": true,
+        "lore": ""
+    },
+    "fist_tigerseed": {
+        "baseType": "fists",
+        "name": "Tiger Seed",
+        "type": "melee",
+        "quality": 0,
+        "autoAttack": false,
+        "switchDelay": 0.25,
+        "damage": 24,
+        "obstacleDamage": 1,
+        "headshotMult": 1,
+        "attack": {
+            "offset": {
+                "x": 1.35,
+                "y": 0
+            },
+            "rad": 0.9,
+            "damageTimes": [
+                0.1
+            ],
+            "cooldownTime": 0.25
+        },
+        "speed": {
+            "equip": 1
+        },
+        "anim": {
+            "idlePose": "fists",
+            "attackAnims": [
+                "fists"
+            ]
+        },
+        "sound": {
+            "swing": "punch_swing_01",
+            "deploy": "stow_weapon_01",
+            "playerHit": "punch_hit_01"
+        },
+        "lootImg": {
+            "sprite": "loot-tiger-seed-fists.img"
+        },
+        "rarity": 3,
+        "noPotatoSwap": true,
+        "handSprites": {
+            "spriteL": "player-fists-tiger-seed-l.img",
+            "spriteR": "player-fists-tiger-seed-r.img"
+        },
+        "isSkin": true,
+        "lore": ""
+    },
+    "fist_paddle": {
+        "baseType": "fists",
+        "name": "Paddle",
+        "type": "melee",
+        "quality": 0,
+        "autoAttack": false,
+        "switchDelay": 0.25,
+        "damage": 24,
+        "obstacleDamage": 1,
+        "headshotMult": 1,
+        "attack": {
+            "offset": {
+                "x": 1.35,
+                "y": 0
+            },
+            "rad": 0.9,
+            "damageTimes": [
+                0.1
+            ],
+            "cooldownTime": 0.25
+        },
+        "speed": {
+            "equip": 1
+        },
+        "anim": {
+            "idlePose": "fists",
+            "attackAnims": [
+                "fists"
+            ]
+        },
+        "sound": {
+            "swing": "punch_swing_01",
+            "deploy": "stow_weapon_01",
+            "playerHit": "punch_hit_01"
+        },
+        "lootImg": {
+            "sprite": "loot-paddle-fists.img"
+        },
+        "rarity": 3,
+        "noPotatoSwap": true,
+        "handSprites": {
+            "spriteL": "player-fists-paddle-l.img",
+            "spriteR": "player-fists-paddle-r.img"
+        },
+        "isSkin": true,
+        "lore": ""
+    },
+    "fist_inkybusiness": {
+        "baseType": "fists",
+        "name": "Inky Business",
+        "type": "melee",
+        "quality": 0,
+        "autoAttack": false,
+        "switchDelay": 0.25,
+        "damage": 24,
+        "obstacleDamage": 1,
+        "headshotMult": 1,
+        "attack": {
+            "offset": {
+                "x": 1.35,
+                "y": 0
+            },
+            "rad": 0.9,
+            "damageTimes": [
+                0.1
+            ],
+            "cooldownTime": 0.25
+        },
+        "speed": {
+            "equip": 1
+        },
+        "anim": {
+            "idlePose": "fists",
+            "attackAnims": [
+                "fists"
+            ]
+        },
+        "sound": {
+            "swing": "punch_swing_01",
+            "deploy": "stow_weapon_01",
+            "playerHit": "punch_hit_01"
+        },
+        "lootImg": {
+            "sprite": "loot-inky-business-fists.img"
+        },
+        "rarity": 4,
+        "noPotatoSwap": true,
+        "handSprites": {
+            "spriteL": "player-fists-inky-business-l.img",
+            "spriteR": "player-fists-inky-business-r.img"
+        },
+        "isSkin": true,
+        "lore": ""
+    },
+    "fist_theotherpong": {
+        "baseType": "fists",
+        "name": "The Other Pong",
+        "type": "melee",
+        "quality": 0,
+        "autoAttack": false,
+        "switchDelay": 0.25,
+        "damage": 24,
+        "obstacleDamage": 1,
+        "headshotMult": 1,
+        "attack": {
+            "offset": {
+                "x": 1.35,
+                "y": 0
+            },
+            "rad": 0.9,
+            "damageTimes": [
+                0.1
+            ],
+            "cooldownTime": 0.25
+        },
+        "speed": {
+            "equip": 1
+        },
+        "anim": {
+            "idlePose": "fists",
+            "attackAnims": [
+                "fists"
+            ]
+        },
+        "sound": {
+            "swing": "punch_swing_01",
+            "deploy": "stow_weapon_01",
+            "playerHit": "punch_hit_01"
+        },
+        "lootImg": {
+            "sprite": "loot-the-other-pong-fists.img"
+        },
+        "rarity": 4,
+        "noPotatoSwap": true,
+        "handSprites": {
+            "spriteL": "player-fists-the-other-pong-l.img",
+            "spriteR": "player-fists-the-other-pong-r.img"
+        },
+        "isSkin": true,
+        "lore": ""
+    },
     "knuckles_rusted": {
         "baseType": "knuckles",
         "name": "Knuckles Rusted",

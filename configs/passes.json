@@ -1155,7 +1155,7 @@
     },
     "pass_survivr7": {
         "type": "pass",
-        "endDate": 1630440000000,
+        "endDate": 1631044800000,
         "startDate": "2021-06-08",
         "buyOptions": {
             "basic": {
@@ -1178,6 +1178,7 @@
                 "discount": 25
             }
         },
+        "level": 30,
         "xp": [
             18,
             26,
@@ -1368,6 +1369,303 @@
                 "level": 30,
                 "item": "outfitTipTheScales",
                 "itemPremium": "outfitEyes-T"
+            }
+        ]
+    },
+    "pass_survivr8": {
+        "type": "pass",
+        "endDate": 1638302400000,
+        "startDate": "2021-09-07",
+        "buyOptions": {
+            "basic": {
+                "price": 4000,
+                "extraXP": 0
+            },
+            "all_levels": {
+                "price": 7500,
+                "extraXP": 0
+            }
+        },
+        "discountLevels": {
+            "10": {
+                "discount": 10
+            },
+            "20": {
+                "discount": 15
+            },
+            "30": {
+                "discount": 25
+            }
+        },
+        "level": 42,
+        "xp": [
+            18,
+            26,
+            35,
+            44,
+            53,
+            62,
+            72,
+            82,
+            92,
+            103,
+            114,
+            125,
+            136,
+            148,
+            160,
+            173,
+            186,
+            199,
+            213,
+            227,
+            242,
+            257,
+            273,
+            289,
+            305,
+            322,
+            340,
+            358,
+            376,
+            395,
+            415,
+            435,
+            456,
+            477,
+            499,
+            522,
+            546,
+            570,
+            595,
+            630,
+            670
+        ],
+        "items": [
+            {
+                "level": 2,
+                "item": "fist_bologna",
+                "itemPremium": "outfitGhoulFire"
+            },
+            {
+                "level": 3,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 15
+            },
+            {
+                "level": 4,
+                "item": "outfitSunburn",
+                "itemPremium": "outfitGridflag"
+            },
+            {
+                "level": 5,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 35
+            },
+            {
+                "level": 6,
+                "item": "outfitStarflag",
+                "itemPremium": "boost_perfect_fit"
+            },
+            {
+                "level": 7,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 55
+            },
+            {
+                "level": 8,
+                "item": "outfitBubblegum",
+                "itemPremium": "fist_inkybusiness"
+            },
+            {
+                "level": 9,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 75
+            },
+            {
+                "level": 10,
+                "item": "espressoDeath",
+                "itemPremium": "outfitMelonWater"
+            },
+            {
+                "level": 11,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 95
+            },
+            {
+                "level": 12,
+                "item": "outfitElectricIce",
+                "itemPremium": "outfitGaudisque"
+            },
+            {
+                "level": 13,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 115
+            },
+            {
+                "level": 14,
+                "item": "outfitToxicBarrel",
+                "itemPremium": "outfitStarryNight"
+            },
+            {
+                "level": 15,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 135
+            },
+            {
+                "level": 16,
+                "item": "fist_bloody",
+                "itemPremium": "heal_double_barrier"
+            },
+            {
+                "level": 17,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 155
+            },
+            {
+                "level": 18,
+                "item": "fist_tigerseed",
+                "itemPremium": "emote_chimpion"
+            },
+            {
+                "level": 19,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 175
+            },
+            {
+                "level": 20,
+                "item": "emote_wait",
+                "itemPremium": "outfitHotMagma"
+            },
+            {
+                "level": 21,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 195
+            },
+            {
+                "level": 22,
+                "item": "fist_flashy",
+                "itemPremium": "emote_pills"
+            },
+            {
+                "level": 23,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 215
+            },
+            {
+                "level": 24,
+                "item": "outfitMicro-wave",
+                "itemPremium": "fist_theotherpong"
+            },
+            {
+                "level": 25,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 235
+            },
+            {
+                "level": 26,
+                "item": "emote_taunty",
+                "itemPremium": "cheeseBombDeath"
+            },
+            {
+                "level": 27,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 255
+            },
+            {
+                "level": 28,
+                "item": "outfitBlueZone",
+                "itemPremium": "constructionDeath"
+            },
+            {
+                "level": 29,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 275
+            },
+            {
+                "level": 30,
+                "item": "outfitKingGalaxy",
+                "itemPremium": "outfitDragonTails"
+            },
+            {
+                "level": 31,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 295
+            },
+            {
+                "level": 32,
+                "item": "fist_makeachoice",
+                "itemPremium": "outfitDigiturt"
+            },
+            {
+                "level": 33,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 315
+            },
+            {
+                "level": 34,
+                "item": "outfitBraaains",
+                "itemPremium": "outfitNorseCode"
+            },
+            {
+                "level": 35,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 335
+            },
+            {
+                "level": 36,
+                "item": "outfitILavaYou",
+                "itemPremium": "outfitJuleVerny"
+            },
+            {
+                "level": 37,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 295
+            },
+            {
+                "level": 38,
+                "item": "emote_glasses",
+                "itemPremium": "fist_paddle"
+            },
+            {
+                "level": 39,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 375
+            },
+            {
+                "level": 40,
+                "item": "outfitStumpd",
+                "itemPremium": "outfitStreetArt"
+            },
+            {
+                "level": 41,
+                "item": "golden_potato",
+                "itemPremium": "empty_slot",
+                "amount": 395
+            },
+            {
+                "level": 42,
+                "item": "outfitCosmicBlue",
+                "itemPremium": "newDeathsEveDeath"
             }
         ]
     }

@@ -360,5 +360,87 @@
             "sprite": "loot-puzzled-death.img"
         },
         "rarity": 5
+    },
+    "espressoDeath": {
+        "name": "Espresso",
+        "type": "deathEffect",
+        "particle": "espressoDeath",
+        "isParticle": true,
+        "lootImg": {
+            "sprite": "loot-espresso-death.img"
+        },
+        "worldImg": {
+            "sprite": "loot-espresso-death.img"
+        },
+        "rarity": 3
+    },
+    "constructionDeath": {
+        "name": "Construction Site",
+        "type": "deathEffect",
+        "particle": "constructionDeath",
+        "isParticle": true,
+        "lootImg": {
+            "sprite": "loot-construction-site-death.img"
+        },
+        "worldImg": {
+            "sprite": "loot-construction-site-death.img"
+        },
+        "rarity": 3
+    },
+    "cheeseBombDeath": {
+        "name": "Cheese Bomb",
+        "type": "deathEffect",
+        "particle": "cheeseBombDeath",
+        "sprites": [
+            "cheese-bomb-death-01.img",
+            "cheese-bomb-death-02.img",
+            "cheese-bomb-death-03.img",
+            "cheese-bomb-death-04.img",
+            "cheese-bomb-death-05.img",
+            "cheese-bomb-death-06.img",
+            "cheese-bomb-death-07.img",
+            "cheese-bomb-death-08.img"
+        ],
+        "isParticle": false,
+        "animationSpeed": 0.28,
+        "animationScale": 1.3,
+        "lootImg": {
+            "sprite": "loot-cheese-bomb-death.img"
+        },
+        "worldImg": {
+            "sprite": "loot-cheese-bomb-death.img"
+        },
+        "rarity": 5
+    },
+    "newDeathsEveDeath": {
+        "name": "New Deaths Eve",
+        "type": "deathEffect",
+        "particle": "newDeathsEveDeath",
+        "sprites": [
+            "new-deaths-eve-death-01.img",
+            "new-deaths-eve-death-02.img",
+            "new-deaths-eve-death-03.img",
+            "new-deaths-eve-death-04.img",
+            "new-deaths-eve-death-05.img",
+            "new-deaths-eve-death-06.img",
+            "new-deaths-eve-death-07.img",
+            "new-deaths-eve-death-08.img",
+            "new-deaths-eve-death-09.img",
+            "new-deaths-eve-death-10.img",
+            "new-deaths-eve-death-11.img",
+            "new-deaths-eve-death-12.img",
+            "new-deaths-eve-death-13.img",
+            "new-deaths-eve-death-14.img"
+        ],
+        "isParticle": false,
+        "animationSpeed": 0.28,
+        "animationScale": 1.3,
+        "lootImg": {
+            "sprite": "loot-new-deaths-eve-death.img"
+        },
+        "worldImg": {
+            "sprite": "loot-new-deaths-eve-death.img"
+        },
+        "rarity": 5
     }
 }

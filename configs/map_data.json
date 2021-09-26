@@ -64,7 +64,7 @@
     "main_spring": {
         "mapId": 0,
         "desc": {
-            "name": "Awesome Blossoms",
+            "name": "Awesome\\x20Blossoms",
             "icon": "img/loot/loot-blossom-icon.svg",
             "buttonCss": "btn-mode-blossoms",
             "buttonText": "index-play-mode-spring"

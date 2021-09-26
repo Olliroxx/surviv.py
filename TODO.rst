@@ -1,11 +1,15 @@
- * More tests
-    * Type 5 and 6 packets
+ * Tests
+    * Add tests for type 5 and 6 packets
     * core and custom_types.py
- * Add the ability to use proxies
- * Add docs for VCS scripts
- * Add docs for json processing scripts
- * Check what docs are missing/incomplete
- * Add logging to deobfuscation scripts
- * Optimise float processing
- * Update API docs
- * ingame.py: make constants load from configs
+    * Check if all tests are gtype/mtype agnostic
+ * Minor changes
+    * Add the ability to use proxies
+    * Add logging to deobfuscation scripts
+    * Optimise float processing
+    * ingame.py: make constants load from configs
+
+ * Docs
+    * Add docs for VCS scripts
+    * Add docs for json processing scripts
+    * Update API docs
+    * Check what docs are missing/incomplete

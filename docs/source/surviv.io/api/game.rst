@@ -18,7 +18,9 @@ Game related API calls
             "version": int,  # Protocol version
             "zones": [
                 str  # What servers are options, like fra or waw
-            ]
+            ],
+            "adminCreate": bool,  # For making tournaments maybe?
+            "privCode": bool  # For joining tournaments?
         }
 
     Response structure:

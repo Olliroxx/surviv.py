@@ -65,7 +65,7 @@ class Profile:
 
         self.version = data["protocolVersion"]
         if self.version != KNOWN_SAFE_VERSION:
-            raise RuntimeWarning("Protocol version is not known safe, things may break or work fine")
+            print("Protocol version is not known safe, things may break or work fine")
 
     def update_currency(self):
         """
@@ -201,7 +201,9 @@ class Profile:
                 "playerCount": 1,
                 "region": "eu",
                 "version": self.version,
-                "zones": ["fra", "waw"]
+                "zones": ["fra", "waw"],
+                "adminCreate": False,
+                "privCode": False
             }
 
         if str(type(settings)) != "<class 'dict'>":
