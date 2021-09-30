@@ -1,27 +1,10 @@
-from json import load
-from src.survivpy_net.custom_types import Point, EndpointLine, Rect, Poly, MxPlusCLine, lerp, SeededRandGenerator
+from survivpy_net.custom_types import Point, EndpointLine, Rect, Poly, MxPlusCLine, lerp, SeededRandGenerator
+from survivpy_net import configs
 from logging import getLogger
 
 logger = getLogger("survivpy_net")
 
 JS_MAX_VALUE = 2 ** 1024 - 1
-
-map_definitions = {}
-constants = {}
-
-
-def update_definitions():
-    """
-    Updates map definitions and constants, run by Map on __init__
-    """
-
-    global map_definitions
-    global constants
-
-    def_file = open("./configs/map_data.json")
-    map_definitions = load(def_file)
-    constants_file = open("./configs/constants.json")
-    constants = load(constants_file)
 
 
 class River:
@@ -38,8 +21,7 @@ class River:
 
     def __init__(self, points, width, looped, other_rivers, min_max: Rect):
 
-        if not constants:
-            update_definitions()
+        configs.update_configs()
 
         def _0x46712b(point1: Point, point2: Point, poly: Poly):
             point3 = point1.add_point(point2)
@@ -261,7 +243,7 @@ class Map:
         logger.debug("Map dict: " + str(map_dict))
 
         self.map_name = map_dict["mapName"]
-        self.map_def = map_definitions[self.map_name]
+        self.map_def = configs.map_defs[self.map_name]
 
         self.special_modes = {}
         modes = (
@@ -357,8 +339,8 @@ class Map:
 
             return output
 
-        shore_variation = constants["map"]["shoreVariation"]
-        grass_variation = constants["map"]["grassVariation"]
+        shore_variation = configs.constants["map"]["shoreVariation"]
+        grass_variation = configs.constants["map"]["grassVariation"]
         rand_generator = SeededRandGenerator(seed)
 
         shore_corner_bl = Point(shore_inset, shore_inset)
@@ -407,7 +389,7 @@ class GameInstance:
     def __init__(self):
         self.map = None
 
-        self.status = "open"
+        self.status = "opening"
         self.team_size = 0
         self.player_id = 0
         self.player_infos = {}
@@ -433,3 +415,4 @@ class GameInstance:
 
     def init_map(self, map_dict):
         self.map = Map(map_dict)
+        self.status = "open"

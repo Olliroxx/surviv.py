@@ -4,7 +4,7 @@ from json import loads, dumps
 from time import time
 logger = getLogger("survivpy_net")
 
-KNOWN_SAFE_VERSION = 108
+KNOWN_SAFE_VERSION = 111
 
 
 class Profile:
@@ -186,7 +186,7 @@ class Profile:
             "progressNotificationActive": self.progress_notification_active
         }
 
-    def join_game(self, settings=None):
+    def prep_game(self, settings=None):
         """
         Contacts matchmaking server, finds game and server
         :param settings: settings, needed for game mode other than standard solos, or regions other than eu

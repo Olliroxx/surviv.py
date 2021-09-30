@@ -17,7 +17,8 @@ The smallest possible script:
 
     profile = spn.pregame.Profile()
     # user_id = profile.id
-    conn = profile.join_game()
+    conn = profile.prep_game()
+    conn.start()
 
     do_something(conn.state)
 

@@ -1,1 +1,1 @@
-recursive-include src/survivpy_net/configs *
+recursive-include configs *

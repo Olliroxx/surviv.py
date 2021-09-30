@@ -51,9 +51,6 @@ coverage.xml
 .pytest_cache/
 cover/
 
-# Scrapy stuff:
-.scrapy
-
 # Sphinx documentation
 docs/_build/
 
@@ -71,9 +68,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
-# mkdocs documentation
-/site
 
 .idea/
 

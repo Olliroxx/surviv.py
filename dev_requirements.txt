@@ -1,8 +1,8 @@
 # These are needed for tests/doc generation/executable generation
 sphinx ~= 4.1
-tox ~=3.24.4
-sphinx_rtd_theme ~=1.0.0
-virtualenv ~=20.8.0
+tox ~= 3.24.4
+sphinx_rtd_theme ~= 1.0.0
+virtualenv ~= 20.8.0
 flake8 ~= 3.9
 pytest ~= 6.2
 

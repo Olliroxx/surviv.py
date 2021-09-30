@@ -4,15 +4,16 @@ Joins a game and then does nothing but print the raw responses
 from src.survivpy_net import pregame
 
 profile = pregame.Profile()
+game_connection = profile.prep_game()
 print("Joining game")
-gameConnection = profile.join_game()
+game_connection.start()
 print("Joined")
 
 try:
     while True:
-        messages = gameConnection.get_decoded()
+        messages = game_connection.get_messages()
         for message in messages:
-            if message == gameConnection.EXIT:
+            if message == game_connection.EXIT:
                 print("Exiting")
                 quit()
             else:

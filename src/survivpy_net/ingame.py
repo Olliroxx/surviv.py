@@ -1,5 +1,6 @@
 from survivpy_net.custom_types import Vector
 from logging import getLogger
+from survivpy_net import configs
 
 constants = {
     "mapNameMaxLen": 0x18,
@@ -21,32 +22,6 @@ log_xcodes = False
 # Set to true to log de/encodings, except for
 # type 6 as that might have a performance impact
 logger = getLogger("survivpy_net")
-
-
-def update_constants():
-    global constants
-    from json import load
-    constants_file = open("./configs/constants.json")
-    constants = constants | load(constants_file)
-    constants_file.close()
-
-    mtypes_file = open("./configs/objects.json")
-    mtypes_dict = load(mtypes_file)["objects"]
-    mtypes_file.close()
-    constants["mtypes"] = list(mtypes_dict.keys())
-    constants["mtypes"].insert(0, "")
-
-    files = ("bullets", "crosshairs", "heal_effects", "emotes", "explosions", "nonweapons", "guns", "melee_weapons",
-             "outfits", "quests", "perks", "passes", "pings", "roles", "throwables", "default_unlocks", "xp_sources",
-             "death_effects", "lootbox_tables", "item_pools", "xp_boost_events", "market_min_values", "npcs")
-    gtypes_dict = {}
-    for file in files:
-        file = open(("./configs/" + file + ".json"))
-        data = load(file)
-        file.close()
-        gtypes_dict = gtypes_dict | data
-    constants["gtypes"] = list(gtypes_dict.keys())
-    constants["gtypes"].insert(0, "")
 
 
 class BitString:
@@ -523,18 +498,18 @@ class TypedBitString(BitString):
 
     def read_game_type(self):
         num = self.read_bits(self.game_type_size)
-        return self._id_to_type(num, constants["gtypes"])
+        return self._id_to_type(num, configs.gtypes_list)
 
     def write_game_type(self, gtype):
-        num = self._type_to_id(gtype, constants["gtypes"])
+        num = self._type_to_id(gtype, configs.gtypes_list)
         self.write_bits(num, self.game_type_size)
 
     def read_map_type(self):
         num = self.read_bits(self.map_type_size)
-        return self._id_to_type(num, constants["mtypes"])
+        return self._id_to_type(num, configs.mtypes_list)
 
     def write_map_type(self, mtype):
-        num = self._type_to_id(mtype, constants["mtypes"])
+        num = self._type_to_id(mtype, configs.mtypes_list)
         self.write_bits(num, self.map_type_size)
 
 
@@ -936,7 +911,7 @@ class Type06Packet(Packet):
                 "emotes": []
             }
         }
-        for _ in range(constants["EmoteSlot"]["Count"]):
+        for _ in range(configs.constants["EmoteSlot"]["Count"]):
             player["loadout"]["emotes"].append(bs.read_game_type())
 
         player["userId"] = bs.read_uint32()
@@ -1140,7 +1115,7 @@ class Type06Packet(Packet):
             output["nitroLaceEffect"] = bs.read_bool()
             # Inferno
 
-        if constants["features"]["inGameNotificationActive"]:
+        if configs.constants["features"]["inGameNotificationActive"]:
             output["questCount"] = bs.read_bits(2)
             output["quests"] = []
             for _ in range(output["questCount"]):
@@ -1158,7 +1133,7 @@ class Type06Packet(Packet):
         result = {
             "pos": bs.read_vec16(),
             "ori": bs.read_bits(2),
-            "scale": bs.read_float(constants["mapObjectMinScale"], constants["mapObjectMaxScale"], 8)
+            "scale": bs.read_float(configs.constants["mapObjectMinScale"], configs.constants["mapObjectMaxScale"], 8)
         }
         bs.read_bits(6)
         return result
@@ -1290,7 +1265,7 @@ class Type06Packet(Packet):
             "layerObjIds": []
         }
 
-        for _ in range(constants["structureLayerCount"]):
+        for _ in range(configs.constants["structureLayerCount"]):
             output["layerObjIds"].append(bs.read_uint16())
         return output
 
@@ -1302,7 +1277,7 @@ class Type06Packet(Packet):
     def _obj_decal_full(bs: TypedBitString):
         return {
             "pos": bs.read_vec16(),
-            "scale": bs.read_float(constants["mapObjectMinScale"], constants["mapObjectMaxScale"], 8),
+            "scale": bs.read_float(configs.constants["mapObjectMinScale"], configs.constants["mapObjectMaxScale"], 8),
             "obj_type": bs.read_map_type(),
             "ori": bs.read_bits(2),
             "layer": bs.read_bits(2),
@@ -1313,7 +1288,7 @@ class Type06Packet(Packet):
     def _obj_projectile_part(bs: TypedBitString):
         output = {
             "pos": bs.read_vec16(),
-            "posZ": bs.read_float(0, constants["projectile"]["maxHeight"], 10),
+            "posZ": bs.read_float(0, configs.constants["projectile"]["maxHeight"], 10),
             "dir": bs.read_unit_vec(7),
             "bombArmed": bs.read_bool()
         }
@@ -1335,7 +1310,7 @@ class Type06Packet(Packet):
         return {
             "obj_type": bs.read_ascii_str(),
             "pos": bs.read_vec16(),
-            "rad": bs.read_float(0, constants["smokeMaxRad"], 8)
+            "rad": bs.read_float(0, configs.constants["smokeMaxRad"], 8)
         }
 
     @staticmethod
@@ -1364,7 +1339,7 @@ class Type06Packet(Packet):
         output = {
             "pos": bs.read_vec16(),
             "ori": bs.read_float(-4, 4, 8),
-            "scale": bs.read_float(constants["mapObjectMinScale"], constants["mapObjectMaxScale"], 8),
+            "scale": bs.read_float(configs.constants["mapObjectMinScale"], configs.constants["mapObjectMaxScale"], 8),
             "state": bs.read_ascii_str(8),
             "invisibleTicker": bs.read_bool()
         }
@@ -1491,7 +1466,7 @@ class Type0aPacket(Packet):
     def decode_object(bs: TypedBitString):
         object_ = {
             "pos": bs.read_vec16(),
-            "scale": bs.read_float(constants["mapObjectMinScale"], constants["mapObjectMaxScale"], 8),
+            "scale": bs.read_float(configs.constants["mapObjectMinScale"], configs.constants["mapObjectMaxScale"], 8),
             "type": bs.read_bits(12),
             "ori": bs.read_bits(2),
             "obstacleType": bs.read_ascii_str()
@@ -1520,10 +1495,8 @@ class GameConnection:
         :param join_packet_data: all of the data needed to make the first packet
         """
 
-        update_constants()
-
-        from survivpy_net.core import GameInstance, update_definitions
-        update_definitions()
+        from survivpy_net.core import GameInstance
+        configs.update_configs()
 
         self._loadout_stats = None
         self._quest_priv = None
@@ -1558,6 +1531,7 @@ class GameConnection:
             "useItem": ""
         }
 
+    def start(self):
         self._join()
 
     class EXIT:

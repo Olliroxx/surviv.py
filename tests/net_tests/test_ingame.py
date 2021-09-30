@@ -1,5 +1,5 @@
 import unittest
-from survivpy_net import ingame
+from survivpy_net import ingame, configs
 
 ASCII_CHARS = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefhijklmnopqrstuvwxyz{|}~"
 TARGET_HEX_BS_RW = \
@@ -39,7 +39,7 @@ class test_packets(unittest.TestCase):
         self.assertEqual({"reason": "Generic error reason"}, packet.decode(DummyGameState()))
 
     def test_type3(self):
-        ingame.update_constants()
+        configs.update_configs()
         self.packet_with_json("type_03_packet_test_data.json", ingame.Type03Packet, self.assertEqual)
 
 
