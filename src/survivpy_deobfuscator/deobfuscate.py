@@ -407,6 +407,9 @@ def process_jsons():
         parse_data = parse_data.replace("\\'", "'")
         parse_data = parse_data.replace("\\x22", "\x22")
         parse_data = parse_data.replace("\\x20", "\x20")
+        parse_data = parse_data.replace("\\x27", "\x27")
+        parse_data = parse_data.replace("\\x5c", "\x5c")
+        # Json cant handle unicode escapes for whatever reason
         parsed = loads(parse_data)
         result = dumps(parsed, indent=4)
         result = indent(result, " " * 12)
@@ -460,4 +463,4 @@ def main(dl_assets=False, redownload=True, deobfuscate=True):
 
 
 if __name__ == "__main__":
-    main()
+    process_jsons()

@@ -114,7 +114,7 @@ a0_0x15fb59(), (window['webpackJsonp'] = window['webpackJsonp'] || [])['push']([
         '00000003': function(_0x0000) {
             'use strict';
             var a = JSON['parse']('{"\x20": "backslash x20 (space)"}'),
-                b = JSON['parse']('{\x22test\x22: \x22backslash x22 (double quote)\x22}');
+                b = JSON['parse']('{\x22test\x22: \x22backslash x22 (double quote)\x22, "\x5c\x5c\x27": ""}');
         },
         'ffffffff': function(_0x0000, _0x0000, _0x0000) {
             'use strict';

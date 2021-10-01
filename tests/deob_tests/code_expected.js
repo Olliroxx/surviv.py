@@ -116,7 +116,8 @@ a0_0x15fb59(), (window['webpackJsonp'] = window['webpackJsonp'] || [])['push']([
                 " ": "backslash x20 (space)"
             },
                 b = {
-                "test": "backslash x22 (double quote)"
+                "test": "backslash x22 (double quote)",
+                "\\'": ""
             };
         },
         'ffffffff': function(_0x0000, _0x0000, _0x0000) {
