@@ -279,12 +279,12 @@ class Map:
         self.map_indicators = []
 
     def __str__(self):
-        return str(dict(self))
+        return str(self.get_dict())
 
     def __repr__(self):
-        return repr(dict(self))
+        return repr(self.get_dict())
 
-    def __getitem__(self, item):
+    def get_dict(self):
         return {
             "name": self.map_name,
             "def": self.map_def,
@@ -304,7 +304,10 @@ class Map:
             "planes": self.planes,
             "airstrike_zones": self.airstrike_zones,
             "pings": self.map_indicators
-        }[item]
+        }
+
+    def __getitem__(self, item):
+        return self.get_dict()[item]
 
     @staticmethod
     def _gen_terrain(width, height, shore_inset, grass_inset, rivers, seed):
@@ -397,6 +400,9 @@ class GameInstance:
         self.active_player_id = 0
 
     def __getitem__(self, item):
+        return self.get_dict()[item]
+
+    def get_dict(self):
         return {
             "status": self.status,
             "team_size": self.team_size,
@@ -405,13 +411,13 @@ class GameInstance:
             "active_player": self.active_player,
             "active_player_id": self.active_player_id,
             "map": self.map
-        }[item]
+        }
 
     def __str__(self):
-        return str(dict(self))
+        return str(self.get_dict())
 
     def __repr__(self):
-        return repr(dict(self))
+        return repr(self.get_dict())
 
     def init_map(self, map_dict):
         self.map = Map(map_dict)

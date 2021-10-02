@@ -964,7 +964,7 @@ class Type06Packet(Packet):
 
         if bs.read_bool():
             output["inventory"] = {"scope": bs.read_game_type()}
-            for item in constants["bagSizes"]:
+            for item in configs.constants["bagSizes"]:
                 output["inventory"][item] = 0
                 if bs.read_bool():
                     output["inventory"][item] = bs.read_bits(9)
@@ -972,7 +972,7 @@ class Type06Packet(Packet):
         if bs.read_bool():
             output["curWeaponIdx"] = bs.read_bits(2)
             output["weapons"] = []
-            for _ in range(constants["WeaponSlot"]["Count"]):
+            for _ in range(configs.constants["WeaponSlot"]["Count"]):
                 output["weapons"].append({
                     "type": bs.read_game_type(),
                     "ammo": bs.read_uint8(),
@@ -1133,7 +1133,7 @@ class Type06Packet(Packet):
         result = {
             "pos": bs.read_vec16(),
             "ori": bs.read_bits(2),
-            "scale": bs.read_float(configs.constants["mapObjectMinScale"], configs.constants["mapObjectMaxScale"], 8)
+            "scale": bs.read_float(constants["mapObjectMinScale"], constants["mapObjectMaxScale"], 8)
         }
         bs.read_bits(6)
         return result
@@ -1466,7 +1466,7 @@ class Type0aPacket(Packet):
     def decode_object(bs: TypedBitString):
         object_ = {
             "pos": bs.read_vec16(),
-            "scale": bs.read_float(configs.constants["mapObjectMinScale"], configs.constants["mapObjectMaxScale"], 8),
+            "scale": bs.read_float(constants["mapObjectMinScale"], constants["mapObjectMaxScale"], 8),
             "type": bs.read_bits(12),
             "ori": bs.read_bits(2),
             "obstacleType": bs.read_ascii_str()
