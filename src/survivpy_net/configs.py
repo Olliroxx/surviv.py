@@ -6,6 +6,7 @@ materials = {}
 animations = {}
 anims = {}
 proxies = {}
+gtypes_subcategories = {}
 updated = False
 
 mtypes_list = []
@@ -16,6 +17,7 @@ def update_configs(force=False):
     from json import load
 
     global constants, mtypes, gtypes, map_defs, materials, anims, animations, proxies, updated, gtypes_list, mtypes_list
+    global gtypes_subcategories
 
     if updated and not force:
         return
@@ -33,10 +35,11 @@ def update_configs(force=False):
              "outfits", "quests", "perks", "passes", "pings", "roles", "throwables", "default_unlocks", "xp_sources",
              "death_effects", "lootbox_tables", "item_pools", "xp_boost_events", "market_min_values", "npcs")
     gtypes = {}
-    for file in files:
-        file = open(("./configs/" + file + ".json"))
+    for filename in files:
+        file = open(("./configs/" + filename + ".json"))
         data = load(file)
         file.close()
+        gtypes_subcategories[filename] = data
         gtypes = gtypes | data
     del file, files
 
@@ -50,3 +53,9 @@ def update_configs(force=False):
 
     mtypes_list = [""] + list(mtypes.keys())
     gtypes_list = [""] + list(gtypes.keys())
+
+
+try:
+    update_configs()
+except FileNotFoundError:
+    pass
