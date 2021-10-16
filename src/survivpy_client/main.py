@@ -1,27 +1,26 @@
-"""
-General architecture:
-There is a list of layers, iterated (.draw() is called, so sprite lists cna be used)over each frame
-list of level_layers which is iterated over twice (for ground floor and underground)
-
-Player layer:
-sprite list of `player` class (inherits arcade.sprite)?
-"""
-
-
 import arcade
 from arcade import gui
 
 from survivpy_net.ingame import GameConnection
 from survivpy_net import configs
 
-from math import sin, cos, pi, atan2, atan, sqrt
+from math import sin, cos, pi, atan2, sqrt
 
-# from random import choice as rand_choice
+from random import choice as rand_choice
 from logging import getLogger
 
 logger = getLogger("survivpy_client")
 
 ASSET_ROOT = "./assets/imgs_world/"
+
+# TODO bag colours
+# TODO hand rotation
+
+
+def load_texture(name: str, *args, **kwargs):
+    if name.endswith(".img"):
+        name = name[:-4]+".png"
+    return arcade.load_texture(ASSET_ROOT + name, *args, **kwargs)
 
 
 def rotate_vector(x, y, angle):
@@ -112,7 +111,6 @@ class Player:
         self.map = map_obj
         self.sprite_list = sprite_list
 
-        # TODO this
         self.loadout = {
             "melee": {
                 "scale": {
@@ -124,21 +122,21 @@ class Player:
         }
 
         self.sprite_footL = arcade.Sprite()
-        self.sprite_footL.texture = arcade.load_texture(ASSET_ROOT+"player-feet-01.png")
+        self.sprite_footL.texture = load_texture("player-feet-01.png", hit_box_algorithm="None")
         self.sprite_footL.scale = 0.45
         self.sprite_footL.radians = 0.5
         self.sprite_footL_submerge = arcade.Sprite()
         self.sprite_footR = arcade.Sprite()
-        self.sprite_footR.texture = arcade.load_texture(ASSET_ROOT+"player-feet-01.png")
+        self.sprite_footR.texture = load_texture("player-feet-01.png", hit_box_algorithm="None")
         self.sprite_footR.scale = 0.45
         self.sprite_footR.radians = 0.5
         self.sprite_footR_submerge = arcade.Sprite()
         self.sprite_backpack = arcade.Sprite()
-        self.sprite_backpack.texture = arcade.load_texture(ASSET_ROOT+"player-circle-base-01.png")
+        self.sprite_backpack.texture = load_texture("player-circle-base-01.png", hit_box_algorithm="None")
         self.sprite_body = arcade.Sprite()
         self.sprite_body_submerge = arcade.Sprite()
         self.sprite_chest = arcade.Sprite()
-        self.sprite_chest.texture = arcade.load_texture(ASSET_ROOT+"player-armor-base-01.png")
+        self.sprite_chest.texture = load_texture("player-armor-base-01.png", hit_box_algorithm="None")
         self.sprite_chest.scale = 0.25
         self.sprite_flak = arcade.Sprite()
         self.sprite_steelskin = arcade.Sprite()
@@ -146,11 +144,13 @@ class Player:
         self.sprite_bodyEffect = arcade.Sprite()
         self.sprite_gunL = arcade.Sprite()
         self.sprite_handL = arcade.Sprite()
+        self.sprite_handL.angle = 0
         self.sprite_handL_submerge = arcade.Sprite()
         self.sprite_objectL = arcade.Sprite()
         self.sprite_gunR = arcade.Sprite()
         self.sprite_melee = arcade.Sprite()
         self.sprite_handR = arcade.Sprite()
+        self.sprite_handR.angle = 0
         self.sprite_handR_submerge = arcade.Sprite()
         self.sprite_objectR = arcade.Sprite()
         self.sprite_visor = arcade.Sprite()
@@ -194,13 +194,13 @@ class Player:
         self.active = True
         self.prev_active = True
 
-        # self.anim = {
-        #     "type": 0,
-        #     "mirrored": False,
-        #     "name": None,
-        #     "seq": -1,
-        #     "ticker": 0
-        # }
+        self.anim = {
+            "type": 0,
+            "mirrored": False,
+            "name": "fists",
+            "seq": -1,
+            "ticker": 0
+        }
         # self.bones = {
         #     "HandR": {"pos": (18.0, -8.25), "weight": 0},
         #     "HandL": {"pos": (6.0, 20.25), "weight": 0},
@@ -237,35 +237,33 @@ class Player:
 
             self.dir = data["dir"]
             self.prev_dir = self.dir_radians
-            self.dir_radians = atan2(*self.dir[::-1])
+            self.dir_radians = atan2(*self.dir[::-1])  # Reverse order because atan2 takes y then x for whatever reason
+
+            # TODO move sprite to origin
+            # TODO make this work (remove and reimplement) around origin
+
             rads_diff = self.dir_radians - self.prev_dir
             for sprite in self.sprites:
-                x_offset = sprite.position[0]-self.pos[0]
-                y_offset = sprite.position[1]-self.pos[1]
+                rel_x = sprite.position[0]-self.pos[0]
+                rel_y = sprite.position[1]-self.pos[1]
 
-                try:
-                    angle = atan(y_offset/x_offset)
-                except ZeroDivisionError:
-                    angle = 0.5 * pi if y_offset > 0 else -0.5 * pi
+                radius = sqrt((rel_x**2) + (rel_y**2))
+                angle = atan2(rel_y, rel_x) + rads_diff
 
-                distance = sqrt(y_offset**2+x_offset**2)
-                new_angle = angle+rads_diff
+                new_rel_x = radius * cos(angle)
+                new_rel_y = radius * sin(angle)
 
-                new_x = distance * cos(new_angle)
-                new_y = distance * sin(angle)
+                new_x = new_rel_x + self.pos[0]
+                new_y = new_rel_y + self.pos[1]
 
-                x_diff = new_x-x_offset
-                y_diff = new_y-y_offset
-
-                sprite.position += (x_diff, y_diff)
+                sprite.position = (new_x, new_y)
                 sprite.radians = (sprite.radians + rads_diff) % (2*pi)
 
             self.prev_pos = self.pos
             self.pos = data["pos"]
             diff = self.pos[0] - self.prev_pos[0], self.pos[1] - self.prev_pos[1]
             for sprite in self.sprites:
-                sprite.position += diff
-
+                sprite.position = tuple(map(sum, zip(diff, sprite.position)))
             # Move the sprites to new positions
 
         else:
@@ -274,7 +272,7 @@ class Player:
                 self.hide()
 
     def update_hand_sprite(self, sprite: arcade.Sprite, name, tint=(255, 255, 255), flipped=False):
-        sprite.texture = arcade.load_texture(ASSET_ROOT+name, flipped_horizontally=flipped)
+        sprite.texture = load_texture(name, flipped_horizontally=flipped)
         sprite.radians = pi * 0.5
         sprite.color = tint
         scale = {"x": 0.175, "y": 0.175}
@@ -299,7 +297,7 @@ class Player:
 
         skin_img = configs.gtypes[self.skin]["skinImg"]
 
-        self.sprite_body.texture = arcade.load_texture(ASSET_ROOT+skin_img["baseSprite"])
+        self.sprite_body.texture = load_texture(skin_img["baseSprite"])
         self.sprite_body.color = num_to_colour(skin_img["baseTint"])
         self.sprite_body.scale = 0.25
         # TODO ghillie
@@ -340,9 +338,9 @@ class Player:
         # TODO ghillie
         if self.helmet:
             self.sprite_helmet.alpha = 255
-            self.sprite_helmet.texture = arcade.load_texture(ASSET_ROOT+configs.gtypes[self.helmet]["skinImg"]["baseSprite"])
-            offset = 3.33 * -1 if self.downed else 1
-            self.move_child(self.sprite_helmet, offset, 0, self.dir_radians)
+            self.sprite_helmet.texture = load_texture(configs.gtypes[self.helmet]["skinImg"]["baseSprite"])
+            offset = 3.33 * (1 if self.downed else -1)
+            self.set_child_pos(self.sprite_helmet, offset, 0, self.dir_radians, self.pos)
 
             self.sprite_helmet.color = num_to_colour(configs.gtypes[self.helmet]["skinImg"]["baseTint"])
 
@@ -363,7 +361,8 @@ class Player:
             offsets = [10.25, 11.5, 12.75]
             offset = offsets[pack_data["level"] - 1]
             scale = (0.4 + pack_data["level"] * 0.03) * 0.5
-            self.sprite_backpack.position = self.sprite_backpack.position[0] + offset, self.sprite_backpack.position[1]
+            self.set_child_pos(self.sprite_backpack, -(self.sprite_backpack.position[0] + offset),
+                               self.sprite_backpack.position[1], self.dir_radians, self.pos)
             self.sprite_backpack.color = num_to_colour(pack_data["tint"])
             self.sprite_backpack.scale = scale
             self.sprite_backpack.alpha = 255
@@ -396,63 +395,113 @@ class Player:
 
     @staticmethod
     def move_child(sprite: arcade.Sprite, x, y, parent_angle):
-        sprite.position += rotate_vector(x, y, parent_angle)
+        sprite.position = tuple(map(sum, zip(rotate_vector(x, y, parent_angle), sprite.position)))
 
-    # def start_anim(self):
-    #     name, mirrored = self._get_anim_name()
-    #     self.anim = {
-    #         "type": self.animType,
-    #         "mirrored": mirrored,
-    #         "name": name,
-    #         "seq": self.animSeq,
-    #         "ticker": 0
-    #     }
-    #
-    # def _get_anim_name(self):
-    #     """
-    #     Gets animation data for current state
-    #     """
-    #     anim_name_functions = [
-    #         lambda x: ("none", False),
-    #         lambda x: ("cook", False),
-    #         lambda x: ("throw", False),
-    #         lambda x: ("revive", False),
-    #         lambda x: ("crawl_forward", True),
-    #         lambda x: ("crawl_backward", True),
-    #         self._get_melee_anim,
-    #         self._get_change_pose_anim
-    #     ]
-    #     Each function takes `self.curWeapType` and returns a 2-tuple containing the animation name and
-    #     # if it mirroring should be used (eg. cook always needs to hold the grenade in the right hand, crawling doesn't care)
-    #     translation_dict = dict(zip(configs.constants["Anim"], anim_name_functions))
-    #     # Creates a dictionary that maps from `animType`s (ints) to 2-tuple functions (see above)
-    #     anim_type, mirrorable = translation_dict[self.animType](self.curWeapType)
-    #
-    #     if mirrorable:
-    #         mirrored = rand_choice([True, False])
-    #     else:
-    #         mirrored = False
-    #
-    #     return anim_type, mirrored
-    #
-    # @staticmethod
-    # def _get_melee_anim(cur_weap):
-    #     gtype_data = configs.gtypes[cur_weap]
-    #     if "anim" not in gtype_data or "attackAnims" not in gtype_data["anim"]:
-    #         return "fists", True
-    #     attack_anims = gtype_data["anim"]["attackAnims"]
-    #     return rand_choice(attack_anims), attack_anims == ["fists"]
-    #
-    # @staticmethod
-    # def _get_change_pose_anim(cur_weap):
-    #     """
-    #     Used for lightsabers?
-    #     """
-    #     gtype_data = configs.gtypes[cur_weap]
-    #     if "anim" not in gtype_data or "poseAnims" not in gtype_data["anim"]:
-    #         return "none", True
-    #     attack_anims = gtype_data["anim"]["poseAnims"]
-    #     return rand_choice(attack_anims), attack_anims == ["fists"]
+    @staticmethod
+    def set_child_pos(sprite: arcade.Sprite, x, y, parent_angle, parent_pos):
+        rotated = rotate_vector(x, y, parent_angle)
+        pos = parent_pos[0]+rotated[0], parent_pos[1]+rotated[1]
+        sprite.position = pos
+
+    def update_anim(self, delta_time):
+        self.anim["ticker"] += delta_time
+        keyframe_data = configs.anims["animations"][self.anim["name"]]["keyframes"]
+        if not keyframe_data:
+            return
+        times = {}
+        for frame in keyframe_data:
+            time = self.get_time(frame)
+            times[time] = frame
+        # Frames are sorted by the order they are played in, if the last frame has played then switch to idle anim
+        # noinspection PyUnboundLocalVariable
+        if self.anim["ticker"] > time:
+            idle_anim = configs.anims["idles"][self.anim["name"]]
+            str_to_sprite = {
+                "HandL": (self.sprite_handL, self.sprite_handL_submerge),
+                "HandR": (self.sprite_handR, self.sprite_handR_submerge),
+                "FootL": (self.sprite_footL, self.sprite_footL_submerge),
+                "FootR": (self.sprite_footR, self.sprite_footR_submerge)
+            }
+            for limb, submerge in str_to_sprite.values():
+                limb.alpha = 0
+                submerge.alpha = 0
+            for limb, value in idle_anim.items():
+                sprite, submerge = str_to_sprite[limb]
+                sprite.alpha = 255
+                submerge.alpha = 255
+                self.set_child_pos(sprite, value[0], value[1], self.dir_radians, self.pos)
+                self.set_child_pos(submerge, value[0], value[1], self.dir_radians, self.pos)
+        # TODO this
+
+    @staticmethod
+    def get_time(frame):
+        if frame["absolute_time"]:
+            return frame["time"]
+        if type(frame["time"]) == list:
+            value = configs.gtypes_subcategories["melee_weapons"]
+            for key in frame["time"]:
+                if key == "damageTimes":
+                    value = value["attack"]
+                value = value[key]
+            return value * frame["time_mult"] + frame["time_offset"]
+
+        raise RuntimeError
+
+    def start_anim(self):
+        name, mirrored = self._get_anim_name()
+        self.anim = {
+            "type": self.animType,
+            "mirrored": mirrored,
+            "name": name,
+            "seq": self.animSeq,
+            "ticker": 0
+        }
+
+    def _get_anim_name(self):
+        """
+        Gets animation data for current state
+        """
+        anim_name_functions = [
+            lambda x: ("none", False),
+            lambda x: ("cook", False),
+            lambda x: ("throw", False),
+            lambda x: ("revive", False),
+            lambda x: ("crawl_forward", True),
+            lambda x: ("crawl_backward", True),
+            self._get_melee_anim,
+            self._get_change_pose_anim
+        ]
+        # Each function takes `self.curWeapType` and returns a 2-tuple containing the animation name and
+        # if mirroring should be used (eg. cook always needs to hold the grenade in the right hand, crawling doesn't care)
+        translation_dict = dict(zip(configs.constants["Anim"].values(), anim_name_functions))
+        # Creates a dictionary that maps from `animType`s (ints) to 2-tuple functions (see above)
+        anim_type, mirrorable = translation_dict[self.animType](self.curWeapType)
+
+        if mirrorable:
+            mirrored = rand_choice([True, False])
+        else:
+            mirrored = False
+
+        return anim_type, mirrored
+
+    @staticmethod
+    def _get_melee_anim(cur_weap):
+        gtype_data = configs.gtypes[cur_weap]
+        if "anim" not in gtype_data or "attackAnims" not in gtype_data["anim"]:
+            return "fists", True
+        attack_anims = gtype_data["anim"]["attackAnims"]
+        return rand_choice(attack_anims), attack_anims == ["fists"]
+
+    @staticmethod
+    def _get_change_pose_anim(cur_weap):
+        """
+        Used for lightsabers?
+        """
+        gtype_data = configs.gtypes[cur_weap]
+        if "anim" not in gtype_data or "poseAnims" not in gtype_data["anim"]:
+            return "none", True
+        attack_anims = gtype_data["anim"]["poseAnims"]
+        return rand_choice(attack_anims), attack_anims == ["fists"]
 
 # TODO layer classes
 
@@ -574,10 +623,10 @@ class RootWindow(arcade.Window):
 class DummyMap:
     def __init__(self):
         self.objects = {0: {
-            "outfit": "outfitBase",
-            "backpack": "backpack03",
-            "helmet": "helmet02",
-            "chest": "chest02",
+            "outfit": "outfitParmaPrestige",
+            "backpack": "backpack01",
+            "helmet": "helmet03",
+            "chest": "chest01",
             "curWeapType": "fists",
             "layer": 1,
             "dead": False,
@@ -588,7 +637,7 @@ class DummyMap:
             "hasActionItem": False,
             "actionItem": "",
             "playerScale": 1.,
-            "dir": (1, 0),
+            "dir": (0.921, -0.389),
             "pos": (0, 0)
         }}
 
@@ -605,8 +654,23 @@ class TestWindow(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
+        arcade.set_background_color((127, 127, 127))
         self.cam.use()
         self.sprite_list.draw()
+
+    def on_update(self, delta_time: float):
+        self.player_sprite.update_anim(delta_time)
+
+    def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
+        x, y = self.normalise_vec(x, y)
+        self.dummy_map.objects[0]["dir"] = (x, y)
+        self.player_sprite.update_data()
+
+    @staticmethod
+    def normalise_vec(x, y, center=(400, 300)):
+        mx, my = x-center[0], y-center[1]
+        mag = sqrt(mx**2 + my**2)
+        return mx/mag, my/mag
 
 
 # TODO `default_layer_list` function
