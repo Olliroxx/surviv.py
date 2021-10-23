@@ -137,7 +137,6 @@ class Vector:
                 self.y = args[0].y
 
             else:
-                print()
                 raise ValueError
 
         elif kwargs:

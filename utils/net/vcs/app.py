@@ -58,7 +58,7 @@ def diff(a_path, b_path):
     elif system() == "Windows":
         from os.path import dirname
 
-        result = run(["fc", a_path, b_path], stdout=PIPE).stdout.decode("utf-8")
+        result = run(["fc", a_path, b_path], stdout=PIPE).stdout.decode("utf-8", errors="ignore")
 
         result = unwrap(result)
         # Text is wrapped so it fits in the terminal, we don't want that

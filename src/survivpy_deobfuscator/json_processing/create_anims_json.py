@@ -1,57 +1,42 @@
-from re import findall
-
-
 def get_anims(script, root_dir):
     """
-    Gets animations
+    Gets animation data and writes to root_dir/anims.json
     """
-    import re
+    from re import findall, DOTALL, split
     from json import dump
 
-    print("Starting anims.json")
-
-    regex = r""" {8}'[\da-f]{8}': function\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}\) \{(
+    # Find module, the bit that starts with '[8 hex chars]': function(3 variables) {[newline]'use strict'
+    module = findall(r""" {8}'[\da-f]{8}': function\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}\) {
  {12}'use strict';
  {12}var (?:_0x[\da-f]{4,6} = _0x[\da-f]{4,6}\('[\da-f]{8}'\),
  {16}_0x[\da-f]{4,6} = _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}\),
- {16})+_0x[\da-f]{4,6}(?:, _0x[\da-f]{4,6})+;
+ {16})+(?:_0x[\da-f]{4,6}, )+_0x[\da-f]{4,6};(.*
+ {12}_0x[\da-f]{4,6}\['exports'] = {
+ {16}'Pose': _0x[\da-f]{4,6},
+ {16}'Bones': _0x[\da-f]{4,6},
+ {16}'IdlePoses': _0x[\da-f]{4,6},
+ {16}'Animations': _0x[\da-f]{4,6}
+ {12}};
+ {8}},)
+ {8}'[\da-f]{8}': function""", script, DOTALL)[0]
 
- {12}function _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}\) \{
- {16}return _0x[\da-f]{4,6} && _0x[\da-f]{4,6}\['__esModule'] \? _0x[\da-f]{4,6} : \{
- {20}'default': _0x[\da-f]{4,6}
- {16}};
- {12}}
- {12}var _0x[\da-f]{4,6} = _0x[\da-f]{4,6}\('[\da-f]{8}'\),
- {16}_0x[\da-f]{4,6} = (_0x[\da-f]{4,6})\['Anim'],(?:
- {16}_0x[\da-f]{4,6} = _0x[\da-f]{4,6}\('[\da-f]{8}'\),)*
- {16}_0x[\da-f]{4,6} = function.*?}),
- {8}'[\da-f]{8}': function"""
+    # Theres a lot of wrapper code (module imports, points, stuff like that), this removes it
+    target_data = findall(r"""
+ {12}_0x[\da-f]{4,6}\(\(.*?
+ {12}var (.*) {12}_0x[\da-f]{4,6}\['exports']""", module, DOTALL)[0]
 
-    source, player_timings = re.findall(regex, script, re.DOTALL)[0]
+    # First element is idle pose data, second is weapon renames and anims
+    idles_raw, target_data = split(r""",\n(?! {16} )""", target_data, 1, DOTALL)
 
-    attack_mappings = dict(re.findall(r"(_0x[\da-f]{4,6}) = _0x[\da-f]{4,6}\['(.*?)']\['attack']", source))
-    for key, value in attack_mappings.items():
-        attack_mappings[key] = "[\"" + value + "\"]"
-    attack_mappings[player_timings] = "[\"player\"]"
+    weap_renames_raw, anims_raw = split(r"""\n {16}(?!_0x[\da-f]{4,6} = _)""", target_data, 1, DOTALL)
 
-    for old, new in attack_mappings.items():
-        source = source.replace(old, new)
-    del old, new
+    # Some timing values are accessed from a dict, but most of those dicts are renamed
+    renames = process_weap_renames(weap_renames_raw)
+    player_rename = findall(r"(_0x[\da-f]{4,6})\['player']", anims_raw)[0]
+    renames[player_rename] = []
 
-    exports_raw = re.findall(r""" {12}_0x[\da-f]{4,6}\['exports'] = {
- {16}'(\w*?)': (_0x[\da-f]{4,6}),
- {16}'(\w*?)': (_0x[\da-f]{4,6}),
- {16}'(\w*?)': (_0x[\da-f]{4,6}),
- {16}'(\w*?)': (_0x[\da-f]{4,6})
- {12}};""", source)[0]
-    exports = dict(zip(exports_raw[::2], exports_raw[1::2]))
-    effect_constructor = get_effect_constructor(source)
-
-    idles_raw = re.findall(exports["IdlePoses"] + r" = {(.*?)\n {16}}", source, re.DOTALL)[0]
+    anims = process_anims(anims_raw, renames)
     idles = process_idles(idles_raw)
-
-    anims_raw = re.findall(exports["Animations"] + r" = {\n(.*?\n {16})}", source, re.DOTALL)[0]
-    anims = process_anims(anims_raw, effect_constructor)
 
     with open(root_dir+"anims.json", "w") as file:
         dump({"idles": idles, "animations": anims}, file, indent=4)
@@ -59,184 +44,240 @@ def get_anims(script, root_dir):
     print("Finished anims.json")
 
 
-def process_idles(idles_raw):
-    idles_split = [i.lstrip(" ") for i in idles_raw.split("\n")[1:-1]]
-    idles = {}
-    regex = r"\(0, _0x[\da-f]{4,6}\['default']\)\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}\['(\w+?)']," \
-            r" new _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}\['create']\((-?\d+(?:\.\d+?)?), (-?\d+(?:\.\d+)?)\)\)\)"
-    for idle in idles_split:
-        out = {}
-        idle_name = idle.split("'")[1]
-        pos_list = findall(regex, idle)
-        for name, x, y in pos_list:
-            out[name] = (float(x), float(y))
-        idles[idle_name] = out
-    return idles
-
-
-def process_anims(anims_raw, effect_constructor):
-    from re import split, findall, DOTALL
+def process_anims(anims_raw, renames):
     from textwrap import dedent
+    from re import split, DOTALL
 
+    # Remove first line and last 2
+    anims_raw = "\n".join(anims_raw.split("\n")[1:-2])
     anims_raw = dedent(anims_raw)
-    anims_split = split(",\n(?! )", anims_raw)
-    anims = {}
 
-    frame_constructor = findall(r"(_0x[\da-f]{4,6})\(0, ", anims_raw)[0]
+    anims_raw = split(r"""(?<=\n}),\n""", anims_raw, flags=DOTALL)
 
-    for anim_text in anims_split:
-        anim = {}
-        name = anim_text.split("'", 2)[1]
-
-        keyframes_str = findall(r"keyframes': \[(.*)],\n {4}'effects'", anim_text, DOTALL)[0]
-        anim["keyframes"] = parse_keyframes(keyframes_str, frame_constructor) if keyframes_str else []
-
-        effects_str = findall(r"'effects': \[(.*)]\n}", anim_text, DOTALL)[0]
-        anim["effects"] = parse_effects(effects_str, effect_constructor) if effects_str else []
-        anims[name] = anim
+    anims = dict([process_anim(anim, renames) for anim in anims_raw])
     return anims
 
 
-def get_coords(text):
-    return findall(r"_0x[\da-f]{4,6}\['create']\((-?\d+(?:\.\d+?)?), (-?\d+(?:\.\d+?)?)\)", text)[0]
+def process_anim(raw, renames):
+    from textwrap import dedent
+
+    name = raw.split("'")[1]
+
+    frames_raw, effects_raw = raw.split("\n    'effects': [")
+    effects_raw = effects_raw[:-3]
+
+    frames_raw = frames_raw.split("\n    'keyframes': [")[1][:-2]
+    frames_raw = dedent(frames_raw)
+
+    frames = process_frames(frames_raw, renames)
+    effects = process_effects(effects_raw, renames)
+
+    return name, {"keyframes": frames, "effects": effects}
 
 
-def get_time(time):
-    abs_time = is_digits(time)
-    length = len(time)
+def process_frames(raw, renames):
+    if not raw:
+        return []
 
-    if " * " in time:
-        time, time_mult = time.split(" * ")
-        time_mult = numberify(time_mult)
-    else:
-        time_mult = 1
+    from re import findall
+    constructor = findall(r"_0x[\da-f]{4,6}", raw)[0]
+    raw = raw[len(constructor)+1:-1]
 
-    if " + " in time:
-        time, offset = time.split(" + ")
-    else:
-        offset = 0
+    frames_raw = raw.split(", "+constructor)
+    frames = []
+    for frame_raw in frames_raw:
 
-    if "][" in time:
-        time = time.rstrip("]")
-        time = time.lstrip("[")
-        time = time.split("][")
-        time = [i.strip("'\"") for i in time]
-        time = [numberify(i) if is_digits(i) else i for i in time]
+        time_raw = frame_raw.split(", ")[0]
+        frame_raw = frame_raw[len(time_raw)+2:]
+        frame = parse_time(time_raw, renames)
 
-    if type(time) == list and time[0] == time[1] == "player":
-        time.pop(0)
+        limbs = parse_point_set(frame_raw)
+        frame = frame | limbs
 
-    return time, offset, abs_time, time_mult, length
+        frames.append(frame)
+
+    return frames
 
 
-def is_digits(text):
-    """
-    Normal str.isdigit can't be used because it returns false if there is a decimal point
-    """
-    from re import fullmatch
-    return bool(fullmatch(r"-?\d+(?:\.\d+?)?", text))
+def process_effects(raw, renames):
+    from re import findall
 
+    if not raw:
+        return []
 
-def numberify(num):
-    if "." in num:
-        return float(num)
-    else:
-        return int(num)
-
-
-def parse_keyframes(text, frame_constructor):
-    keyframes = []
-
-    args = [frame_constructor+i.lstrip(", ") for i in text.split(frame_constructor)[:-1] if i]
-
-    for arg in args:
-        arg = findall(frame_constructor + r"\((?:-?\d+(?:\.\d+?)?, |\[\").+?\)\),", arg)[0]
-
-        limb = None
-        for possible_limb in ["HandR", "HandL", "FootL", "FootR"]:
-            if possible_limb in arg:
-                if limb:
-                    raise RuntimeError
-                limb = possible_limb
-        if not limb:
-            raise RuntimeError
-
-        pos = get_coords(arg)
-
-        time_raw = findall(frame_constructor + r"\((.*?),", arg)[0]
-        time, time_offset, abs_time, time_mult, _ = get_time(time_raw)
-
-        if abs_time:
-            time = numberify(time)
-
-        keyframes.append({
-            "time": time,
-            "time_mult": time_mult,
-            "time_offset": time_offset,
-            "pos": [numberify(i) for i in pos],
-            "absolute_time": abs_time,
-            "limb": limb,
-            "transform": process_transform(arg)
-        })
-
-    return keyframes
-
-
-def process_transform(text):
-    text = text.rstrip(",")
-    transforms_raw = findall(r"\['rotate']\(.+?\)\)\)$", text)
-    # Offset and copy are also implemented, but not used
-    if not transforms_raw:
-        return None
-    transforms = []
-    for transform_raw in transforms_raw:
-        transform = {
-            "type": transform_raw.lstrip("['").split("']")[0]
-        }
-        amount_raw = transform_raw[5+len(transform["type"]):-3]
-        sign = -1 if amount_raw[0] == "-" else 1
-        exponent = numberify(amount_raw.split(" * ")[1])
-        transform["amount"] = 3.141592653589793 * exponent * sign
-        transforms.append(transform)
-
-    return transforms
-
-
-def parse_effects(text, effect_constructor):
-    from json import loads
+    effect_constructor = findall(r"_0x[\da-f]{4,6}", raw)[0]
+    effects_raw = raw.split(effect_constructor)[1:]
+    effects_raw = [string.strip(" ,\n")[1:-1] for string in effects_raw]
 
     effects = []
-    raw_effects = [i for i in text.split(effect_constructor) if i]
+    for effect_raw in effects_raw:
 
-    for raw in raw_effects:
-        if is_digits(raw[1:].split(",")[0]):
-            effect = {
-                "time": raw[1:].split(",")[0],
-                "abs_time": True,
-                "time_mult": 1
-            }
-            raw = raw[len(str(effect["time"]))+4:]
-        else:
-            effect = {}
-            effect["time"], _, effect["abs_time"], effect["time_mult"], length = get_time(raw[1:].split(",")[0])
-            raw = raw[length+4:]
-        effect["func"] = raw.split("'")[0]
-        raw = raw[len(effect["func"])+3:]
-        raw = raw.rstrip("), ")
-        effect["args"] = loads(raw.replace("'", '"'))
+        time_raw = effect_raw.split(",")[0]
+        effect = parse_time(time_raw, renames)
+
+        effect_raw = effect_raw[len(time_raw)+2:]
+        effect["func"] = effect_raw.split("'")[1]
+
+        effect_raw = effect_raw[len(effect["func"])+5:-1]
+
+        # noinspection PyTypeChecker
+        effect["args"] = {}
+
+        for line in effect_raw.split("\n"):
+            line = line.strip(" ")
+            if line:
+                key, value = line.split(": ")
+                key = key.strip("'")
+                value = value.strip("'")
+                effect["args"][key] = value
+
         effects.append(effect)
 
     return effects
 
 
-def get_effect_constructor(script):
-    return findall(r""" {12}function (_0x[\da-f]{4,6})\(_0x[\da-f]{4,6}, _0x[\da-f]{4,6}, _0x[\da-f]{4,6}\) {
- {16}return {
- {20}'time': _0x[\da-f]{4,6},
- {20}'fn': _0x[\da-f]{4,6},
- {20}'args': _0x[\da-f]{4,6}
- {16}};
- {12}}""", script)[0]
+def process_weap_renames(raw: str):
+    # General string cleaning, turns "    _0x1234 = _0x5678['foo']['bar'],\n" into "_0x1234=_0x5678[foo[bar"
+    raw = raw.replace(" ", "")
+    raw = raw.replace(",", "")
+    raw = raw.replace("'", "")
+    raw = raw.replace("]", "")
+    lines = raw.split("\n")
+
+    out = {}
+    for line in lines:
+        new, old_raw = line.split("=")
+        _, *old = old_raw.split("[")
+        out[new] = old[::-1]
+    return out
+
+
+def process_idles(idles_raw):
+    from textwrap import dedent
+
+    # Remove first and last lines
+    idles_raw = "\n".join(idles_raw.split("\n")[1:-1])
+    idles_raw = dedent(idles_raw)
+
+    idles = {}
+    for line in idles_raw.split("\n"):
+        name = line.split("'")[1]
+        line = line[len(name)+5:-1]
+
+        parsed = parse_point_set(line)
+        idles[name] = parsed
+
+    return idles
+
+
+def parse_time(raw, renames):
+    raw = raw.lstrip(" (")
+
+    out = {
+        "time": None,
+        "abs_time": False,
+        "time_mult": 1,
+        "time_offset": 0.0
+    }
+
+    if is_number(raw):
+        out["abs_time"] = True
+        # noinspection PyTypedDict
+        out["time"] = float(raw)
+        return out
+
+    out["time"] = []
+
+    if "*" in raw:
+        item1, item2 = raw.split(" * ")
+        if is_number(item1):
+            out["time_mult"] = float(item1)
+            raw = item2
+        else:
+            out["time_mult"] = float(item2)
+            raw = item1
+
+    if "+" in raw or "-" in raw:
+
+        neg = False
+        if "-" in raw:
+            neg = True
+            raw = raw.replace("-", "+")
+
+        item1, item2 = raw.split(" + ")
+        if is_number(item1):
+            out["time_offset"] = float(item1)
+            raw = item2
+            if neg:
+                out["time_mult"] *= -1
+        else:
+            out["time_offset"] = float(item2) * (-1 if neg else 1)
+            raw = item1
+
+    raw = raw.replace("]", "")
+
+    for name, replacements in renames.items():
+        if name in raw:
+            raw = raw.replace(name, "")
+            for item in replacements:
+                raw = "[" + repr(item) + raw
+            raw = raw[1:]
+            break
+
+    for element in raw.split("["):
+        if element[0] == "'":
+            out["time"].append(element[1:-1])
+        else:
+            out["time"].append(int(element))
+
+    return out
+
+
+def parse_point_set(raw):
+    from re import findall
+    frame = {
+        "HandL": None,
+        "HandR": None,
+        "FootL": None,
+        "FootR": None
+    }
+
+    limbs = findall(
+        # This is treated as one string, but is spaced out to make it easier to read
+        r"\(0, _0x[\da-f]{4,6}\['default']\)"  # Some wierd function that comes from the TS->JS conversion (I think)
+        r"\((?:_0x[\da-f]{4,6}|{})"  # Either a dict or the name of a dict
+        r", _0x[\da-f]{4,6}\['((?:Hand|Foot)[LR])']"  # Specifies which limb is being set (1st element in limb)
+        r", new _0x[\da-f]{4,6}\(_0x[\da-f]{4,6}\['create']"  # Point-with-rotation constructor, then point constructor
+        r"\((-?\d+(?:\.\d+)?), (-?\d+(?:\.\d+)?)\)\)"  # x/y coords (2nd/3rd element in limb)
+        r"(?:\['rotate']\((-)?Math\['PI'] \* (\d+(?:\.\d+)?))?",  # Optional rotation amount and even more optional
+        raw)                                                      # negative value (4th/5th element in limb)
+
+    if not limbs:
+        raise RuntimeError("No limbs in passed string")
+
+    for limb in limbs:
+        name = limb[0]
+        x = float(limb[1])
+        y = float(limb[2])
+
+        # If ['rotate'] is used
+        if limb[-1]:
+            angle = float(limb[-1])
+
+            # If there's a negative sign in front of Math['PI'], make the angle negative
+            if limb[3]:
+                angle *= -1
+
+        else:
+            angle = 0
+
+        frame[name] = [x, y, angle]
+    return frame
+
+
+def is_number(string):
+    from re import fullmatch
+    return bool(fullmatch(r"-?\d+(?:\.\d+)?", string))
 
 
 if __name__ == '__main__':

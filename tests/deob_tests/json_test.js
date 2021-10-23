@@ -1844,7 +1844,13 @@
                     'args': _0x195ad3
                 };
             }
-
+            var _0x5bbdb5 = {
+                'HandL': 0x0,
+                'HandR': 0x1,
+                'FootL': 0x2,
+                'FootR': 0x3
+            };
+            _0x4ef3e5((0, _0x3b94e2['default'])(_0x5bbdb5)['length'] % 2 == 0);
             var _0x2e2438 = {
                     'fists': (_0x5a9f38 = {}, (0, _0x513bda['default'])(_0x5a9f38, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0x5a9f38, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))), _0x5a9f38),
                     'downed': (_0x54c9c5 = {}, (0, _0x513bda['default'])(_0x54c9c5, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0x54c9c5, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))), (0, _0x513bda['default'])(_0x54c9c5, _0x1145c3['FootL'], new _0x267824(_0x2287a4['create'](-15.75, -9))), (0, _0x513bda['default'])(_0x54c9c5, _0x1145c3['FootR'], new _0x267824(_0x2287a4['create'](-15.75, 9))), _0x54c9c5)
@@ -1852,6 +1858,7 @@
                 _0x28944d = _0x5e3fe8['fists']['attack'],
                 _0x40d352 = _0x5e3fe8['saw']['attack'],
                 _0x473dfa = _0x5e3fe8['lasr_swrd']['attack'],
+                _0x460143 = _0x5e3fe8['katana']['attack'],
                 _0x111f02 = {
                     'none': {
                         'keyframes': [],
@@ -1894,6 +1901,12 @@
                     'revive': {
                         'keyframes': [_0x9dd69a(0, (_0xe3815f = {}, (0, _0x513bda['default'])(_0xe3815f, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](14, -12.25))), (0, _0x513bda['default'])(_0xe3815f, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](14, 12.25))), _0xe3815f)), _0x9dd69a(0.2, (_0x10423d = {}, (0, _0x513bda['default'])(_0x10423d, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](24.5, -8.75))), (0, _0x513bda['default'])(_0x10423d, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](5.25, 21))), _0x10423d)), _0x9dd69a(0.2 + _0x16b364['player']['reviveDuration'], (_0x399457 = {}, (0, _0x513bda['default'])(_0x399457, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](24.5, -8.75))), (0, _0x513bda['default'])(_0x399457, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](5.25, 21))), _0x399457))],
                         'effects': []
+                    },
+                    'katanaSwing': {
+                        'keyframes': [_0x9dd69a(0, (_0x2e810e = {}, (0, _0x513bda['default'])(_0x2e810e, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](8.5, 13.25))), (0, _0x513bda['default'])(_0x2e810e, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](-3, 17.75))), _0x2e810e)), _0x9dd69a(_0x460143['damageTimes'][0] * 0.3, (_0x3d2859 = {}, (0, _0x513bda['default'])(_0x3d2859, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](8.5, 13.25))['rotate'](Math['PI'] * 0.2)), (0, _0x513bda['default'])(_0x3d2859, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](-3, 17.75))['rotate'](Math['PI'] * 0.2)), _0x3d2859)), _0x9dd69a(_0x460143['damageTimes'][0] * 0.9, (_0x5fc831 = {}, (0, _0x513bda['default'])(_0x5fc831, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](8.5, 13.25))['rotate'](-Math['PI'] * 1.2)), (0, _0x513bda['default'])(_0x5fc831, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](-3, 17.75))['rotate'](-Math['PI'] * 1.2)), _0x5fc831)), _0x9dd69a(_0x460143['cooldownTime'], (_0x41b9a3 = {}, (0, _0x513bda['default'])(_0x41b9a3, _0x1145c3['HandL'], new _0x267824(_0x2287a4['create'](8.5, 13.25))), (0, _0x513bda['default'])(_0x41b9a3, _0x1145c3['HandR'], new _0x267824(_0x2287a4['create'](-3, 17.75))), _0x41b9a3))],
+                        'effects': [_0x481243(_0x460143['damageTimes'][0], 'animPlaySound', {
+                            'sound': 'swing'
+                        }), _0x481243(_0x460143['damageTimes'][0], 'animMeleeCollision', {})]
                     }
                 };
             _0x331b2f['exports'] = {
@@ -1902,7 +1915,6 @@
                 'IdlePoses': _0x2e2438,
                 'Animations': _0x111f02
             };
-
         },
         'ffffffff': function(_0x0000, _0x0000, _0x0000) {
             'use strict';
