@@ -8,7 +8,7 @@
     * Add logging to deobfuscation scripts
     * Optimise float processing
     * Add asset patching?
-    * Check if animation extraction works on frames with feet (crawl_forward and crawl_backward)
+    * Check object extraction (key phrases: "['decoration_01'] || ''" and "candle_lit_01")
 
  * Deobfuscation
     * name to file sound mappings

@@ -32128,7 +32128,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": -9.0,
@@ -32138,7 +32138,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 9.0,
@@ -54267,7 +54267,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "barn_basement_floor_02d",
+                    "type": "barn_basement_floor_02",
                     "pos": {
                         "type": "coord",
                         "x": -8.0,
@@ -58173,7 +58173,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "panicroom_01",
+                    "type": "barn_basement_structure_01",
                     "pos": {
                         "type": "coord",
                         "x": 19.5,
@@ -58992,7 +58992,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "panicroom_01",
+                    "type": "barn_basement_structure_01d",
                     "pos": {
                         "type": "coord",
                         "x": 19.5,
@@ -63125,7 +63125,7 @@
                     "ori": 2
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"loot_tier_vault_floor\": 1}}",
+                    "type": "loot_tier_stonehammer",
                     "pos": {
                         "type": "coord",
                         "x": -3.5,
@@ -68677,7 +68677,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "",
+                    "type": "stand_01",
                     "pos": {
                         "type": "coord",
                         "x": -12.5,
@@ -69337,7 +69337,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "",
+                    "type": "stand_01",
                     "pos": {
                         "type": "coord",
                         "x": -12.5,
@@ -69408,7 +69408,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "",
+                    "type": "cache_pumpkin_02",
                     "pos": {
                         "type": "coord",
                         "x": -4.5,
@@ -69418,7 +69418,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "cache_pumpkin_02",
                     "pos": {
                         "type": "coord",
                         "x": 5.75,
@@ -76757,7 +76757,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "loot_tier_mansion_floor",
                     "pos": {
                         "type": "coord",
                         "x": -2.0,
@@ -76767,7 +76767,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": -21.0,
@@ -76777,7 +76777,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 18.0,
@@ -76787,7 +76787,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 6.0,
@@ -81824,7 +81824,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "loot_tier_helmet_forest",
+                    "type": "loot_tier_airdrop_armor",
                     "pos": {
                         "type": "coord",
                         "x": 0.0,
@@ -82127,7 +82127,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_08su",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": -10.0,
@@ -82137,7 +82137,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_08su",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": -17.5,
@@ -82147,7 +82147,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_08su",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": 18.0,
@@ -82157,7 +82157,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_08su",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": 17.5,
@@ -82305,7 +82305,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_16",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": -10.0,
@@ -82315,7 +82315,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_16",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": -17.5,
@@ -82325,7 +82325,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_16",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": 18.0,
@@ -82335,7 +82335,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_16",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": 17.5,
@@ -82483,7 +82483,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_10",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": -10.0,
@@ -82493,7 +82493,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_10",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": -17.5,
@@ -82503,7 +82503,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_10",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": 18.0,
@@ -82513,7 +82513,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "tree_10",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": 17.5,

@@ -3,141 +3,219 @@
         "fists": {
             "HandL": [
                 14.0,
-                -12.25
+                -12.25,
+                0
             ],
             "HandR": [
                 14.0,
-                12.25
-            ]
+                12.25,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "slash": {
             "HandL": [
                 18.0,
-                -8.25
+                -8.25,
+                0
             ],
             "HandR": [
                 6.0,
-                20.25
-            ]
+                20.25,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "meleeTwoHanded": {
             "HandL": [
                 10.5,
-                -14.25
+                -14.25,
+                0
             ],
             "HandR": [
                 18.0,
-                6.25
-            ]
+                6.25,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "meleeLasrSwrd": {
             "HandL": [
                 10.5,
-                0.0
+                0.0,
+                0
             ],
             "HandR": [
                 18.0,
-                0.5
-            ]
+                0.5,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "meleeKatana": {
             "HandL": [
                 8.5,
-                13.25
+                13.25,
+                0
             ],
             "HandR": [
                 -3.0,
-                17.75
-            ]
+                17.75,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "meleeNaginata": {
             "HandL": [
                 19.0,
-                -7.25
+                -7.25,
+                0
             ],
             "HandR": [
                 8.5,
-                24.25
-            ]
+                24.25,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "machete": {
             "HandL": [
                 14.0,
-                -12.25
+                -12.25,
+                0
             ],
             "HandR": [
                 1.0,
-                17.75
-            ]
+                17.75,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "rifle": {
             "HandL": [
                 28.0,
-                5.25
+                5.25,
+                0
             ],
             "HandR": [
                 14.0,
-                1.75
-            ]
+                1.75,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "dualRifle": {
             "HandL": [
                 5.75,
-                -16.0
+                -16.0,
+                0
             ],
             "HandR": [
                 5.75,
-                16.0
-            ]
+                16.0,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "bullpup": {
             "HandL": [
                 28.0,
-                5.25
+                5.25,
+                0
             ],
             "HandR": [
                 24.0,
-                1.75
-            ]
+                1.75,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "launcher": {
             "HandL": [
                 20.0,
-                10.0
+                10.0,
+                0
             ],
             "HandR": [
                 2.0,
-                22.0
-            ]
+                22.0,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "pistol": {
             "HandL": [
                 14.0,
-                1.75
+                1.75,
+                0
             ],
             "HandR": [
                 14.0,
-                1.75
-            ]
+                1.75,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "dualPistol": {
             "HandL": [
                 15.75,
-                -8.75
+                -8.75,
+                0
             ],
             "HandR": [
                 15.75,
-                8.75
-            ]
+                8.75,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
         },
         "throwable": {
             "HandL": [
                 15.75,
-                -9.625
+                -9.625,
+                0
             ],
             "HandR": [
                 15.75,
-                9.625
+                9.625,
+                0
+            ],
+            "FootL": null,
+            "FootR": null
+        },
+        "downed": {
+            "HandL": [
+                14.0,
+                -12.25,
+                0
+            ],
+            "HandR": [
+                14.0,
+                12.25,
+                0
+            ],
+            "FootL": [
+                -15.75,
+                -9.0,
+                0
+            ],
+            "FootR": [
+                -15.75,
+                9.0,
+                0
             ]
         }
     },
@@ -149,39 +227,63 @@
         "fists": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        12.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
                         29.75,
-                        1.75
+                        1.75,
+                        0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -190,11 +292,13 @@
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -203,65 +307,82 @@
         "cut": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        12.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.25,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        12.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        -0.35
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": -1.0995574287564276
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1.25,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        12.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0.35
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": 1.0995574287564276
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -270,11 +391,13 @@
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -283,65 +406,82 @@
         "cutReverse": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        1,
-                        17.75
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        1.0,
+                        17.75,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.4,
-                    "time_offset": 0,
-                    "pos": [
-                        25,
-                        6.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        25.0,
+                        6.25,
+                        0.3
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": 0.9424777960769379
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1.4,
-                    "time_offset": 0,
-                    "pos": [
-                        25,
-                        6.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        25.0,
+                        6.25,
+                        -0.5
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": -1.5707963267948966
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        1.0,
+                        17.75,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -350,11 +490,13 @@
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -363,65 +505,82 @@
         "thrust": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        12.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.4,
-                    "time_offset": 0,
-                    "pos": [
-                        5,
-                        12.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        5.0,
+                        12.25,
+                        0.1
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": 0.3141592653589793
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1.4,
-                    "time_offset": 0,
-                    "pos": [
-                        25,
-                        6.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        25.0,
+                        6.25,
+                        -0.0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": -0.0
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -430,11 +589,13 @@
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -443,39 +604,75 @@
         "slash": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        18,
-                        -8.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        18.0,
+                        -8.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        6.0,
+                        20.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        6,
-                        -22.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        6.0,
+                        -22.25,
+                        0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        6.0,
+                        20.25,
+                        -0.6
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        18.0,
+                        -8.25,
+                        0
+                    ],
+                    "HandR": [
+                        6.0,
+                        20.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -484,11 +681,13 @@
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -497,81 +696,102 @@
         "hook": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        12.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "hook",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.25,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        12.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0.1
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": 0.3141592653589793
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "hook",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        24,
-                        1.75
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        24.0,
+                        1.75,
+                        0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "hook",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1,
-                    "time_offset": "0.05",
-                    "pos": [
-                        14,
-                        12.25
+                    "time_offset": 0.05,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": -0.9424777960769379
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "hook",
+                        "attack",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.1,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -580,11 +800,13 @@
                 {
                     "time": [
                         "hook",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -593,57 +815,68 @@
         "pan": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        12.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": 0.15,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        22,
-                        -8.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        22.0,
+                        -8.25,
+                        -0.2
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": -0.6283185307179586
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": 0.25,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        28,
-                        -8.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        28.0,
+                        -8.25,
+                        0.5
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": 1.5707963267948966
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": 0.55,
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -652,11 +885,13 @@
                 {
                     "time": [
                         "pan",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -665,59 +900,103 @@
         "axeSwing": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         10.5,
-                        -14.25
+                        -14.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        6.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "woodaxe",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.4,
-                    "time_offset": 0,
-                    "pos": [
-                        9,
-                        -14.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        9.0,
+                        -14.25,
+                        0.4
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        6.25,
+                        0.4
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "woodaxe",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        9,
-                        -14.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        9.0,
+                        -14.25,
+                        -0.4
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        6.25,
+                        -0.4
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "woodaxe",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        10.5,
+                        -14.25,
+                        0
+                    ],
+                    "HandR": [
+                        18.0,
+                        6.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
                     "time": [
                         "woodaxe",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -726,11 +1005,13 @@
                 {
                     "time": [
                         "woodaxe",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -739,59 +1020,103 @@
         "hammerSwing": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         10.5,
-                        -14.25
+                        -14.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        6.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "stonehammer",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.4,
-                    "time_offset": 0,
-                    "pos": [
-                        9,
-                        -14.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        9.0,
+                        -14.25,
+                        0.4
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        6.25,
+                        0.4
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "stonehammer",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        9,
-                        -14.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        9.0,
+                        -14.25,
+                        -0.4
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        6.25,
+                        -0.4
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "stonehammer",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        10.5,
+                        -14.25,
+                        0
+                    ],
+                    "HandR": [
+                        18.0,
+                        6.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
                     "time": [
                         "stonehammer",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -800,11 +1125,13 @@
                 {
                     "time": [
                         "stonehammer",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -813,59 +1140,103 @@
         "lasrSwrdSwing": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         8.5,
-                        13.25
+                        13.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        16.0,
+                        17.75,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "lasr_swrd",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.3,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         8.5,
-                        13.25
+                        13.25,
+                        0.2
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        16.0,
+                        17.75,
+                        0.2
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "lasr_swrd",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.9,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         8.5,
-                        13.25
+                        13.25,
+                        -0.6
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        16.0,
+                        17.75,
+                        -0.6
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        10.5,
+                        0.0,
+                        0
+                    ],
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
                     "time": [
                         "lasr_swrd",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -874,11 +1245,13 @@
                 {
                     "time": [
                         "lasr_swrd",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -887,31 +1260,66 @@
         "lasrSwrd_pose_1": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         10.5,
-                        0
+                        0.0,
+                        0.3
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        0.3
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "lasr_swrd",
+                        "attack",
                         "poseTime"
                     ],
+                    "abs_time": false,
                     "time_mult": 0.5,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         10.5,
+                        0.0,
+                        -0.2
+                    ],
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        -0.2
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "attack",
+                        "poseTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        10.5,
+                        0.0,
                         0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": []
@@ -919,31 +1327,66 @@
         "lasrSwrd_pose_2": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         10.5,
-                        0
+                        0.0,
+                        -0.2
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        -0.2
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "lasr_swrd",
+                        "attack",
                         "poseTime"
                     ],
+                    "abs_time": false,
                     "time_mult": 0.5,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         10.5,
+                        0.0,
+                        0.2
+                    ],
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        0.2
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "attack",
+                        "poseTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        10.5,
+                        0.0,
                         0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": []
@@ -951,31 +1394,66 @@
         "lasrSwrd_pose_3": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         10.5,
-                        0
+                        0.0,
+                        0.1
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        0.1
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "lasr_swrd",
+                        "attack",
                         "poseTime"
                     ],
+                    "abs_time": false,
                     "time_mult": 0.5,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         10.5,
+                        0.0,
+                        -0.3
+                    ],
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        -0.3
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "lasr_swrd",
+                        "attack",
+                        "poseTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        10.5,
+                        0.0,
                         0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        18.0,
+                        0.5,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": []
@@ -983,59 +1461,103 @@
         "katanaSwing": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         8.5,
-                        13.25
+                        13.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        -3.0,
+                        17.75,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "katana",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.3,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         8.5,
-                        13.25
+                        13.25,
+                        0.2
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        -3.0,
+                        17.75,
+                        0.2
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "katana",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.9,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         8.5,
-                        13.25
+                        13.25,
+                        -1.2
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        -3.0,
+                        17.75,
+                        -1.2
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "katana",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        8.5,
+                        13.25,
+                        0
+                    ],
+                    "HandR": [
+                        -3.0,
+                        17.75,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
                     "time": [
                         "katana",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -1044,11 +1566,13 @@
                 {
                     "time": [
                         "katana",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -1057,59 +1581,103 @@
         "naginataSwing": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        19,
-                        -7.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        19.0,
+                        -7.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        8.5,
+                        24.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "naginata",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.3,
-                    "time_offset": 0,
-                    "pos": [
-                        19,
-                        -7.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        19.0,
+                        -7.25,
+                        0.3
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        8.5,
+                        24.25,
+                        0.3
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "naginata",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.9,
-                    "time_offset": 0,
-                    "pos": [
-                        19,
-                        -7.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        19.0,
+                        -7.25,
+                        -0.85
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        8.5,
+                        24.25,
+                        -0.85
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "naginata",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        19.0,
+                        -7.25,
+                        0
+                    ],
+                    "HandR": [
+                        8.5,
+                        24.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
                     "time": [
                         "woodaxe",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -1118,11 +1686,13 @@
                 {
                     "time": [
                         "woodaxe",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -1131,140 +1701,159 @@
         "sawSwing": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        1,
-                        17.75
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        1.0,
+                        17.75,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "saw",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.4,
-                    "time_offset": 0,
-                    "pos": [
-                        25,
-                        6.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        25.0,
+                        6.25,
+                        0.3
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": 0.9424777960769379
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "saw",
-                        "damageTimes",
-                        0
-                    ],
-                    "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        25,
-                        6.25
-                    ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": -0.9424777960769379
-                        }
-                    ]
-                },
-                {
-                    "time": [
-                        "saw",
-                        "damageTimes",
-                        "1] - 0.1"
-                    ],
-                    "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        25,
-                        17.75
-                    ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": -0.7853981633974483
-                        }
-                    ]
-                },
-                {
-                    "time": [
-                        "saw",
-                        "damageTimes",
-                        1
-                    ],
-                    "time_mult": 0.6,
-                    "time_offset": 0,
-                    "pos": [
-                        -36,
-                        7.75
-                    ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": -0.7853981633974483
-                        }
-                    ]
-                }
-            ],
-            "effects": [
-                {
-                    "time": "0",
-                    "abs_time": true,
-                    "time_mult": 1,
-                    "func": "animPlaySound",
-                    "args": {
-                        "sound": "swing"
-                    }
-                },
-                {
-                    "time": "0.4",
-                    "abs_time": true,
-                    "time_mult": 1,
-                    "func": "animPlaySound",
-                    "args": {
-                        "sound": "swing"
-                    }
-                },
-                {
-                    "time": [
-                        "saw",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        25.0,
+                        6.25,
+                        -0.3
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "saw",
+                        "attack",
+                        "damageTimes",
+                        1
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": -0.1,
+                    "HandL": null,
+                    "HandR": [
+                        25.0,
+                        17.75,
+                        -0.25
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "saw",
+                        "attack",
+                        "damageTimes",
+                        1
+                    ],
+                    "abs_time": false,
+                    "time_mult": 0.6,
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        -36.0,
+                        7.75,
+                        -0.25
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "saw",
+                        "attack",
+                        "damageTimes",
+                        1
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.2,
+                    "HandL": null,
+                    "HandR": [
+                        1.0,
+                        17.75,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                }
+            ],
+            "effects": [
+                {
+                    "time": 0.0,
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": 0.4,
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "func": "animPlaySound",
+                    "args": {
+                        "sound": "swing"
+                    }
+                },
+                {
+                    "time": [
+                        "saw",
+                        "attack",
+                        "damageTimes",
+                        0
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 },
                 {
                     "time": [
                         "saw",
+                        "attack",
                         "damageTimes",
                         1
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {
                         "playerHit": "playerHit2"
@@ -1275,65 +1864,82 @@
         "cutReverseShort": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        1,
-                        17.75
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        1.0,
+                        17.75,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandR",
-                    "transform": null
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "saw",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 0.4,
-                    "time_offset": 0,
-                    "pos": [
-                        25,
-                        6.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        25.0,
+                        6.25,
+                        0.3
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": 0.9424777960769379
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": [
                         "saw",
+                        "attack",
                         "damageTimes",
                         0
                     ],
+                    "abs_time": false,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        25,
-                        6.25
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        25.0,
+                        6.25,
+                        -0.3
                     ],
-                    "absolute_time": false,
-                    "limb": "HandR",
-                    "transform": [
-                        {
-                            "type": "rotate",
-                            "amount": -0.9424777960769379
-                        }
-                    ]
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "fists",
+                        "attack",
+                        "cooldownTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": null,
+                    "HandR": [
+                        14.0,
+                        17.75,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "swing"
@@ -1342,11 +1948,13 @@
                 {
                     "time": [
                         "fists",
+                        "attack",
                         "damageTimes",
                         0
                     ],
                     "abs_time": false,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animMeleeCollision",
                     "args": {}
                 }
@@ -1355,68 +1963,112 @@
         "cook": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         15.75,
-                        -9.625
+                        -9.625,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        15.75,
+                        9.625,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": 0.1,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        -1.75
+                    "time_offset": 0.0,
+                    "HandL": [
+                        14.0,
+                        -1.75,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        14.0,
+                        1.75,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": 0.3,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        -1.75
+                    "time_offset": 0.0,
+                    "HandL": [
+                        14.0,
+                        -1.75,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        14.0,
+                        1.75,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": 0.4,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         22.75,
-                        -1.75
+                        -1.75,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        1.75,
+                        14.0,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": 99999.0,
+                    "abs_time": true,
+                    "time_mult": 1,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        22.75,
+                        -1.75,
+                        0
+                    ],
+                    "HandR": [
+                        1.75,
+                        14.0,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "pullPin"
                     }
                 },
                 {
-                    "time": "0.1",
+                    "time": 0.1,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animSetThrowableState",
                     "args": {
                         "state": "cook"
@@ -1427,53 +2079,89 @@
         "throw": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         22.75,
-                        -1.75
+                        -1.75,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        1.75,
+                        14.175,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": 0.15,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         5.25,
-                        -15.75
+                        -15.75,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        29.75,
+                        1.75,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "player",
+                        "throwTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.15,
+                    "HandL": [
+                        15.75,
+                        -9.625,
+                        0
+                    ],
+                    "HandR": [
+                        15.75,
+                        9.625,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": [
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animPlaySound",
                     "args": {
                         "sound": "throwing"
                     }
                 },
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animSetThrowableState",
                     "args": {
                         "state": "throwing"
                     }
                 },
                 {
-                    "time": "0",
+                    "time": 0.0,
                     "abs_time": true,
                     "time_mult": 1,
+                    "time_offset": 0.0,
                     "func": "animThrowableParticles",
                     "args": {}
                 }
@@ -1482,46 +2170,85 @@
         "crawl_forward": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        -12.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        14.0,
+                        -12.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": null,
+                    "FootL": [
+                        -15.75,
+                        -9.0,
+                        0
+                    ],
+                    "FootR": null
                 },
                 {
                     "time": [
                         "player",
                         "crawlTime"
                     ],
+                    "abs_time": false,
                     "time_mult": 0.33,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         19.25,
-                        -10.5
+                        -10.5,
+                        0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": null,
+                    "FootL": [
+                        -20.25,
+                        -9.0,
+                        0
+                    ],
+                    "FootR": null
                 },
                 {
                     "time": [
                         "player",
                         "crawlTime"
                     ],
+                    "abs_time": false,
                     "time_mult": 0.66,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         5.25,
-                        -15.75
+                        -15.75,
+                        0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": null,
+                    "FootL": [
+                        -11.25,
+                        -9.0,
+                        0
+                    ],
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "player",
+                        "crawlTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1.0,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        14.0,
+                        -12.25,
+                        0
+                    ],
+                    "HandR": null,
+                    "FootL": [
+                        -15.75,
+                        -9.0,
+                        0
+                    ],
+                    "FootR": null
                 }
             ],
             "effects": []
@@ -1529,46 +2256,85 @@
         "crawl_backward": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        -12.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        14.0,
+                        -12.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": null,
+                    "FootL": [
+                        -15.75,
+                        -9.0,
+                        0
+                    ],
+                    "FootR": null
                 },
                 {
                     "time": [
                         "player",
                         "crawlTime"
                     ],
+                    "abs_time": false,
                     "time_mult": 0.33,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         5.25,
-                        -15.75
+                        -15.75,
+                        0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": null,
+                    "FootL": [
+                        -11.25,
+                        -9.0,
+                        0
+                    ],
+                    "FootR": null
                 },
                 {
                     "time": [
                         "player",
                         "crawlTime"
                     ],
+                    "abs_time": false,
                     "time_mult": 0.66,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         19.25,
-                        -10.5
+                        -10.5,
+                        0
                     ],
-                    "absolute_time": false,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": null,
+                    "FootL": [
+                        -20.25,
+                        -9.0,
+                        0
+                    ],
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "player",
+                        "crawlTime"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1.0,
+                    "time_offset": 0.0,
+                    "HandL": [
+                        14.0,
+                        -12.25,
+                        0
+                    ],
+                    "HandR": null,
+                    "FootL": [
+                        -15.75,
+                        -9.0,
+                        0
+                    ],
+                    "FootR": null
                 }
             ],
             "effects": []
@@ -1576,28 +2342,61 @@
         "revive": {
             "keyframes": [
                 {
-                    "time": 0,
+                    "time": 0.0,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
-                        14,
-                        -12.25
+                    "time_offset": 0.0,
+                    "HandL": [
+                        14.0,
+                        -12.25,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        14.0,
+                        12.25,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 },
                 {
                     "time": 0.2,
+                    "abs_time": true,
                     "time_mult": 1,
-                    "time_offset": 0,
-                    "pos": [
+                    "time_offset": 0.0,
+                    "HandL": [
                         24.5,
-                        -8.75
+                        -8.75,
+                        0
                     ],
-                    "absolute_time": true,
-                    "limb": "HandL",
-                    "transform": null
+                    "HandR": [
+                        5.25,
+                        21.0,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
+                },
+                {
+                    "time": [
+                        "player",
+                        "reviveDuration"
+                    ],
+                    "abs_time": false,
+                    "time_mult": 1,
+                    "time_offset": 0.2,
+                    "HandL": [
+                        24.5,
+                        -8.75,
+                        0
+                    ],
+                    "HandR": [
+                        5.25,
+                        21.0,
+                        0
+                    ],
+                    "FootL": null,
+                    "FootR": null
                 }
             ],
             "effects": []

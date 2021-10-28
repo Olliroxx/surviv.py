@@ -64,7 +64,7 @@
     "main_spring": {
         "mapId": 0,
         "desc": {
-            "name": "Awesome\\x20Blossoms",
+            "name": "Awesome Blossoms",
             "icon": "img/loot/loot-blossom-icon.svg",
             "buttonCss": "btn-mode-blossoms",
             "buttonText": "index-play-mode-spring"
@@ -1459,7 +1459,7 @@
     "ultimate_sacrifice": {
         "mapId": 14,
         "desc": {
-            "name": "50v50 Last Sacrifice",
+            "name": "50v50\\x20Last\\x20Sacrifice",
             "icon": "img/gui/poppy.svg",
             "buttonCss": "btn-mode-faction-sacrifice",
             "buttonText": "index-play-mode-50v50"
