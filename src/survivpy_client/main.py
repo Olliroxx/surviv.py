@@ -316,7 +316,7 @@ class Player:
 
         self.update_netdata()
         self.update_sprites()
-        self.switch_to_idle()
+        self.skip_anim()
 
     def update_netdata(self):
         self.prev_active = self.active
@@ -520,6 +520,9 @@ class Player:
         pos = self.pos[0]+rotated[0], self.pos[1]+rotated[1]
         sprite.position = pos
 
+    def set_rotation(self, sprite: arcade.Sprite, rads):
+        sprite.radians = (self.dir_radians+rads) % (2*pi)
+
     def update_anim(self, delta_time):
         self.anim["ticker"] += delta_time
 
@@ -541,12 +544,7 @@ class Player:
         # Frames are sorted by the order they are played in, if the last frame has played then switch to idle anim
         # noinspection PyUnboundLocalVariable
         if 0 >= self.anim["ticker"] or self.anim["ticker"] > time:
-            idle_anim = configs.anims["idles"][self.anim["name"]]
-            for limb, value in idle_anim.items():
-                sprite, submerge = str_to_sprite[limb]
-                if value is not None:
-                    self.set_child_pos(sprite, value[0], value[1])
-                    self.set_child_pos(submerge, value[0], value[1])
+            self.update_idle(str_to_sprite)
         else:
             pose = self.lerp_anim(times)
             pose = self.strip_dict_to_limbs(pose)
@@ -554,10 +552,54 @@ class Player:
             for limb, value in pose.items():
                 for sprite in str_to_sprite[limb]:
                     if value is not None:
-                        self.set_child_pos(sprite, pose[limb][0], pose[limb][1])
-                        sprite.radians = (pose[limb][2]+self.dir_radians+(0.5 if "Leg" in limb else 0)) % (2*pi)
+                        target = rotate_vector(pose[limb][0], pose[limb][1], (pose[limb][2]+(0.5 if "Leg" in limb else 0))*pi)
+                        self.set_child_pos(sprite, target[0], -target[1])
+                        self.set_rotation(sprite, pose[limb][2]+(0.5 if "Leg" in limb else 0)*pi)
 
-    def switch_to_idle(self):
+    def select_idle(self) -> dict:
+        if self.downed:
+            return configs.anims["idles"]["downed"]
+
+        cur_weap_gdata = configs.gtypes[self.curWeapType]
+        if "anim" in cur_weap_gdata and "idlePose" in cur_weap_gdata["anim"]:
+            return configs.anims["idles"][cur_weap_gdata["anim"]["idlePose"]]
+
+        if cur_weap_gdata["type"] == "gun":
+            if "pistol" in cur_weap_gdata:
+                return configs.anims["idles"]["dualPistol" if "isDual" in cur_weap_gdata else "pistol"]
+
+            if "isBullpup" in cur_weap_gdata:
+                return configs.anims["idles"]["bullpup"]
+            if "isLauncher" in cur_weap_gdata:
+                return configs.anims["idles"]["launcher"]
+
+            return configs.anims["idles"]["rifle"]
+
+        elif cur_weap_gdata["type"] == "throwable":
+            return configs.anims["idles"]["throwable"]
+
+        return configs.anims["idles"]["fists"]
+
+    def update_idle(self, str_to_sprite):
+        from copy import deepcopy
+        cur_weap_gtype = configs.gtypes[self.curWeapType]
+        pose = deepcopy(self.select_idle())
+
+        if cur_weap_gtype["type"] == "gun" and "HandL" in pose:
+            pose["HandL"][0] += cur_weap_gtype["worldImg"]["leftHandOffset"]["x"]
+            pose["HandL"][1] += cur_weap_gtype["worldImg"]["leftHandOffset"]["y"]
+
+        for limb, pos in pose.items():
+            for sprite in str_to_sprite[limb]:
+                if pos is not None:
+                    sprite.alpha = 255
+                    self.set_rotation(sprite, pos[2]*pi)
+                    target = rotate_vector(pos[0], -pos[1], pos[2]*pi)
+                    self.set_child_pos(sprite, *target)
+                else:
+                    sprite.alpha = 0
+
+    def skip_anim(self):
         keyframe_data = configs.anims["animations"][self.anim["name"]]["keyframes"]
         time = max(self.get_time(frame) for frame in keyframe_data)
         self.anim["ticker"] = time
@@ -650,7 +692,7 @@ class Player:
         """
         anim_name_functions = [
             lambda x: ("none", False),
-            self._get_melee_anim,
+            self.get_weap_anim,
             lambda x: ("cook", False),
             lambda x: ("throw", False),
             lambda x: ("revive", False),
@@ -673,7 +715,7 @@ class Player:
         return anim_type, mirrored
 
     @staticmethod
-    def _get_melee_anim(cur_weap):
+    def get_weap_anim(cur_weap):
         gtype_data = configs.gtypes[cur_weap]
         if "anim" not in gtype_data or "attackAnims" not in gtype_data["anim"]:
             return "fists", True
@@ -808,28 +850,6 @@ class RootWindow(arcade.Window):
         self.manager.draw()
 
 
-class DummyMap:
-    def __init__(self):
-        self.objects = {0: {
-            "outfit": "outfitParmaPrestige",
-            "backpack": "backpack01",
-            "helmet": "",
-            "chest": "",
-            "curWeapType": "m9",
-            "layer": 1,
-            "dead": False,
-            "downed": False,
-            "animType": 1,
-            "animSeq": 1,
-            "wearingPan": False,
-            "hasActionItem": False,
-            "actionItem": "",
-            "playerScale": 1.,
-            "dir": (0, -1),
-            "pos": (0, 0)
-        }}
-
-
 class PlayerTestWindow(arcade.Window):
     def __init__(self):
         super().__init__(800, 600, "Player test window")
@@ -931,6 +951,28 @@ class GunTestWindow(arcade.Window):
 # walls
 # floors
 # ground
+
+
+class DummyMap:
+    def __init__(self):
+        self.objects = {0: {
+            "outfit": "outfitParmaPrestige",
+            "backpack": "backpack01",
+            "helmet": "",
+            "chest": "",
+            "curWeapType": "ak47",
+            "layer": 1,
+            "dead": False,
+            "downed": True,
+            "animType": 1,
+            "animSeq": 1,
+            "wearingPan": False,
+            "hasActionItem": False,
+            "actionItem": "",
+            "playerScale": 1.,
+            "dir": (0, -1),
+            "pos": (0, 0)
+        }}
 
 
 if __name__ == '__main__':
