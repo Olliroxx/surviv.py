@@ -25539,27 +25539,10 @@
                 },
                 "imgs": [
                     {
-                        "sprite": "map-building-greenhouse-ceiling-01.img",
-                        "pos": {
-                            "type": "coord",
-                            "x": 0.0,
-                            "y": -9.85
-                        },
+                        "sprite": "map-building-greenhouse-ceiling-02.img",
                         "scale": 1,
                         "alpha": 1,
                         "tint": 16777215
-                    },
-                    {
-                        "sprite": "map-building-greenhouse-ceiling-01.img",
-                        "pos": {
-                            "type": "coord",
-                            "x": 0.0,
-                            "y": 9.85
-                        },
-                        "scale": 1,
-                        "alpha": 1,
-                        "tint": 16777215,
-                        "mirrorY": true
                     }
                 ],
                 "destroy": {
@@ -30550,7 +30533,7 @@
                 },
                 "imgs": [
                     {
-                        "sprite": "map-building-hut-ceiling-01.img",
+                        "sprite": "map-building-hut-ceiling-02.img",
                         "scale": 0.667,
                         "alpha": 1,
                         "tint": 16777215
@@ -31105,7 +31088,7 @@
                 },
                 "imgs": [
                     {
-                        "sprite": "map-building-hut-ceiling-01.img",
+                        "sprite": "map-building-hut-ceiling-03.img",
                         "scale": 0.667,
                         "alpha": 1,
                         "tint": 16777215
@@ -54267,7 +54250,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "barn_basement_floor_02",
+                    "type": "barn_basement_floor_02d",
                     "pos": {
                         "type": "coord",
                         "x": -8.0,
@@ -58173,7 +58156,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "barn_basement_structure_01",
+                    "type": "panicroom_01",
                     "pos": {
                         "type": "coord",
                         "x": 19.5,
@@ -58992,7 +58975,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "barn_basement_structure_01d",
+                    "type": "panicroom_01",
                     "pos": {
                         "type": "coord",
                         "x": 19.5,
@@ -67531,7 +67514,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "cache_pumpkin_02",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 4.5,
@@ -67541,7 +67524,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "cache_pumpkin_02",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": -5.25,
@@ -71955,7 +71938,7 @@
                     "ori": 2
                 },
                 {
-                    "type": "gun_mount_02",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"gun_mount_01\": 50, \"gun_mount_05\": 50, \"gun_mount_04\": 10, \"gun_mount_02\": 10, \"gun_mount_03\": 1}}",
                     "pos": {
                         "type": "coord",
                         "x": 4.0,
@@ -76757,7 +76740,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "loot_tier_mansion_floor",
+                    "type": "candle_lit_01",
                     "pos": {
                         "type": "coord",
                         "x": -2.0,
@@ -76767,7 +76750,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "candle_lit_01",
                     "pos": {
                         "type": "coord",
                         "x": -21.0,
@@ -76777,7 +76760,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "candle_lit_01",
                     "pos": {
                         "type": "coord",
                         "x": 18.0,
@@ -76787,7 +76770,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "candle_lit_01",
                     "pos": {
                         "type": "coord",
                         "x": 6.0,
@@ -76797,7 +76780,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "decal_web_01",
                     "pos": {
                         "type": "coord",
                         "x": -30.15,
@@ -76807,7 +76790,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "decal_web_01",
                     "pos": {
                         "type": "coord",
                         "x": 1.5,
@@ -76817,7 +76800,7 @@
                     "ori": 2
                 },
                 {
-                    "type": "",
+                    "type": "decal_web_01",
                     "pos": {
                         "type": "coord",
                         "x": 8.5,
@@ -76827,7 +76810,7 @@
                     "ori": 3
                 },
                 {
-                    "type": "",
+                    "type": "decal_web_01",
                     "pos": {
                         "type": "coord",
                         "x": 22.5,
@@ -76837,7 +76820,7 @@
                     "ori": 3
                 },
                 {
-                    "type": "",
+                    "type": "decal_web_01",
                     "pos": {
                         "type": "coord",
                         "x": 22.5,
@@ -76942,7 +76925,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "bush_01",
+                    "type": "cache_pumpkin_02",
                     "pos": {
                         "type": "coord",
                         "x": -8.0,
@@ -76952,7 +76935,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "bush_01",
+                    "type": "cache_pumpkin_02",
                     "pos": {
                         "type": "coord",
                         "x": 4.0,
@@ -77925,7 +77908,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "candle_lit_01",
                     "pos": {
                         "type": "coord",
                         "x": 16.5,
@@ -77935,7 +77918,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "candle_lit_01",
                     "pos": {
                         "type": "coord",
                         "x": 11.5,
@@ -81824,7 +81807,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "loot_tier_airdrop_armor",
+                    "type": "loot_tier_helmet_forest",
                     "pos": {
                         "type": "coord",
                         "x": 0.0,
@@ -82127,7 +82110,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_08su",
                     "pos": {
                         "type": "coord",
                         "x": -10.0,
@@ -82137,7 +82120,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_08su",
                     "pos": {
                         "type": "coord",
                         "x": -17.5,
@@ -82147,7 +82130,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_08su",
                     "pos": {
                         "type": "coord",
                         "x": 18.0,
@@ -82157,7 +82140,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_08su",
                     "pos": {
                         "type": "coord",
                         "x": 17.5,
@@ -82305,7 +82288,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_16",
                     "pos": {
                         "type": "coord",
                         "x": -10.0,
@@ -82315,7 +82298,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_16",
                     "pos": {
                         "type": "coord",
                         "x": -17.5,
@@ -82325,7 +82308,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_16",
                     "pos": {
                         "type": "coord",
                         "x": 18.0,
@@ -82335,7 +82318,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_16",
                     "pos": {
                         "type": "coord",
                         "x": 17.5,
@@ -82483,7 +82466,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_10",
                     "pos": {
                         "type": "coord",
                         "x": -10.0,
@@ -82493,7 +82476,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_10",
                     "pos": {
                         "type": "coord",
                         "x": -17.5,
@@ -82503,7 +82486,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_10",
                     "pos": {
                         "type": "coord",
                         "x": 18.0,
@@ -82513,7 +82496,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"tree_08sp\": 2, \"\": 1}}",
+                    "type": "tree_10",
                     "pos": {
                         "type": "coord",
                         "x": 17.5,

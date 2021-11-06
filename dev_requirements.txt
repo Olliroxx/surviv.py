@@ -2,8 +2,8 @@
 sphinx ~= 4.1
 tox ~= 3.24.4
 sphinx_rtd_theme ~= 1.0.0
-virtualenv ~= 20.8.0
-flake8 ~= 3.9
+virtualenv ~= 20.10.0
+flake8 ~= 4.0
 pytest ~= 6.2
 
 # Will be needed later

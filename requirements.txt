@@ -1,5 +1,5 @@
 ws4py ~= 0.5.1
-requests ~= 2.25
-jsbeautifier ~= 1.13
-pypng ~= 0.0.20
-arcade ~= 2.6.3
+requests ~= 2.26
+jsbeautifier ~= 1.14
+pypng ~= 0.0.21
+arcade ~= 2.6.4

@@ -137,14 +137,12 @@ class Gun:
     # TODO add casing particles
     # TODO add recoil
 
-    def __init__(self, sprite_list: arcade.SpriteList, gun_sprite: arcade.Sprite, mag_sprite: arcade.Sprite, set_pos,
-                 rel_move):
+    def __init__(self, sprite_list: arcade.SpriteList, gun_sprite: arcade.Sprite, mag_sprite: arcade.Sprite, parent):
         self.sprite_list = sprite_list
         self.gun_sprite = gun_sprite
         self.mag_sprite = mag_sprite
-        self.set_sprite_pos = set_pos
-        self.move_sprite = rel_move
-
+        self.set_sprite_pos = parent.set_child_pos
+        self.move_sprite = parent.move_child
         self.max_scale_shoot = 0  # Something to do with the rainbow blaster
         self.mag_top = False  # Use unknown
 
@@ -166,16 +164,16 @@ class Gun:
             self.gun_sprite.scale = worldimg_data["scale"]["x"] / scale
 
         self.gun_sprite.color = num_to_colour(worldimg_data["tint"])
-        self.gun_sprite.alpha = 255
+        self.gun_sprite.visible = True
 
         if not loaded:
             if "magImg" in worldimg_data:
                 mag_img = worldimg_data["magImg"]
                 self.mag_sprite.texture = load_texture(mag_img["sprite"], rotation=270)
-                self.set_sprite_pos(self.mag_sprite, 0.5+(mag_img["pos"]["x"]/scale), 0.5+(mag_img["pos"]["y"]/scale))
+                self.set_sprite_pos(self.mag_sprite, -(0.5+(mag_img["pos"]["y"]/scale)) * 2, 0.5+(mag_img["pos"]["x"]/scale))
                 self.mag_sprite.scale = 0.5*scale
                 self.mag_sprite.color = (255, 255, 255)
-                self.mag_sprite.alpha = 255
+                self.mag_sprite.visible = True
 
                 self.sprite_list.remove(self.mag_sprite)
                 pos = self.sprite_list.index(self.gun_sprite)
@@ -185,7 +183,7 @@ class Gun:
                     self.sprite_list.insert(pos, self.mag_sprite)
 
             else:
-                self.mag_sprite.alpha = 0
+                self.mag_sprite.visible = False
 
         self.mag_top = "magImg" in worldimg_data and "top" in worldimg_data["magImg"] and worldimg_data["magImg"]["top"]
 
@@ -200,12 +198,12 @@ class Gun:
                 self.move_sprite(sprite, *offset)
 
     def hide(self):
-        self.gun_sprite.alpha = 0
-        self.mag_sprite.alpha = 0
+        self.gun_sprite.visible = False
+        self.mag_sprite.visible = False
 
     def show(self):
-        self.gun_sprite.alpha = 255
-        self.mag_sprite.alpha = 255
+        self.gun_sprite.visible = True
+        self.mag_sprite.visible = True
 
 
 class Player:
@@ -226,14 +224,14 @@ class Player:
         }
 
         self.sprite_footL = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_footL.texture = load_texture("player-feet-01.png", hit_box_algorithm="None")
-        self.sprite_footL.scale = 0.45 * PLAYER_SCALE_FACTOR
-        self.sprite_footL.radians = 0.5
+        self.sprite_footL.texture = load_texture("player-feet-01.png", hit_box_algorithm="None", rotation=90)
+        # self.sprite_footL.scale = 0.45 * PLAYER_SCALE_FACTOR
+        # self.sprite_footL.radians = 0.5
         self.sprite_footL_submerge = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_footR = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_footR.texture = load_texture("player-feet-01.png", hit_box_algorithm="None")
-        self.sprite_footR.scale = 0.45 * PLAYER_SCALE_FACTOR
-        self.sprite_footR.radians = 0.5
+        self.sprite_footR.texture = load_texture("player-feet-01.png", hit_box_algorithm="None", rotation=90)
+        # self.sprite_footR.scale = 0.45 * PLAYER_SCALE_FACTOR
+        # self.sprite_footR.radians = 0.5
         self.sprite_footR_submerge = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_backpack = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_body = arcade.Sprite(hit_box_algorithm="None")
@@ -241,10 +239,10 @@ class Player:
         self.sprite_chest = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_chest.texture = load_texture("player-armor-base-01.png", hit_box_algorithm="None")
         self.sprite_chest.scale = 0.25 * PLAYER_SCALE_FACTOR
-        self.sprite_flak = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_steelskin = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_hip = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_bodyEffect = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_flak = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_steelskin = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_hip = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_bodyEffect = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_gunL = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_magL = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_handL = arcade.Sprite(hit_box_algorithm="None")
@@ -257,26 +255,27 @@ class Player:
         self.sprite_handR.angle = 0
         self.sprite_handR_submerge = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_objectR = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_visor = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_accessory = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_patch = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_visor = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_accessory = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_patch = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_helmet = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_slime = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_aim = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_phoenix = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_pyro = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_slime = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_aim = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_phoenix = arcade.Sprite(hit_box_algorithm="None")
+        # self.sprite_pyro = arcade.Sprite(hit_box_algorithm="None")
 
-        self.sprites = [self.sprite_footL, self.sprite_footL_submerge, self.sprite_footR, self.sprite_footR_submerge,
-                        self.sprite_backpack, self.sprite_body, self.sprite_body_submerge, self.sprite_chest,
-                        self.sprite_flak, self.sprite_steelskin, self.sprite_hip, self.sprite_bodyEffect,
-                        self.sprite_gunL, self.sprite_handL, self.sprite_handL_submerge, self.sprite_objectL,
-                        self.sprite_gunR, self.sprite_melee, self.sprite_handR, self.sprite_handR_submerge,
-                        self.sprite_objectR, self.sprite_visor, self.sprite_accessory, self.sprite_patch,
-                        self.sprite_helmet, self.sprite_slime, self.sprite_aim, self.sprite_phoenix, self.sprite_pyro]
+        self.gunL = Gun(self.sprite_list, self.sprite_gunL, self.sprite_magL, self)
+        self.gunR = Gun(self.sprite_list, self.sprite_gunR, self.sprite_magR, self)
+
+        self.sprites = [
+            self.sprite_footL, self.sprite_footL_submerge, self.sprite_footR, self.sprite_footR_submerge,
+            self.sprite_backpack, self.sprite_body, self.sprite_body_submerge, self.sprite_chest,
+            self.sprite_gunL, self.sprite_magL, self.sprite_objectL, self.sprite_gunR, self.sprite_magR,
+            self.sprite_melee, self.sprite_handL, self.sprite_handL_submerge, self.sprite_handR,
+            self.sprite_handR_submerge, self.sprite_objectR, self.sprite_helmet
+            ]
+
         self.sprite_list.extend(self.sprites)
-
-        self.gunL = Gun(self.sprite_list, self.sprite_gunL, self.sprite_magL, self.move_child, self.set_child_pos)
-        self.gunR = Gun(self.sprite_list, self.sprite_gunR, self.sprite_magR, self.move_child, self.set_child_pos)
 
         self.skin = None
         self.backpack = None
@@ -395,18 +394,13 @@ class Player:
 
         return sprite
 
-    @staticmethod
-    def update_foot_sprite(sprite: arcade.Sprite, tint, visible: bool):
-        sprite.color = tint
-        sprite.alpha = 255 * int(visible)
-
     def update_sprites(self):
         skin_img = configs.gtypes[self.skin]["skinImg"]
 
         self.sprite_body.texture = load_texture(skin_img["baseSprite"])
         self.sprite_body.color = num_to_colour(skin_img["baseTint"])
         self.sprite_body.scale = 0.25 * PLAYER_SCALE_FACTOR
-        self.sprite_body.alpha = 255
+        self.sprite_body.visible = True
         # TODO ghillie
 
         # TODO frozen effects
@@ -424,17 +418,19 @@ class Player:
 
         tint = num_to_colour(skin_img["footTint"])
         # TODO change tint if using ghillie suit
-        self.update_foot_sprite(self.sprite_footL, tint, self.downed)
-        self.update_foot_sprite(self.sprite_footR, tint, self.downed)
+        self.sprite_footL.color = tint
+        self.sprite_footL.visible = self.downed
+        self.sprite_footR.color = tint
+        self.sprite_footR.visible = self.downed
 
         # TODO draw flak if not ghillie
 
         # TODO ghillie stuff
         if self.chest:
-            self.sprite_chest.alpha = 255
+            self.sprite_chest.visible = True
             self.sprite_chest.color = num_to_colour(configs.gtypes[self.chest]["skinImg"]["baseTint"])
         else:
-            self.sprite_chest.alpha = 0
+            self.sprite_chest.visible = False
 
         # TODO draw steelskin if not ghillie
 
@@ -444,7 +440,7 @@ class Player:
 
         # TODO ghillie
         if self.helmet:
-            self.sprite_helmet.alpha = 255
+            self.sprite_helmet.visible = True
             self.sprite_helmet.texture = load_texture(configs.gtypes[self.helmet]["skinImg"]["baseSprite"])
             offset = 3.33 * (1 if self.downed else -1)
             self.set_child_pos(self.sprite_helmet, offset, 0)
@@ -459,7 +455,7 @@ class Player:
             # TODO 50v50
 
         else:
-            self.sprite_helmet.alpha = 0
+            self.sprite_helmet.visible = False
 
         # TODO ghillie
         if self.backpack != "" and not self.downed:
@@ -473,14 +469,14 @@ class Player:
                                self.sprite_backpack.position[1])
             self.sprite_backpack.color = num_to_colour(skin_img["backpackTint"])
             self.sprite_backpack.scale = scale * PLAYER_SCALE_FACTOR
-            self.sprite_backpack.alpha = 255
+            self.sprite_backpack.visible = True
         else:
-            self.sprite_backpack.alpha = 0
+            self.sprite_backpack.visible = False
 
         # TODO draw pan
 
         held_item = configs.gtypes[self.curWeapType]
-        if held_item["type"] == "gun":
+        if held_item["type"] == "gun" and not self.downed:
             self.gunR.show()
             self.gunR.set_type(self.curWeapType, self.body_rad/configs.constants["player"]["radius"], self.gun_loaded)
         else:
@@ -581,23 +577,28 @@ class Player:
         return configs.anims["idles"]["fists"]
 
     def update_idle(self, str_to_sprite):
-        from copy import deepcopy
         cur_weap_gtype = configs.gtypes[self.curWeapType]
-        pose = deepcopy(self.select_idle())
+        pose = self.select_idle()
 
-        if cur_weap_gtype["type"] == "gun" and "HandL" in pose:
-            pose["HandL"][0] += cur_weap_gtype["worldImg"]["leftHandOffset"]["x"]
-            pose["HandL"][1] += cur_weap_gtype["worldImg"]["leftHandOffset"]["y"]
+        l_hand_offset = [0, 0]
+        if cur_weap_gtype["type"] == "gun" and not self.downed:
+            l_hand_offset[0] += cur_weap_gtype["worldImg"]["leftHandOffset"]["x"]
+            l_hand_offset[1] += cur_weap_gtype["worldImg"]["leftHandOffset"]["y"]
 
         for limb, pos in pose.items():
             for sprite in str_to_sprite[limb]:
                 if pos is not None:
-                    sprite.alpha = 255
+                    sprite.visible = True
                     self.set_rotation(sprite, pos[2]*pi)
-                    target = rotate_vector(pos[0], -pos[1], pos[2]*pi)
+
+                    if limb == "HandL":
+                        target = rotate_vector(pos[0]+l_hand_offset[0], -(pos[1]+l_hand_offset[1]), pos[2]*pi)
+                    else:
+                        target = rotate_vector(pos[0], -pos[1], pos[2]*pi)
+
                     self.set_child_pos(sprite, *target)
                 else:
-                    sprite.alpha = 0
+                    sprite.visible = False
 
     def skip_anim(self):
         keyframe_data = configs.anims["animations"][self.anim["name"]]["keyframes"]
@@ -669,7 +670,11 @@ class Player:
         if frame["abs_time"]:
             return frame["time"]
         if type(frame["time"]) == list:
-            value = configs.gtypes_subcategories["melee_weapons"]
+            if frame["time"][0] == "player":
+                value = configs.constants
+            else:
+                value = configs.gtypes_subcategories["melee_weapons"]
+
             for key in frame["time"]:
                 value = value[key]
             return value * frame["time_mult"] + frame["time_offset"]
@@ -732,6 +737,7 @@ class Player:
             return "none", True
         attack_anims = gtype_data["anim"]["poseAnims"]
         return rand_choice(attack_anims), attack_anims == ["fists"]
+
 
 # TODO layer classes
 
@@ -878,60 +884,6 @@ class PlayerTestWindow(arcade.Window):
         self.player_sprite.start_anim()
 
 
-class GunTestWindow(arcade.Window):
-    def __init__(self):
-        super().__init__(800, 600, "Gun test window")
-
-        self.gun_sprite = arcade.Sprite(hit_box_algorithm="None")
-        self.mag_sprite = arcade.Sprite(hit_box_algorithm="None")
-
-        self.sprite_list = arcade.SpriteList()
-        self.sprite_list.append(self.gun_sprite)
-        self.sprite_list.append(self.mag_sprite)
-
-        self.dir = 0
-        self.prev_dir = 0
-
-        self.gun = Gun(self.sprite_list, self.gun_sprite, self.mag_sprite, self.set_pos, self.rel_move)
-        self.gun.set_type("pkp", 1, False)
-
-        self.cam = arcade.Camera(800, 600)
-        # noinspection PyTypeChecker
-        self.cam.move((-400, -300))
-
-    def set_pos(self, sprite: arcade.Sprite, x, y):
-        new_x = x * sprite.width
-        new_y = y * sprite.height
-        sprite.position = rotate_vector(new_x, new_y, self.dir)
-
-    def rel_move(self, sprite, x, y):
-        new_x = x * sprite.width
-        new_y = y * sprite.height
-        sprite.position = tuple(map(sum, zip(rotate_vector(new_x, new_y, self.dir), sprite.position)))
-
-    # def on_mouse_motion(self, x: float, y: float, dx: float, dy: float):
-    #     x, y = normalise_vec(x, y)
-    #     self.prev_dir = self.dir
-    #     self.dir = atan2(y, x)
-    #
-    #     rads_diff = self.dir - self.prev_dir
-    #     for sprite in [self.gun_sprite, self.mag_sprite]:
-    #         radius = sqrt((sprite.position[0] ** 2) + (sprite.position[1] ** 2))
-    #         angle = atan2(sprite.position[1], sprite.position[0]) + rads_diff
-    #
-    #         new_x = radius * cos(angle)
-    #         new_y = radius * sin(angle)
-    #
-    #         sprite.position = (new_x, new_y)
-    #         sprite.radians = (sprite.radians + rads_diff) % (2 * pi)
-
-    def on_draw(self):
-        arcade.start_render()
-        arcade.set_background_color((127, 127, 127))
-        self.cam.use()
-        self.sprite_list.draw()
-
-
 # TODO `default_layer_list` function
 # TODO layer order:
 # ping markers
@@ -960,11 +912,11 @@ class DummyMap:
             "backpack": "backpack01",
             "helmet": "",
             "chest": "",
-            "curWeapType": "ak47",
+            "curWeapType": "hk416",
             "layer": 1,
             "dead": False,
             "downed": True,
-            "animType": 1,
+            "animType": 6,
             "animSeq": 1,
             "wearingPan": False,
             "hasActionItem": False,

@@ -64,7 +64,7 @@
     "main_spring": {
         "mapId": 0,
         "desc": {
-            "name": "Awesome Blossoms",
+            "name": "Awesome\\x20Blossoms",
             "icon": "img/loot/loot-blossom-icon.svg",
             "buttonCss": "btn-mode-blossoms",
             "buttonText": "index-play-mode-spring"
@@ -1278,7 +1278,7 @@
     "cinco_de_mayo": {
         "mapId": 1,
         "desc": {
-            "name": "Cinco de Mayo",
+            "name": "Cinco\\x20de\\x20Mayo",
             "icon": "img/loot/pinata_icon.svg",
             "buttonCss": "btn-mode-easter",
             "buttonText": "index-play-mode-sinko"
@@ -1459,7 +1459,7 @@
     "ultimate_sacrifice": {
         "mapId": 14,
         "desc": {
-            "name": "50v50\\x20Last\\x20Sacrifice",
+            "name": "50v50 Last Sacrifice",
             "icon": "img/gui/poppy.svg",
             "buttonCss": "btn-mode-faction-sacrifice",
             "buttonText": "index-play-mode-50v50"
