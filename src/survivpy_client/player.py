@@ -31,6 +31,7 @@ class Gun:
     # TODO add casing particles
     # TODO add recoil
     # TODO fist anims are always same fist, should be random
+    # TODO check duals
 
     def __init__(self, sprite_list: arcade.SpriteList, gun_sprite: arcade.Sprite, mag_sprite: arcade.Sprite, parent):
         self.sprite_list = sprite_list
@@ -50,7 +51,7 @@ class Gun:
         else:
             self.gun_sprite.texture = load_texture(worldimg_data["sprite"], rotation=270)
 
-        self.set_sprite_pos(self.gun_sprite, self.gun_sprite.width*0.2, 0)
+        self.set_sprite_pos(self.gun_sprite, self.gun_sprite.width * 0.2, 0)
 
         if worldimg_data["scale"]["x"] != worldimg_data["scale"]["y"]:
             self.gun_sprite.texture = scale_texture(self.gun_sprite.texture, worldimg_data["scale"]["x"],
@@ -65,15 +66,16 @@ class Gun:
             if "magImg" in worldimg_data:
                 mag_img = worldimg_data["magImg"]
                 self.mag_sprite.texture = load_texture(mag_img["sprite"], rotation=270)
-                self.set_sprite_pos(self.mag_sprite, -(0.5+(mag_img["pos"]["y"]/scale)) * 2, 0.5+(mag_img["pos"]["x"]/scale))
-                self.mag_sprite.scale = 0.5*scale
+                self.set_sprite_pos(self.mag_sprite, -(0.5 + (mag_img["pos"]["y"] / scale)) * 2,
+                                    0.5 + (mag_img["pos"]["x"] / scale))
+                self.mag_sprite.scale = 0.5 * scale
                 self.mag_sprite.color = (255, 255, 255)
                 self.mag_sprite.visible = True
 
                 self.sprite_list.remove(self.mag_sprite)
                 pos = self.sprite_list.index(self.gun_sprite)
                 if "top" in mag_img and mag_img["top"]:
-                    self.sprite_list.insert(pos+1, self.mag_sprite)
+                    self.sprite_list.insert(pos + 1, self.mag_sprite)
                 else:
                     self.sprite_list.insert(pos, self.mag_sprite)
 
@@ -101,6 +103,36 @@ class Gun:
         self.mag_sprite.visible = True
 
 
+class Melee:
+    # TODO fix offset bug
+    def __init__(self, sprite_list: arcade.SpriteList, sprite: arcade.Sprite, parent: arcade.Sprite):
+        self.list = sprite_list
+        self.sprite = sprite
+        self.parent = parent
+        self.pos_offset = (0, 0)
+        self.dir_offset = 0
+
+    def update_pos(self):
+        target_pos = rotate_vector(*self.pos_offset, self.parent.radians)
+        target_pos = [i + j for i, j in zip(target_pos, self.parent.position)]
+        self.sprite.position = target_pos
+
+        self.sprite.radians = self.parent.radians - self.dir_offset
+
+    def update_sprite(self, held_item):
+        world_img = held_item["worldImg"]
+
+        if "baseType" in held_item:
+            world_img = configs.gtypes[held_item["baseType"]]["worldImg"] | world_img
+        self.sprite.texture = load_texture(world_img["sprite"])
+        x_scale = (world_img["scale"]["x"] * PLAYER_SCALE_FACTOR) / configs.constants["player"]["radius"]
+        y_scale = (world_img["scale"]["y"] * PLAYER_SCALE_FACTOR) / configs.constants["player"]["radius"]
+        self.sprite.texture = scale_texture(self.sprite.texture, x_scale, y_scale)
+        self.sprite.color = num_to_colour(world_img["tint"])
+        self.pos_offset = (-world_img["pos"]["x"]*world_img["scale"]["x"], -world_img["pos"]["y"]*world_img["scale"]["y"])
+        self.dir_offset = world_img["rot"]
+
+
 class Player:
     def __init__(self, player_id, map_obj, sprite_list: arcade.SpriteList):
         super().__init__()
@@ -119,12 +151,12 @@ class Player:
         }
 
         self.sprite_footL = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_footL.texture = load_texture("player-feet-01.png", hit_box_algorithm="None", rotation=90)
+        self.sprite_footL.texture = load_texture("player-feet-01.png", hit_box_algorithm="None")
         # self.sprite_footL.scale = 0.45 * PLAYER_SCALE_FACTOR
         # self.sprite_footL.radians = 0.5
         self.sprite_footL_submerge = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_footR = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_footR.texture = load_texture("player-feet-01.png", hit_box_algorithm="None", rotation=90)
+        self.sprite_footR.texture = load_texture("player-feet-01.png", hit_box_algorithm="None")
         # self.sprite_footR.scale = 0.45 * PLAYER_SCALE_FACTOR
         # self.sprite_footR.radians = 0.5
         self.sprite_footR_submerge = arcade.Sprite(hit_box_algorithm="None")
@@ -145,11 +177,12 @@ class Player:
         self.sprite_objectL = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_gunR = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_magR = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_melee = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_handR = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_handR.angle = 0
         self.sprite_handR_submerge = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_objectR = arcade.Sprite(hit_box_algorithm="None")
+        self.sprite_melee = arcade.Sprite(hit_box_algorithm="None")
+        self.melee = Melee(self.sprite_list, self.sprite_melee, self.sprite_handR)
         # self.sprite_visor = arcade.Sprite(hit_box_algorithm="None")
         # self.sprite_accessory = arcade.Sprite(hit_box_algorithm="None")
         # self.sprite_patch = arcade.Sprite(hit_box_algorithm="None")
@@ -168,7 +201,7 @@ class Player:
             self.sprite_gunL, self.sprite_magL, self.sprite_objectL, self.sprite_gunR, self.sprite_magR,
             self.sprite_melee, self.sprite_handL, self.sprite_handL_submerge, self.sprite_handR,
             self.sprite_handR_submerge, self.sprite_objectR, self.sprite_helmet
-            ]
+        ]
 
         self.sprite_list.extend(self.sprites)
 
@@ -239,10 +272,10 @@ class Player:
 
             rads_diff = self.dir_radians - self.prev_dir
             for sprite in self.sprites:
-                rel_x = sprite.position[0]-self.pos[0]
-                rel_y = sprite.position[1]-self.pos[1]
+                rel_x = sprite.position[0] - self.pos[0]
+                rel_y = sprite.position[1] - self.pos[1]
 
-                radius = sqrt((rel_x**2) + (rel_y**2))
+                radius = sqrt((rel_x ** 2) + (rel_y ** 2))
                 angle = atan2(rel_y, rel_x) + rads_diff
 
                 new_rel_x = radius * cos(angle)
@@ -252,7 +285,7 @@ class Player:
                 new_y = new_rel_y + self.pos[1]
 
                 sprite.position = (new_x, new_y)
-                sprite.radians = (sprite.radians + rads_diff) % (2*pi)
+                sprite.radians = (sprite.radians + rads_diff) % (2 * pi)
             # Move the sprites to new positions (player rotation)
 
             self.prev_pos = self.pos
@@ -348,6 +381,8 @@ class Player:
             self.sprite_helmet.visible = False
 
         # TODO ghillie
+
+        # Update backpack
         if self.backpack != "" and not self.downed:
             self.sprite_backpack.texture = load_texture(skin_img["backpackSprite"], hit_box_algorithm="None")
             pack_data = configs.gtypes[self.backpack]
@@ -366,14 +401,21 @@ class Player:
         # TODO draw pan
 
         held_item = configs.gtypes[self.curWeapType]
+        # Update gun
         if held_item["type"] == "gun" and not (self.downed or self.animType == configs.constants["Anim"]["Revive"]):
             self.gunR.show()
-            self.gunR.set_type(self.curWeapType, self.body_rad/configs.constants["player"]["radius"], self.gun_loaded)
+            self.gunR.set_type(self.curWeapType, self.body_rad / configs.constants["player"]["radius"], self.gun_loaded)
         else:
             self.gunR.hide()
             self.gunL.hide()
 
-        # draw held melee CORE
+        # Update held melee
+        # TODO if downed/reviving, hide sprites
+        if held_item["type"] == "melee" and self.curWeapType != "fists" and "handSprites" not in held_item:
+            self.melee.update_sprite(held_item)
+            self.sprite_melee.visible = True
+        else:
+            self.sprite_melee.visible = False
 
         # draw held throwable CORE
 
@@ -400,11 +442,11 @@ class Player:
         x *= PLAYER_SCALE_FACTOR
         y *= PLAYER_SCALE_FACTOR
         rotated = rotate_vector(x, y, self.dir_radians)
-        pos = self.pos[0]+rotated[0], self.pos[1]+rotated[1]
+        pos = self.pos[0] + rotated[0], self.pos[1] + rotated[1]
         sprite.position = pos
 
     def set_rotation(self, sprite: arcade.Sprite, rads):
-        sprite.radians = (self.dir_radians+rads) % (2*pi)
+        sprite.radians = (self.dir_radians + rads) % (2 * pi)
 
     def update_anim(self, delta_time):
         self.anim["ticker"] += delta_time
@@ -435,9 +477,12 @@ class Player:
             for limb, value in pose.items():
                 for sprite in str_to_sprite[limb]:
                     if value is not None:
-                        target = rotate_vector(pose[limb][0], pose[limb][1], (pose[limb][2]+(0.5 if "Leg" in limb else 0))*pi)
+                        target = rotate_vector(pose[limb][0], pose[limb][1],
+                                               (pose[limb][2] + (0.5 if "Leg" in limb else 0)) * pi)
                         self.set_child_pos(sprite, target[0], -target[1])
-                        self.set_rotation(sprite, pose[limb][2]+(0.5 if "Leg" in limb else 0)*pi)
+                        self.set_rotation(sprite, (-pose[limb][2] + (0.5 if "Leg" in limb else 0)) * pi)
+
+        self.melee.update_pos()
 
     def select_idle(self) -> dict:
         if self.downed:
@@ -476,12 +521,12 @@ class Player:
             for sprite in str_to_sprite[limb]:
                 if pos is not None:
                     sprite.visible = True
-                    self.set_rotation(sprite, pos[2]*pi)
+                    self.set_rotation(sprite, pos[2] * pi)
 
                     if limb == "HandL":
-                        target = rotate_vector(pos[0]+l_hand_offset[0], -(pos[1]+l_hand_offset[1]), pos[2]*pi)
+                        target = rotate_vector(pos[0] + l_hand_offset[0], -(pos[1] + l_hand_offset[1]), pos[2] * pi)
                     else:
-                        target = rotate_vector(pos[0], -pos[1], pos[2]*pi)
+                        target = rotate_vector(pos[0], -pos[1], pos[2] * pi)
 
                     self.set_child_pos(sprite, *target)
                 else:
@@ -518,9 +563,9 @@ class Player:
         """
         Given two numbers (imagine on a number line) and number between them, get the ratio between the gaps between them
         """
-        diff_tl = target-lower
-        diff_ut = upper-target
-        return diff_tl/(diff_tl+diff_ut)
+        diff_tl = target - lower
+        diff_ut = upper - target
+        return diff_tl / (diff_tl + diff_ut)
 
     @staticmethod
     def strip_dict_to_limbs(in_dict):
@@ -659,10 +704,10 @@ class DummyMap:
     def __init__(self):
         self.objects = {0: {
             "outfit": "outfitParmaPrestige",
-            "backpack": "backpack01",
+            "backpack": "",
             "helmet": "",
             "chest": "",
-            "curWeapType": "katana",
+            "curWeapType": "machete",
             "layer": 1,
             "dead": False,
             "downed": False,
