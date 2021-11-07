@@ -133,6 +133,40 @@ class Melee:
         self.dir_offset = world_img["rot"]
 
 
+class Throwable:
+    def __init__(self, sprite_list: arcade.SpriteList, frag_sprite: arcade.Sprite, pin_sprite: arcade.Sprite, frag_hand,
+                 pin_hand):
+        self.list = sprite_list
+        self.frag = frag_sprite
+        self.pin = pin_sprite
+        self.frag_parent = frag_hand
+        self.pin_parent = pin_hand
+
+        self.pos_offset = {
+            self.frag: (0, 0),
+            self.pin: (0, 0)
+        }
+
+    def update_pos(self):
+        for sprite, parent in zip([self.frag, self.pin], [self.frag_parent, self.pin_parent]):
+            pos_offset = self.pos_offset[sprite]
+            target_pos = rotate_vector(*pos_offset, parent.radians)
+            target_pos = [i + j for i, j in zip(target_pos, parent.position)]
+            sprite.position = target_pos
+
+            sprite.radians = parent.radians + 0.5*pi
+
+    def update_sprites(self, hand_img):
+        for sprite, img in zip([self.frag, self.pin], [hand_img["right"], hand_img["left"]]):
+            if "sprite" in img and img["sprite"] != "none":
+                sprite.texture = load_texture(img["sprite"])
+                self.pos_offset[sprite] = (img["pos"]["x"], img["pos"]["y"])
+                sprite.scale = img["scale"] * PLAYER_SCALE_FACTOR
+                sprite.visible = True
+            else:
+                sprite.visible = False
+
+
 class Player:
     def __init__(self, player_id, map_obj, sprite_list: arcade.SpriteList):
         super().__init__()
@@ -182,6 +216,8 @@ class Player:
         self.sprite_handR_submerge = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_objectR = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_melee = arcade.Sprite(hit_box_algorithm="None")
+        self.throwable = Throwable(self.sprite_list, self.sprite_objectR, self.sprite_objectL, self.sprite_handR,
+                                   self.sprite_handL)
         self.melee = Melee(self.sprite_list, self.sprite_melee, self.sprite_handR)
         # self.sprite_visor = arcade.Sprite(hit_box_algorithm="None")
         # self.sprite_accessory = arcade.Sprite(hit_box_algorithm="None")
@@ -198,8 +234,8 @@ class Player:
         self.sprites = [
             self.sprite_footL, self.sprite_footL_submerge, self.sprite_footR, self.sprite_footR_submerge,
             self.sprite_backpack, self.sprite_body, self.sprite_body_submerge, self.sprite_chest,
-            self.sprite_gunL, self.sprite_magL, self.sprite_objectL, self.sprite_gunR, self.sprite_magR,
-            self.sprite_melee, self.sprite_handL, self.sprite_handL_submerge, self.sprite_handR,
+            self.sprite_gunL, self.sprite_magL, self.sprite_gunR, self.sprite_magR, self.sprite_melee,
+            self.sprite_handL, self.sprite_handL_submerge, self.sprite_objectL, self.sprite_handR,
             self.sprite_handR_submerge, self.sprite_objectR, self.sprite_helmet
         ]
 
@@ -237,6 +273,8 @@ class Player:
             "seq": -1,
             "ticker": 0
         }
+        self.last_anim_num = -1
+        self.throwable_state = "equip"
 
         # TODO add way to get ghillie colour
 
@@ -417,7 +455,9 @@ class Player:
         else:
             self.sprite_melee.visible = False
 
-        # draw held throwable CORE
+        # Update held throwable
+        if held_item["type"] == "throwable":
+            self.throwable.update_sprites(held_item["handImg"][self.throwable_state])
 
         # hide held object if downed or reviving CORE
 
@@ -471,6 +511,10 @@ class Player:
         if 0 >= self.anim["ticker"] or self.anim["ticker"] > time:
             self.update_idle(str_to_sprite)
         else:
+
+            effects = configs.anims["animations"][self.anim["name"]]["effects"]
+            self.handle_anim_effects(effects)
+
             pose = self.lerp_anim(times)
             pose = self.strip_dict_to_limbs(pose)
 
@@ -483,6 +527,42 @@ class Player:
                         self.set_rotation(sprite, (-pose[limb][2] + (0.5 if "Leg" in limb else 0)) * pi)
 
         self.melee.update_pos()
+        self.throwable.update_pos()
+
+    def handle_anim_effects(self, effects):
+        for num, effect in enumerate(effects):
+            if num > self.last_anim_num and self.anim["ticker"] >= self.get_time(effect):
+                self.handle_anim_effect(effect["func"], effect["args"])
+                self.last_anim_num += 1
+
+    def handle_anim_effect(self, name, args):
+        print(name)
+        handlers = {
+            "animPlaySound": self.play_anim_sound,
+            "animMeleeCollision": self.anim_melee_collision,
+            "animSetThrowableState": self.anim_throwable_state,
+            "animThrowableParticles": self.throwable_particles
+        }
+        if name not in handlers:
+            raise RuntimeWarning("No handler for effect " + name)
+        else:
+            handlers[name](**args)
+
+    def play_anim_sound(self, sound):
+        pass
+        # TODO
+
+    def anim_melee_collision(self):
+        pass
+        # TODO
+
+    def throwable_particles(self):
+        pass
+        # TODO
+
+    def anim_throwable_state(self, state):
+        self.throwable_state = state
+        self.update_sprites()
 
     def select_idle(self) -> dict:
         if self.downed:
@@ -622,6 +702,7 @@ class Player:
             "seq": self.animSeq,
             "ticker": 0
         }
+        self.last_anim_num = -1
 
     def _get_anim_name(self):
         """
@@ -647,6 +728,9 @@ class Player:
             mirrored = rand_choice([True, False])
         else:
             mirrored = False
+
+        if anim_type not in ["cook", "throw"]:
+            self.throwable_state = "equip"
 
         return anim_type, mirrored
 
@@ -707,11 +791,11 @@ class DummyMap:
             "backpack": "",
             "helmet": "",
             "chest": "",
-            "curWeapType": "machete",
+            "curWeapType": "frag",
             "layer": 1,
             "dead": False,
             "downed": False,
-            "animType": 1,
+            "animType": 3,
             "animSeq": 1,
             "wearingPan": False,
             "hasActionItem": False,
