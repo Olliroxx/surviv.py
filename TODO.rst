@@ -11,6 +11,7 @@
     * Check object extraction (key phrases: "['decoration_01'] || ''", "gun_mount_02", "tree_08su" and "candle_lit_01")
     * Modify init.py for spn to reduce length of imports
     * Add __all__ for spn, spd and spc
+    * Fix melee offset bug in spc/player
 
  * Deobfuscation
     * name to file sound mappings

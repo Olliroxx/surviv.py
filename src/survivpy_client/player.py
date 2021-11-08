@@ -185,12 +185,12 @@ class Player:
         }
 
         self.sprite_footL = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_footL.texture = load_texture("player-feet-01.png", hit_box_algorithm="None")
+        self.sprite_footL.texture = load_texture("player-feet-01.png", hit_box_algorithm="None", rotation=90)
         # self.sprite_footL.scale = 0.45 * PLAYER_SCALE_FACTOR
         # self.sprite_footL.radians = 0.5
         self.sprite_footL_submerge = arcade.Sprite(hit_box_algorithm="None")
         self.sprite_footR = arcade.Sprite(hit_box_algorithm="None")
-        self.sprite_footR.texture = load_texture("player-feet-01.png", hit_box_algorithm="None")
+        self.sprite_footR.texture = load_texture("player-feet-01.png", hit_box_algorithm="None", rotation=90)
         # self.sprite_footR.scale = 0.45 * PLAYER_SCALE_FACTOR
         # self.sprite_footR.radians = 0.5
         self.sprite_footR_submerge = arcade.Sprite(hit_box_algorithm="None")
@@ -439,27 +439,35 @@ class Player:
         # TODO draw pan
 
         held_item = configs.gtypes[self.curWeapType]
-        # Update gun
-        if held_item["type"] == "gun" and not (self.downed or self.animType == configs.constants["Anim"]["Revive"]):
-            self.gunR.show()
-            self.gunR.set_type(self.curWeapType, self.body_rad / configs.constants["player"]["radius"], self.gun_loaded)
+        if not (self.downed or self.animType == configs.constants["Anim"]["Revive"]):
+            # Update gun
+            if held_item["type"] == "gun":
+                self.gunR.show()
+                self.gunR.set_type(self.curWeapType, self.body_rad / configs.constants["player"]["radius"], self.gun_loaded)
+            else:
+                self.gunR.hide()
+                self.gunL.hide()
+
+            # Update held melee
+            # TODO if downed/reviving, hide sprites
+            if held_item["type"] == "melee" and self.curWeapType != "fists" and "handSprites" not in held_item:
+                self.melee.update_sprite(held_item)
+                self.sprite_melee.visible = True
+            else:
+                self.sprite_melee.visible = False
+
+            # Update held throwable
+            if held_item["type"] == "throwable":
+                self.throwable.update_sprites(held_item["handImg"][self.throwable_state])
+            else:
+                self.sprite_objectR.visible = False
+                self.sprite_objectL.visible = False
         else:
             self.gunR.hide()
             self.gunL.hide()
-
-        # Update held melee
-        # TODO if downed/reviving, hide sprites
-        if held_item["type"] == "melee" and self.curWeapType != "fists" and "handSprites" not in held_item:
-            self.melee.update_sprite(held_item)
-            self.sprite_melee.visible = True
-        else:
+            self.sprite_objectR.visible = False
+            self.sprite_objectL.visible = False
             self.sprite_melee.visible = False
-
-        # Update held throwable
-        if held_item["type"] == "throwable":
-            self.throwable.update_sprites(held_item["handImg"][self.throwable_state])
-
-        # hide held object if downed or reviving CORE
 
         # TODO show heal/rev particles
 
@@ -536,7 +544,6 @@ class Player:
                 self.last_anim_num += 1
 
     def handle_anim_effect(self, name, args):
-        print(name)
         handlers = {
             "animPlaySound": self.play_anim_sound,
             "animMeleeCollision": self.anim_melee_collision,
@@ -795,7 +802,7 @@ class DummyMap:
             "layer": 1,
             "dead": False,
             "downed": False,
-            "animType": 3,
+            "animType": 6,
             "animSeq": 1,
             "wearingPan": False,
             "hasActionItem": False,

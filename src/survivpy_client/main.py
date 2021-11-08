@@ -6,8 +6,6 @@ from logging import getLogger
 
 logger = getLogger("survivpy_client")
 
-PLAYER_SCALE_FACTOR = 2
-
 
 class RootLayer:
     def setup(self):
