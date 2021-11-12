@@ -317,28 +317,28 @@ class Map:
             point_spacing = rect.width / (side_point_count + 1)
 
             output.append(rect.bl.copy())
-            for point_num in range(side_point_count):
+            for point_num in range(1, side_point_count + 1):
                 output.append(Point(
                     rect.bl.x + point_spacing * point_num,
                     rect.bl.y + rand_gen.gen(-variation, variation)))
 
             output.append(rect.br.copy())
-            for point_num in range(side_point_count):
+            for point_num in range(1, side_point_count + 1):
                 output.append(Point(
                     rect.br.x + rand_gen.gen(-variation, variation),
                     rect.br.y + point_spacing * point_num))
 
             output.append(rect.tr.copy())
-            for point_num in range(side_point_count):
+            for point_num in range(1, side_point_count + 1):
                 output.append(Point(
-                    rect.tr.x + point_spacing * point_num,
+                    rect.tr.x - point_spacing * point_num,
                     rect.tr.y + rand_gen.gen(-variation, variation)))
 
             output.append(rect.tl.copy())
-            for point_num in range(side_point_count):
+            for point_num in range(1, side_point_count + 1):
                 output.append(Point(
                     rect.tl.x + rand_gen.gen(-variation, variation),
-                    rect.tl.y + point_spacing * point_num))
+                    rect.tl.y - point_spacing * point_num))
 
             return output
 
