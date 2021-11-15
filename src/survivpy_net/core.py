@@ -1,10 +1,11 @@
-from survivpy_net.custom_types import Point, EndpointLine, Rect, Poly, MxPlusCLine, lerp, SeededRandGenerator
+from survivpy_net import Point, EndpointLine, Rect, MxPlusCLine, SeededRandGenerator
 from survivpy_net import configs
 from logging import getLogger
 
 logger = getLogger("survivpy_net")
 
 JS_MAX_VALUE = 2 ** 1024 - 1
+RIVER_JOIN_DIST = 1.5
 
 
 class River:
@@ -23,20 +24,12 @@ class River:
 
         configs.update_configs()
 
-        def _0x46712b(point1: Point, point2: Point, poly: Poly):
-            point3 = point1.add_point(point2)
-            if not poly.point_in_poly(point3):
-                num = poly.ray_poly_intersect(EndpointLine(point1, point2))
-                if num:
-                    return point2.mul(num)
-            return point2
-
         self.points = []
         for point in points:
             if not type(point) == Point:
                 point = Point(*point)
             self.points.append(point)
-        points = self.points
+        points = self.points.copy()
 
         self.water_width = width
         self.shore_width = sorted((4, 8, width * 0.75))[1]
@@ -50,143 +43,143 @@ class River:
         self.center.div(len(points))
         # Average all points to make a center
 
-        total_length = 0
-        for point in points:
-            point = point.copy()
-            point.sub_point(self.center)
-            total_length += point.length()
-        average_length = total_length / len(points)
+        self.rect = None
+        self.water_widths = []
+        self.shore_widths = []
+        self.water_poly = []
+        self.shore_poly = []
 
-        halfway = min_max.bl.copy()
-        halfway = halfway.sub_point(min_max.tr)
-        halfway = halfway.mul(0.5)
-        halfway = halfway.add_point(min_max.tr)
+        self.point_gen(points, looped, other_rivers)
 
-        lines = []
-        for number, point in enumerate(points[:-1]):
-            next_point = points[number + 1]
-            lines.append(MxPlusCLine.from_line_and_offset(MxPlusCLine.from_points(point, next_point), 1))
+    def point_gen(self, points, looped, other_rivers):
+        l_dirs, r_dirs, closest = self.gen_directions(points, looped, other_rivers)
+        water_widths, shore_widths = self.gen_widths(points, looped, closest)
 
-        lines.insert(0, MxPlusCLine.perp_line_and_point(lines[0], points[0]))
-        lines.insert(-1, MxPlusCLine.perp_line_and_point(lines[-1], points[-1]))
-        # Add first and last lines
+        l_water = []
+        r_water = []
+        l_shore = []
+        r_shore = []
 
-        normalised_points = []
-        for number, line in enumerate(lines[:-1]):
-            normalised_points.append(line.get_intersect(lines[number + 1]))
-        # Make "normalised" (offset) points
-        # If there are list of points representing a track, the normalised points are the points for the edge of the road
+        for left, right, shore, water, source in zip(l_dirs, r_dirs, shore_widths, water_widths, points):
+            l_water.append(left.mul(water).add_point(source))
+            r_water.append(right.mul(water).add_point(source))
+            l_shore.append(left.mul(shore).add_point(source))
+            r_shore.append(right.mul(shore).add_point(source))
 
-        water_poly = []
-        shore_poly = []
-        water_widths = []
+        self.water_poly = l_water + r_water[::-1]
+        self.shore_poly = l_shore + r_shore[::-1]
+
+    @staticmethod
+    def gen_directions(points, looped, other_rivers):
+        lines = [(), ()]
+        closest_river = None
+
+        if other_rivers:
+            # Work out if this river is a fork of another river
+            closest = [None, None, None]
+            for river in other_rivers:
+                for point_num in [0, -1]:
+                    point = river.get_closest(points[point_num])
+                    dist = point.sub_point(points[point_num]).length()
+                    if closest[1] is None or dist < closest[1]:
+                        closest = [point, dist, bool(point_num+1), river]
+            # Make the line from the first/last point of the current window to the closest point on the other river
+            closest_river = closest[3]
+            # noinspection PyTypeChecker
+            if closest[1] < RIVER_JOIN_DIST:
+                if closest[2]:
+                    line = (closest[0], points[0])
+                    lines = [line, ()]
+                else:
+                    line = (points[-1], closest[0])
+                    lines = [(), line]
+
+        # Make the line that connects the first and last point, if looped
+        if looped:
+            lines = [(points[0], points[-1]), ()]
+
+        # Make the remainder of the lines
+        for point_num in range(1, len(points)):
+            prev = points[point_num-1]
+            current = points[point_num]
+            line = EndpointLine(prev, current)
+            lines.insert(-1, line)
+
+        # Turn the list of lines into a list of line pairs. Example:
+        # ["a", "b", "c"] -> [("a", "b"), ("b", "c")]
+        line_pairs = []
+        for line_num in range(1, len(lines)):
+            prev = lines[line_num-1]
+            current = lines[line_num]
+            line_pairs.append((prev, current))
+
+        # Get the gradient perpendicular to the points where each pair meets (if its the end/start, only use one line)
+        gradients = []
+        for line_1, line_2 in line_pairs:
+
+            if not (line_1 and line_2):
+                non_empty = line_1 if line_1 else line_2
+                av_gradient = non_empty.get_mx_plus_c().m
+                gradients.append(-1/av_gradient)
+            else:
+                prev_point = line_1.start
+                next_point = line_2.end
+                to_bisect = EndpointLine(prev_point, next_point)
+
+                try:
+                    m = to_bisect.get_mx_plus_c().m
+                    if not m:
+                        gradients.append("infinity")
+                    else:
+                        gradients.append(-1/m)
+                except ZeroDivisionError:
+                    gradients.append(0)
+
+        l_vectors = []
+        r_vectors = []
+        for grad_num, grad in enumerate(gradients):
+            if grad == "infinity":
+                pos_vec = Point(0, 1)
+                alt_vec = Point(0, -1)
+            else:
+                pos_vec = Point(1, grad).normalise()
+                alt_vec = Point(-1, -grad).normalise()
+
+            r_vectors.append(pos_vec)
+            l_vectors.append(alt_vec)
+
+        return l_vectors, r_vectors, closest_river
+
+    def gen_widths(self, points, looped, closest_river):
+        if looped:
+            water_widths = [self.water_width] * len(points)
+        else:
+            water_widths = []
+            for point_num, point in enumerate(points):
+                dist_to_end = len(points) - point_num
+                dist_to_start = point_num
+                base_thickness = 2 * max(dist_to_start, dist_to_end) / len(points)
+                water_widths.append((1 + base_thickness**3 * 1.5) * self.water_width)
+
         shore_widths = []
 
-        for point_number, point in enumerate(points):
-            normalised_point = normalised_points[point_number]
-            modified_endpoint = False
-            if not looped and (point_number == 0 or point_number == (len(points) - 1)):
-                # If the point is the last or first point of a (non-looped) river
-                halfway_subbed = point.sub_point(halfway)
-                _0x867030 = Point(0, 0)
-                _0x50e90b = Point(1, 0)
-                if abs(halfway_subbed.x) > abs(halfway_subbed.y):
-                    if halfway_subbed.x > 0:
-                        x = min_max.tr.x
-                    else:
-                        x = min_max.bl.x
-                    _0x867030 = Point(x, point.y)
-                    _0x50e90b = Point(1 if halfway_subbed.x > 0 else -1, 0)
-                else:
-                    if halfway_subbed.y > 0:
-                        y = min_max.tr.y
-                    else:
-                        y = min_max.bl.y
-                    _0x867030 = Point(point.x, y)
-                    _0x50e90b = Point(0, 1 if halfway_subbed.y > 0 else -1)
-                if _0x867030.sub_point(point).length() ** 2 < 1:
-                    _0x826f0 = _0x50e90b.perp()
-                    if (normalised_point.x * _0x826f0.x + normalised_point.y * _0x826f0.y) < 0:
-                        _0x826f0 = _0x826f0.mul(-1)
-                        # noinspection PyUnusedLocal
-                        normalised_point = _0x826f0
-                        modified_endpoint = True
-                # Maybe something with if the start/end of a river is horizontal/vertical?
-                # Possible incomplete
+        for point_num, point in enumerate(points):
+            width = self.shore_width
+            if closest_river:
+                closest_point = closest_river.get_closest(point)
+                dist = closest_point.sub_point(point).length()
+                if dist < closest_river.water_width * 2:
+                    width = max(width, closest_river.shore_width)
 
-            water_width = self.water_width
-            if not looped:
-                _0x15454d = 2 * max(1 - point_number / len(points), point_number / len(points))
-                water_width = (1 + _0x15454d ** 3 * 1 / 5) * self.water_width
-            water_widths.append(water_width)
+                if point_num in (0, len(points)-1) and dist < 1.5 and not looped:  # Another condition here, idk what
+                    # parent_river = closest_river  # TODO check this works the same as official
+                    pass
 
-            shore_width = self.shore_width
-            source_river = None
-            for river in other_rivers:
-                closest_pos = river.get_closest(point)
-                source_river_dist = closest_pos.sub_point(point).length()
-                if source_river_dist < water_width * 2:
-                    shore_width = max(shore_width, self.shore_width)
-                if (point_number == 0 or point_number == len(
-                        points) - 1) and source_river_dist < 1.5 and not modified_endpoint:
-                    source_river = river
+            if point_num:
+                width = (shore_widths[-1] + width)/2
+            shore_widths.append(width)
 
-            if point_number > 0:
-                shore_width = (shore_widths[point_number - 1] + shore_width) / 2
-            shore_widths.append(shore_width)
-            shore_width += water_width
-
-            if looped:
-                _0xb6810b = point.sub_point(self.center)
-                _0x473647 = _0xb6810b.length()
-                _0xb6810b = _0xb6810b.div(_0x473647) if _0x473647 > 0.000 else Point(1, 0)
-                _0x29a0be = lerp(min(water_width / average_length, 1) ** 0.5, water_width,
-                                 (1 - (average_length - water_width) / _0x473647) * _0x473647)
-                _0x2bde26 = lerp(min(shore_width / average_length, 1) ** 0.5, shore_width,
-                                 (1 - (average_length - shore_width) / _0x473647) * _0x473647)
-                water_corner1 = point.add_point(_0xb6810b.mul(water_width))
-                water_corner2 = point.add_point(_0xb6810b.mul(-_0x29a0be))
-                shore_corner1 = point.add_point(_0xb6810b.mul(water_width))
-                shore_corner2 = point.add_point(_0xb6810b.mul(-_0x2bde26))
-            else:
-                water_corner1 = point.mul(water_width)
-                water_corner2 = point.mul(-water_width)
-                shore_corner1 = point.mul(shore_width)
-                shore_corner2 = point.mul(-shore_width)
-
-                if source_river:
-
-                    water_corner1 = _0x46712b(point, water_corner1, Poly(water_poly))
-                    water_corner2 = _0x46712b(point, water_corner2, Poly(water_poly))
-                    shore_corner1 = _0x46712b(point, shore_corner1, Poly(shore_poly))
-                    shore_corner2 = _0x46712b(point, shore_corner2, Poly(shore_poly))
-
-                    water_corner1 = point.add_point(water_corner1)
-                    water_corner2 = point.add_point(water_corner2)
-                    shore_corner1 = point.add_point(shore_corner1)
-                    shore_corner2 = point.add_point(shore_corner2)
-
-            water_corner1 = min_max.clamp_point(water_corner1)
-            water_corner2 = min_max.clamp_point(water_corner2)
-            shore_corner1 = min_max.clamp_point(shore_corner1)
-            shore_corner2 = min_max.clamp_point(shore_corner2)
-
-            water_poly.insert(point_number, water_corner1)
-            water_poly.insert(len(water_poly) - point_number, water_corner2)
-            shore_poly.insert(point_number, shore_corner1)
-            shore_poly.insert(len(shore_poly) - point_number, shore_corner2)
-        # Make shore+river polys
-        furthest_bottom_left = Point(JS_MAX_VALUE, JS_MAX_VALUE)
-        furthest_top_right = Point(-JS_MAX_VALUE, -JS_MAX_VALUE)
-        for point_num in range(len(shore_poly)):
-            furthest_bottom_left = furthest_bottom_left.min(shore_poly[point_num])
-            furthest_top_right = furthest_top_right.max(shore_poly[point_num])
-
-        self.rect = Rect(furthest_bottom_left, furthest_top_right)
-        self.water_widths = water_widths
-        self.shore_widths = shore_widths
-        self.water_poly = water_poly
-        self.shore_poly = shore_poly
+        return water_widths, shore_widths
 
     def __str__(self):
         return str((self.water_width, self.looped, self.points))

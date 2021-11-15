@@ -29,8 +29,15 @@ class GenericXYObject:
     def __str__(self):
         return str((self.x, self.y))
 
+    def __repr__(self):
+        return str(self)
+
     def __iter__(self):
         return iter((self.x, self.y))
+
+    def __eq__(self, other):
+        other = Point(*other)
+        return self.x == other.x and self.y == other.y
 
 
 class Point(GenericXYObject):
@@ -213,7 +220,10 @@ class MxPlusCLine:
         diff_x = point1.x - point2.x
         diff_y = point1.y - point2.y
         m = diff_y / diff_x
-        c = point1.y / (point1.x * m)
+        if not m:
+            c = point1.y
+        else:
+            c = point1.y / (point1.x * m)
         return MxPlusCLine(m, c)
 
     @staticmethod
@@ -237,6 +247,12 @@ class EndpointLine:
     def __init__(self, start: Point, end: Point):
         self.start = start
         self.end = end
+
+    def __repr__(self):
+        return str(self)
+
+    def __str__(self):
+        return str((self.start, self.end))
 
     def get_mx_plus_c(self):
         return MxPlusCLine.from_points(self.start, self.end)

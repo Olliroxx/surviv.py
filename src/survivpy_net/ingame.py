@@ -1277,7 +1277,7 @@ class Type06Packet(Packet):
     def _obj_decal_full(bs: TypedBitString):
         return {
             "pos": bs.read_vec16(),
-            "scale": bs.read_float(configs.constants["mapObjectMinScale"], configs.constants["mapObjectMaxScale"], 8),
+            "scale": bs.read_float(constants["mapObjectMinScale"], constants["mapObjectMaxScale"], 8),
             "obj_type": bs.read_map_type(),
             "ori": bs.read_bits(2),
             "layer": bs.read_bits(2),
