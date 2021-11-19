@@ -1,4 +1,4 @@
-from survivpy_net import Point, EndpointLine, Rect, MxPlusCLine, SeededRandGenerator
+from survivpy_net import Point, EndpointLine, Rect, Poly, SeededRandGenerator
 from survivpy_net import configs
 from logging import getLogger
 
@@ -20,7 +20,7 @@ class River:
     :param min_max: Top right map corner to center
     """
 
-    def __init__(self, points, width, looped, other_rivers, min_max: Rect):
+    def __init__(self, points, width, looped, other_rivers, min_max: Rect, shore_poly):
 
         configs.update_configs()
 
@@ -44,14 +44,12 @@ class River:
         # Average all points to make a center
 
         self.rect = None
-        self.water_widths = []
-        self.shore_widths = []
         self.water_poly = []
         self.shore_poly = []
 
-        self.point_gen(points, looped, other_rivers)
+        self.point_gen(points, looped, other_rivers, shore_poly)
 
-    def point_gen(self, points, looped, other_rivers):
+    def point_gen(self, points, looped, other_rivers, shore_poly):
         l_dirs, r_dirs, closest = self.gen_directions(points, looped, other_rivers)
         water_widths, shore_widths = self.gen_widths(points, looped, closest)
 
@@ -63,11 +61,53 @@ class River:
         for left, right, shore, water, source in zip(l_dirs, r_dirs, shore_widths, water_widths, points):
             l_water.append(left.mul(water).add_point(source))
             r_water.append(right.mul(water).add_point(source))
-            l_shore.append(left.mul(shore).add_point(source))
-            r_shore.append(right.mul(shore).add_point(source))
+            l_shore.append(left.mul(shore + water).add_point(source))
+            r_shore.append(right.mul(shore + water).add_point(source))
+
+        l_shore = self.trim_to_shore(l_shore, shore_poly)
+        r_shore = self.trim_to_shore(r_shore, shore_poly)
 
         self.water_poly = l_water + r_water[::-1]
         self.shore_poly = l_shore + r_shore[::-1]
+
+    @staticmethod
+    def trim_to_shore(points, shore_poly):
+        in_poly = []
+        shore_poly = Poly(shore_poly)
+        for point in points:
+            in_poly.append(shore_poly.point_in_poly(point))
+
+        points_outside_start = 0
+        for point in in_poly:
+            if point:
+                break
+            else:
+                points_outside_start += 1
+
+        if points_outside_start:
+            points = points[points_outside_start-1:]
+            edge_intersect = EndpointLine(points[0], points[1])
+            for poly_edge in shore_poly.edges:
+                if edge_intersect.ep_line_intersect(poly_edge):
+                    points[0] = edge_intersect.ep_line_intersect(poly_edge)
+                    break
+
+        points_outside_end = 0
+        for point in in_poly[::-1]:
+            if point:
+                break
+            else:
+                points_outside_end += 1
+
+        if points_outside_end:
+            points = points[:-points_outside_end+1]
+            edge_intersect = EndpointLine(points[-1], points[-2])
+            for poly_edge in shore_poly.edges:
+                if edge_intersect.ep_line_intersect(poly_edge):
+                    points[-1] = edge_intersect.ep_line_intersect(poly_edge)
+                    break
+
+        return points
 
     @staticmethod
     def gen_directions(points, looped, other_rivers):
@@ -148,7 +188,20 @@ class River:
             r_vectors.append(pos_vec)
             l_vectors.append(alt_vec)
 
-        return l_vectors, r_vectors, closest_river
+        new_r = [r_vectors[0]]
+        new_l = [l_vectors[0]]
+        for num in range(1, len(r_vectors)):
+            r_line = EndpointLine(new_r[-1], r_vectors[num])
+            l_line = EndpointLine(new_l[-1], l_vectors[num])
+
+            if r_line.ep_line_intersect(l_line):
+                new_l.append(r_vectors[num])
+                new_r.append(l_vectors[num])
+            else:
+                new_l.append(l_vectors[num])
+                new_r.append(r_vectors[num])
+
+        return new_l, new_r, closest_river
 
     def gen_widths(self, points, looped, closest_river):
         if looped:
@@ -158,7 +211,7 @@ class River:
             for point_num, point in enumerate(points):
                 dist_to_end = len(points) - point_num
                 dist_to_start = point_num
-                base_thickness = 2 * max(dist_to_start, dist_to_end) / len(points)
+                base_thickness = (2 * (max(dist_to_start, dist_to_end) / len(points))) - 1
                 water_widths.append((1 + base_thickness**3 * 1.5) * self.water_width)
 
         shore_widths = []
@@ -183,34 +236,6 @@ class River:
 
     def __str__(self):
         return str((self.water_width, self.looped, self.points))
-
-    def get_closest(self, target):
-        closest = self.points[0]
-        for point in self.points:
-            if target.distance_to(point) < target.distance_to(closest):
-                closest = point
-        if self.points.index(closest) + 1 == len(self.points):
-            second = self.points[self.points.index(closest) - 1]
-        elif self.points.index(closest) - 1 == -1:
-            second = self.points[self.points.index(closest) + 1]
-        else:
-            pre = self.points[self.points.index(closest) - 1]
-            post = self.points[self.points.index(closest) + 1]
-            second = pre if target.distance_to(pre) < target.distance_to(post) else post
-
-        inf_line = MxPlusCLine.from_points(closest, second)
-        perp_line = MxPlusCLine.perp_line_and_point(inf_line, target)
-        intersection = inf_line.get_intersect(perp_line)
-        if (second.x > intersection.x > closest.x or second.x < intersection.x < closest.x) and (
-                second.y > intersection.y > closest.y or second.y < intersection.y < closest.y):
-            return intersection
-        else:
-            return closest
-
-    def distance_to_shore(self, target):
-        shore_point = self.get_closest(target)
-        dist_to_point = target.sub_point(shore_point).length()
-        return max(dist_to_point, 0)
 
 
 class Map:
@@ -359,7 +384,7 @@ class Map:
 
         rivers_out = []
         for river in rivers:
-            rivers_out.append(River(river["points"], river["width"], river["looped"], rivers_out, min_max))
+            rivers_out.append(River(river["points"], river["width"], river["looped"], rivers_out, min_max, shore_points))
 
         return {
             "shore": shore_points,
