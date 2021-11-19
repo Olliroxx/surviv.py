@@ -1,4 +1,5 @@
 from .main import LevelLayer
+from .main import Layer
 
 from .utils import load_texture
 from .utils import scale_texture

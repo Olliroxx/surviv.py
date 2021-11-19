@@ -25448,7 +25448,7 @@
                 ],
                 "imgs": [
                     {
-                        "sprite": "map-building-greenhouse-floor-02.img",
+                        "sprite": "map-building-greenhouse-floor-01.img",
                         "pos": {
                             "type": "coord",
                             "x": 0.0,
@@ -25460,7 +25460,7 @@
                         "rot": 2
                     },
                     {
-                        "sprite": "map-building-greenhouse-floor-02.img",
+                        "sprite": "map-building-greenhouse-floor-01.img",
                         "pos": {
                             "type": "coord",
                             "x": 0.0,
@@ -28545,7 +28545,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "bunker_chrys_sublevel_01",
+                    "type": "bunker_chrys_sublevel_01b",
                     "pos": {
                         "type": "coord",
                         "x": 0.0,
@@ -56854,7 +56854,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "cache_pumpkin_02",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": -4.0,
@@ -56864,7 +56864,7 @@
                     "ori": 2
                 },
                 {
-                    "type": "cache_pumpkin_02",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 4.0,
@@ -58156,7 +58156,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "panicroom_01",
+                    "type": "barn_basement_structure_01",
                     "pos": {
                         "type": "coord",
                         "x": 19.5,
@@ -58975,7 +58975,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "panicroom_01",
+                    "type": "barn_basement_structure_01d",
                     "pos": {
                         "type": "coord",
                         "x": 19.5,
@@ -66878,7 +66878,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "stand_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": -12.25,
@@ -67463,7 +67463,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "stand_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": -12.25,
@@ -67514,7 +67514,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "",
+                    "type": "cache_pumpkin_02",
                     "pos": {
                         "type": "coord",
                         "x": 4.5,
@@ -67524,7 +67524,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "cache_pumpkin_02",
                     "pos": {
                         "type": "coord",
                         "x": -5.25,
@@ -69391,7 +69391,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "cache_pumpkin_02",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": -4.5,
@@ -69401,7 +69401,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "cache_pumpkin_02",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 5.75,
@@ -75446,13 +75446,13 @@
                     "ori": 2
                 },
                 {
-                    "type": "tree_interior_01",
+                    "type": "tree_11",
                     "pos": {
                         "type": "coord",
                         "x": -2.0,
                         "y": 4.0
                     },
-                    "scale": 0.6,
+                    "scale": 1,
                     "ori": 0,
                     "ignoreMapSpawnReplacement": true
                 },
@@ -75497,7 +75497,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 0}}",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 999}}",
                     "pos": {
                         "type": "coord",
                         "x": -4.75,
@@ -75508,7 +75508,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 0}}",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 999}}",
                     "pos": {
                         "type": "coord",
                         "x": 0.75,
@@ -75519,7 +75519,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 0}}",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 999}}",
                     "pos": {
                         "type": "coord",
                         "x": -4.75,
@@ -75530,7 +75530,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 0}}",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 999}}",
                     "pos": {
                         "type": "coord",
                         "x": 0.75,
@@ -76740,7 +76740,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "loot_tier_mansion_floor",
                     "pos": {
                         "type": "coord",
                         "x": -2.0,
@@ -76750,7 +76750,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": -21.0,
@@ -76760,7 +76760,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 18.0,
@@ -76770,7 +76770,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "candle_lit_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 6.0,
@@ -76780,7 +76780,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "decal_web_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": -30.15,
@@ -76790,7 +76790,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "decal_web_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 1.5,
@@ -76800,7 +76800,7 @@
                     "ori": 2
                 },
                 {
-                    "type": "decal_web_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 8.5,
@@ -76810,7 +76810,7 @@
                     "ori": 3
                 },
                 {
-                    "type": "decal_web_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 22.5,
@@ -76820,7 +76820,7 @@
                     "ori": 3
                 },
                 {
-                    "type": "decal_web_01",
+                    "type": "",
                     "pos": {
                         "type": "coord",
                         "x": 22.5,
@@ -77878,7 +77878,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "barrel_02",
+                    "type": "pumpkin_01",
                     "pos": {
                         "type": "coord",
                         "x": 8.5,
@@ -77898,7 +77898,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "barrel_02",
+                    "type": "pumpkin_01",
                     "pos": {
                         "type": "coord",
                         "x": 14.5,
@@ -77928,7 +77928,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "decal_web_01",
                     "pos": {
                         "type": "coord",
                         "x": 0.5,
@@ -77938,7 +77938,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "",
+                    "type": "decal_web_01",
                     "pos": {
                         "type": "coord",
                         "x": 22.5,
@@ -81807,7 +81807,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "loot_tier_helmet_forest",
+                    "type": "loot_tier_airdrop_armor",
                     "pos": {
                         "type": "coord",
                         "x": 0.0,

@@ -116,14 +116,15 @@ class WorldView(gui.UIInteractiveWidget):
                 self.first_frame_setup()
 
             self.prepare_render(surface)
+            surface.activate()
             surface.clear((0, 0, 0, 255))
             self.cam.use()
 
             for layer in self.level_layers:
-                layer.render(self.state, surface, 1)
+                layer.render(self.state, surface, 0)
 
             for layer in self.level_layers:
-                layer.render(self.state, surface, 0)
+                layer.render(self.state, surface, 1)
 
             for layer in self.layers:
                 layer.render(self.state, surface)

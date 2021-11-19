@@ -64,7 +64,7 @@
     "main_spring": {
         "mapId": 0,
         "desc": {
-            "name": "Awesome\\x20Blossoms",
+            "name": "Awesome Blossoms",
             "icon": "img/loot/loot-blossom-icon.svg",
             "buttonCss": "btn-mode-blossoms",
             "buttonText": "index-play-mode-spring"
@@ -1278,7 +1278,7 @@
     "cinco_de_mayo": {
         "mapId": 1,
         "desc": {
-            "name": "Cinco\\x20de\\x20Mayo",
+            "name": "Cinco de Mayo",
             "icon": "img/loot/pinata_icon.svg",
             "buttonCss": "btn-mode-easter",
             "buttonText": "index-play-mode-sinko"
