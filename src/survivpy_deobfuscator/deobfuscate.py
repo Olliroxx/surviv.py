@@ -301,20 +301,20 @@ def fill_strings():
     del script_as_list
     # Remove the list
 
-    regex = r"""var (a0_0x[\da-f]{3,7}) = function\(_0x[\da-f]{6}, _0x[\da-f]{6}\) \{
-    _0x[\da-f]{6} = _0x[\da-f]{6} - ?\(?0\)?;
-    var _0x[\da-f]{6} = """ + list_name + r"""\[_0x[\da-f]{6}];
-    return _0x[\da-f]{6};
+    regex = r"""var (a0_0x[\da-f]{3,7}) = function\(_0x[\da-f]{4,7}, _0x[\da-f]{4,7}\) \{
+    _0x[\da-f]{4,7} = _0x[\da-f]{4,7} - ?\(?0\)?;
+    var _0x[\da-f]{4,7} = """ + list_name + r"""\[_0x[\da-f]{4,7}];
+    return _0x[\da-f]{4,7};
 };"""
     alt_name = re.findall(regex, script)[0]
     del regex
     # There is a a function that (as far as I can tell) does nothing except rename it
     # This finds the new name
 
-    regex = r"""var a0_[\da-f]{3,7} = function\(_0x[\da-f]{6}, _0x[\da-f]{6}\) \{
-        _0x[\da-f]{6} = _0x[\da-f]{6} - ?\(?0\)?;
-        var _0x[\da-f]{6} = """ + list_name + r"""\[_0x[\da-f]{6}];
-        return _0x[\da-f]{6};
+    regex = r"""var a0_[\da-f]{3,7} = function\(_0x[\da-f]{4,7}, _0x[\da-f]{4,7}\) \{
+        _0x[\da-f]{4,7} = _0x[\da-f]{4,7} - ?\(?0\)?;
+        var _0x[\da-f]{4,7} = """ + list_name + r"""\[_0x[\da-f]{4,7}];
+        return _0x[\da-f]{4,7};
     };"""
     script = re.sub(regex, "", script)
     del regex
