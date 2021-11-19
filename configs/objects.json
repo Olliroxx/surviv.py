@@ -66895,7 +66895,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "stand_01",
                     "pos": {
                         "type": "coord",
                         "x": -12.25,
@@ -67480,7 +67480,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "",
+                    "type": "stand_01",
                     "pos": {
                         "type": "coord",
                         "x": -12.25,
@@ -75463,13 +75463,13 @@
                     "ori": 2
                 },
                 {
-                    "type": "tree_11",
+                    "type": "tree_interior_01",
                     "pos": {
                         "type": "coord",
                         "x": -2.0,
                         "y": 4.0
                     },
-                    "scale": 1,
+                    "scale": 0.6,
                     "ori": 0,
                     "ignoreMapSpawnReplacement": true
                 },
@@ -75514,7 +75514,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 999}}",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 0}}",
                     "pos": {
                         "type": "coord",
                         "x": -4.75,
@@ -75525,7 +75525,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 999}}",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 0}}",
                     "pos": {
                         "type": "coord",
                         "x": 0.75,
@@ -75536,7 +75536,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 999}}",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 0}}",
                     "pos": {
                         "type": "coord",
                         "x": -4.75,
@@ -75547,7 +75547,7 @@
                     "ignoreMapSpawnReplacement": true
                 },
                 {
-                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 999}}",
+                    "type": "{\"type\": \"weighted_random_obstacle\", \"value\": {\"bush_01\": 25, \"bush_03\": 1, \"\": 0}}",
                     "pos": {
                         "type": "coord",
                         "x": 0.75,
@@ -77895,7 +77895,7 @@
                     "ori": 1
                 },
                 {
-                    "type": "pumpkin_01",
+                    "type": "barrel_02",
                     "pos": {
                         "type": "coord",
                         "x": 8.5,
@@ -77915,7 +77915,7 @@
                     "ori": 0
                 },
                 {
-                    "type": "pumpkin_01",
+                    "type": "barrel_02",
                     "pos": {
                         "type": "coord",
                         "x": 14.5,

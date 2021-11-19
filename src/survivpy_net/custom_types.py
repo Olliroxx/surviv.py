@@ -223,7 +223,7 @@ class MxPlusCLine:
         if not m:
             c = point1.y
         else:
-            c = point1.y / (point1.x * m)
+            c = point1.y - (point1.x * m)
         return MxPlusCLine(m, c)
 
     @staticmethod
@@ -259,7 +259,8 @@ class EndpointLine:
 
     def is_point_on_line(self, point):
         mxc = self.get_mx_plus_c()
-        if point.y == mxc.get_y(point.x) and sorted((point.x, self.start.x, self.end.x))[1] == point:
+        # Have to use strings because rounding errors can mess with things
+        if str(point.y)[:5] == str(mxc.get_y(point.x))[:5] and sorted((point.x, self.start.x, self.end.x))[1] == point.x:
             # Check if point is on mx+c line and point is between endpoints
             return True
         else:
@@ -268,7 +269,10 @@ class EndpointLine:
     def ep_line_intersect(self, line):
         mxc1 = self.get_mx_plus_c()
         mxc2 = line.get_mx_plus_c()
-        intersect = mxc1.get_intersect(mxc2)
+        try:
+            intersect = mxc1.get_intersect(mxc2)
+        except ValueError:
+            return None
         if self.is_point_on_line(intersect) and line.is_point_on_line(intersect):
             return intersect
         else:
@@ -316,47 +320,16 @@ class Poly:
 
     def point_in_poly(self, point):
         point_in_poly = False
-        for point_num in range(len(self.points)):
-            point1 = self.points[point_num]
-            if point_num - 1 > 0:
-                point2 = self.points[point_num - 1]
-            else:
-                point2 = self.points[-1]
+        source_x = max([x[0] for x in self.points]) + 1
+        source_y = max([x[1] for x in self.points]) + 1
+        source = Point(source_x, source_y)
+        ray = EndpointLine(point, source)
 
-            if (point1.y > point.y) != (point2.y > point.y) and point.x < (point2.x - point1.x) * (
-                    point.y - point1.y) / (point2.y - point1.y) + point1.x:
+        for edge in self.edges:
+            if ray.ep_line_intersect(edge) and ray.ep_line_intersect(edge) != edge.end:
                 point_in_poly = not point_in_poly
 
         return point_in_poly
-
-    @staticmethod
-    def ray_ray_intersect(ray1, ray2):
-        _0x1db09c = ray2.end.sub_point(ray2.start).rot_90_clk()
-        _0xdd691c = ray1.end.dot(_0x1db09c)
-        if abs(_0xdd691c) <= 0.000001:
-            return None
-        _0x2b4d11 = ray2.start.sub_point(ray1.start)
-        _0x1532eb = _0x1db09c.dot(_0x2b4d11) / _0xdd691c
-        _0x571310 = ray1.end.rot_90_clk().dot(_0x2b4d11) / _0xdd691c
-        if _0x1532eb >= 0 and 0 <= _0x571310 <= 1:
-            return _0x1532eb
-
-    def ray_poly_intersect(self, ray):
-        _0x54db53 = False
-        _0x44cf23 = 0
-        _0x5f4018 = len(self)-1
-        _0x1cb21d = JS_MAX_VALUE
-
-        while _0x44cf23 < len(self):
-            _0x51393c = self.ray_ray_intersect(ray, EndpointLine(self[_0x5f4018], self[_0x44cf23]))
-            if _0x51393c is not None and _0x51393c < JS_MAX_VALUE:
-                _0x1cb21d = _0x51393c
-                _0x54db53 = True
-
-            _0x5f4018 = _0x44cf23
-            _0x44cf23 += 1
-
-        return _0x1cb21d if _0x54db53 else None
 
 
 class SeededRandGenerator:

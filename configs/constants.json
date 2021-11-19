@@ -1,6 +1,6 @@
 {
-    "protocolVersion": 111,
-    "clientVersion": "1.8.0b",
+    "protocolVersion": 114,
+    "clientVersion": "1.9.0",
     "Input": {
         "MoveLeft": 0,
         "MoveRight": 1,

@@ -3828,5 +3828,98 @@
         "noDropOnDeath": true,
         "rarity": 5,
         "lore": "Created by XxHackerzxX"
+    },
+    "outfitLustrousPaladin": {
+        "baseType": "outfitBase",
+        "name": "Lustrous Paladin",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-lustrous-paladin.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-lustrous-paladin.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-lustrous-paladin.img"
+        },
+        "lootImg": {
+            "sprite": "loot-lustrous-paladin-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": "",
+        "isParticle": true,
+        "particle": "paladinParticle",
+        "accessory": {
+            "sprite": "player-accessory-lustrous-paladin.img",
+            "topUI": 55
+        }
+    },
+    "outfitVillageNinja": {
+        "baseType": "outfitBase",
+        "name": "Village Ninja",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-village-ninja.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-village-ninja.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-village-ninja.img"
+        },
+        "lootImg": {
+            "sprite": "loot-village-ninja-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": "",
+        "isParticle": true,
+        "particle": "villageNinjaParticle",
+        "accessory": {
+            "sprite": "player-accessory-village-ninja.img",
+            "topUI": 55
+        }
+    },
+    "outfitAhoy": {
+        "baseType": "outfitBase",
+        "name": "Ahoy",
+        "type": "outfit",
+        "skinImg": {
+            "baseTint": 16777215,
+            "baseSprite": "player-base-ahoy.img",
+            "handTint": 16777215,
+            "handSprite": "player-hands-ahoy.img",
+            "footTint": 16777215,
+            "footSprite": "player-feet-01.img",
+            "backpackTint": 16777215,
+            "backpackSprite": "player-back-ahoy.img"
+        },
+        "lootImg": {
+            "sprite": "loot-ahoy-outfit.img",
+            "tint": 16777215
+        },
+        "sound": {
+            "pickup": "clothes_pickup_01"
+        },
+        "noDropOnDeath": true,
+        "rarity": 5,
+        "lore": "",
+        "isParticle": true,
+        "particle": "ahoyParticle",
+        "accessory": {
+            "sprite": "player-accessory-ahoy.img",
+            "topUI": 55
+        }
     }
 }
