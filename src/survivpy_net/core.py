@@ -52,7 +52,6 @@ class River:
     def point_gen(self, points, looped, other_rivers, shore_poly):
         l_dirs, r_dirs, closest = self.gen_directions(points, looped, other_rivers)
         water_widths, shore_widths = self.gen_widths(points, looped, closest)
-        # water_widths = shore_widths = [8] * len(l_dirs)
 
         l_water = []
         r_water = []
