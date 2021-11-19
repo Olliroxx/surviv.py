@@ -34,8 +34,8 @@ class Ground(LevelLayer):
     def first_frame(self, state):
         colours = state.map.map_def["biome"]["colors"]
 
-        self.background_rect = arcade.create_rectangle(state.map.width / 2, state.map.height / 2, state.map.width / 2,
-                                                       state.map.height / 2, num_to_colour(colours["water"]))
+        self.background_rect = arcade.create_rectangle(state.map.width / 2, state.map.height / 2, state.map.width,
+                                                       state.map.height, num_to_colour(colours["water"]))
         self.base_shore_poly = arcade.create_polygon(state.map.terrain["shore"], num_to_colour(colours["beach"]))
         self.base_grass_poly = arcade.create_polygon(state.map.terrain["grass"], num_to_colour(colours["grass"]))
         self.make_overwrite_polys(state.map.terrain["rivers"], num_to_colour(colours["water"]),
@@ -61,8 +61,6 @@ class Ground(LevelLayer):
             self.overwrite_river_polys.append(water_poly)
             shore_poly = arcade.create_polygon(river.shore_poly, shore_colour)
             self.overwrite_shore_polys.append(shore_poly)
-            for item in river.water_poly:
-                print(str(item)[1:-1])
 
     def merge_lists(self):
         self.master_list.append(self.background_rect)
@@ -626,7 +624,9 @@ class DummyMap:
                 (60.21874012821671, 78.73866211272907),
                 (58.15671078366296, 68.80183208418401)
             ],
-            "rivers": [
+            "rivers": None
+        }
+        self.terrain["rivers"] = [
                 River(*([(0.5000076295109483, 469.11653315022505), (15.078355077439536, 447.85058365758755),
                          (36.81306172274357, 434.00662241550316), (63.07908751049058, 437.0847943846799),
                          (86.47006942854964, 424.75648126955065), (111.56420233463035, 419.81890592813),
@@ -643,10 +643,9 @@ class DummyMap:
                          (594.2278171969177, 313.80166323338676), (618.8844434271763, 304.0983901731899),
                          (635.5721980621042, 288.2543984130617), (657.7444113832304, 286.5668726634623),
                          (681.8854047455558, 277.4261081864652), (694.7918516823072, 254.4101319905394),
-                         (719.4953536278324, 245.11311512932022)], 8, 0, [], Rect(Point(0, 0), Point(720, 720))))
+                         (719.4953536278324, 245.11311512932022)], 8, 0, [], Rect(Point(0, 0), Point(720, 720)),
+                        self.terrain["shore"]))
             ]
-        }
-        print()
 
 
 class DummyState:
@@ -676,8 +675,6 @@ class DummyView(gui.UIInteractiveWidget):
 
 
 class GroundTestWindow(arcade.Window):
-    from arcade import gui
-
     def __init__(self):
         super().__init__(1600, 1000, "Ground Test window")
 
