@@ -188,11 +188,14 @@ class River:
             r_vectors.append(pos_vec)
             l_vectors.append(alt_vec)
 
+        # Sometimes l and r switch sides, this undoes that
         new_r = [r_vectors[0]]
         new_l = [l_vectors[0]]
         for num in range(1, len(r_vectors)):
-            r_line = EndpointLine(new_r[-1], r_vectors[num])
-            l_line = EndpointLine(new_l[-1], l_vectors[num])
+            cur_point = points[num]
+            prev_point = points[num-1]
+            r_line = EndpointLine(prev_point.add_point(new_r[-1]), cur_point.add_point(r_vectors[num]))
+            l_line = EndpointLine(prev_point.add_point(new_l[-1]), cur_point.add_point(l_vectors[num]))
 
             if r_line.ep_line_intersect(l_line):
                 new_l.append(r_vectors[num])
