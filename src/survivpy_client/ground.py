@@ -10,17 +10,14 @@ GRID_LINE_THICKNESS = 1
 LINE_COLOUR = (0, 0, 0, 127)
 
 
-class Ground(LevelLayer):
+class GroundLayer(LevelLayer):
     """
     Water/sand/grass floors, not for buildings
     """
 
-    # noinspection PyMissingConstructor
-    def __init__(self, level=1):
+    def __init__(self):
         self.name = "ground"
         self.source = "main"
-        self.level = level
-        self.loader = None
 
         self.background_rect = None
         self.base_shore_poly = None  # Sand poly w/o rivers
@@ -660,7 +657,7 @@ class DummyView(gui.UIInteractiveWidget):
         super().__init__(x, y, width, height)
 
         self.state = DummyState()
-        self.ground = Ground()
+        self.ground = GroundLayer()
         self.first_frame = True
 
     def do_render(self, surface):

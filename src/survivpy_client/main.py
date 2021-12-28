@@ -1,6 +1,7 @@
 import arcade
 from arcade import gui
 
+import survivpy_client
 from survivpy_net.ingame import GameConnection
 from logging import getLogger
 
@@ -8,9 +9,6 @@ logger = getLogger("survivpy_client")
 
 
 class RootLayer:
-    def setup(self):
-        pass
-
     def first_frame(self, state):
         pass
 
@@ -73,9 +71,7 @@ class WorldView(gui.UIInteractiveWidget):
 
         Uses a layer based system for rendering:
          * Layers are added/inserted to the list
-         * Two setup functions exist for each layer: `setup` and `first frame`:
-            * `setup` runs when the view is being initialised (can run before the connection to the game is established)
-            * `first_frame` runs on the first frame, when the map data has been received
+         * `first_frame` runs on the first frame, when the map data has been received
          * When a frame is rendered, go through the list (starting with the ground) and call `render`
          * Layers are duplicated on floor levels (main and underground), so level_layers exist and are called on each layer
         """
@@ -90,9 +86,6 @@ class WorldView(gui.UIInteractiveWidget):
 
         self.layers = layers
         self.level_layers = level_layers
-        # noinspection PyTypeChecker
-        for layer in self.layers + self.level_layers:
-            layer.setup()
 
         self.state = self.conn.state
         self.map = None
@@ -161,7 +154,7 @@ class RootWindow(arcade.Window):
             from survivpy_net import pregame
             self.prof = pregame.Profile()
             self.conn = self.prof.prep_game()
-            game_view = WorldView([], [], self.conn, width=800, height=600)
+            game_view = WorldView(*default_layer_list(), self.conn, width=800, height=600)
             self.v_box.add(game_view)
 
         self.manager.add(gui.UIAnchorWidget(anchor_x="center_x", anchor_y="center_y", child=self.v_box))
@@ -171,7 +164,9 @@ class RootWindow(arcade.Window):
         self.manager.draw()
 
 
-# TODO `default_layer_list` function
+def default_layer_list():
+    return (), (survivpy_client.PlayerLayer, survivpy_client.GroundLayer)
+
 # TODO layer order:
 # ping markers
 # gas

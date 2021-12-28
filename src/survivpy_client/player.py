@@ -14,16 +14,23 @@ PLAYER_SCALE_FACTOR = 2
 class PlayerLayer(LevelLayer):
     def __init__(self):
         super().__init__()
+        self.sprite_list = arcade.SpriteList()
+        self.players = {}
+        self.objects = None
 
     def first_frame(self, state):
-        pass
+        self.objects = state.map.objects
 
     def render(self, state, surface: gui.surface.Surface, layer):
-        pass
+        for num, val in state.map.objects.items():
+            if val["type"] == 6 and num not in self.players:
+                self.players[num] = Player(num, state.map.objects, self.sprite_list)
 
+        for player in self.players.values():
+            player.update_netdata()
+            player.update_sprites()
 
-class PlayerList:
-    pass
+        self.sprite_list.draw()
 
 
 class Gun:

@@ -8,6 +8,7 @@ from .utils import normalise_vec
 from .utils import num_to_colour
 
 from .player import PlayerLayer
+from .ground import GroundLayer
 
 __version__ = "0.0.1"
 ASSET_ROOT = "./assets/imgs_world/"
